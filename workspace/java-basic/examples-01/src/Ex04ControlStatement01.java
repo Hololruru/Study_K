@@ -66,6 +66,8 @@ public class Ex04ControlStatement01 {
 		} else { // else : 위의 조건에 해당하지 않는 모든 경우 ( 여기서는 +, -, *, /가 아닌 모든 경우 )
 			System.out.println("지원하지 않는 연산자입니다.");
 			valid = false;
+			// result의 값은 garbage
+			
 		}		
 		
 		// ㄹ 작업 수행
