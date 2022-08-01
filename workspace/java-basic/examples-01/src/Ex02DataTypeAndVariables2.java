@@ -16,6 +16,14 @@ public class Ex02DataTypeAndVariables2 {
 		int bbb = 40;
 		int ccc = aaa + bbb;
 		
+		{ // 영역
+			int localV = 100;
+			System.out.println(localV); // 같은 지역(영역)에 만들어진 변수 사용 가능
+			System.out.println(ccc); // 상위 영역 (부모 영역)에서 만들어진 변수 사용 가능
+		}
+		// System.out.println(localV); // 오류 : 다른 지역(영역)에 만들어진 변수 사용 불가능
+		
+		
 		MyType mt = new MyType(); // Reference Type
 		mt.d = 10;
 		mt.s = "Test Class";
@@ -52,7 +60,7 @@ public class Ex02DataTypeAndVariables2 {
 		boolean b;
 		b = true;
 		b = false;
-		System.out.println(b);
+		System.out.println("5. boolean : " + b);
 		
 		//6. 리터럴 : 코드에 사용된 값 표현 --> 10, 11.11, true, "문자열데이터"
 		int color = 0xfefefe;
@@ -61,33 +69,38 @@ public class Ex02DataTypeAndVariables2 {
 		//7. char 자료형
 		int A = 10;
 		char c = 'A'; // 문자 리터럴은 '를 사용해서 표현
-		System.out.println("문자표현 : " + c);
-		System.out.println("숫자표현 : " + (int)c); // (자료형)변수 : 변수를 지정된 자료형으로 변경
+		System.out.println("7. 문자표현 : " + c); // 문자 출력
+		System.out.println("7. 숫자표현 : " + (int)c); // (자료형)변수 : 변수를 지정된 자료형으로 변경
 		
 		//8. 문자열 자료형
 		String name = "John Doe"; // 문자열 리터럴은 " 사용
-		System.out.println(name);
+		System.out.println("8.Name : " + name);
 		
 		//9. Escape Sequence
 		String message = "안녕하세요 \"홍길동\"님. \n만나서 반갑습니다.";
-		System.out.println(message);
+		System.out.println("9. escape sequence : " + message);
 		
-		//10. 형변환 (Type Casting)
+		//10. float vs double
+		//float f1 = 3.14; // 오류 : 3.14는 double로 해석 -> float 변수에 저장할 수 없습니다.
+		float f1 = 3.14f; // 3.14f는 float으로 해석
+		System.out.println("10. float literal : " + f1);
+		
+		//11. 형변환 (Type Casting)
 		double d = 10; // --> 10.0으로 변경 ( 데이터 손실이 없으면 암시적 형변환 )
 		int x = (int)11.11; // --> 11로 변경 ( 데이터 손실이 발생하면 명시적 형변환 )
 		String s = "value 1 : " + d + " / value 2 : " + x; // d와 x를 문자열로 형변환
-		double d2 = d + x;
+		double d2 = d + x; // double + int -> double ( 범위가 넓을 쪽으로 변환 )
 		// int y = (int)"100"; // 문자열을 숫자로 직접 형변환 할 수 없습니다.
-		int y = Integer.valueOf("100"); // 문자열을 정수로 변환
-		int y2 = Integer.parseInt("100"); // 문자열을 정수로 변환
+		int y = Integer.valueOf("100"); // 문자열을 정수로 변환 ( parseInt와 같은 기능 )
+		int y2 = Integer.parseInt("100"); // 문자열을 정수로 변환 ( valueOf와 같은 기능 )
 		double d3 = Double.parseDouble("11.1123"); // 문자열을 실수로 변환
 		
 		System.out.println(s);
 		System.out.println(y);
 		System.out.println(y2);
 		
-		// 1 -> 00000001 
-		//  "1" -> 81
+		// 1 -> 1 
+		//  '1' -> 81
 		// 100 + 100 -> 200
 		// "100" + "100" -> "100100"
 		
