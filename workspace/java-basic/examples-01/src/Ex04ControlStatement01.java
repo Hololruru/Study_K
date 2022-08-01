@@ -47,10 +47,25 @@ public class Ex04ControlStatement01 {
 		op = scanner.next(); // next : Console에서 입력 받은 데이터를 문자열로 변환 ( nextLine과 같은 역할 )
 		
 		System.out.print("두 번째 숫자를 입력하세요 : ");
-		operand2 = scanner.nextInt();		
+		operand2 = scanner.nextInt();
 		
-		// 테스트 코드
-		System.out.printf("[%d][%s][%d]\n", operand1, op, operand2);
+		//ㄷ 작업 수행
+		int result = 0;
+		if (op.equals("+")) { // 문자열을 비교할 경우 ==를 사용할 수 없습니다. 대신 equals 메서드(명령)을 사용해야 합니다.
+			result = operand1 + operand2;
+		} else if (op.equals("-")) {
+			result = operand1 - operand2;
+		} else if (op.equals("*")) {
+			result = operand1 * operand2; // ( * : 곱하기 연산 )
+		} else {
+			result = operand1 / operand2; // ( / : 나누기 연산 )
+		}
+		
+		
+		// ㄹ 작업 수행		
+		System.out.printf("%d %s %d = %d\n", operand1, op, operand2, result);
+		
+		
 
 		scanner.close(); // Scanner는 다 사용하면 닫아야 합니다. ( 반납 )		
 
