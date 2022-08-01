@@ -43,7 +43,7 @@ public class Ex04ControlStatement01 {
 		System.out.print("첫 번째 숫자를 입력하세요 : ");
 		operand1 = scanner.nextInt();
 		
-		System.out.print("연산자를 입력하세요 : ");
+		System.out.print("연산자를 입력하세요 (+, -, *, /, %) : ");
 		// op = scanner.nextLine(); // nextLine : Console에서 입력 받은 데이터를 문자열로 변환 ( enter를 입력으로 인식 )
 		op = scanner.next(); // next : Console에서 입력 받은 데이터를 문자열로 변환 ( enter를 입력으로 인식하지 않습니다. )
 		
@@ -51,7 +51,8 @@ public class Ex04ControlStatement01 {
 		operand2 = scanner.nextInt();
 		
 		//ㄷ 작업 수행
-		int result = 0;
+		double result = 0;
+		boolean valid = true;
 		if (op.equals("+")) { // 문자열을 비교할 경우 ==를 사용할 수 없습니다. 대신 equals 메서드(명령)을 사용해야 합니다.
 			result = operand1 + operand2;
 		} else if (op.equals("-")) {
@@ -59,16 +60,18 @@ public class Ex04ControlStatement01 {
 		} else if (op.equals("*")) {
 			result = operand1 * operand2; // ( * : 곱하기 연산 )
 		} else if (op.equals("/")) {
-			result = operand1 / operand2; // ( / : 나누기 연산 )
+			result = (double)operand1 / operand2; // ( / : 나누기 연산 ), int / int -> int, double / int -> double
+		} else if (op.equals("%")) {
+			result = operand1 % operand2; // ( % : 나머지 연산 )
 		} else { // else : 위의 조건에 해당하지 않는 모든 경우 ( 여기서는 +, -, *, /가 아닌 모든 경우 )
 			System.out.println("지원하지 않는 연산자입니다.");
+			valid = false;
+		}		
+		
+		// ㄹ 작업 수행
+		if (valid == true) {
+			System.out.printf("%d %s %d = %.2f\n", operand1, op, operand2, result); // %.2f : 실수, 소수점 2자리까지 출력
 		}
-		
-		
-		// ㄹ 작업 수행		
-		System.out.printf("%d %s %d = %d\n", operand1, op, operand2, result);
-		
-		
 
 		scanner.close(); // Scanner는 사용이 끝나면 닫아야 합니다. ( 반납 )		
 
