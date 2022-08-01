@@ -37,8 +37,20 @@ public class Ex04ControlStatement01 {
 		//   ㄹ. 연산 결과 출력
 		
 		//ㄱ, ㄴ 작업 수행
+		int operand1, operand2;
+		String op;
 		
+		System.out.print("첫 번째 숫자를 입력하세요 : ");
+		operand1 = scanner.nextInt();
 		
+		System.out.print("연산자를 입력하세요 : ");
+		op = scanner.next(); // next : Console에서 입력 받은 데이터를 문자열로 변환 ( nextLine과 같은 역할 )
+		
+		System.out.print("두 번째 숫자를 입력하세요 : ");
+		operand2 = scanner.nextInt();		
+		
+		// 테스트 코드
+		System.out.printf("[%d][%s][%d]\n", operand1, op, operand2);
 
 		scanner.close(); // Scanner는 다 사용하면 닫아야 합니다. ( 반납 )		
 
