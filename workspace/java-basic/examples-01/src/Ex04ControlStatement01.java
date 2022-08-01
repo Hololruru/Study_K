@@ -44,7 +44,8 @@ public class Ex04ControlStatement01 {
 		operand1 = scanner.nextInt();
 		
 		System.out.print("연산자를 입력하세요 : ");
-		op = scanner.next(); // next : Console에서 입력 받은 데이터를 문자열로 변환 ( nextLine과 같은 역할 )
+		// op = scanner.nextLine(); // nextLine : Console에서 입력 받은 데이터를 문자열로 변환 ( enter를 입력으로 인식 )
+		op = scanner.next(); // next : Console에서 입력 받은 데이터를 문자열로 변환 ( enter를 입력으로 인식하지 않습니다. )
 		
 		System.out.print("두 번째 숫자를 입력하세요 : ");
 		operand2 = scanner.nextInt();
@@ -57,8 +58,10 @@ public class Ex04ControlStatement01 {
 			result = operand1 - operand2;
 		} else if (op.equals("*")) {
 			result = operand1 * operand2; // ( * : 곱하기 연산 )
-		} else {
+		} else if (op.equals("/")) {
 			result = operand1 / operand2; // ( / : 나누기 연산 )
+		} else { // else : 위의 조건에 해당하지 않는 모든 경우 ( 여기서는 +, -, *, /가 아닌 모든 경우 )
+			System.out.println("지원하지 않는 연산자입니다.");
 		}
 		
 		
@@ -67,7 +70,7 @@ public class Ex04ControlStatement01 {
 		
 		
 
-		scanner.close(); // Scanner는 다 사용하면 닫아야 합니다. ( 반납 )		
+		scanner.close(); // Scanner는 사용이 끝나면 닫아야 합니다. ( 반납 )		
 
 	}
 
