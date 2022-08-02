@@ -29,17 +29,22 @@ public class Ex04ControlStatement04 {
 		double result = 0;
 		boolean valid = true;
 		
-		switch(op) {
+		switch(op) { // op의 값을 읽고 일치하는 case를 찾는 형식, op의 값은 정수 계열 및 문자열만 가능 (실수 처리 불가능)
 		case "+":
 			result = operand1 + operand2;
+			break; // break : 즉시 switch문을 종료하는 명령
 		case "-":
 			result = operand1 - operand2;
+			break;
 		case "*":
 			result = operand1 * operand2;
+			break;
 		case "/":
 			result = (double)operand1 / operand2;
+			break;
 		case "%":
 			result = operand1 % operand2;
+			break;
 		default: // 위 case에 해당하지 모든 경우 ( if문의 else 기능 )
 			System.out.println("지원하지 않는 연산자입니다.");
 			valid = false;
