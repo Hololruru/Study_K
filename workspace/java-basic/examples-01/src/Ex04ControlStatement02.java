@@ -46,27 +46,40 @@ public class Ex04ControlStatement02 {
 		//System.out.printf("[COMPUTER : %d][USER : %d]\n", comNumber, userNumber);
 		
 		//    - 승부 계산 1
-		String result = "DRAW"; // 0 : Draw, 1: Win, -1 : Lose
-		if (userNumber == 1) { // 사용자 : 가위
-			if (comNumber == 2) { // 컴퓨터 : 바위
-				result = "LOSE";
-			} else if (comNumber == 3) { // 컴퓨터 : 보
-				result = "WIN";
-			}
-		} else if (userNumber == 2) { // 사용자 : 바위
-			if (comNumber == 3) { // 컴퓨터 : 보
-				result = "LOSE";
-			} else if (comNumber == 1) { // 컴퓨터 : 가위
-				result = "WIN";
-			}
-		} else if (userNumber == 3) { // 사용자 : 보
-			if (comNumber == 1) { // 컴퓨터 : 가위
-				result = "LOSE";
-			} else if (comNumber == 2) { // 컴퓨터 : 바위
-				result = "WIN";
-			}
+//		String result = "DRAW"; 
+//		if (userNumber == 1) { // 사용자 : 가위
+//			if (comNumber == 2) { // 컴퓨터 : 바위
+//				result = "LOSE";
+//			} else if (comNumber == 3) { // 컴퓨터 : 보
+//				result = "WIN";
+//			}
+//		} else if (userNumber == 2) { // 사용자 : 바위
+//			if (comNumber == 3) { // 컴퓨터 : 보
+//				result = "LOSE";
+//			} else if (comNumber == 1) { // 컴퓨터 : 가위
+//				result = "WIN";
+//			}
+//		} else if (userNumber == 3) { // 사용자 : 보
+//			if (comNumber == 1) { // 컴퓨터 : 가위
+//				result = "LOSE";
+//			} else if (comNumber == 2) { // 컴퓨터 : 바위
+//				result = "WIN";
+//			}
+//		}
+		
+		//		- 승부 계산 2
+		String result = "DRAW";
+		if ( (userNumber == 1 && comNumber == 2) || 
+			 (userNumber == 2 && comNumber == 3) || 
+			 (userNumber == 3 && comNumber == 1) ) {
+			result = "LOSE";
+		} else if (userNumber == comNumber) {
+			// DO NOTHING : result = "DRAW"
+		} else {
+			result = "WIN";
 		}
-						
+		
+		
 		//    - 출력
 		System.out.printf("[COMPUTER : %d][USER : %d][RESULT : %s]\n", comNumber, userNumber, result);
 		
@@ -76,3 +89,19 @@ public class Ex04ControlStatement02 {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
