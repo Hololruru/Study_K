@@ -43,11 +43,32 @@ public class Ex04ControlStatement02 {
 		System.out.print("가위/바위/보 입력 (가위=1, 바위=2, 보=3) : ");
 		int userNumber = scanner.nextInt();
 		
-		System.out.printf("[COMPUTER : %d][USER : %d]\n", comNumber, userNumber);
+		//System.out.printf("[COMPUTER : %d][USER : %d]\n", comNumber, userNumber);
 		
-		//    - 승부 계산
+		//    - 승부 계산 1
+		String result = "DRAW"; // 0 : Draw, 1: Win, -1 : Lose
+		if (userNumber == 1) { // 사용자 : 가위
+			if (comNumber == 2) { // 컴퓨터 : 바위
+				result = "LOSE";
+			} else if (comNumber == 3) { // 컴퓨터 : 보
+				result = "WIN";
+			}
+		} else if (userNumber == 2) { // 사용자 : 바위
+			if (comNumber == 3) { // 컴퓨터 : 보
+				result = "LOSE";
+			} else if (comNumber == 1) { // 컴퓨터 : 가위
+				result = "WIN";
+			}
+		} else if (userNumber == 3) { // 사용자 : 보
+			if (comNumber == 1) { // 컴퓨터 : 가위
+				result = "LOSE";
+			} else if (comNumber == 2) { // 컴퓨터 : 바위
+				result = "WIN";
+			}
+		}
+						
 		//    - 출력
-		
+		System.out.printf("[COMPUTER : %d][USER : %d][RESULT : %s]\n", comNumber, userNumber, result);
 		
 		scanner.close(); // 자원 반납
 		
