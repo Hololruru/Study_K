@@ -28,16 +28,16 @@ public class Ex04ControlStatement06 {
 		boolean valid = true;
 		
 		switch((int)average / 10) { // 1. switch는 실수 평가 불가능 -> 정수로 형변환, 2. 범위표현이 불가능하기 때문에 10으로 나눈 값 사용
-		case 10: grade1 = "A"; grade2 = 'A'; break;
+		case 10: 
 		case  9: grade1 = "A"; grade2 = 'A'; break;
 		case  8: grade1 = "B"; grade2 = 'B'; break;
 		case  7: grade1 = "C"; grade2 = 'C'; break;
 		case  6: grade1 = "D"; grade2 = 'D'; break;
-		case  5: grade1 = "F"; grade2 = 'F'; break;
-		case  4: grade1 = "F"; grade2 = 'F'; break;
-		case  3: grade1 = "F"; grade2 = 'F'; break;
-		case  2: grade1 = "F"; grade2 = 'F'; break;
-		case  1: grade1 = "F"; grade2 = 'F'; break;
+		case  5: 
+		case  4: 
+		case  3: 
+		case  2: 
+		case  1: 
 		case  0: grade1 = "F"; grade2 = 'F'; break;
 		default : valid = false; break;
 		}
