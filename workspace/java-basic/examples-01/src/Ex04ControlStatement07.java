@@ -26,9 +26,35 @@ public class Ex04ControlStatement07 {
 		System.out.printf("%d ~ %d까지의 합 : %d\n", 1, number, sum);
 		
 		
+		// 행운숫자 뽑기
+		// - 1 ~ 45 사이의 숫자를 뽑아서 보여주기 
+		// - 사용자가 원할 때까지 반복
+		
+		while (true) { // 무한 반복
+			int number2 = (int)(Math.random() * 45) + 1; //1 ~ 45
+			System.out.printf("당신의 행운번호 : [%2d]\n", number2);
+			
+			System.out.print("계속할까요(y/n) : ");
+			String yn = scanner.next();
+			if (yn.equals("y") == false) {
+				break; // 반복문을 중단하는 명령
+			}
+		}
 		
 		scanner.close();
 
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
