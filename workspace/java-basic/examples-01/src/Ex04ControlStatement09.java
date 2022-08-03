@@ -17,18 +17,27 @@ public class Ex04ControlStatement09 {
 		//      *                  *
 		//      ....
 		//      ********************
-		System.out.print("박스의 너비 : ");
-		int width = scanner.nextInt();
-		System.out.print("박스의 높이 : ");
-		int height = scanner.nextInt();
+//		System.out.print("박스의 너비 : ");
+//		int width = scanner.nextInt();
+//		System.out.print("박스의 높이 : ");
+//		int height = scanner.nextInt();
+//		
+//		for (int y = 0; y < height; y++) {
+//			for (int x = 0; x < width; x++) {
+//				if (x == 0 || y == 0 || 
+//					x == width - 1 || y == height - 1) {
+//					System.out.print("*");
+//				} else {
+//					System.out.print(" ");
+//				}
+//			}
+//			System.out.println();
+//		}
 		
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				if (x == 0 || y == 0 || x == width - 1 || y == height - 1) {
-					System.out.print("*");
-				} else {
-					System.out.print(" ");
-				}
+		// 2-1. 직각삼각형 그리기
+		for (int y = 1; y <= 10; y++) {
+			for (int x = 1; x <= y; x++) {
+				System.out.print("*");
 			}
 			System.out.println();
 		}
@@ -37,3 +46,14 @@ public class Ex04ControlStatement09 {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
