@@ -28,8 +28,14 @@ public class Ex10ControlStatement10 {
 				double n = Math.random() * 3; // 0 <= n < 3
 				int comNumber = (int)(n + 1);
 				
-				System.out.print("가위/바위/보 입력 (가위=1, 바위=2, 보=3) : ");
-				int userNumber = scanner.nextInt();
+				String sUserNumber;
+				do {
+					System.out.print("가위/바위/보 입력 (가위=1, 바위=2, 보=3) : ");
+					sUserNumber = scanner.next();
+				} while (sUserNumber.equals("1") == false &&
+						 sUserNumber.equals("2") == false &&
+						 sUserNumber.equals("3") == false);
+				int userNumber = Integer.parseInt(sUserNumber); // Integer.parseInt("문자열") : "문자열"을 숫자로 변경
 				
 				String result = "DRAW";
 				if ( (userNumber == 1 && comNumber == 2) || 
@@ -41,8 +47,13 @@ public class Ex10ControlStatement10 {
 				} else {
 					result = "WIN";
 				}
-				//    - 출력
-				System.out.printf("[COMPUTER : %d][USER : %d][RESULT : %s]\n", comNumber, userNumber, result);
+				// 출력				
+				String com;
+				if (comNumber == 1) 		com = "가위";
+				else if (comNumber == 2) 	com = "바위";
+				else 						com = "보";
+				String user = userNumber == 1 ? "가위" : (userNumber == 2 ? "바위" : "보");
+				System.out.printf("[COMPUTER : %2s][USER : %2s][RESULT : %s]\n", com, user, result);
 				
 				break;
 			case "9": // 프로그램 종료
