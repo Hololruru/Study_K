@@ -34,13 +34,26 @@ public class Ex04ControlStatement09 {
 //			System.out.println();
 //		}
 		
-		// 2-1. 직각삼각형 그리기
+		// 2-1. 직각삼각형 그리기 1
 		for (int y = 1; y <= 10; y++) {
 			for (int x = 1; x <= y; x++) {
 				System.out.print("*");
 			}
 			System.out.println();
 		}
+		
+		// 2-2. 직각삼각형 그리기 2
+		for (int y = 1; y <= 10; y++) {
+			for (int x = 1; x <= 10; x++) {
+				if (x <= 10 - y) {
+					System.out.print(" ");
+				} else {
+					System.out.print("*");
+				}
+			}
+			System.out.println();
+		}
+		
 		
 		scanner.close();
 	}
