@@ -35,18 +35,25 @@ public class Ex04ControlStatement08 {
 		//    5 * 2 = 10
 		//    ...
 		//    5 * 9 = 45
-		System.out.print("출력할 구구단의 단 : ");
-		int dan = scanner.nextInt();
-		for (int i = 1; i <= 9; i++) {
-			//System.out.println(dan + " * " + i + " = " + (dan * i) );
-			System.out.printf("%d * %d = %2d\n", dan, i, dan*i);
-		}
+//		System.out.print("출력할 구구단의 단 : ");
+//		int dan = scanner.nextInt();
+//		for (int i = 1; i <= 9; i++) {
+//			//System.out.println(dan + " * " + i + " = " + (dan * i) );
+//			System.out.printf("%d * %d = %2d\n", dan, i, dan*i);
+//		}
 		
 		// 5. 전체 구구단 출력 ( for문 중첩해서 구현 )
 		//    1 * 1 = 1   2 * 1 =  2 .... 9 * 1 =  9
 		//    1 * 2 = 2   2 * 2 =  4 .... 9 * 2 = 18
 		//    ...
 		//    1 * 9 = 9   2 * 9 = 18 .... 9 * 9 = 81
+		for (int y = 1; y <= 9; y++) { // 종축 방향 반복
+			for (int x = 1; x <= 9; x++) { // 횡축 방향 반복
+				System.out.printf("[%d*%d=%2d] ", x, y, x*y);
+			}
+			System.out.println();
+		}
+		
 
 		
 		scanner.close();
