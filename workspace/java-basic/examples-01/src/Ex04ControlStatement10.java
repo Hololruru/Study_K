@@ -1,5 +1,5 @@
 
-public class Ex10ControlStatement10 {
+public class Ex04ControlStatement10 {
 
 	public static void main(String[] args) {
 		
