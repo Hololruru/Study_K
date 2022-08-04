@@ -11,6 +11,7 @@ public class Ex06Array2 {
 		// ==============================
 		// 5. 중복이 발생하지 않도록 숫자 뽑기
 		// 6. 메뉴 사용해서 사용자가 원하는 동안 반복
+		// 7. 평균이 20보다 작거나 26보다 크면 다시 뽑기 (do ~ while)
 		
 		int[] numbers = new int[6];
 		for (int i = 0; i < numbers.length; i++) {
