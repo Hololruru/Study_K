@@ -11,6 +11,23 @@ public class Ex06Array2 {
 		// ==============================
 		// 5. 중복이 발생하지 않도록 숫자 뽑기
 		// 6. 메뉴 사용해서 사용자가 원하는 동안 반복
+		
+		int[] numbers = new int[6];
+		for (int i = 0; i < numbers.length; i++) {
+			numbers[i] = (int)(Math.random() * 45) + 1;
+		}
+		
+		int sum = 0;
+		for (int i = 0; i < numbers.length; i++) {
+			sum += numbers[i]; // sum = sum + numbers[i];
+		}
+		int average = sum / numbers.length;
+		
+		System.out.print("선택된 번호 : ");
+		for (int i = 0; i < numbers.length; i++) {
+			System.out.printf("[%2d]", numbers[i]);
+		}
+		System.out.printf("[AVERAGE : %2d]\n", average);
 
 	}
 
