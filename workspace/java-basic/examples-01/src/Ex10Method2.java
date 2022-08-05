@@ -24,15 +24,16 @@ public class Ex10Method2 {
 	
 		result = add(1, 2, 3, 4); // 전달인자 4개를 사용하는 add 호출
 		System.out.println(result);
-		
-		int x;
 
 	}
 	
+	// 전달인자는 여러 개 사용 가능, return은 단일 값만 반환 ( 여러 개의 값을 반환하려면 배열에 담아서 반환 )
 	static int add(int a, int b) { //결과형 : 이 메서드가 return하는 값의 자료형 지정 ( void : 반환 값이 없음을 의미 )
 		int result = a + b;
 		return result; // result에 저장된 값을 호출한 곳으로 전달(반환)하고 메서드 종료하는 명령
+		               
 	}
+	
 	static int add(int a, int b, int c) {
 		int result = a + b + c;
 		return result;
