@@ -16,6 +16,14 @@ public class Ex06Array2 {
 		int[] numbers = new int[6];
 		for (int i = 0; i < numbers.length; i++) {
 			numbers[i] = (int)(Math.random() * 45) + 1;
+			// 중복 검사를 위한 반복문
+			for (int j = 0; j < i; j++) { // 현재 뽑은 숫자의 위치보다 앞에 있는 숫자와 비교 (반복)
+				if (numbers[i] == numbers[j]) { // 중복된 경우
+					// i--; // 반복문의 i++의 반대효과를 적용해서 현재 위치를 다시 뽑게 만드는 구현
+					i = -1; // 처음부터 다시 뽑는 구현
+					break;
+				}
+			}
 		}
 		
 		int sum = 0;
