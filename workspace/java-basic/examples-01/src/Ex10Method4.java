@@ -23,32 +23,11 @@ public class Ex10Method4 {
 			case "1": 
 				int comNumber = makeComNumber();
 				
-				String sUserNumber;
-				do {
-					System.out.print("가위/바위/보 입력 (가위=1, 바위=2, 보=3) : ");
-					sUserNumber = scanner.next();
-				} while (sUserNumber.equals("1") == false &&
-						 sUserNumber.equals("2") == false &&
-						 sUserNumber.equals("3") == false);
-				int userNumber = Integer.parseInt(sUserNumber); // Integer.parseInt("문자열") : "문자열"을 숫자로 변경
+				int userNumber = inputUserNumber(); 
 				
-				String result = "DRAW";
-				if ( (userNumber == 1 && comNumber == 2) || 
-					 (userNumber == 2 && comNumber == 3) || 
-					 (userNumber == 3 && comNumber == 1) ) {
-					result = "LOSE";
-				} else if (userNumber == comNumber) {
-					// DO NOTHING : result = "DRAW"
-				} else {
-					result = "WIN";
-				}
-				// 출력				
-				String com;
-				if (comNumber == 1) 		com = "가위";
-				else if (comNumber == 2) 	com = "바위";
-				else 						com = "보";
-				String user = userNumber == 1 ? "가위" : (userNumber == 2 ? "바위" : "보");
-				System.out.printf("[COMPUTER : %2s][USER : %2s][RESULT : %s]\n", com, user, result);
+				String result = makeDecision(userNumber, comNumber);
+				
+				showResult(comNumber, userNumber, result);
 				
 				break;
 			case "9": // 프로그램 종료
@@ -85,6 +64,42 @@ public class Ex10Method4 {
 		double n = Math.random() * 3; // 0 <= n < 3
 		int comNumber = (int)(n + 1);
 		return comNumber;
+	}
+	
+	static int inputUserNumber() {
+		String sUserNumber;
+		do {
+			System.out.print("가위/바위/보 입력 (가위=1, 바위=2, 보=3) : ");
+			sUserNumber = scanner.next();
+		} while (!sUserNumber.equals("1") &&
+				 !sUserNumber.equals("2") &&
+				 !sUserNumber.equals("3"));
+		int userNumber = Integer.parseInt(sUserNumber); // Integer.parseInt("문자열") : "문자열"을 숫자로 변경
+		return userNumber;
+	}
+	
+	static String makeDecision(int userNumber, int comNumber) {
+		String result = "DRAW";
+		if ( (userNumber == 1 && comNumber == 2) || 
+			 (userNumber == 2 && comNumber == 3) || 
+			 (userNumber == 3 && comNumber == 1) ) {
+			result = "LOSE";
+		} else if (userNumber == comNumber) {
+			// DO NOTHING : result = "DRAW"
+		} else {
+			result = "WIN";
+		}
+		return result;
+	}
+	
+	static void showResult(int comNumber, int userNumber, String result) {
+		// 출력				
+		String com;
+		if (comNumber == 1) 		com = "가위";
+		else if (comNumber == 2) 	com = "바위";
+		else 						com = "보";
+		String user = userNumber == 1 ? "가위" : (userNumber == 2 ? "바위" : "보");
+		System.out.printf("[COMPUTER : %2s][USER : %2s][RESULT : %s]\n", com, user, result);
 	}
 }
 
