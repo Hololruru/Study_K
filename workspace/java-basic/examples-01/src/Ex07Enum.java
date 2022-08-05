@@ -27,6 +27,10 @@ public class Ex07Enum {
 		// color = Gender.MALE;
 		color = RainbowColor.PURPLE;
 		System.out.println(color);
+		
+		
+		//int x = null; // primitive type에는 null을 저장할 수 없습니다.
+		RainbowColor color2 = null; // 열겨형(enum)은 참조형이므로 null 저장 가능
 
 	}
 
