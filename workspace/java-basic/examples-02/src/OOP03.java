@@ -17,9 +17,10 @@ class Person3 {
 	public void setNo(int no) {
 		if (no < 0) {
 			System.out.println("잘못된 번호입니다.");
-			return;
+			// 값을 저장하지 않습니다.
+		} else {
+			this.no = no; // this.no는 객체(인스턴스)의 멤버변수 no를 의미하는 표현
 		}
-		this.no = no; // this.no는 객체(인스턴스)의 멤버변수 no를 의미하는 표현
 	}
 	public String getName() {
 		return name;
