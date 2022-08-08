@@ -4,7 +4,7 @@
 // 클래스를 만드는 것으로는 어떤 실행도 발생하지 않습니다.
 class Person5 {	
 	// 1. 특성
-	private int no;		 
+	private int no = 100; // 필드 초기화 ( 생성자 보다 먼저 실행되는 초기화 구문 )		 
 	private String name;
 	private String phone;
 	private String email;
@@ -16,6 +16,7 @@ class Person5 {
 		System.out.println("1. 전달인자 없는 생성자 메서드 호출");
 	}	
 	public Person5(int no, String name, String phone, String email) {// 생성자 메서드의 전달인자는 초기화하려는 값으로 구성
+		this(); // 같은 클래스의 전달인자 없는 생성자 메서드 호출 
 		this.no = no;
 		this.name = name;
 		this.phone = phone;
@@ -57,9 +58,16 @@ class Person5 {
 public class OOP05 {	
 	public static void main(String[] args) {		
 		
-		Person5 person = new Person5(); // new Person5() -> 전달인자 없는 생성자 메서드 자동 호출		
+		Person5 person = new Person5(); // new Person5() -> 전달인자 없는 생성자 메서드 자동 호출
+		System.out.println(person.info());
+		
 		Person5 person2 = new Person5(1, "김윤석", "010-5499-6712", "kys@example.com");
 		System.out.println(person2.info());
+		
+		/////////////////////////////
+		// 생성자 메서드 사용 사례
+		String s = new String("TEST STRING");
+		java.util.Scanner scanner = new java.util.Scanner(System.in);
 
 	}
 
