@@ -5,9 +5,57 @@
 // 2. 실행방식 : 메뉴 제공 -> 메뉴 선택 -> 작업 실행
 // 3. 모든 구현은 별도의 클래스를 만들어서 적용
 
+// 연락처 정보 저장용 클래스
+class Contact {
+	private int no;		 
+	private String name;
+	private String phone;
+	private String email;
+
+	public Contact() {}
+	public Contact(int no, String name, String phone, String email) {
+		this.no = no;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+	}
+
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String info() {
+		return String.format("[%d][%s][%s][%s]", no, name, phone, email);
+	}
+}
+
+// 연락처 관리 기능 클래스
 class ContactManager {
 	
 	private java.util.Scanner scanner = new java.util.Scanner(System.in);
+	
+	private Contact[] contacts = new Contact[1000]; // 연락처 목록 변수
 	
 	public void doManage() { // 프로그램의 주 실행 로직 구현
 		
@@ -17,7 +65,9 @@ class ContactManager {
 			
 			System.out.println();
 			if (selection.equals("1")) {
-				
+				// 등록 기능 구현 : Contact 클래스 만들기
+				// 1. Contact 인스턴스 만들기
+				// 2. 사용자 입력 -> 입력된 내용을 Contact 인스턴스에 저장
 			} else if (selection.equals("4")) {
 				
 			} else if (selection.equals("9")) {
@@ -53,7 +103,9 @@ class ContactManager {
 public class OOP07 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		ContactManager manager = new ContactManager();
+		manager.doManage();
 
 	}
 
