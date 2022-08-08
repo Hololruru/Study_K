@@ -15,7 +15,6 @@ class Person5 {
 	public Person5() {
 		System.out.println("1. 전달인자 없는 생성자 메서드 호출");
 	}	
-	
 	public Person5(int no, String name, String phone, String email) {// 생성자 메서드의 전달인자는 초기화하려는 값으로 구성
 		this.no = no;
 		this.name = name;
@@ -23,7 +22,6 @@ class Person5 {
 		this.email = email;
 		System.out.println("2. 전달인자 있는 생성자 메서드 호출");
 	}
-
 	// 메서드를 사용해서 데이터 접근 : 잘못된 데이터의 유입을 막을 수 있습니다.
 	public int getNo() {	// 변수이름 -> get or set + 첫번째문자(대문자) + 나머지변수이름
 		return no;
@@ -59,8 +57,7 @@ class Person5 {
 public class OOP05 {	
 	public static void main(String[] args) {		
 		
-		Person5 person = new Person5(); // new Person5() -> 전달인자 없는 생성자 메서드 자동 호출
-		
+		Person5 person = new Person5(); // new Person5() -> 전달인자 없는 생성자 메서드 자동 호출		
 		Person5 person2 = new Person5(1, "김윤석", "010-5499-6712", "kys@example.com");
 		System.out.println(person2.info());
 
