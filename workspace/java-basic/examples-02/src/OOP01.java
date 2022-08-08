@@ -1,5 +1,7 @@
 
 
+// 클래스 : 구현 대상의 문법적 표현, 설계도, 사용자 정의 자료형
+// 클래스를 만드는 것으로는 어떤 실행도 발생하지 않습니다.
 class Person {
 	
 	// 1. 특성
@@ -24,7 +26,10 @@ class Person {
 public class OOP01 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
+		// int a;
+		Person person; // Person class 자료형으로 참조형 변수 만들기
+		person = new Person(); // 데이터를 저장할 변수 만들기 + 그 변수의 주소를 person 변수에 저장
 
 	}
 
