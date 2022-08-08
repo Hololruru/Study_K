@@ -29,8 +29,26 @@ public class OOP01 {
 	
 		// int a;
 		Person person; // Person class 자료형으로 참조형 변수 만들기
-		person = new Person(); // 데이터를 저장할 변수 만들기 + 그 변수의 주소를 person 변수에 저장
+		person = new Person(); // 인스턴스(데이터를 저장할 변수, 객체)만들기 + 그 변수의 주소를 person 변수에 저장
+		
+		person.no = 1; // person이 참조하는 인스턴스의 개별 멤버변수(필드)나 멤버메서드를 사용하려면 .연산자 사용
+		person.name = "장동건";
+		person.email = "jdk@example.com";
+		person.phone = "010-9876-2345";
+		
+		String info = person.info();
+		System.out.println(info);
 
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
