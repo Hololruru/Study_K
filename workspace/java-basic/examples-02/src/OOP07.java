@@ -137,6 +137,12 @@ class ContactManager {
 		return contact;
 	}
 	
+	/**
+	 * 사용자에게 선택 가능한 기능 목록을 표시하고<br />
+	 * 사용자의 선택을 입력받은 후 반환
+	 * 
+	 * @return 문자열 형식의 사용자 입력 값
+	 */
 	String selectMenu() {
 		System.out.println("******************************");
 		System.out.println("* 1. 연락처 등록                 *");
