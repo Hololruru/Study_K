@@ -56,6 +56,7 @@ class ContactManager {
 	private java.util.Scanner scanner = new java.util.Scanner(System.in);
 	
 	private Contact[] contacts = new Contact[1000]; // 연락처 목록 변수
+	private int nextIdx = 0; // 새로 등록되는 연락처가 저장될 배열의 위치
 	
 	public void doManage() { // 프로그램의 주 실행 로직 구현
 		
@@ -68,6 +69,8 @@ class ContactManager {
 				// 등록 기능 구현 : Contact 클래스 만들기
 				// 1. Contact 인스턴스 만들기
 				// 2. 사용자 입력 -> 입력된 내용을 Contact 인스턴스에 저장
+				// 3. 2의 인스턴스를 conatcts 배열에 저장 ( nextIdx를 사용해서 위치 결정 )
+				// 4. 다음 연락처의 저장 위치를 하나 증가 
 			} else if (selection.equals("4")) {
 				
 			} else if (selection.equals("9")) {
