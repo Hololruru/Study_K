@@ -66,13 +66,30 @@ class ContactManager {
 			
 			System.out.println();
 			if (selection.equals("1")) {
-				// 등록 기능 구현 : Contact 클래스 만들기
+				// 등록 기능 구현
 				// 1. Contact 인스턴스 만들기
+				Contact contact = new Contact();
 				// 2. 사용자 입력 -> 입력된 내용을 Contact 인스턴스에 저장
+				contact.setNo(nextIdx + 1);
+				System.out.print("이름 : ");
+				String name = scanner.next();
+				contact.setName(name); // contact.name = name;
+				System.out.print("전화번호 : ");
+				String phone = scanner.next();
+				contact.setPhone(phone);
+				System.out.print("이메일 : ");
+				String email = scanner.next();
+				contact.setEmail(email);
 				// 3. 2의 인스턴스를 conatcts 배열에 저장 ( nextIdx를 사용해서 위치 결정 )
+				contacts[nextIdx] = contact;
 				// 4. 다음 연락처의 저장 위치를 하나 증가 
-			} else if (selection.equals("4")) {
-				
+				nextIdx++;
+			} else if (selection.equals("4")) { // 전체 목록 보기
+				// contacts 배열의 데이터를 처음(0)부터 데이터가 저장된 위치(nextIdx)까지 반복하면서 출력
+				System.out.println("[ 연락처 목록 ]");
+				for (int i = 0; i < nextIdx; i++) {
+					System.out.println(contacts[i].info());
+				}
 			} else if (selection.equals("9")) {
 				System.out.println("$$$ 연락처 관리 프로그램을 종료합니다.");
 				break;
