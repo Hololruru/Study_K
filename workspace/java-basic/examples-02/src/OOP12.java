@@ -23,7 +23,13 @@ class TheChild extends TheParent { // TheParent 상속 : TheParent의 모든 멤
 	}
 	public TheChild() {
 		System.out.println("TheChild's constructor");
-	}	
+	}
+	
+	@Override
+	void m() { // 메서드 재정의 : 메서드이름, 전달인자, 결과형은 부모의 메서드와 동일하게 -> 내용은 다르게
+		System.out.println("자식 클래스에서 재정의된 m()");
+		// super.m(); // 부모클래스의 메서드를 명시적으로 호출
+	}
 }
 
 public class OOP12 {
@@ -37,10 +43,30 @@ public class OOP12 {
 		
 		// 2. 참조타입과 인스턴스 타입이 다를 수 있습니다. ( 부모참조 -> 자식인스턴스 )
 		TheParent p2 = new TheChild();
-		
 		// TheChild c2 = (TheChild)new TheParent(); // 허용되지 않습니다. ( 자식참조 -> 부모인스턴스 )
-		TheChild c3 = (TheChild)p2; // 자식참조 -> 부모
+		TheChild c3 = (TheChild)p2; // (자식참조 -> 부모)인 것처럼 보이지만 실제로는 (자식참조 -> 자식인스턴스) 상황
 		
+		TheParent p3 = new TheParent();
+		if (p3 instanceof TheChild) { // instanceof : 형변환 가능한지 확인 ( 안전한 형변환 도구 )
+			c3 = (TheChild)p3;
+		} else {
+			System.out.println("형변환 불가 !!!!");
+		}
+		
+		// 3. 재정의 메서드 사용
+		TheParent p4 = new TheParent();
+		TheChild c4 = new TheChild();
+		p4.m();	// 부모 클래스의 메서드 호출
+		c4.m(); // 자식 클래스에서 재정의한 메서드 호출
+		
+		System.out.println("============================");
+		
+		// 4. (재정의) 메서드 호출 기준
+		TheParent p5;
+		p5 = new TheChild();
+		p5.m(); // 부모 메서드 or 자식 메서드 -> 자식 메서드 (인스턴스 타입 기준)
+		p5 = new TheParent();
+		p5.m();
 		
 		
 
