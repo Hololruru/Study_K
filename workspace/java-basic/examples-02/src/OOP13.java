@@ -37,7 +37,7 @@ public class OOP13 {
 		
 		System.out.println("===============================");
 		
-		// 2.
+		// 2. 배열의 다형성
 		//    Rectangle 4개, Line 4개, Oval 4개 만들어서 사용 --> 배열로 만들어서 사용
 		//    참고 : int[] ar = new int[10] -> 이 배열에는 int만 저장 가능
 		TheShape[] shapes = new TheShape[12]; // TheShape 배열을 만들면 이 배열에는 TheShape 인스턴스와 자식 인스턴스를 모두 저장할 수 있습니다.
