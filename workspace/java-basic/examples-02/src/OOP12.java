@@ -5,7 +5,7 @@ class TheParent {
 	void m() {
 		System.out.println("TheParent.m");
 	}
-	public TheParent() {
+	public TheParent() { // 생성자 메서드 (constructor) : 인스턴스를 만들 때(new 할 때) 자동으로 호출
 		System.out.println("TheParent's constructor");
 	}
 }
@@ -21,7 +21,7 @@ class TheChild extends TheParent { // TheParent 상속 : TheParent의 모든 멤
 		// p = "Parent's member"; // 오류 : 부모의 private 멤버는 사용할 수 없습니다.
 		System.out.println("TheChild.m2");
 	}
-	public TheChild() {
+	public TheChild() { // 생성자 메서드 (constructor) : 인스턴스를 만들 때(new 할 때) 자동으로 호출
 		System.out.println("TheChild's constructor");
 	}
 	
