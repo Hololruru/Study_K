@@ -38,7 +38,8 @@ class Contact {
 		this.email = email;
 	}
 	
-	public String info() {
+	@Override
+	public String toString() {
 		return String.format("[%d][%s][%s][%s]", no, name, phone, email);
 	}
 }

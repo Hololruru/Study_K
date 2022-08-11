@@ -50,7 +50,7 @@ class ContactManager {
 		System.out.println("[ 검색된 연락처 목록 ]");
 		for (Contact contact : contacts) {
 			if (contact.getName().contains(name)) { 	// 부분 일치 검색 -> contains 사용
-				System.out.println(contact.info());
+				System.out.println(contact); // 문자열이 필요한 곳에서 자동으로 toString() 호출
 			}
 		}
 	}
@@ -58,7 +58,7 @@ class ContactManager {
 	public void showAllContacts() {
 		System.out.println("[ 연락처 목록 ]");
 		for (Contact contact : contacts) {
-			System.out.println(contact.info());
+			System.out.println(contact); // 문자열이 필요한 곳에서 자동으로 toString() 호출
 		}
 	}
 
