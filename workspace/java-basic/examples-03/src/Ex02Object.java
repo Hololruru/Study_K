@@ -12,6 +12,11 @@ class MyClass /* extends Object */ implements Serializable { // extends Object�
 	}
 	
 	@Override
+	public int hashCode() {
+		return x;
+	}
+
+	@Override
 	public String toString() { // 객체(인스턴스)의 정보를 간단한 문자열로 반환하는 메서드
 		return String.format("[X : %d]", x);
 	}
