@@ -20,11 +20,9 @@ class ContactManager {
 				// 등록 기능 구현				
 				Contact contact = inputContact();
 				
-				// 3. 2의 인스턴스를 conatcts 배열에 저장 ( nextIdx를 사용해서 위치 결정 )
-				contacts[nextIdx] = contact;
-				// 4. 다음 연락처의 저장 위치를 하나 증가 
-				nextIdx++;
-				
+				// 3. 2의 인스턴스를 conatcts 리스트에 저장 
+				contacts.add(contact);
+								
 				System.out.println("$$$ 새 연락처를 등록했습니다");
 				
 			} else if (selection.equals("4")) { // 전체 목록 보기
@@ -48,24 +46,19 @@ class ContactManager {
 		}		
 	}
 	
-	public void showSearchedContacts(String name) {
-		//2. 연락처 목록을 0 ~ nextIdx까지 반복하면서 이름이 같은 연락처 찾기 -> 출력
-		//   --> 입력 받은 이름과 연락처.getName()과 비교 ( == 사용하면 안되고, equals를 사용해서 비교 )
-		//       if (search.equals( contacts[i].getName() )				
+	public void showSearchedContacts(String name) {			
 		System.out.println("[ 검색된 연락처 목록 ]");
-		for (int i = 0; i < nextIdx; i++) {
-			// if (name.equals(contacts[i].getName())) { 	// 완전 일치 검색 -> equals 사용
-			if (contacts[i].getName().contains(name)) { 	// 부분 일치 검색 -> contains 사용
-				System.out.println(contacts[i].info());
+		for (Contact contact : contacts) {
+			if (contact.getName().contains(name)) { 	// 부분 일치 검색 -> contains 사용
+				System.out.println(contact.info());
 			}
 		}
 	}
 	
 	public void showAllContacts() {
-		// contacts 배열의 데이터를 처음(0)부터 데이터가 저장된 위치(nextIdx)까지 반복하면서 출력
 		System.out.println("[ 연락처 목록 ]");
-		for (int i = 0; i < nextIdx; i++) {
-			System.out.println(contacts[i].info());
+		for (Contact contact : contacts) {
+			System.out.println(contact.info());
 		}
 	}
 
