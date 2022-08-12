@@ -33,21 +33,21 @@ public class Ex08IO {
 //		
 //		System.out.println("파일에 데이터를 썼습니다.");
 //		
-		FileInputStream fis1 = new FileInputStream("test1.txt");//읽기 스트림		
-		byte[] buffer1 = new byte[256];//한 번에 읽은 데이터를 저장할 변수
-		while (true) {
-			int count =						//read 명령으로 실제 읽은 데이터 양 
-				fis1.read(buffer1,			//스트림에서 읽은 데이터를 저장할 byte[]  
-						  0, 				//byte[]의 저장 시작 위치
-						  buffer1.length);	//읽기 원하는 양
-			
-			if (count == -1) break; //EOF (End of File)
-			
-			//byte[] -> char[] 직접 변환 (String 생성자를 사용)
-			String str2 = new String(buffer1, 0, count);//buffer1의 0번째부터 count까지의 데이터를 문자열로 변환
-			System.out.println(str2);
-		}
-		fis1.close();//파일 닫기
+//		FileInputStream fis1 = new FileInputStream("test1.txt");//읽기 스트림		
+//		byte[] buffer1 = new byte[256];//한 번에 읽은 데이터를 저장할 변수
+//		while (true) {
+//			int count =						//read 명령으로 실제 읽은 데이터 양 
+//				fis1.read(buffer1,			//스트림에서 읽은 데이터를 저장할 byte[]  
+//						  0, 				//byte[]의 저장 시작 위치
+//						  buffer1.length);	//읽기 원하는 양
+//			
+//			if (count == -1) break; //EOF (End of File)
+//			
+//			//byte[] -> char[] 직접 변환 (String 생성자를 사용)
+//			String str2 = new String(buffer1, 0, count);//buffer1의 0번째부터 count까지의 데이터를 문자열로 변환
+//			System.out.println(str2);
+//		}
+//		fis1.close();//파일 닫기
 		
 		//////////////////////////////////////////////////////////////////////
 
@@ -74,23 +74,24 @@ public class Ex08IO {
 //		reader2.close();
 //		istream2.close();
 		
-		//3. primitive type <-> byte[]		
-//		FileOutputStream ostream3 = new FileOutputStream("test3.dat");//파일에 쓰기
-//		DataOutputStream dostream3 = new DataOutputStream(ostream3); //primitive type -> byte[]
-//		
-//		FileOutputStream ostream3_1 = 	new FileOutputStream("test3.txt");//파일에 쓰기
-//		OutputStreamWriter writer3 = new OutputStreamWriter(ostream3_1); //text -> byte[]
-//		
-//		for (int i = 0; i < 10000; i++) {
-//			dostream3.writeInt(Integer.MAX_VALUE); //2147483647, binary write
-//			writer3.write(Integer.MAX_VALUE + ""); //text write			
-//		}
-//		dostream3.close();
-//		ostream3.close();
-//		writer3.close();
-//		ostream3_1.close();
-//		
-//		System.out.println("파일에 데이터를 썼습니다.");
+		//3. primitive type <-> byte[]	
+		// binary 데이터 쓰기
+		FileOutputStream ostream3 = new FileOutputStream("test3.dat");//파일에 쓰기
+		DataOutputStream dostream3 = new DataOutputStream(ostream3); //primitive type -> byte[]
+		// text 데이터 쓰기
+		FileOutputStream ostream3_1 = 	new FileOutputStream("test3.txt");//파일에 쓰기
+		OutputStreamWriter writer3 = new OutputStreamWriter(ostream3_1); //text -> byte[]
+		
+		for (int i = 0; i < 10000; i++) {
+			dostream3.writeInt(Integer.MAX_VALUE); //2147483647, binary write
+			writer3.write(Integer.MAX_VALUE + ""); //text write			
+		}
+		dostream3.close();
+		ostream3.close();
+		writer3.close();
+		ostream3_1.close();
+		
+		System.out.println("파일에 데이터를 썼습니다.");
 //		
 //		FileInputStream istream3 = new FileInputStream("test3.dat");//파일에서 읽기
 //		DataInputStream distream3 = new DataInputStream(istream3);//byte[] -> binary
