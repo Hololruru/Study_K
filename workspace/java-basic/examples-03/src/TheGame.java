@@ -1,13 +1,19 @@
+import java.util.ArrayList;
 
 // 1. 가위 바위 보 게임을 클래스 버전으로 변환
 //    -> ContactManager 참고
 
-// 2. 게임 마다 게임 결과를 목록에 저장
-// 3. 게임 결과 보기 메뉴 기능 추가
+// 2. 게임 결과 관리
+//    - 게임 결과를 저장할 변수 만들기 ( 문자열의 목록형 변수 : Collection Class 사용 )
+//    - 게임 마다 게임 결과를 목록에 저장 ( case "1"의 showResult() 호출 밑에서 구현 )
+//    - 게임 결과 보여주기 ( case "2": 만들고 내용 구현 )
+//    - 번외 : 게임 결과 저장 : 번호, 게임시간, 컴퓨터 선택, 사용자선택, 게임결과 를 저장하도록 구현 ( 별도 클래스 생성 )
 
 public class TheGame {
 
 	private java.util.Scanner scanner = new java.util.Scanner(System.in);
+	
+	private ArrayList<String> gameResults = new ArrayList<>();
 	
 	public void doGame() {
 		
@@ -28,7 +34,16 @@ public class TheGame {
 				
 				showResult(comNumber, userNumber, result);
 				
+				gameResults.add(result);	// 게임 결과 저장
+				
 				break;
+				
+			case "2": // 게임 결과 목록 표시
+				for (String gameResult : gameResults) {
+					System.out.println(gameResult);
+				}
+				break;
+				
 			case "9": // 프로그램 종료
 				System.out.println("$$ 프로그램을 종료합니다. $$");
 				//break; // switch문 종료
@@ -51,6 +66,7 @@ public class TheGame {
 	public String selectMenu() {
 		System.out.println("******************************");
 		System.out.println("* 1. 가위/바위/보 게임 시작       *");
+		System.out.println("* 2. 게임 결과 보기             *");
 		System.out.println("* 9. 종료                     *");
 		System.out.println("******************************");
 		System.out.print("작업을 선택하세요 : ");
