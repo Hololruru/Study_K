@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 
 // 1. Ex10Method5의 내용을 Lotto 클래스에 적용
 
@@ -9,7 +11,9 @@
 
 public class Lotto {
 	
-	private java.util.Scanner scanner = new java.util.Scanner(System.in);
+	private Scanner scanner = new Scanner(System.in);
+	
+	private ArrayList<int[]> numbersList = new ArrayList<>(); // 뽑힌 번호 배열을 저장하는 컬렉션 변수
 
 	public void doStart() {
 
@@ -38,6 +42,20 @@ public class Lotto {
 
 				// 4. 출력
 				showNumbers(numbers, average);
+				
+				numbersList.add(numbers); // 뽑힌 로또 번호 세트(6개) 목록에 추가
+				
+				break;
+				
+			case "2":
+				System.out.println("[ 당첨 예상번호 목록 ]");
+				for (int[] numbers2 : numbersList) {
+					// System.out.println(numbers2.toString()); // 배열의 toString() 사용 -> 클래스이름@hashCode
+					for (int number : numbers2) {
+						System.out.printf("[%2d]", number);
+					}
+					System.out.println();
+				}
 				break;
 
 			case "9": // 3-2. 사용자가 9를 입력한 경우
