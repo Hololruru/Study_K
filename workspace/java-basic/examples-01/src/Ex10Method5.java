@@ -1,9 +1,10 @@
 
 public class Ex10Method5 {
-
+	
+	static java.util.Scanner scanner = new java.util.Scanner(System.in);
+	
 	public static void main(String[] args) {
-
-		java.util.Scanner scanner = new java.util.Scanner(System.in);
+		
 		String selection = "";		//사용자 메뉴 입력 변수
 		int[] numbers = new int[6];	//뽑은 당첨 예상 번호를 저장할 배열 변수
 		int sum = 0, average = 0;	//뽑은 숫자의 합과 평균을 저장할 변수
@@ -11,12 +12,9 @@ public class Ex10Method5 {
 		MainLoop: //레이블 구문 : 코드의 위치에 이름 붙이기 
 		while (true) {
 			
-			//1. 메뉴 표시
-			showMenu();
+			//1. 메뉴 표시 + 사용자 입력
+			selection = selectMenu();
 			
-			//2. 사용자 입력
-			System.out.print("원하는 작업 번호를 입력하세요 : ");
-			selection = scanner.nextLine();
 			System.out.println();
 			
 			switch (selection) {
@@ -50,13 +48,17 @@ public class Ex10Method5 {
 	/**
 	 * 사용자에게 선택 가능한 작업의 목록을 보여주는 메서드
 	 */
-	static void showMenu() {
+	static String selectMenu() {
 		System.out.println();
 		System.out.println("******************************");
 		System.out.println("* 1. 번호 뽑기.");
 		System.out.println("* 2. 목록 보기.");
 		System.out.println("* 9. 종료.");
 		System.out.println("******************************");
+		
+		System.out.print("원하는 작업 번호를 입력하세요 : ");
+		String selection = scanner.nextLine();
+		return selection;
 	}
 	
 	/**
