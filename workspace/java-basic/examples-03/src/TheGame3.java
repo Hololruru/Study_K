@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -24,11 +25,16 @@ public class TheGame3 {
 	
 	@SuppressWarnings("unchecked")
 	public TheGame3() { // 생성자 메서드 : 클래스이름과 동일, 결과형 없음, 자동 호출 (new 할 때 )
+		
+		if (!new File("game-result.dat").exists()) { // 파일이 없는 경우 ( exists() : 파일 존재 여부 확인 )
+			return;
+		}
+		
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
-			fis = new FileInputStream("game-result.dat");
-			ois = new ObjectInputStream(fis);
+			fis = new FileInputStream("game-result.dat");	// 파일에서 읽기
+			ois = new ObjectInputStream(fis);				// byte[] -> Object 변환기
 			gameResults2 = (ArrayList<GameResult>)ois.readObject();
 			
 			if (gameResults2.size() > 0) {
@@ -79,8 +85,8 @@ public class TheGame3 {
 				ObjectOutputStream oos = null;
 				
 				try {
-					fos = new FileOutputStream("game-result.dat");
-					oos = new ObjectOutputStream(fos);
+					fos = new FileOutputStream("game-result.dat");	// 파일에 쓰기
+					oos = new ObjectOutputStream(fos);				// Object -> byte[] 변환기
 					oos.writeObject(gameResults2);
 					
 				} catch (Exception ex) {

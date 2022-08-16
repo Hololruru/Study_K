@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -158,10 +159,11 @@ public class Ex08IO {
 //		oistream5.close();istream5.close();
 		
 		//6 - 1.
-//		InputStreamReader isr6 = new InputStreamReader(System.in); //System.in : 표준 입력 스트림 (키보드)
+//		InputStream is = System.in;	//System.in : 표준 입력 스트림 (키보드)
+//		InputStreamReader isr6 = new InputStreamReader(is); 
 //		BufferedReader br6 = new BufferedReader(isr6);//enter 단위로 읽기 가능
 //		
-//		System.out.print("이름 : ");
+//		System.out.print("이름 : ");		// System.out : 표준 출력 스트림 (모니터)
 //		String name = br6.readLine();
 //		System.out.println("Your Name is " + name); //System.out : 표준 출력 장치 (모니터)
 		
