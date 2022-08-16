@@ -102,16 +102,16 @@ public class Ex08IO {
 //		distream3.close(); istream3.close();
 		
 		//4. Object <-> byte[]
-		Item item = new Item();
-		item.setNo(10); // item.no = 10;
-		item.setName("테스트 아이템");		
-		
-		FileOutputStream ostream4 = new FileOutputStream("test4.dat");		// 파일에 쓰기
-		ObjectOutputStream oostream4 = new ObjectOutputStream(ostream4);	// 객체 -> byte[] 변환		
-		oostream4.writeObject(item);	//객체를 파일에 binary 형식으로 저장		
-		oostream4.close(); ostream4.close();
-		
-		System.out.println("파일에 데이터를 썼습니다.");
+//		Item item = new Item();
+//		item.setNo(10); // item.no = 10;
+//		item.setName("테스트 아이템");		
+//		
+//		FileOutputStream ostream4 = new FileOutputStream("test4.dat");		// 파일에 쓰기
+//		ObjectOutputStream oostream4 = new ObjectOutputStream(ostream4);	// 객체 -> byte[] 변환		
+//		oostream4.writeObject(item);	//객체를 파일에 binary 형식으로 저장		
+//		oostream4.close(); ostream4.close();
+//		
+//		System.out.println("파일에 데이터를 썼습니다.");
 //		
 //		FileInputStream istream4 = new FileInputStream("test4.dat");	// 파일에서 읽기
 //		ObjectInputStream oistream4 = new ObjectInputStream(istream4);	// byte[] -> 객체 변환
@@ -122,7 +122,7 @@ public class Ex08IO {
 //		oistream4.close();
 //		istream4.close();
 		
-		//5.		
+		//5. Object <-> byte[]	
 //		ArrayList<Item> items = new ArrayList<Item>();
 //		for (int i = 0; i < 10; i++) {
 //			Item item = new Item();
@@ -139,7 +139,7 @@ public class Ex08IO {
 ////			oostream5.writeObject(item);
 ////		}
 //			
-//		//아이템을 한번에 저장하는 방식 (ArrayList를 저장)
+//		//아이템을 한번에 저장하는 방식 (ArrayList를 저장 -> ArrayList에 포함된 Item 객체도 자동 저장)
 //		oostream5.writeObject(items);  
 //
 //		oostream5.close();
@@ -147,8 +147,8 @@ public class Ex08IO {
 //		
 //		System.out.println("파일에 데이터를 썼습니다.");		
 //		
-//		FileInputStream istream5 = new FileInputStream("test5.dat");
-//		ObjectInputStream oistream5 = new ObjectInputStream(istream5);
+//		FileInputStream istream5 = new FileInputStream("test5.dat");	// 파일에서 읽기
+//		ObjectInputStream oistream5 = new ObjectInputStream(istream5);	// byte[] -> Object 변환
 //		ArrayList<Item> items2 = (ArrayList<Item>)oistream5.readObject();
 //		
 //		for (Item item : items2) {
