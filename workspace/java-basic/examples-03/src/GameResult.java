@@ -1,10 +1,17 @@
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class GameResult {
+public class GameResult implements Serializable {
 	
 	private static int nextNo = 1; // 번호표 기계 역할 ( 모든 인스턴스가 공유하는 유일한 변수 )
-	
+	public static int getNextNo() {
+		return nextNo;
+	}
+	public static void setNextNo(int nextNo) {
+		GameResult.nextNo = nextNo;
+	}
+
 	private int no;
 	private Date gameDate;
 	private int comNo;

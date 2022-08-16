@@ -1,3 +1,7 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,6 +21,28 @@ public class TheGame3 {
 	private java.util.Scanner scanner = new java.util.Scanner(System.in);
 	
 	private ArrayList<GameResult> gameResults2 = new ArrayList<>();
+	
+	@SuppressWarnings("unchecked")
+	public TheGame3() { // 생성자 메서드 : 클래스이름과 동일, 결과형 없음, 자동 호출 (new 할 때 )
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		try {
+			fis = new FileInputStream("game-result.dat");
+			ois = new ObjectInputStream(fis);
+			gameResults2 = (ArrayList<GameResult>)ois.readObject();
+			
+			if (gameResults2.size() > 0) {
+				GameResult gr = gameResults2.get(gameResults2.size() - 1); // 마지막 요소 가져오기
+				GameResult.setNextNo(gr.getNo() + 1);
+			}
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try { ois.close(); } catch (Exception ex) {}
+			try { fis.close(); } catch (Exception ex) {}
+		}
+	}
 	
 	public void doGame() {
 		
@@ -48,6 +74,22 @@ public class TheGame3 {
 				break;
 				
 			case "9": // 프로그램 종료
+				
+				FileOutputStream fos = null;
+				ObjectOutputStream oos = null;
+				
+				try {
+					fos = new FileOutputStream("game-result.dat");
+					oos = new ObjectOutputStream(fos);
+					oos.writeObject(gameResults2);
+					
+				} catch (Exception ex) {
+					ex.printStackTrace();	// 예외 메시지 출력 ( 테스트 전용 )
+				} finally {
+					try { oos.close(); } catch (Exception ex) {}
+					try { fos.close(); } catch (Exception ex) {}
+				}
+				
 				System.out.println("$$ 프로그램을 종료합니다. $$");
 				//break; // switch문 종료
 				break outer; // outer: while(true)문 종료
