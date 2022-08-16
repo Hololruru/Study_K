@@ -35,17 +35,13 @@ public class TheGame3 {
 				String result = makeDecision(userNumber, comNumber);
 				
 				showResult(comNumber, userNumber, result);
-				
-				gameResults.add(result);	// 게임 결과 저장
+								
 				GameResult gr = new GameResult(0, new Date(), comNumber, userNumber, result);
 				gameResults2.add(gr);
 				
 				break;
 				
 			case "2": // 게임 결과 목록 표시
-//				for (String gameResult : gameResults) {
-//					System.out.println(gameResult);
-//				}
 				for (GameResult gameResult : gameResults2) {
 					System.out.println(gameResult);
 				}
