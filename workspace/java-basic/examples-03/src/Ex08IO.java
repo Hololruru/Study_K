@@ -93,29 +93,29 @@ public class Ex08IO {
 //		
 //		System.out.println("파일에 데이터를 썼습니다.");
 //		
-		FileInputStream istream3 = new FileInputStream("test3.dat");	//파일에서 읽기
-		DataInputStream distream3 = new DataInputStream(istream3);		//byte[] -> binary
-		int data = distream3.readInt();
-		int data2 = distream3.readInt();
-		System.out.printf("%d-%d", data, data2);
-		
-		distream3.close(); istream3.close();
+//		FileInputStream istream3 = new FileInputStream("test3.dat");	//파일에서 읽기
+//		DataInputStream distream3 = new DataInputStream(istream3);		//byte[] -> binary
+//		int data = distream3.readInt();
+//		int data2 = distream3.readInt();
+//		System.out.printf("%d-%d", data, data2);
+//		
+//		distream3.close(); istream3.close();
 		
 		//4. Object <-> byte[]
-//		Item item = new Item();
-//		item.setNo(10); // item.no = 10;
-//		item.setName("테스트 아이템");
+		Item item = new Item();
+		item.setNo(10); // item.no = 10;
+		item.setName("테스트 아이템");		
+		
+		FileOutputStream ostream4 = new FileOutputStream("test4.dat");		// 파일에 쓰기
+		ObjectOutputStream oostream4 = new ObjectOutputStream(ostream4);	// 객체 -> byte[] 변환		
+		oostream4.writeObject(item);	//객체를 파일에 binary 형식으로 저장		
+		oostream4.close(); ostream4.close();
+		
+		System.out.println("파일에 데이터를 썼습니다.");
 //		
-//		FileOutputStream ostream4 = new FileOutputStream("test4.dat");
-//		ObjectOutputStream oostream4 = new ObjectOutputStream(ostream4);		
-//		oostream4.writeObject(item);//객체를 파일에 binary 형식으로 저장		
-//		oostream4.close(); ostream4.close();
-//		
-//		System.out.println("파일에 데이터를 썼습니다.");
-//		
-//		FileInputStream istream4 = new FileInputStream("test4.dat");
-//		ObjectInputStream oistream4 = new ObjectInputStream(istream4);		
-//		Item item2 = (Item)oistream4.readObject();//파일에서 데이터를 읽고 객체로 복원
+//		FileInputStream istream4 = new FileInputStream("test4.dat");	// 파일에서 읽기
+//		ObjectInputStream oistream4 = new ObjectInputStream(istream4);	// byte[] -> 객체 변환
+//		Item item2 = (Item)oistream4.readObject();	//파일에서 데이터를 읽고 객체로 복원
 //
 //		System.out.println(item2);
 //				
