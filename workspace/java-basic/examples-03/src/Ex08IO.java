@@ -76,30 +76,30 @@ public class Ex08IO {
 		
 		//3. primitive type <-> byte[]	
 		// binary 데이터 쓰기
-		FileOutputStream ostream3 = new FileOutputStream("test3.dat");//파일에 쓰기
-		DataOutputStream dostream3 = new DataOutputStream(ostream3); //primitive type -> byte[]
-		// text 데이터 쓰기
-		FileOutputStream ostream3_1 = 	new FileOutputStream("test3.txt");//파일에 쓰기
-		OutputStreamWriter writer3 = new OutputStreamWriter(ostream3_1); //text -> byte[]
-		
-		for (int i = 0; i < 10000; i++) {
-			dostream3.writeInt(Integer.MAX_VALUE); //2147483647, binary write
-			writer3.write(Integer.MAX_VALUE + ""); //text write			
-		}
-		dostream3.close();
-		ostream3.close();
-		writer3.close();
-		ostream3_1.close();
-		
-		System.out.println("파일에 데이터를 썼습니다.");
+//		FileOutputStream ostream3 = new FileOutputStream("test3.dat");//파일에 쓰기
+//		DataOutputStream dostream3 = new DataOutputStream(ostream3); //primitive type -> byte[]
+//		// text 데이터 쓰기
+//		FileOutputStream ostream3_1 = 	new FileOutputStream("test3.txt");//파일에 쓰기
+//		OutputStreamWriter writer3 = new OutputStreamWriter(ostream3_1); //text -> byte[]
 //		
-//		FileInputStream istream3 = new FileInputStream("test3.dat");//파일에서 읽기
-//		DataInputStream distream3 = new DataInputStream(istream3);//byte[] -> binary
-//		int data = distream3.readInt();
-//		int data2 = distream3.readInt();
-//		System.out.printf("%d-%d", data, data2);
+//		for (int i = 0; i < 10000; i++) {
+//			dostream3.writeInt(Integer.MAX_VALUE); //2147483647, binary write
+//			writer3.write(Integer.MAX_VALUE + ""); //text write			
+//		}
+//		dostream3.close();
+//		ostream3.close();
+//		writer3.close();
+//		ostream3_1.close();
 //		
-//		distream3.close(); istream3.close();
+//		System.out.println("파일에 데이터를 썼습니다.");
+//		
+		FileInputStream istream3 = new FileInputStream("test3.dat");	//파일에서 읽기
+		DataInputStream distream3 = new DataInputStream(istream3);		//byte[] -> binary
+		int data = distream3.readInt();
+		int data2 = distream3.readInt();
+		System.out.printf("%d-%d", data, data2);
+		
+		distream3.close(); istream3.close();
 		
 		//4. Object <-> byte[]
 //		Item item = new Item();
