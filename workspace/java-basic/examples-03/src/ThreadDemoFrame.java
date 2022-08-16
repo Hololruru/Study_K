@@ -44,7 +44,7 @@ public class ThreadDemoFrame extends JFrame {
 			worker.doWork(); // 10초간 대기
 			System.out.println("4. doWork 호출 후");			
 		} );		
-		add(button2); 
+		add(button2);
 	}
 	
 	class ButtonClickHandler implements ActionListener { // ActionListener : 클릭 처리기에 대한 약속
