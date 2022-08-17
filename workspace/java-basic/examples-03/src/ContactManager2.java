@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -12,19 +13,28 @@ class ContactManager2 {
 	
 	private java.util.Scanner scanner = new java.util.Scanner(System.in);
 		
-	private ArrayList<Contact> contacts = new ArrayList<>();
+	private ArrayList<Contact> contacts; // = new ArrayList<>();
 	
+	@SuppressWarnings("unchecked")
 	public ContactManager2() { // 생성자 메서드 : 클래스 이름과 같은 이름, 결과형 없음
-		FileInputStream fis = null;
-		ObjectInputStream ois = null;
-		try {
-			fis = new FileInputStream("contacts.dat");
-			ois = new ObjectInputStream(fis);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			try { ois.close(); } catch (Exception ex) {}
-			try { fis.close(); } catch (Exception ex) {}
+		
+		File f = new File("contacts.dat");
+		if (f.exists()) {		
+			FileInputStream fis = null;
+			ObjectInputStream ois = null;
+			try {
+				fis = new FileInputStream("contacts.dat");
+				ois = new ObjectInputStream(fis);
+				contacts = (ArrayList<Contact>)ois.readObject();
+			} catch (Exception ex) {
+				contacts = new ArrayList<>();
+				ex.printStackTrace();
+			} finally {
+				try { ois.close(); } catch (Exception ex) {}
+				try { fis.close(); } catch (Exception ex) {}
+			}
+		} else {
+			contacts = new ArrayList<>();
 		}
 	}
 	
