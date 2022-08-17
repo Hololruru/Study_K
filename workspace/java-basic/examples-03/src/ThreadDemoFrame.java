@@ -63,6 +63,23 @@ public class ThreadDemoFrame extends JFrame {
 			System.out.println("4. doWork 호출 후");			
 		} );		
 		add(button3);
+		
+		//////////
+		
+		JButton button4 = new JButton();
+		button4.setText("비동기 방식 호출 (Thread 상속)"); // 버튼 위에 표시되는 메시지
+		button4.setSize(250, 50);
+		button4.setLocation(15, 210); // 좌측 상단의 위치 값
+		button4.addActionListener( (e) -> {						// 버튼 클릭하면 호출될 메서드 등록
+			System.out.println("1. doWork 호출 전");
+			
+			TheWorker3 worker3 = new TheWorker3();
+			// worker3.doWork(); // 동기 방식 호출
+			worker3.start(); // 비동기 방식 worker3.run() 호출 -> doWork() 호출
+			
+			System.out.println("4. doWork 호출 후");			
+		} );		
+		add(button4);
 	}
 	
 	class ButtonClickHandler implements ActionListener { // ActionListener : 클릭 처리기에 대한 약속
