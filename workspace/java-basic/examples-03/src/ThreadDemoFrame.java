@@ -72,6 +72,7 @@ public class ThreadDemoFrame extends JFrame {
 		button4.setLocation(15, 210); // 좌측 상단의 위치 값
 		button4.addActionListener( (e) -> {						// 버튼 클릭하면 호출될 메서드 등록
 			System.out.println("1. doWork 호출 전");
+			System.out.println("Frame : " + Thread.currentThread().getId());
 			
 			TheWorker3 worker3 = new TheWorker3();
 			// worker3.doWork(); // 동기 방식 호출
