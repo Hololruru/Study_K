@@ -12,45 +12,47 @@ public class EchoClient {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.print("서버로 전송할 메시지 : ");
-		String message = scanner.nextLine();
-		
-		Socket socket = null;
-		try {
-			// 소켓 만들기 + 서버 연결
-			socket = new Socket("127.0.0.1", 9900); // 127.0.0.1 == localhost == 같은 컴퓨터
+		while (true) {
+			System.out.print("서버로 전송할 메시지 : ");
+			String message = scanner.nextLine();
 			
-			InputStream is = null;
-			InputStreamReader isr = null;
-			BufferedReader br = null;
-			OutputStream os = null;
-			PrintWriter pw = null;
+			Socket socket = null;
 			try {
-				os = socket.getOutputStream();
-				pw = new PrintWriter(os);
-				pw.println(message);
-				pw.flush(); // 전송되지 않은 데이터 강제 전송 
+				// 소켓 만들기 + 서버 연결
+				socket = new Socket("127.0.0.1", 9900); // 127.0.0.1 == localhost == 같은 컴퓨터
 				
-				is = socket.getInputStream(); // 네트워크와 연결된 데이터 송수신 도구 (읽기/쓰기 도구)
-				isr = new InputStreamReader(is);
-				br = new BufferedReader(isr);
-				String rMessage = br.readLine();	
-				System.out.println(rMessage);
+				InputStream is = null;
+				InputStreamReader isr = null;
+				BufferedReader br = null;
+				OutputStream os = null;
+				PrintWriter pw = null;
+				try {
+					os = socket.getOutputStream();
+					pw = new PrintWriter(os);
+					pw.println(message);
+					pw.flush(); // 전송되지 않은 데이터 강제 전송 
+					
+					is = socket.getInputStream(); // 네트워크와 연결된 데이터 송수신 도구 (읽기/쓰기 도구)
+					isr = new InputStreamReader(is);
+					br = new BufferedReader(isr);
+					String rMessage = br.readLine();	
+					System.out.println(rMessage);
+					
+				} catch (Exception ex2) {
+					ex2.printStackTrace();
+				} finally {
+					try { br.close(); } catch (Exception ex2) {}
+					try { isr.close(); } catch (Exception ex2) {}
+					try { is.close(); } catch (Exception ex2) {}
+					try { pw.close(); } catch (Exception ex2) {}
+					try { os.close(); } catch (Exception ex2) {}
+				}		
 				
-			} catch (Exception ex2) {
-				ex2.printStackTrace();
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			} finally {
-				try { br.close(); } catch (Exception ex2) {}
-				try { isr.close(); } catch (Exception ex2) {}
-				try { is.close(); } catch (Exception ex2) {}
-				try { pw.close(); } catch (Exception ex2) {}
-				try { os.close(); } catch (Exception ex2) {}
-			}		
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			try { socket.close(); } catch (Exception ex) {}
+				try { socket.close(); } catch (Exception ex) {}
+			}
 		}
 
 	}
