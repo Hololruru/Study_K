@@ -1,5 +1,7 @@
+import java.io.Serializable;
+
 // 연락처 정보 저장용 클래스
-class Contact {
+class Contact implements Serializable { // 파일에 저장할 객체의 타입은 Serializable 인터페이스 구현해야 합니다.
 	private int no;		 
 	private String name;
 	private String phone;

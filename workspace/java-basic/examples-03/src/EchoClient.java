@@ -19,7 +19,8 @@ public class EchoClient {
 			Socket socket = null;
 			try {
 				// 소켓 만들기 + 서버 연결
-				socket = new Socket("127.0.0.1", 9900); // 127.0.0.1 == localhost == 같은 컴퓨터
+				//socket = new Socket("127.0.0.1", 9900); // 127.0.0.1 == localhost == 같은 컴퓨터
+				socket = new Socket("192.168.0.18", 9900);
 				
 				InputStream is = null;
 				InputStreamReader isr = null;
