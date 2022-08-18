@@ -56,3 +56,46 @@ SELECT *
 FROM member
 WHERE height BETWEEN 165 AND 167; -- BETWEEN ~ AND ~ 
 
+-- 9. 주소가 '경기' 또는 '전남'인 member 조회
+SELECT *
+FROM member
+WHERE addr = '경기' OR addr = '전남';
+
+SELECT *
+FROM member
+WHERE addr IN ('경기', '전남');
+
+-- 10. 이름에 '핑크'가 포함된 회원 조회
+SELECT *
+FROM member
+WHERE mem_name LIKE '%핑크%'; -- %는 0개 이상의 모든 문자 의미 '핫핑크', '핑크래빗', ...
+
+-- 11. 2014년 ~ 2015년 사이에 데뷔한 멤버
+SELECT *
+FROM member
+WHERE debut_date >= '2014-01-01' AND debut_date <= '2015-12-31';
+
+SELECT *
+FROM member
+WHERE debut_date BETWEEN '2014-01-01' AND '2015-12-31';
+
+-- 12. 데뷔 년도 순으로 회원 조회
+SELECT *
+FROM member
+ORDER BY debut_date; -- 오름차순 정렬 기본 적용
+
+SELECT *
+FROM member
+ORDER BY debut_date DESC; -- DESC : 내림차순, ASC : 오름차순
+
+-- 13. 지역순으로 조회하되 같은 지역인 경우 데뷔일자 순으로 조회
+SELECT *
+FROM member
+ORDER BY addr DESC, debut_date ASC;
+
+-- 14. 데뷔일자가 빠른 순으로 5명의 회원 조회
+SELECT *
+FROM member
+ORDER BY debut_date ASC
+-- LIMIT 3; -- 처음부터 3건의 결과 조회
+LIMIT 3, 3; -- 3번째부터 3건의 결과 조회 (순서는 0부터)
