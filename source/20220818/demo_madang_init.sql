@@ -1,9 +1,4 @@
-/* 이름: demo_madang_init.sql*/
-/* 설명 */
-/* madang data 를 초기화 */
-/* MySQL Workbench에서 초기화면에서 +를 눌러 madang connection을 만들어 접속한다. */
- 
-use madang;
+
 DROP TABLE IF EXISTS Orders ;
 DROP TABLE IF EXISTS Book;
 DROP TABLE IF EXISTS Customer;
