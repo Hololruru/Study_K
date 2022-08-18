@@ -35,10 +35,24 @@ FROM member;
 -- 5. member 테이블에서 서울에 사는 회원 조회
 SELECT * 
 FROM member
-WHERE addr = '서울';
+WHERE addr = '서울'; -- SQL에서 작은따옴표는 문자열 표시 (큰따옴표는 다른 용도)
 
 -- 6. member 테이블에서 키가 165 이상인 회원 조회
 SELECT *
 FROM member
 WHERE height >= 165;
+
+-- 7. 서울에 살거나 키가 165 이상의 회원 조회
+SELECT *
+FROM member
+WHERE addr = '서울' OR height >= 165; -- AND : &&, OR : ||
+
+-- 8. 키 165 이상 167 이하인 회원 조회
+SELECT *
+FROM member
+WHERE height >= 165 AND height <= 167; -- AND : &&, OR : ||
+
+SELECT *
+FROM member
+WHERE height BETWEEN 165 AND 167; -- BETWEEN ~ AND ~ 
 
