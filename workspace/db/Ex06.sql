@@ -55,6 +55,17 @@ ON c.custid = o.custid
 GROUP BY c.custid
 ORDER BY SUM(o.saleprice) DESC;
 
+-- 고객아이디, 고객이름, 도서명, 주문 정보 ( customer, book, orders )
+SELECT c.custid, c.name, b.bookname, o.saleprice, o.orderdate
+FROM customer c, orders o, book b
+WHERE c.custid = o.custid AND o.bookid = b.bookid
+ORDER BY c.custid;
+
+SELECT c.custid, c.name, b.bookname, o.saleprice, o.orderdate
+FROM customer c
+INNER JOIN orders o ON c.custid = o.custid
+INNER JOIN book b   ON o.bookid = b.bookid
+ORDER BY c.custid;
 
 
 
