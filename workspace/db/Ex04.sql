@@ -43,5 +43,49 @@ HAVING SUM(price * amount) >= 1000 -- HAVING : GROUP BY 다음에 조건 검사
 ORDER BY SUM(price * amount);
 
 
+-- ------------------------------------------------------
+
+SELECT * FROM customer;
+SELECT * FROM book;
+SELECT * FROM orders;
+
+-- 6. 고객이 주문한 도서의 총 판매액을 구하시오
+SELECT SUM(saleprice) 총판매액
+FROM orders;
+
+-- 7. 2번 김연아 고객이 주문한 도서의 총 판매액을 구하시오.
+SELECT custid
+FROM customer 
+WHERE name = '김연아';
+
+SELECT SUM(saleprice) 총판매액
+FROM orders
+WHERE custid = 2;
+
+-- 8. 고객이 주문한 도서의 총 판매액, 평균값, 최저가, 최고가를 구하시오
+SELECT SUM(saleprice) 총판매액, AVG(saleprice) 평균값, 
+	   MAX(saleprice) 최고가, MIN(saleprice) 최저가
+FROM orders;
+
+-- 9. 도서 판매 건수를 구하시오.
+SELECT COUNT(*) 판매건수
+FROM orders;
+
+-- 10. 고객별로 주문한 도서의 총 수량과 총 판매액을 구하시오
+SELECT custid, COUNT(saleprice) 총수량, SUM(saleprice) 총판매액
+FROM orders
+GROUP BY custid;
+
+-- 11. 가격이 8,000원 이상인 도서를 구매한 고객에 대하여 
+--     고객별 주문 도서의 총 수량을 구하시오. 단, 두 권 이상 구매한 고객만 구한다.
+SELECT custid, COUNT(saleprice) 총구매수량
+FROM orders
+WHERE saleprice >= 8000
+GROUP BY custid
+HAVING COUNT(saleprice) >= 2;
+
+
+
+
 
 
