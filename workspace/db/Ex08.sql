@@ -51,5 +51,12 @@ LEFT OUTER JOIN orders o ON c.custid = o.custid
 GROUP BY c.name;
 
 -- (6) 고객의 이름과 고객이 구매한 도서 목록 ( customer, orders, book )
+SELECT c.name, b.bookname, b.publisher, b.price
+FROM customer c
+INNER JOIN orders o ON c.custid = o.custid
+INNER JOIN book b ON o.bookid = b.bookid
+ORDER BY c.name;
+
+
 (7) 도서의 가격(Book 테이블)과 판매가격(Orders 테이블)의 차이가 가장 많은 주문 ( book, orders )
 (8) 도서의 판매액 평균보다 자신의 구매액 평균이 더 높은 고객의 이름 ( orders, book, customer )
