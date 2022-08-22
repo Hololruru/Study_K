@@ -22,6 +22,19 @@ INNER JOIN customer c ON o.custid = c.custid
 WHERE c.name = '박지성';
 
 -- (3) 박지성이 구매하지 않은 도서의 이름 ( customer, orders, book )
+SELECT b.*
+FROM book b
+INNER JOIN orders o ON b.bookid = o.bookid 
+INNER JOIN customer c ON o.custid = c.custid 
+WHERE c.name <> '박지성';
+
+SELECT b.*
+FROM book b
+INNER JOIN orders o ON b.bookid = o.bookid 
+WHERE o.custid <> ( SELECT custid 
+					FROM customer
+                    WHERE name = '박지성');
+
 (4) 주문하지 않은 고객의 이름 ( customer, orders )
 (5) 고객의 이름과 고객별 구매액 ( customer, orders )
 (6) 고객의 이름과 고객이 구매한 도서 목록 ( customer, orders, book )
