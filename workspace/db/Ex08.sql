@@ -22,18 +22,18 @@ INNER JOIN customer c ON o.custid = c.custid
 WHERE c.name = '박지성';
 
 -- (3) 박지성이 구매하지 않은 도서의 이름 ( customer, orders, book )
-SELECT b.*
-FROM book b
-INNER JOIN orders o ON b.bookid = o.bookid 
-INNER JOIN customer c ON o.custid = c.custid 
-WHERE c.name <> '박지성';
+select count(*) from book;	-- 10 ( 총도서개수 )
+select count(distinct bookid) from orders; -- 8 (판매도서개수)
+-- 위 두 조회 결과로 볼 때 판매되지 않은 도서가 2권입니다.
 
-SELECT b.*
+SELECT DISTINCT b.*
 FROM book b
-INNER JOIN orders o ON b.bookid = o.bookid 
+LEFT OUTER JOIN orders o ON b.bookid = o.bookid
 WHERE o.custid <> ( SELECT custid 
 					FROM customer
-                    WHERE name = '박지성');
+                    WHERE name = '박지성') -- 박지성 고객이 주문하지 않은 도서 조건
+	  OR
+      o.custid IS NULL; -- 주문 실적이 없는 도서 조건 (NULL은 직접 비교 불가)
 
 (4) 주문하지 않은 고객의 이름 ( customer, orders )
 (5) 고객의 이름과 고객별 구매액 ( customer, orders )
