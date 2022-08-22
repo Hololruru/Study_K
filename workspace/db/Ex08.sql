@@ -43,6 +43,13 @@ WHERE c.custid NOT IN ( SELECT DISTINCT custid
 						FROM orders );
 
 -- (5) 고객의 이름과 고객별 구매액 ( customer, orders )
-(6) 고객의 이름과 고객이 구매한 도서 목록 ( customer, orders, book )
+SELECT c.name 고객이름, 
+	   SUM(o.saleprice) 구매액1, IFNULL(SUM(o.saleprice), 0) 구매액2
+FROM customer c
+-- INNER JOIN orders o ON c.custid = o.custid
+LEFT OUTER JOIN orders o ON c.custid = o.custid
+GROUP BY c.name;
+
+-- (6) 고객의 이름과 고객이 구매한 도서 목록 ( customer, orders, book )
 (7) 도서의 가격(Book 테이블)과 판매가격(Orders 테이블)의 차이가 가장 많은 주문 ( book, orders )
 (8) 도서의 판매액 평균보다 자신의 구매액 평균이 더 높은 고객의 이름 ( orders, book, customer )
