@@ -57,6 +57,17 @@ INNER JOIN orders o ON c.custid = o.custid
 INNER JOIN book b ON o.bookid = b.bookid
 ORDER BY c.name;
 
+-- (7) 도서의 가격(Book 테이블)과 판매가격(Orders 테이블)의 차이가 가장 많은 주문 ( book, orders )
+SELECT MAX(b.price - o.saleprice) 최대할인액
+FROM book b
+INNER JOIN orders o ON b.bookid = o.bookid;
 
-(7) 도서의 가격(Book 테이블)과 판매가격(Orders 테이블)의 차이가 가장 많은 주문 ( book, orders )
+SELECT o.*, b.price
+FROM orders o
+INNER JOIN book b ON o.bookid = b.bookid
+WHERE b.price - o.saleprice = ( SELECT MAX(b.price - o.saleprice)
+								FROM book b
+								INNER JOIN orders o 
+                                ON b.bookid = o.bookid );
+
 (8) 도서의 판매액 평균보다 자신의 구매액 평균이 더 높은 고객의 이름 ( orders, book, customer )
