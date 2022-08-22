@@ -25,6 +25,7 @@ WHERE c.name = '박지성';
 select count(*) from book;	-- 10 ( 총도서개수 )
 select count(distinct bookid) from orders; -- 8 (판매도서개수)
 -- 위 두 조회 결과로 볼 때 판매되지 않은 도서가 2권입니다.
+-- 2권의 도서는 박지성 고객이 주문하지 않은 도서에 포함되어야 합니다.
 
 SELECT DISTINCT b.*
 FROM book b
@@ -35,8 +36,13 @@ WHERE o.custid <> ( SELECT custid
 	  OR
       o.custid IS NULL; -- 주문 실적이 없는 도서 조건 (NULL은 직접 비교 불가)
 
-(4) 주문하지 않은 고객의 이름 ( customer, orders )
-(5) 고객의 이름과 고객별 구매액 ( customer, orders )
+-- (4) 주문하지 않은 고객의 이름 ( customer, orders )
+SELECT *
+FROM customer c
+WHERE c.custid NOT IN ( SELECT DISTINCT custid 
+						FROM orders );
+
+-- (5) 고객의 이름과 고객별 구매액 ( customer, orders )
 (6) 고객의 이름과 고객이 구매한 도서 목록 ( customer, orders, book )
 (7) 도서의 가격(Book 테이블)과 판매가격(Orders 테이블)의 차이가 가장 많은 주문 ( book, orders )
 (8) 도서의 판매액 평균보다 자신의 구매액 평균이 더 높은 고객의 이름 ( orders, book, customer )
