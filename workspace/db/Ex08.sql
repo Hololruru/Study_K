@@ -70,4 +70,13 @@ WHERE b.price - o.saleprice = ( SELECT MAX(b.price - o.saleprice)
 								INNER JOIN orders o 
                                 ON b.bookid = o.bookid );
 
-(8) 도서의 판매액 평균보다 자신의 구매액 평균이 더 높은 고객의 이름 ( orders, book, customer )
+-- (8) 도서의 판매액 평균보다 자신의 구매액 평균이 더 높은 고객의 이름 ( orders, customer )
+SELECT AVG(o.saleprice) FROM orders o; -- 도서의 판매액 평균
+
+SELECT c.*
+FROM customer c
+INNER JOIN orders o ON c.custid = o.custid
+-- WHERE AVG(o.saleprice) > ( SELECT AVG(o.saleprice) FROM orders o )
+GROUP BY c.name
+HAVING AVG(o.saleprice) > ( SELECT AVG(o.saleprice) FROM orders o );
+
