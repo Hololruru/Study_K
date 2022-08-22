@@ -25,6 +25,7 @@
    commentno int pk 자동증가
    writer 문자열 NOT NULL
    boardno INT not null
+   content 문자열 not null
    writedate DATETIME
    modifydate DATETIME
    외래키 boardno -> tbl_board(boardno)
