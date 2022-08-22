@@ -30,6 +30,8 @@
  
 3. tbl_comment 테이블 데이터 추가
 
+   - 아래 1, 2, 3은 글번호인데 2번에서 삽입된 글번호 사용
+
    'iamusertwo', 1, '게시글 1에 대한 댓글', now(), now()
    'iamusertwo', 2, '게시글 2에 대한 댓글', now(), now()
    'iamusertwo', 3, '게시글 3에 대한 댓글', now(), now()
