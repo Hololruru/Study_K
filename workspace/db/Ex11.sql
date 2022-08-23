@@ -68,6 +68,19 @@ VALUES ('iamadminone', 'iamadminone', 'iamadminone@example.com', 'admin');
 
 SELECT * FROM tbl_member;
 
+-- 7. tbl_board 테이블에 데이터 삽입
+
+INSERT INTO tbl_board (writer, title, content, category) -- 나머지 컬럼은 기본값 사용
+VALUES ('iamuserone', '게시글 연습 1', '게시글 작성 연습입니다.', 'free');
+
+INSERT INTO tbl_board (writer, title, content, category)
+VALUES ('iamuserone', '게시글 연습 2', '게시글 작성 연습입니다.', 'notice');
+
+INSERT INTO tbl_board (writer, title, content, category)
+VALUES ('iamuserone', '게시글 연습 3', '게시글 작성 연습입니다.', 'free');
+
+SELECT * FROM tbl_board; 
+
 
 
    
