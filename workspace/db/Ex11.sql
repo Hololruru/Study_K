@@ -41,6 +41,15 @@ CREATE TABLE tbl_comment
    CONSTRAINT fk_member_comment FOREIGN KEY (writer) REFERENCES tbl_member(memberid)
 );
 
+-- 4. tbl_member 수정
+ALTER TABLE tbl_member
+ADD COLUMN usergrade INT NULL,
+CHANGE COLUMN regdate joindate DATETIME DEFAULT ( NOW() );
+
+-- 5. tbl_board 수정
+ALTER TABLE tbl_board
+ADD COLUMN category VARCHAR (50) NOT NULL;
+
 
 
    
