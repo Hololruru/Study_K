@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 
 import com.mysql.cj.jdbc.Driver;
 
-public class Ex01 {
+public class Ex02 {
 
 	public static void main(String[] args) {
 		
