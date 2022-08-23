@@ -22,6 +22,12 @@ public class EmployeesManager {
 				showList(employees1);
 				break;
 			case "2" : 
+				System.out.print("검색할 사원 번호 : ");
+				int empNo = scanner.nextInt(); // 버퍼에 enter가 남아서 다음 nextLine에 영향을 미침
+				scanner.nextLine(); // 버퍼에 남아있는 enter 제거
+				List<EmployeeDto> employees2 = dao.selectEmployeesByEmpNo(empNo);
+				System.out.println("***** 직원 목록 *****");
+				showList(employees2);
 				break;
 			case "3" : 
 				System.out.print("검색할 사원 이름 : ");
