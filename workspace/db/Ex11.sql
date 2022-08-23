@@ -50,6 +50,24 @@ CHANGE COLUMN regdate joindate DATETIME DEFAULT ( NOW() );
 ALTER TABLE tbl_board
 ADD COLUMN category VARCHAR (50) NOT NULL;
 
+-- 6. tbl_member 테이블에 데이터 삽입
+
+-- INSERT INTO tbl_member
+-- VALUES ('iamuserone', 'iamuserone', 'iamuserone@example.com', 'user', now(), true);
+INSERT INTO tbl_member (memberid, passwd, email) -- 나머지 컬럼은 기본값 사용
+VALUES ('iamuserone', 'iamuserone', 'iamuserone@example.com');
+
+INSERT INTO tbl_member (memberid, passwd, email) -- 나머지 컬럼은 기본값 사용
+VALUES ('iamusertwo', 'iamusertwo', 'iamusertwo@example.com');
+
+INSERT INTO tbl_member (memberid, passwd, email) -- 나머지 컬럼은 기본값 사용
+VALUES ('iamuserthree', 'iamuserthree', 'iamuserthree@example.com');
+
+INSERT INTO tbl_member (memberid, passwd, email, usertype) -- 나머지 컬럼은 기본값 사용
+VALUES ('iamadminone', 'iamadminone', 'iamadminone@example.com', 'admin');
+
+SELECT * FROM tbl_member;
+
 
 
    
