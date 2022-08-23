@@ -15,8 +15,8 @@ select * from employees where (lower(first_name) like '%geo%' or lower(last_name
 -- 전체 부서 보기
 SELECT * FROM departments;
 
--- 부서별 직원 검색 (현직) ( DTO 필요 없음 )
-SELECT count(e.emp_no)
+-- 부서별 직원 검색 (현직) 
+SELECT e.*
 FROM employees e, dept_emp de, departments d
 WHERE e.emp_no = de.emp_no and d.dept_no = de.dept_no and de.to_date = '9999-01-01' and d.dept_no = 'd005';
 
