@@ -107,6 +107,13 @@ WHERE boardno = 1;
 
 SELECT * FROM tbl_board;
 
+-- 10. 데이터 삭제
+
+DELETE FROM tbl_member 
+WHERE memberid = 'iamuserthree'; -- 이 데이터를 참조하고 있는 데이터가 있다면 삭제 불가능
+
+SELECT * FROM tbl_member; 
+
 
 
    
