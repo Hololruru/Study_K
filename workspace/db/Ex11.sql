@@ -81,6 +81,32 @@ VALUES ('iamuserone', '게시글 연습 3', '게시글 작성 연습입니다.',
 
 SELECT * FROM tbl_board; 
 
+-- 8. tbl_comment 테이블에 데이터 삽입
+INSERT INTO tbl_comment (writer, boardno, content)
+VALUES ('iamusertwo', 1, '게시글 1에 대한 댓글');
+
+INSERT INTO tbl_comment (writer, boardno, content)
+VALUES ('iamusertwo', 2, '게시글 2에 대한 댓글');
+
+INSERT INTO tbl_comment (writer, boardno, content)
+VALUES ('iamusertwo', 3, '게시글 3에 대한 댓글');
+
+SELECT * FROM tbl_comment;
+
+-- 9. 데이터 수정
+
+UPDATE tbl_member
+SET passwd = 'Pa$$word',  email = 'iamuserone@naver.com'
+WHERE memberid = 'iamuserone';
+
+SELECT * FROM tbl_member;
+
+UPDATE tbl_board
+SET title = '수정된 게시글 1',  modifydate = now()
+WHERE boardno = 1;
+
+SELECT * FROM tbl_board;
+
 
 
    
