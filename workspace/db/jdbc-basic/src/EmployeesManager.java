@@ -36,7 +36,11 @@ public class EmployeesManager {
 				System.out.println("***** 직원 목록 *****");
 				showList(employees3);
 				break;
-			case "4" : break;
+			case "4" :
+				List<DepartmentDto> departments = dao.selectAllDepartments();
+				System.out.println("***** 부서 목록 *****");
+				showList(departments);
+				break;
 			case "5" : break;
 			case "0" : 
 				System.out.println("프로그램을 종료합니다.");
@@ -63,6 +67,7 @@ public class EmployeesManager {
 		System.out.println("* 1. 모든 직원 조회             *");
 		System.out.println("* 2. 직원 조회 (번호)           *");
 		System.out.println("* 3. 직원 조회 (이름)           *");
+		System.out.println("* 4. 모든 부서 조회             *");
 		System.out.println("* 0. 종료                     *");
 		System.out.println("******************************");
 		System.out.print("작업을 선택하세요 : ");
