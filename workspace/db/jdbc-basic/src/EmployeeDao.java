@@ -30,8 +30,8 @@ public class EmployeeDao {
 			String sql = 
 					"SELECT emp_no, birth_date, first_name, last_name, gender, hire_date " +
 					"FROM employees " +
-					"WHERE lower(first_name) LIKE "
-					+ " OR " + // ? : 나중에 채워질 영역 표시
+					"WHERE lower(first_name) LIKE ? " + // ? : 나중에 채워질 영역 표시
+					"      OR " + 
 					"      lower(last_name) LIKE ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + name + "%");	// SQL의 1번째 ?를 대체할 데이터
@@ -42,13 +42,15 @@ public class EmployeeDao {
 			
 			// 5. 결과 처리 (결과가 있다면 - SELECT 명령을 실행한 경우)
 			while (rs.next()) {	// 결과 집합의 다음 행으로 이동
-				System.out.printf("[%d][%s][%s][%s][%s][%s]\n",
-						rs.getInt(1),				// 현재 행의 1번째 열 데이터를 정수로 읽기
-						rs.getDate(2).toString(),	// 현재 행의 2번째 열 데이터를 날짜로 읽기
-						rs.getString(3),
-						rs.getString(4),
-						rs.getString(5),
-						rs.getDate(6).toString());
+				EmployeeDto employee = new EmployeeDto(); 	// 한 행당 Dto 객체 한 개 만들기
+				employee.setEmpNo(rs.getInt(1));			// 현재 행의 1번째 열 데이터를 정수로 읽기
+				employee.setBirthDate(rs.getDate(2));		// 현재 행의 2번째 열 데이터를 날짜로 읽기
+				employee.setFirstName(rs.getString(3));
+				employee.setLastName(rs.getString(4));
+				employee.setGender(rs.getString(5));
+				employee.setHireDate(rs.getDate(6));
+				
+				employees.add(employee);
 			}			
 			
 		} catch (Exception ex) {
