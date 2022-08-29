@@ -22,6 +22,10 @@ import java.util.ArrayList;
 // 4. 등록 기능 수정
 //    DAO에 void insertContact(Contact contact) 메서드 만들기 : JDBC 구현
 //    ContactManager에서 위의 DAO 메서드 호출
+//
+// 5. 전체 목록 보기 기능 수정
+//    Dao에 List<Contact> selectAllContacts() 메서드 만들기 : JDBC 구현
+//    ContactManager에서 위의 Dao 메서드 호출 + 결과 출력
 
 // 연락처 관리 기능 클래스
 class ContactManager3 {
