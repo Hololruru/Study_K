@@ -20,6 +20,8 @@ import java.util.ArrayList;
 //
 // 3. Dao 만들기 : ContactDao 클래스
 // 4. 등록 기능 수정
+//    DAO에 void insertContact(Contact contact) 메서드 만들기 : JDBC 구현
+//    ContactManager에서 위의 DAO 메서드 호출
 
 // 연락처 관리 기능 클래스
 class ContactManager3 {
@@ -59,11 +61,12 @@ class ContactManager3 {
 			
 			System.out.println();
 			if (selection.equals("1")) { // 등록
-				// 등록 기능 구현				
+				// 입력				
 				Contact contact = inputContact();
 				
-				// 3. 2의 인스턴스를 conatcts 리스트에 저장 
-				contacts.add(contact);
+				// 인스턴스를 데이터베이스에 저장 
+				ContactDao dao = new ContactDao();
+				dao.insertContact(contact);
 								
 				System.out.println("$$$ 새 연락처를 등록했습니다");
 				

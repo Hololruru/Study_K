@@ -338,7 +338,7 @@ public class EmployeeDao {
 	}
 
 	public List<EmployeeDto> selectManagerByDeptNo(String deptCode7) {
-ArrayList<EmployeeDto> employees = new ArrayList<>();
+		ArrayList<EmployeeDto> employees = new ArrayList<>();
 		
 		// 데이터베이스에서 데이터를 조회하고 employees에 채우는 작업 수행
 		Connection conn = null;			// 연결과 관련된 JDBC 호출 규격 ( 인터페이스 )
