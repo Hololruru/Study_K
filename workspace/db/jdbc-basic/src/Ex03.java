@@ -33,8 +33,8 @@ public class Ex03 {
 			String sql = 
 					"SELECT emp_no, birth_date, first_name, last_name, gender, hire_date " +
 					"FROM employees " +
-					"WHERE lower(first_name) LIKE "
-					+ " OR " + // ? : 나중에 채워질 영역 표시
+					"WHERE lower(first_name) LIKE ? " + // ? : 나중에 채워질 영역 표시
+					"      OR " + 
 					"      lower(last_name) LIKE ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + name + "%");	// SQL의 1번째 ?를 대체할 데이터
