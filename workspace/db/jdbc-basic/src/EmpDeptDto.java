@@ -57,8 +57,19 @@ public class EmpDeptDto {
 	
 	@Override
 	public String toString() {
-		return String.format("[%d][%s][%s][%s][%s][%s][%s]", 
-							 empNo, firstName, lastName, deptCode, deptName, fromDate, toDate);
+//		return String.format("[%d][%s][%s][%s][%s][%s][%s]", 
+//							 empNo, firstName, lastName, deptCode, deptName, fromDate, toDate);
+		
+		StringBuilder sb = new StringBuilder(100);
+		if (empNo > 0) 			sb.append(String.format("[EMPNO : %d]", empNo));		 
+		if (firstName != null) 	sb.append(String.format("[FIRST NAME : %s]", firstName));
+		if (lastName != null) 	sb.append(String.format("[LAST NAME : %s]", lastName));
+		if (deptCode != null)	sb.append(String.format("[DEPTNO : %s]", deptCode));
+		if (deptName != null) 	sb.append(String.format("[DEPT NAME : %s]", deptName));
+		if (fromDate != null) 	sb.append(String.format("[FROM : %s]", fromDate));
+		if (toDate != null) 	sb.append(String.format("[TO : %s]", toDate));
+		
+		return sb.toString();
 	}
 
 }
