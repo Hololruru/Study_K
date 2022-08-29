@@ -58,8 +58,7 @@ public class EmployeesManager {
 				break;
 			case "7" : 
 				System.out.print("부서 코드 입력 : ");
-				String deptCode7 = scanner.nextLine();
-				scanner.nextLine(); // 버퍼에 남아있는 enter 제거				
+				String deptCode7 = scanner.nextLine();								
 				List<EmployeeDto> employees7 = dao.selectManagerByDeptNo(deptCode7);
 				System.out.println("***** 부서 관리자 *****");
 				showList(employees7);
