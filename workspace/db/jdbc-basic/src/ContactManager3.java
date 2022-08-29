@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 // 1. 데이터베이스와 테이블 만들기
 //    데이터베이스는 market_db 사용
@@ -76,7 +77,9 @@ class ContactManager3 {
 				
 			} else if (selection.equals("4")) { // 전체 목록 보기
 				
-				showAllContacts();
+				ContactDao dao = new ContactDao();
+				List<Contact> contacts = dao.selectAllContacts();
+				showContacts(contacts);
 				
 			} else if (selection.equals("5")) { // 검색
 				//1. 검색할 이름 입력
@@ -118,7 +121,7 @@ class ContactManager3 {
 		}
 	}
 	
-	public void showAllContacts() {
+	public void showContacts(List<Contact> contacts) {
 		System.out.println("[ 연락처 목록 ]");
 		for (Contact contact : contacts) {
 			System.out.println(contact); // 문자열이 필요한 곳에서 자동으로 toString() 호출
