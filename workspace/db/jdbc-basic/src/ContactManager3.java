@@ -27,37 +27,18 @@ import java.util.List;
 // 5. 전체 목록 보기 기능 수정
 //    Dao에 List<Contact> selectAllContacts() 메서드 만들기 : JDBC 구현
 //    ContactManager에서 위의 Dao 메서드 호출 + 결과 출력
+//
+// 6. 검색 기능 수정
+//    Dao에 List<Contact> selectContactsByName(String name) 메서드 만들기 : JDBC 구현
+//    ContactManager에서 위의 Dao 메서드 호출 + 결과 출력
 
 // 연락처 관리 기능 클래스
 class ContactManager3 {
 	
 	private java.util.Scanner scanner = new java.util.Scanner(System.in);
-		
-	private ArrayList<Contact> contacts; // = new ArrayList<>();
 	
-	@SuppressWarnings("unchecked")
-	public ContactManager3() { // 생성자 메서드 : 클래스 이름과 같은 이름, 결과형 없음
+	private ContactDao dao = new ContactDao();
 		
-		File f = new File("contacts.dat");
-		if (f.exists()) {		
-			FileInputStream fis = null;
-			ObjectInputStream ois = null;
-			try {
-				fis = new FileInputStream("contacts.dat");
-				ois = new ObjectInputStream(fis);
-				contacts = (ArrayList<Contact>)ois.readObject();
-			} catch (Exception ex) {
-				contacts = new ArrayList<>();
-				ex.printStackTrace();
-			} finally {
-				try { ois.close(); } catch (Exception ex) {}
-				try { fis.close(); } catch (Exception ex) {}
-			}
-		} else {
-			contacts = new ArrayList<>();
-		}
-	}
-	
 	public void doManage() { // 프로그램의 주 실행 로직 구현
 		
 		while (true) {
@@ -69,15 +50,13 @@ class ContactManager3 {
 				// 입력				
 				Contact contact = inputContact();
 				
-				// 인스턴스를 데이터베이스에 저장 
-				ContactDao dao = new ContactDao();
+				// 인스턴스를 데이터베이스에 저장				
 				dao.insertContact(contact);
 								
 				System.out.println("$$$ 새 연락처를 등록했습니다");
 				
 			} else if (selection.equals("4")) { // 전체 목록 보기
-				
-				ContactDao dao = new ContactDao();
+								
 				List<Contact> contacts = dao.selectAllContacts();
 				showContacts(contacts);
 				
@@ -86,39 +65,14 @@ class ContactManager3 {
 				System.out.print("검색할 이름 : ");
 				String name = scanner.next();
 				
-				showSearchedContacts(name);
+				List<Contact> contacts = dao.selectContactsByName(name);
+				showContacts(contacts);
 				
-			} else if (selection.equals("9")) {
-				// 연락처 정보를 파일에 저장
-				FileOutputStream fos = null;
-				ObjectOutputStream oos = null;
-				try {
-					fos = new FileOutputStream("contacts.dat");
-					oos = new ObjectOutputStream(fos);
-					oos.writeObject(contacts);
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				} finally {
-					try { oos.close(); } catch (Exception ex) {}
-					try { fos.close(); } catch (Exception ex) {}
-				}
-				
-				System.out.println("$$$ 연락처 관리 프로그램을 종료합니다.");
-				break;
 			} else {
 				System.out.println("$$$ 지원하지 않는 기능입니다.");
 			}
 			System.out.println();
 		}		
-	}
-	
-	public void showSearchedContacts(String name) {			
-		System.out.println("[ 검색된 연락처 목록 ]");
-		for (Contact contact : contacts) {
-			if (contact.getName().contains(name)) { 	// 부분 일치 검색 -> contains 사용
-				System.out.println(contact); // 문자열이 필요한 곳에서 자동으로 toString() 호출
-			}
-		}
 	}
 	
 	public void showContacts(List<Contact> contacts) {
@@ -132,9 +86,7 @@ class ContactManager3 {
 		// 1. Contact 인스턴스 만들기
 		Contact contact = new Contact();
 		// 2. 사용자 입력 -> 입력된 내용을 Contact 인스턴스에 저장
-		System.out.println("[ 신규 등록 연락처 정보 입력 ]");
-		int cnt = contacts.size(); // 연락처 갯수
-		contact.setNo(cnt + 1); // 마지막 연락처의 다음 순서 번호 사용
+		System.out.println("[ 신규 등록 연락처 정보 입력 ]");		
 		System.out.print("이름 : ");
 		String name = scanner.next();
 		contact.setName(name); // contact.name = name;
