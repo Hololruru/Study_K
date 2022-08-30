@@ -60,13 +60,32 @@ public class Lotto {
 				
 			case "3": // 당첨 번호 등록
 				// 1. 기존 저장된 번호 삭제
+				LottoDao dao = new LottoDao();
+				dao.deleteAll();
+				
 				// 2. 새 번호 저장
+				List<LottoDto> dataSet = loadLottoFromFile();
+				dao.insertMany(dataSet);
+				
+				System.out.println("과거 당첨 번호를 데이터베이스에 저장했습니다.");
 				break;
 				
 			case "4": // 당첨 번호 조회
 				// 1. 회차 입력
+				System.out.print("회차 번호 : ");
+				int round = scanner.nextInt();
+				scanner.nextLine(); // nextLine()과 함께 사용하는 경우 버퍼 정리 필요
 				// 2. 회차로 번호 조회
+				LottoDao dao2 = new LottoDao();
+				List<LottoDto> result = dao2.selectLottoByRnd(round);				
 				// 3. 출력
+				if (result.size() == 0) {
+					System.out.println("해당 회차의 데이터가 없습니다.");
+				} else {
+					for (LottoDto l : result) {
+						System.out.println(l);
+					}
+				}
 				break;
 
 			case "9": // 3-2. 사용자가 9를 입력한 경우
@@ -153,7 +172,6 @@ public class Lotto {
 				String line = br.readLine();
 				if (line == null) break; // EOF ( End of File )
 				
-				//System.out.println(line);
 				String[] row = line.split(","); // "a,b,c" -> ["a", "b", "c"]
 				
 				LottoDto l = new LottoDto();
@@ -166,7 +184,7 @@ public class Lotto {
 				l.setNo5(Integer.parseInt(row[6]));
 				l.setNo6(Integer.parseInt(row[7]));
 				l.setBonus(Integer.parseInt(row[8]));
-				// System.out.println(l);
+				
 				dataSet.add(l);
 			}
 		} catch (Exception ex) {
