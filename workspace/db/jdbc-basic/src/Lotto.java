@@ -1,5 +1,10 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Lotto {
@@ -132,6 +137,47 @@ public class Lotto {
 			System.out.printf("[%2d]", numbers[i]);
 		}
 		System.out.printf("[AVERAGE : %2d]\n", average);
+	}
+	
+	public List<LottoDto> loadLottoFromFile() {
+		FileInputStream fis = null;		// 파일 데이터 읽기 기능 제공
+		InputStreamReader isr = null;	// byte[] -> char[] (String)으로 변환 기능 제공
+		BufferedReader br = null; 		// 한 행 단위로 텍스트 파일 읽기 기능 제공
+		ArrayList<LottoDto> dataSet = new ArrayList<>(); // 읽은 데이터 저장 변수
+		try {
+			fis = new FileInputStream("winning-numbers.csv");
+			isr = new InputStreamReader(fis);
+			br = new BufferedReader(isr);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd"); // 날짜 <-> 특정형식문자열
+			while (true) {
+				String line = br.readLine();
+				if (line == null) break; // EOF ( End of File )
+				
+				//System.out.println(line);
+				String[] row = line.split(","); // "a,b,c" -> ["a", "b", "c"]
+				
+				LottoDto l = new LottoDto();
+				l.setRnd(Integer.parseInt(row[0]));
+				l.setLotteryDate(sdf.parse(row[1])); // "2022.08.27" -> Date
+				l.setNo1(Integer.parseInt(row[2]));
+				l.setNo2(Integer.parseInt(row[3]));
+				l.setNo3(Integer.parseInt(row[4]));
+				l.setNo4(Integer.parseInt(row[5]));
+				l.setNo5(Integer.parseInt(row[6]));
+				l.setNo6(Integer.parseInt(row[7]));
+				l.setBonus(Integer.parseInt(row[8]));
+				// System.out.println(l);
+				dataSet.add(l);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try { br.close(); } catch (Exception ex) {}
+			try { isr.close(); } catch (Exception ex) {}
+			try { fis.close(); } catch (Exception ex) {}
+		}
+		
+		return dataSet;
 	}
 	
 	public static void main(String[] args) {
