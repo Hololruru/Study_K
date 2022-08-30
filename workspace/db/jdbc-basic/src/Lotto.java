@@ -52,6 +52,17 @@ public class Lotto {
 				}
 				
 				break;
+				
+			case "3": // 당첨 번호 등록
+				// 1. 기존 저장된 번호 삭제
+				// 2. 새 번호 저장
+				break;
+				
+			case "4": // 당첨 번호 조회
+				// 1. 회차 입력
+				// 2. 회차로 번호 조회
+				// 3. 출력
+				break;
 
 			case "9": // 3-2. 사용자가 9를 입력한 경우
 				System.out.println("행운을 빕니다....");
@@ -74,6 +85,8 @@ public class Lotto {
 		System.out.println("******************************");
 		System.out.println("* 1. 번호 뽑기.");
 		System.out.println("* 2. 목록 보기.");
+		System.out.println("* 3. 당첨 번호 데이터베이스 저장.");
+		System.out.println("* 4. 당첨 번호 조회.");
 		System.out.println("* 9. 종료.");
 		System.out.println("******************************");
 
