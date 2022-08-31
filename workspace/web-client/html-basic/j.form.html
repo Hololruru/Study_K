@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>입력 요소 연습</title>
+</head>
+<body>
+    <br><br><br>
+    <table border="1" width="700" align="center">
+        <tr style="height:50px">
+            <th style="width:200px">아이디</th>
+            <td style="padding:5px;">
+                <input type="text" name="id" id="id" value="" >
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <th style="width:200px">패스워드</th>
+            <td style="padding:5px;">
+                <input type="password" name="passwd" id="passwd" value="" >
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <th style="width:200px">이메일</th>
+            <td style="padding:5px;">
+                <!-- <input type="email" name="email" id="email" value="" > -->
+                <input type="text" name="email_id" id="email_id">
+                @
+                <select name="email_domain">
+                    <option value="naver.com">naver.com</option>
+                    <option value="gamil.com">gmail.com</option>
+                    <option value="daum.net">daum.com</option>
+                    <option value="nate.com">naver.com</option>
+                </select>
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <th style="width:200px">성별</th>
+            <td style="padding:5px;">
+                <!-- <input type="text" name="gender" id="gender"> -->
+                <input type="radio" name="gender" id="gender" value="male">남
+                <input type="radio" name="gender" id="gender" value="female">여
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>
