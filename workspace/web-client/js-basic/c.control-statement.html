@@ -33,6 +33,35 @@
         document.write("</tr>");
         document.write("</table>");
     </script>
+    <table border="1">
+        <tr>
+            <script type="text/javascript">
+            for (var i = 0; i < 6; i++) {
+                var no = Math.random() * 45;
+                no = Math.floor( no ) + 1;
+                document.write(`<td style="width:50px">${no}</td>`);
+            }
+            </script>   
+        </tr>
+    </table>
+
+    <!-- 구구단 전체를 테이블에 표현하는 자바스크립트 작성 -->
+
+    <script type="text/javascript">
+        document.write("<table border='1'>");
+        for (var i = 1; i <= 9; i++) {
+            document.write("<tr>");
+            for (var j = 1; j <= 9; j++) {
+                // var n = i * j < 10 ? "&nbsp;&nbsp;" + (i * j) : i * j;
+                // document.write(`<td style='width:100px;text-align:center'>${j} x ${i} = ${n}</td>`);                
+                document.write(`<td style='width:100px;text-align:center'>${j} x ${i} = ${i * j}</td>`);
+            }
+            document.write("</tr>");
+        }
+        document.write("</table>");
+    </script>
+
+
     
 </body>
 </html>
