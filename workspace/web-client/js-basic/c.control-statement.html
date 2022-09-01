@@ -7,13 +7,32 @@
 <body>
 
     <script type="text/javascript">
-        //
-        var no = Math.random(); // 0 ~ 1
-        if (no > 0.5) {
-            document.write("<h1>" + no + "는 0.5보다 큰 수</h1>");
-        } else {
-            document.write("<h1>" + no + "는 0.5보다 작은 수</h1>");
+        // 1. 난수 발생 + 조건 검사
+        // var no = Math.random(); // 0 ~ 1
+        // no = no.toFixed(3); // toFixed : 소수점 이하 자리수 고정
+        // if (no > 0.5) {
+        //     document.write("<h1>" + no + "는 0.5보다 큰 수</h1>");
+        // } else {
+        //     document.write("<h1>" + no + "는 0.5보다 작은 수</h1>");
+        // }
+
+        // 2. 난수 발생 + 실수 -> 크기 및 정수 변환
+        // var no2 = Math.random();
+        // no2 = Math.floor(no2 * 900) + 100; // 100 ~ 1000
+        // document.write("<h1>" + no2 + "</h1>");
+        // document.write(`<h1>${no2}</h1>`); // 문자열과 데이터 결합
+
+        // 3. 1 ~ 45 사이의 숫자 6개 html 테이블로 출력 ( random, document.write, for )
+        document.write("<table border='1' width='500'>");
+        document.write("<tr>");
+        for (var i = 0; i < 6; i++) {
+            var no = Math.random() * 45;
+            no = Math.floor( no ) + 1;
+            document.write(`<td>${no}</td>`);
         }
+        document.write("</tr>");
+        document.write("</table>");
     </script>
+    
 </body>
 </html>
