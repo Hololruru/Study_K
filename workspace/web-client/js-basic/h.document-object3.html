@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>문서 객체 연습</title>
+</head>
+<body>
+    
+    <input type="text" id="krw">
+    <button id="btn-krw-to-usd">원==&gt;달러</button>
+    <button id="btn-usd-to-krw">원&lt;==달러</button>
+    <input type="text" id="usd">
+    
+    <script type="text/javascript">
+        var krw = document.querySelector("#krw");
+        var usd = document.querySelector("#usd");
+        var btnKrwToUsd = document.querySelector("#btn-krw-to-usd");
+        var btnUsdToKrw = document.querySelector("#btn-usd-to-krw");
+        btnKrwToUsd.addEventListener('click', function() {
+            usd.value = parseInt(krw.value) / 1362;
+        });
+        btnUsdToKrw.addEventListener('click', function() {
+            krw.value = parseInt(usd.value) * 1362;
+        });
+    </script>
+
+</body>
+</html>
