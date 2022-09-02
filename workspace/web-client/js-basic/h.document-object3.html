@@ -10,6 +10,24 @@
     <button id="btn-krw-to-usd">원==&gt;달러</button>
     <button id="btn-usd-to-krw">원&lt;==달러</button>
     <input type="text" id="usd">
+
+    <hr>
+
+    <table border="1">
+        <tr>
+            <td colspan="6">
+                <button id="btn-select-numbers" style="width:100%">번호 뽑기</button>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="text" readonly id="no1"></td>
+            <td><input type="text" readonly id="no2"></td>
+            <td><input type="text" readonly id="no3"></td>
+            <td><input type="text" readonly id="no4"></td>
+            <td><input type="text" readonly id="no5"></td>
+            <td><input type="text" readonly id="no6"></td>
+        </tr>
+    </table>
     
     <script type="text/javascript">
         var krw = document.querySelector("#krw");
@@ -22,6 +40,23 @@
         btnUsdToKrw.addEventListener('click', function() {
             krw.value = parseInt(usd.value) * 1362;
         });
+        ////////////////////////////////////////////
+
+        function selectLottoNumbers() {
+            var numbers = new Array(6); // [0, 0, 0, 0, 0, 0]
+            for (var i = 0; i < 6; i++) {
+                var no = Math.random() * 45;
+                no = Math.floor( no ) + 1;
+                numbers[i] = no;
+                for (var j = 0; j < i; j++) {
+                    if (numbers[i] == numbers[j]) {
+                        i--; // i = -1;
+                        break;
+                    }
+                }
+            }
+            return numbers;
+        }
     </script>
 
 </body>
