@@ -33,6 +33,29 @@
         for (var i = 0; i < ar4.length; i++) {
             document.write(`<span style='font-size:15pt'>[${ ar4[i] }]</span>`)
         }
+
+        //////////////////////////////////////////////////////////////////
+        var numbers = new Array(6); // [0, 0, 0, 0, 0, 0]
+        for (var i = 0; i < 6; i++) {
+            var no = Math.random() * 45;
+            no = Math.floor( no ) + 1;
+            numbers[i] = no;
+            for (var j = 0; j < i; j++) {
+                if (numbers[i] == numbers[j]) {
+                    i--; // i = -1;
+                    break;
+                }
+            }
+        }
+        document.write("<hr>");
+        document.write("<table border='1'>");
+        document.write("<caption>당첨 예상 번호</caption>");
+        document.write("<tr>");
+        for (var i = 0; i < 6; i++) {            
+            document.write(`<td style="width:50px">${numbers[i]}</td>`);
+        }
+        document.write("</tr>");
+        document.write("</table>");
     </script>
 </body>
 </html>
