@@ -5,14 +5,16 @@
     <title>이벤트 연습</title>
 </head>
 <body>
-    
+    <script type="text/javascript">
+        // function handler() {
+        //     alert('클릭하셨군요... 감사합니다.');
+        // }        
+        // document.addEventListener("click", handler); // document 객체를 클릭하면 handler 함수 호출하도록 연결
+               
+        document.addEventListener("click", function() {
+            alert('클릭하셨군요... 감사합니다 2');
+        }); 
+    </script>
 </body>
-<script type="text/javascript">
-    function handler() {
-        alert('클릭하셨군요... 감사합니다.');
-    }
-    var body = document.querySelector('body'); // <body> 태그 요소 (객체) 찾기
-    body.style.backgroundColor = 'red';
-    body.addEventListener("mouseup", handler, true); // body 객체를 클릭하면 handler 함수 호출하도록 연결
-</script>
+
 </html>
