@@ -29,7 +29,29 @@
             document.write(`<td style="width:50px">${no}</td>`);
         }
         document.write("</tr>");
-        document.write("</table>");        
+        document.write("</table>");
+        
+        /////////////////////////////////////////////////
+
+        // 1급 객체 : 변수에 저장하고 전달인자로 전달할 수 있는 객체
+        // 자바스크립트의 함수는 1급 객체
+        function add(a, b) {
+            return a + b;
+        }
+        var result = add(10, 20);
+        document.write(`<h3>${result}</h3>`);
+
+        var f = add; // 함수를 다른 변수에 저장할 수 있습니다.
+        result = f(100, 200); //  함수를 저장한 변수는 함수처럼 동작
+        document.write(`<h3>${result}</h3>`);
+
+        var f2 = function (a, b) { return a - b; } // 익명 함수 
+        result = f2(200, 100); 
+        document.write(`<h3>${result}</h3>`);
+
+        var f3 = (a, b) => a * b;  // 화살표 함수 ( 람다 )
+        result = f3(15, 32); 
+        document.write(`<h3>${result}</h3>`);
     </script>
     
 </body>
