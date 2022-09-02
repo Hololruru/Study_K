@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>함수 연습</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function makeRandomNumber(min, max) { // function 키워드 사용, 전달인자에 var 키워드 사용 X
+            var r = Math.random();
+            r = r * (max - min) + min;
+            r = Math.floor(r);
+
+            return r;
+        }
+        document.write("<table border='1'>");
+        document.write("<tr>");
+        for (var i = 0; i < 6; i++) {
+            var no = makeRandomNumber(1, 46);
+            document.write(`<td style="width:50px">${no}</td>`);
+        }
+        document.write("</tr>");
+        document.write("</table>");
+
+        
+    </script>
+    
+</body>
+</html>
