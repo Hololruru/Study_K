@@ -57,6 +57,24 @@
             }
             return numbers;
         }
+
+        var btn = document.querySelector('#btn-select-numbers');
+        btn.addEventListener('click', function() {
+            // alert('번호를 뽑아서 입력상자에 보여주세요');
+            var numbers = selectLottoNumbers(); // 번호 뽑기 ==> 배열 반환
+            for (var i = 0; i < numbers.length; i++) {
+                var number = numbers[i] // 번호 하나씩 뽑기
+                var input = document.querySelector("#no" + (i + 1));
+                input.value = number;
+            }
+            // document.querySelector('#no1').value = numbers[0]
+            // document.querySelector('#no2').value = numbers[1]
+            // document.querySelector('#no3').value = numbers[2]
+            // document.querySelector('#no4').value = numbers[3]
+            // document.querySelector('#no5').value = numbers[4]
+            // document.querySelector('#no6').value = numbers[5]
+
+        });
     </script>
 
 </body>
