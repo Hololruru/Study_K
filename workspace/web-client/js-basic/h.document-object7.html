@@ -5,6 +5,43 @@
     <title>문서 객체 연습</title>
 </head>
 <body>
+    <table id="user-selection">
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+        window.addEventListener('load', function(event) {
+
+            var selections = ["scissors", "rock", "paper"];
+
+            var userSelection = null; // 사용자 선택 없음 (처음 시작)
+
+            var table = document.querySelector("#user-selection");
+            table.style.margin = "0 auto";
+
+            var imgs = document.querySelectorAll("#user-selection img");
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].src = `images/${ selections[i] }.png`;
+                imgs[i].style.width = "200px";
+                imgs[i].style.height = "200px";
+                imgs[i].style.border = "solid 1px black";
+                imgs[i].alt = i; // 이미지 마다 번호 부여 (0:scissors, 1:rock, 2:paper)
+
+                imgs[i].addEventListener('click', function(event) {
+                    if (userSelection != null) {
+                        imgs[userSelection].style.border = "solid 1px black";
+                    }
+                    var img = event.target; // 이벤트 발생 객체
+                    img.style.border = "solid 3px red";
+                    userSelection = parseInt(img.alt);
+                });
+            }
+        });
+    </script>
     
 </body>
 </html>
