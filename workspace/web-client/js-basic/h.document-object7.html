@@ -59,7 +59,13 @@
             button.style.fontSize = "25pt";
             button.style.fontWeight = "bold";
 
-            button.addEventListener("click", function(event) {                
+            button.addEventListener("click", function(event) {
+                
+                if (userSelection == null) { // 사용자 선택이 없는 경우
+                    alert("가위 바위 보를 선택하세요");
+                    return;
+                }
+                
                 // 컴퓨터 선택 만들기
                 var comSelection = Math.floor(Math.random() * 3);
                 
@@ -73,6 +79,12 @@
                 } else { // Lose
                     resultImg.src = 'images/lose.png';  // 결과 표시
                 }
+
+                // 사용자 선택 초기화
+                // //var img = document.querySelector(`#user-selection-row img:nth-child(${userSelection + 1})`);
+                // var img = document.querySelectorAll("#user-selection-row img");
+                // img[userSelection].style.border = "solid 1px black";
+                // userSelection = null;
                 
 
             });
