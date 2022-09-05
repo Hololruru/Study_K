@@ -49,6 +49,7 @@
 
             function tdMouseEnterHandler(event) {    // event : 이벤트 관련 정보
                 var td = event.target;          // event.target : 이벤트 발생 객체
+                alert(td.id);
                 div.style.backgroundColor = td.style.backgroundColor;                
             }
             function tdMouseLeaveHandler(event) {    // event : 이벤트 관련 정보
