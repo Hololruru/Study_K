@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>문서 객체 연습</title>
+
 </head>
 <body>
     <table>
@@ -45,6 +46,30 @@
             }
             
             ///////////////////////////////////
+
+            var button = document.querySelector("#button-row button");
+            button.style.width = "100%";
+            button.style.height = "100px";
+            button.style.fontSize = "25pt";
+            button.style.fontWeight = "bold";
+
+            button.addEventListener("click", function(event) {                
+                // 컴퓨터 선택 만들기
+                var comSelection = Math.floor(Math.random() * 3);
+                
+                // 사용자 선택과 비교 (0:가위, 1:바위, 2:보)
+                if ( (userSelection == 0 && comSelection == 2) ||
+                     (userSelection == 1 && comSelection == 0) ||
+                     (userSelection == 2 && comSelection == 1) ) {  // Win
+                    alert('You Win !!!!!');
+                } else if ( userSelection == comSelection) { // Draw
+                    alert('Draw !!!!!');
+                } else { // Lose
+                    alert('You Lose !!!!!');
+                }
+                // 결과 표시
+
+            });
 
 
         });
