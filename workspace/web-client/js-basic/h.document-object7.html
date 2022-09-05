@@ -15,6 +15,9 @@
         <tr id="button-row">
             <td colspan="3"><button id="btn-start-game">게임 시작</button></td>
         </tr>
+        <tr id="result-row">
+            <td colspan="3"><img></td>
+        </tr>
     </table>
 
     <script type="text/javascript">
@@ -47,6 +50,9 @@
             
             ///////////////////////////////////
 
+            var resultImg = document.querySelector('#result-row img');
+            resultImg.style.width = "620px";
+
             var button = document.querySelector("#button-row button");
             button.style.width = "100%";
             button.style.height = "100px";
@@ -61,13 +67,13 @@
                 if ( (userSelection == 0 && comSelection == 2) ||
                      (userSelection == 1 && comSelection == 0) ||
                      (userSelection == 2 && comSelection == 1) ) {  // Win
-                    alert('You Win !!!!!');
+                    resultImg.src = 'images/win.png';   // 결과 표시
                 } else if ( userSelection == comSelection) { // Draw
-                    alert('Draw !!!!!');
+                    resultImg.src = 'images/draw.png';  // 결과 표시
                 } else { // Lose
-                    alert('You Lose !!!!!');
+                    resultImg.src = 'images/lose.png';  // 결과 표시
                 }
-                // 결과 표시
+                
 
             });
 
