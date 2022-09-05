@@ -5,11 +5,14 @@
     <title>문서 객체 연습</title>
 </head>
 <body>
-    <table id="user-selection">
-        <tr>
+    <table>
+        <tr id="user-selection-row">
             <td><img></td>
             <td><img></td>
             <td><img></td>
+        </tr>
+        <tr id="button-row">
+            <td colspan="3"><button id="btn-start-game">게임 시작</button></td>
         </tr>
     </table>
 
@@ -20,10 +23,10 @@
 
             var userSelection = null; // 사용자 선택 없음 (처음 시작)
 
-            var table = document.querySelector("#user-selection");
+            var table = document.querySelector("table");
             table.style.margin = "0 auto";
 
-            var imgs = document.querySelectorAll("#user-selection img");
+            var imgs = document.querySelectorAll("#user-selection-row img");
             for (var i = 0; i < imgs.length; i++) {
                 imgs[i].src = `images/${ selections[i] }.png`;
                 imgs[i].style.width = "200px";
@@ -40,6 +43,10 @@
                     userSelection = parseInt(img.alt);
                 });
             }
+            
+            ///////////////////////////////////
+
+
         });
     </script>
     
