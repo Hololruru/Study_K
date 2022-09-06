@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>문서 객체 연습</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+        window.addEventListener("load", function(event) {
+
+            var imgFiles = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"] ;
+
+            var idxList = [];
+            while (idxList.length < 20) {
+                idx = Math.floor(Math.random() * 20); // 0 ~ 19(포함)
+                var duplicate = false;
+                for (var j = 0; j < idxList.length; j++) {
+                    if (idxList[j] == idx) {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate)
+                    idxList.push(idx);                
+            }
+
+            alert(idxList);
+
+            var table = document.querySelector("table");
+            table.style.margin = "0 auto";
+
+
+
+        });
+    </script>
+</body>
+</html>
