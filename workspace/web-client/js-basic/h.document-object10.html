@@ -12,7 +12,7 @@
         <tr style="height:50px">
             <th style="width:200px">아이디</th>
             <td style="padding:5px;">
-                <input type="text" name="id" id="id" value="" >
+                <input type="text" name="id" id="id" value="" placeholder="아이디를 입력하세요">
             </td>
         </tr>
         <tr style="height:50px">
@@ -80,10 +80,10 @@
         </tr>
         <tr style="height:50px">
             <td style="text-align: center;" colspan="2">
-                <input type="submit" value="가입1"><!-- submit : form을 서버로 전송 -->
-                <input type="image"><!-- image : image를 표시하는 submit -->
+                <input id="submit1" type="submit" value="가입1"><!-- submit : form을 서버로 전송 -->
+                <input id="submit2" type="image"><!-- image : image를 표시하는 submit -->
                 <input type="reset"><!-- reset : 폼을 처음 상태로 복원 -->
-                <input type="button" value="뭘까요?"><!-- button : do nothing, javascript와 연결 목적 -->
+                <input id="submit3" type="button" value="뭘까요?"><!-- button : do nothing, javascript와 연결 목적 -->
             </td>
         </tr>
         
@@ -92,5 +92,27 @@
 
     <!-- 전송 요청이 발생하면 전송하기 전에 아이디, 패스워드를 입력하지 않으면 
          전송 중지 + 메시지 표시 + 입력요소에 포커스  -->
+    <script type="text/javascript">
+        window.addEventListener('load', function(event) {
+            var submit3 = document.querySelector("#submit3");
+            submit3.addEventListener("click", function(event) {
+
+                var id = document.querySelector("#id");
+                //if ( id.value == null || id.value.length == 0 )
+                if (!id.value) { // id.value == null or id.value == "" 이면 false
+                    alert('아이디를 입력하지 않았습니다.');
+                    id.focus();
+                    return;
+                }
+
+                var passwd = document.querySelector("#passwd");
+                if (!passwd.value) { // id.value == null or id.value == "" 이면 false
+                    alert('패스워드를 입력하지 않았습니다.');
+                    passwd.focus();
+                    return;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
