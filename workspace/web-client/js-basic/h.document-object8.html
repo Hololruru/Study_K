@@ -64,35 +64,35 @@
             currentImg.src = images[currentIdx].src;
 
             var nextBtn = document.querySelector("#btn-next");
-            nextBtn.addEventListener("click", function(event) {
-                if (currentIdx == images.length - 1) { // 마지막 위치인 경우
-                    // 처음으로 돌아가기
-                    currentIdx = 0; 
-                    // 멈추기
-                    // alert("마지막 이미지입니다.");
-                    //  return;
-                } else {
-                    currentIdx++; // == currentIdx = currentIdx + 1 or currentIdx += 1
-                }
-                //currentImg.src = images[currentIdx].src;            // <img 객체이서 파일 경로 가져오기
-                currentImg.src = `images/${imgFiles[currentIdx]}`;  // 이미지파일이름 배열에서 경로 가져오기
+            nextBtn.addEventListener("click", function(event) {                
+                changeImage(true);                
             });
             var prevBtn = document.querySelector("#btn-prev");
-            prevBtn.addEventListener("click", function(event) {
-                images[currentIdx].style.border = 'solid 1px black';
-                if (currentIdx == 0) { // 처음 위치인 경우
-                    // 마지막으로 돌아가기
-                    currentIdx = images.length - 1; 
-                    // 멈추기
-                    // alert("처음 이미지입니다.");
-                    // return;
-                } else {
-                    currentIdx--; // == currentIdx = currentIdx - 1 or currentIdx -= 1
-                }
-                //currentImg.src = images[currentIdx].src;            // <img 객체이서 파일 경로 가져오기
-                currentImg.src = `images/${imgFiles[currentIdx]}`;  // 이미지파일이름 배열에서 경로 가져오기
-                images[currentIdx].style.border = 'solid 3px red';
+            prevBtn.addEventListener("click", function(event) {               
+                changeImage(false);
             });
+
+            function changeImage(moveToNext = true, rolling = true) {
+                images[currentIdx].style.border = 'solid 1px black';
+
+                if (moveToNext) {
+                    if (currentIdx == images.length - 1) {
+                        currentIdx = 0; 
+                        
+                    } else {
+                        currentIdx++;
+                    }
+                } else {
+                    if (currentIdx == 0) {
+                        currentIdx = images.length - 1; 
+                    } else {
+                        currentIdx--;
+                    }
+                }
+                currentImg.src = `images/${imgFiles[currentIdx]}`;  // 이미지파일이름 배열에서 경로 가져오기
+
+                images[currentIdx].style.border = 'solid 3px red';
+            }
 
 
 
