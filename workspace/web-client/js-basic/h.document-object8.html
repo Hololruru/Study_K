@@ -20,7 +20,14 @@
         </tr>
     </table>
     <br>
-    <div id="canvas"><img></div>
+    <table id="canvas" border="1">
+        <tr>
+            <td><button id="btn-prev">이전</button></td>
+            <td><img></td>
+            <td><button id="btn-next">다음</button></td>
+        </tr>
+    </table>
+    
     <script type="text/javascript">
         window.addEventListener('load', function(event) {
 
@@ -43,13 +50,17 @@
             }
 
             var canvas = document.querySelector('#canvas');
-            canvas.style.margin = "0 auto";
-            canvas.style.textAlign = "center";            
+            canvas.style.margin = "0 auto";           
 
             var currentImg = document.querySelector("#canvas img");
             currentImg.style.width = "500px";
             currentImg.style.height = "500px";            
             currentImg.style.border = "solid 3px blue";
+
+            //////////////////////////////////////////////////
+
+            currentImg.src = images[0].src;
+
 
 
 
