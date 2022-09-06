@@ -76,13 +76,19 @@
             });
             var autoBtn = document.querySelector("#btn-auto");
             autoBtn.addEventListener("click", function(event) {
-                alert(event.target.innerText); // innerText : <button>innerText</button>
-                autoChangeImage();
+                // alert(event.target.innerText); // innerText : <button>innerText</button>
+                if ( event.target.innerText === "자동보기" ) {
+                    autoChangeImage();
+                    event.target.innerText = "자동보기중지";
+                } else {
+                    clearTimeout(timer); // 자동보기 중지
+                    event.target.innerText = "자동보기";
+                }
             });
-
+            var timer = null;
             function autoChangeImage() {
                 changeImage(true);
-                setTimeout(autoChangeImage, 3000);
+                timer = setTimeout(autoChangeImage, 3000);
             }
 
             function changeImage(moveToNext = true, rolling = true) {
