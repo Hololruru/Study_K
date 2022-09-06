@@ -6,7 +6,7 @@
 </head>
 <body>
     <br><br><br>
-    <form action="" method="get"> <!-- method : get or post -->
+    <form id="myform" action="" method="get"> <!-- method : get or post -->
     <input type="hidden" name="ip" value="127.0.0.1"><!-- 화면에 표시되지 않지만 전송되는 데이터 -->
     <table border="1" width="700" align="center">
         <tr style="height:50px">
@@ -94,6 +94,53 @@
          전송 중지 + 메시지 표시 + 입력요소에 포커스  -->
     <script type="text/javascript">
         window.addEventListener('load', function(event) {
+
+            // 이 테스트는 이미지 버튼을 클릭해서 확인하세요
+            var form = document.querySelector("#myform");
+            form.addEventListener("submit", function(event) {
+                var id = document.querySelector("#id");
+                if (!id.value) { // id.value == null or id.value == "" 이면 false
+                    alert('아이디를 입력하지 않았습니다.');
+                    id.focus();
+                    event.preventDefault();
+                    return;
+                }
+
+                var passwd = document.querySelector("#passwd");
+                if (!passwd.value) { // id.value == null or id.value == "" 이면 false
+                    alert('패스워드를 입력하지 않았습니다.');
+                    passwd.focus();
+                    event.preventDefault();
+                    return;
+                }
+
+            });
+
+            var submit1 = document.querySelector("#submit1");
+            submit1.addEventListener("click", function(event) {
+                event.preventDefault();     // 원래 객체의 기본 동작을 수행하지 못하도록 설정
+                event.stopPropagation();    // 상위 객체로 이벤트를 전달하지 못하도록 설정
+
+                var id = document.querySelector("#id");
+                //if ( id.value == null || id.value.length == 0 )
+                if (!id.value) { // id.value == null or id.value == "" 이면 false
+                    alert('아이디를 입력하지 않았습니다.');
+                    id.focus();
+                    return;
+                }
+
+                var passwd = document.querySelector("#passwd");
+                if (!passwd.value) { // id.value == null or id.value == "" 이면 false
+                    alert('패스워드를 입력하지 않았습니다.');
+                    passwd.focus();
+                    return;
+                }
+
+                // 정상적인 경우
+                var myForm = document.querySelector("#myform");
+                myForm.submit(); // form.submit() : form을 서버로 submit 하는 명령
+            });
+
             var submit3 = document.querySelector("#submit3");
             submit3.addEventListener("click", function(event) {
 
@@ -111,6 +158,10 @@
                     passwd.focus();
                     return;
                 }
+
+                // 정상적인 경우
+                var myForm = document.querySelector("#myform");
+                myForm.submit(); // form.submit() : form을 서버로 submit 하는 명령
             });
         });
     </script>
