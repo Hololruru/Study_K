@@ -26,6 +26,9 @@
             <td><img></td>
             <td><button id="btn-next">다음</button></td>
         </tr>
+        <tr>
+            <td colspan="3"><button id="btn-auto">자동보기</button></td>
+        </tr>
     </table>
     
     <script type="text/javascript">
@@ -71,14 +74,23 @@
             prevBtn.addEventListener("click", function(event) {               
                 changeImage(false);
             });
+            var autoBtn = document.querySelector("#btn-auto");
+            autoBtn.addEventListener("click", function(event) {
+                alert(event.target.innerText); // innerText : <button>innerText</button>
+                autoChangeImage();
+            });
+
+            function autoChangeImage() {
+                changeImage(true);
+                setTimeout(autoChangeImage, 3000);
+            }
 
             function changeImage(moveToNext = true, rolling = true) {
                 images[currentIdx].style.border = 'solid 1px black';
 
                 if (moveToNext) {
                     if (currentIdx == images.length - 1) {
-                        currentIdx = 0; 
-                        
+                        currentIdx = 0;                         
                     } else {
                         currentIdx++;
                     }
