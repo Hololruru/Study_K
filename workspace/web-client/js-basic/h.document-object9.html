@@ -52,6 +52,7 @@
             var images = document.querySelectorAll("img");
             var isRunning = false; // 작업이 진행중인지 여부를 저장하는 변수
             var firstImg = null, secondImg = null; // 전면이 표시된 이미지를 저장하는 변수
+            var machingCnt = 0;
 
             function resetIdx() {
                 idxList = [];
@@ -94,21 +95,40 @@
                 isRunning = false;
             }, 3000);
 
+            
             // 각 이미지에 이벤트 처리기 등록
             for (var i = 0; i < images.length; i++) {
                 images[i].addEventListener("click", function(event) {
+                    if (event.target.src.includes(event.target.alt)) { // 이미지가 열려 있는지 확인
+                        return;
+                    }
                     if (!isRunning) {
                         // alert(event.target.alt);
                         if (firstImg == null) { // 아무 이미지도 열리지 않은 경우
                             firstImg = event.target ;
                         } else if (secondImg == null) { // 첫 번째 이미지만 열린 경우
                             secondImg = event.target;
+                            if (firstImg.alt === secondImg.alt) { // 일치하는 경우
+                                machingCnt++;                                
+                                firstImg = secondImg = null;
+                                if (machingCnt == images.length / 2) { // 다 찾은 경우
+                                    alert('성공했습니다. 축하합니다.');
+                                    machingCnt = 0;
+                                }
+                            } else {
+                                isRunning = true;
+                                setTimeout(function() {
+                                    firstImg.src = secondImg.src = 'images/no_image.jpg';
+                                    firstImg = secondImg = null;
+                                    isRunning = false;
+                                }, 1000);
+                            }
                         } else { // 둘 다 열린 경우
                             return;
                         }
                         event.target.src = `images/${event.target.alt}`;
                     }
-                })
+                });
             }
 
             var table = document.querySelector("table");
