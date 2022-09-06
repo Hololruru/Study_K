@@ -13,6 +13,12 @@
 <body>
     <table>
         <tr>
+            <td colspan="2">
+                <button id="btn-start-game">게임시작</button>
+                <button id="btn-stop-game">게임중지</button>
+            </td>
+        </tr>
+        <tr>
             <td><img></td>
             <td><img></td>
             <td><img></td>
@@ -84,17 +90,6 @@
                 resetIdx();
                 setImages();
             }
-
-            initImages();
-
-            isRunning = true;
-            setTimeout(function() {
-                for (var i = 0; i < images.length; i++) {
-                    images[i].src = 'images/no_image.jpg';
-                }
-                isRunning = false;
-            }, 3000);
-
             
             // 각 이미지에 이벤트 처리기 등록
             for (var i = 0; i < images.length; i++) {
@@ -131,8 +126,33 @@
                 });
             }
 
+            var btnStartGame = document.querySelector('#btn-start-game');
+            btnStartGame.addEventListener("click", function(event) {
+                initImages();
+                isRunning = true;
+                setTimeout(function() {
+                    for (var i = 0; i < images.length; i++) {
+                        images[i].src = 'images/no_image.jpg';
+                    }
+                    isRunning = false;
+                }, 3000);
+            });
+
+            var btnStopGame = document.querySelector('#btn-stop-game');
+            btnStopGame.addEventListener("click", function(event) {
+                for (var i = 0; i < images.length; i++) {
+                    images[i].alt = images[i].src = '';
+                }
+                firstImg = secondImg = null;  
+                idxList = null;
+                machingCnt = 0
+                isRunning = false;
+            });
+
+
             var table = document.querySelector("table");
             table.style.margin = "0 auto";
+            
 
 
 
