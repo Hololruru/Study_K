@@ -51,6 +51,7 @@
             var idxList = null;
             var images = document.querySelectorAll("img");
             var isRunning = false; // 작업이 진행중인지 여부를 저장하는 변수
+            var firstImg = null, secondImg = null; // 전면이 표시된 이미지를 저장하는 변수
 
             function resetIdx() {
                 idxList = [];
@@ -72,7 +73,10 @@
                     idx = idxList[i]; // 위에서 뽑아둔 Random한 이미지 위치
                     idx2 = idxList[10 + i]; // 위에서 뽑아둔 Random한 이미지 위치
                     images[idx].src = `images/${imgFiles[i]}`;
+                    images[idx].alt = imgFiles[i];
                     images[idx2].src = `images/${imgFiles[i]}`; 
+                    images[idx2].alt = imgFiles[i];
+
                 }
             }
             function initImages() {
@@ -94,7 +98,15 @@
             for (var i = 0; i < images.length; i++) {
                 images[i].addEventListener("click", function(event) {
                     if (!isRunning) {
-                        alert(event.target.src);
+                        // alert(event.target.alt);
+                        if (firstImg == null) { // 아무 이미지도 열리지 않은 경우
+                            firstImg = event.target ;
+                        } else if (secondImg == null) { // 첫 번째 이미지만 열린 경우
+                            secondImg = event.target;
+                        } else { // 둘 다 열린 경우
+                            return;
+                        }
+                        event.target.src = `images/${event.target.alt}`;
                     }
                 })
             }
