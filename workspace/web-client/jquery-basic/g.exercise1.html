@@ -69,14 +69,16 @@
 
         //2. 
         // alert( $('input[id*=no]').length ); // jQuery객체.length : 포함된 요소의 갯수
-        $('input[id*=no]').each(function(idx, input) { // jQuery객체.each(함수) : 포함된 객체마다 함수 호출 
+        // jQuery객체.each(함수) : 포함된 객체마다 함수 호출 -> 함수(순서번호, 객체) 
+        $('input[id*=no]').each(function(idx, input) { 
             alert(idx + " / " + input.id);
         });
 
         $('#btn-select-numbers').on('click', function(event) {
             var numbers = selectLottoNumbers(); // 번호 뽑기 ==> 배열 반환
             $('input[id*=no]').each(function(idx, input) { // jQuery객체.each(함수) : 포함된 객체마다 함수 호출 
-                input.value = numbers[idx];
+                // input.value = numbers[idx];
+                $(input).val(numbers[idx]);
             }); 
         });
 
