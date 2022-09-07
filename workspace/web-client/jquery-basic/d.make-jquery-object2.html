@@ -6,7 +6,7 @@
 </head>
 <body>
     <button id="btn-add-div">항목 추가</button>
-    <button id="btn-add-div">항목 추가</button>
+    <button id="btn-empty-div">항목 제거</button>
     <hr>
     <div id="container"></div>
 
@@ -14,7 +14,7 @@
     <script type="text/javascript">
 
         $(function() {
-            var btn = $("#btn-add-div"); // 확장 요소 집합 객체 생성
+            var btn = $("#btn-add-div"); // 확장 요소 집합 객체 생성 (가져오기)
             btn.on('click', function(event) {
                 var container = $('#container'); // 기존 객체 가져오기
                 var newDiv = $("<div></div>"); // 새 객체 만들기 : document.createElement("div");
@@ -25,6 +25,11 @@
                 });
                 newDiv.text(new Date()); // text : newDiv.innertText
                 container.append(newDiv); // append : 요소 추가 함수
+            });
+
+            var btn2 = $("#btn-empty-div"); // 확장 요소 집합 객체 생성 (가져오기)
+            btn2.on('click', function(event) {
+                $('#container').empty(); // empty : 모든 하위 요소 제거
             });
         });
 
