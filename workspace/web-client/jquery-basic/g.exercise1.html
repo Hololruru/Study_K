@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>문서 객체 연습</title>
+</head>
+<body>
+    
+    <input type="text" id="krw">
+    <button id="btn-krw-to-usd">원==&gt;달러</button>
+    <button id="btn-usd-to-krw">원&lt;==달러</button>
+    <input type="text" id="usd">
+
+    <hr>
+
+    <table border="1">
+        <tr>
+            <td colspan="6">
+                <button id="btn-select-numbers" style="width:100%">번호 뽑기</button>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="text" readonly id="no1"></td>
+            <td><input type="text" readonly id="no2"></td>
+            <td><input type="text" readonly id="no3"></td>
+            <td><input type="text" readonly id="no4"></td>
+            <td><input type="text" readonly id="no5"></td>
+            <td><input type="text" readonly id="no6"></td>
+        </tr>
+    </table>
+    
+    <script src="js/jquery-3.6.1.js"></script>
+    <script type="text/javascript">
+        // 환율변경
+        $("#btn-krw-to-usd").on('click', function() {
+            // 읽기 : usd.value -> usd.val();
+            // 쓰기 : usd.value = 10 -> usd.val(10);
+            $("#usd").val( parseInt($("#krw").val()) / 1362 );
+        });
+        $("#btn-usd-to-krw").on('click', function() {
+            $("#krw").val( parseInt($("#usd").val()) * 1362 );
+        });
+        ////////////////////////////////////////////
+        // 로또
+    </script>
+
+</body>
+</html>
