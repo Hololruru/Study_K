@@ -42,6 +42,44 @@
         });
         ////////////////////////////////////////////
         // 로또
+        function selectLottoNumbers() {
+            var numbers = new Array(6); // [0, 0, 0, 0, 0, 0]
+            for (var i = 0; i < 6; i++) {
+                var no = Math.random() * 45;
+                no = Math.floor( no ) + 1;
+                numbers[i] = no;
+                for (var j = 0; j < i; j++) {
+                    if (numbers[i] == numbers[j]) {
+                        i--; // i = -1;
+                        break;
+                    }
+                }
+            }
+            return numbers;
+        }
+
+        //1. 
+        // $('#btn-select-numbers').on('click', function(event) {
+        //     var numbers = selectLottoNumbers(); // 번호 뽑기 ==> 배열 반환
+        //     for (var i = 0; i < numbers.length; i++) {
+        //         var number = numbers[i] // 번호 하나씩 뽑기
+        //         $("#no" + (i + 1)).val(number);
+        //     }
+        // });
+
+        //2. 
+        // alert( $('input[id*=no]').length ); // jQuery객체.length : 포함된 요소의 갯수
+        $('input[id*=no]').each(function(idx, input) { // jQuery객체.each(함수) : 포함된 객체마다 함수 호출 
+            alert(idx + " / " + input.id);
+        });
+
+        $('#btn-select-numbers').on('click', function(event) {
+            var numbers = selectLottoNumbers(); // 번호 뽑기 ==> 배열 반환
+            $('input[id*=no]').each(function(idx, input) { // jQuery객체.each(함수) : 포함된 객체마다 함수 호출 
+                input.value = numbers[idx];
+            }); 
+        });
+
     </script>
 
 </body>
