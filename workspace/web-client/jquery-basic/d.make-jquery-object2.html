@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery 준비</title>
+</head>
+<body>
+    <button id="btn-add-div">항목 추가</button>
+    <hr>
+    <div id="container"></div>
+
+    <script type="text/javascript" src="js/jquery-3.6.1.js"></script>
+    <script type="text/javascript">
+
+        $(function() {
+            var btn = $("#btn-add-div"); // 확장 요소 집합 객체 생성
+            btn.on('click', function(event) {
+                var container = $('#container'); // 기존 객체 가져오기
+                var newDiv = $("<div style='border: solid 1px'>This is New Div</div>"); // 새 객체 만들기
+                container.append(newDiv); // append : 요소 추가 함수
+            });
+        });
+
+    </script>
+</body>
+</html>
