@@ -6,6 +6,7 @@
 </head>
 <body>
     <button id="btn-add-div">항목 추가</button>
+    <button id="btn-add-div">항목 추가</button>
     <hr>
     <div id="container"></div>
 
@@ -16,7 +17,13 @@
             var btn = $("#btn-add-div"); // 확장 요소 집합 객체 생성
             btn.on('click', function(event) {
                 var container = $('#container'); // 기존 객체 가져오기
-                var newDiv = $("<div style='border: solid 1px'>This is New Div</div>"); // 새 객체 만들기
+                var newDiv = $("<div></div>"); // 새 객체 만들기 : document.createElement("div");
+                newDiv.css({    // css : newDiv.style.style-name = style-value
+                    "border": "solid 1px",
+                    "padding": "5px",
+                    "margin": "5px 0"
+                });
+                newDiv.text(new Date()); // text : newDiv.innertText
                 container.append(newDiv); // append : 요소 추가 함수
             });
         });
