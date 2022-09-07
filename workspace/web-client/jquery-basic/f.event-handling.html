@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery 준비</title>
+</head>
+<body>
+
+    <div id="a"></div>
+    
+    <script type="text/javascript" src="js/jquery-3.6.1.js"></script>
+    <script type="text/javascript">
+
+        $(function() {
+            
+            $('#a').css({
+                        "border" : "solid 1px",
+                        "height" : "300px"
+                    });
+            
+            var clicked = false;
+            // $('#a').on('click', function(event) {
+            $('#a').click(function(event) {                
+                // this : event가 발생한 javascript 객체 -> $(this) : jQuery 객체
+                if (clicked) {
+                    $(this).css({"border" : "solid 3px red"});    
+                } else {
+                    $(this).css({"border" : "solid 3px blue"});    
+                }
+                clicked = !clicked; // true -> false , false -> true
+            });
+
+        });
+
+    </script>
+</body>
+</html>

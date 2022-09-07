@@ -32,7 +32,12 @@
                    .filter(":even") // h3:even에만 적용
                    .css({
                         "background-color": "lightgray"
-                   })
+                   });
+
+            $('h3').filter(function(idx) { // h3을 반복하면서 함수 호출
+                        return (idx == 3 || idx == 1); // true를 반환하는 위치의 항목이 선택되는 항목
+                    })
+                    .css({"font-size": "50pt"});
         });
 
     </script>
