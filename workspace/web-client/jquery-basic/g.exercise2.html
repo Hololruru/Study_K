@@ -21,39 +21,35 @@
     <br>
     <div></div>
 
+    <script src="js/jquery-3.6.1.js"></script>
     <script type="text/javascript">
-        window.addEventListener('load', function() { // javascript의 main 함수 역할 (시작점)
+        $(function() { // javascript의 main 함수 역할 (시작점)
 
-            var table = document.querySelector("table");
-            table.style.width = "500px";
-            table.style.margin = "0 auto";
+            $("table").css({
+                "width": "500px",
+                "margin": "0 auto"
+            });
 
-            var tr = document.querySelector('tr');
-            tr.style.height = "70px";
+            $('tr').css({
+                "height": "70px"
+            });            
 
             var bgColor = ['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple'];
-            // document.querySelector("td"); // 첫 번째 td만 찾기
-            var tds = document.querySelectorAll("td"); // 모든 td 찾기
-            for (var i = 0; i < tds.length; i++) {
-                tds[i].id = bgColor[i]; // <td id='red' ...></td>
-                tds[i].style.backgroundColor = bgColor[i]; // background-color -> backgroundColor
-            }
+            $("td").each(function(i, td) {
+                $(td).attr({"id": bgColor[i]}) // jQuery객체.attr("id"), jQuery객체.attr("id", "값")
+                     .css({"background-color" : bgColor[i]});
+            })
 
-            var div = document.querySelector("div");
-            div.style.width = "500px";
-            div.style.height = "300px";
-            div.style.border = "solid 1px";
-            div.style.margin = "0 auto";
-
-            function tdClickHandler(event) {    // event : 이벤트 관련 정보
-                var td = event.target;          // event.target : 이벤트 발생 객체
-                div.style.backgroundColor = td.style.backgroundColor;                
-            }
-            for (var i = 0; i < tds.length; i++) {
-                tds[i].addEventListener('click', tdClickHandler);
-            }
-
-
+            $("div").css({
+                        "width" : "500px",
+                        "height": "300px",
+                        "border":"solid 1px",
+                        "margin": "0 auto"
+                    });
+            
+            $("td").on('click', function(event) { // 반복문 필요 없이 내부의 모든 객체에 이벤트 할당
+                $("div").css({"background-color" : $(this).css("background-color")})                
+            });
             
         });
     </script>
