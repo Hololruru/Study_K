@@ -39,6 +39,13 @@
 		<input type="submit" value="전송">
 	</form>
 	
+	<h2>7. <a href="01.jsp-structure.jsp">JSP Structure</a></h2>
+	
+	<h2>8. <a href="02.jsp-object.jsp">JSP Object</a></h2>
+	
+	<h2>9-1. <a href="03.forward.jsp">Forward</a></h2>
+	<h2>9-1. <a href="03.redirect.jsp">Redirect</a></h2>
+	
 	</div>
 
 </body>
