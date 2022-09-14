@@ -13,9 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 public class ProcessDataServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 요청 데이터 읽기
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		System.out.println(name + " / " + email);
 		
+		response.setContentType("text/html;charset=utf-8");// 응답컨텐츠에 대한 정보 설정 ( 한글 설정 포함 )
+		PrintWriter out = response.getWriter();
+		out.println("<h1>" + name + " / " + email + "</h1>");
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 요청 데이터 읽기
 		String name = request.getParameter("name");
