@@ -33,6 +33,12 @@
 		<input type="submit" value="전송">
 	</form>
 	
+	<h2>6. 폼 데이터 전송3 ( JSP )</h2>
+	<form action="process-data.jsp" method="post">
+		출력할 단 : <input type="text" name="dan"><br>
+		<input type="submit" value="전송">
+	</form>
+	
 	</div>
 
 </body>
