@@ -19,11 +19,17 @@
 	<h2>2. <a href="hello-servlet2">Hello, Servlet 2 ( GET 방식 )</a></h2>
 	<h2>3. <a href="hello.jsp">Hello, JSP</a></h2>
 	
-	<h2>4. Hello, Servlet 3 ( POST 방식 )</h2>
+	<h2>4. 폼 데이터 전송 ( GET / POST 방식 )</h2>
 	<form action="process-data" method="post">
 	<!-- <form action="process-data" method="get"> -->
 		Your Name : <input type="text" name="name"><br>
 		Your Email : <input type="text" name="email"><br>
+		<input type="submit" value="전송">
+	</form>
+	
+	<h2>5. 폼 데이터 전송2 ( POST 방식 )</h2>
+	<form action="process-data2" method="post">
+		출력할 단 : <input type="text" name="dan"><br>
 		<input type="submit" value="전송">
 	</form>
 	
