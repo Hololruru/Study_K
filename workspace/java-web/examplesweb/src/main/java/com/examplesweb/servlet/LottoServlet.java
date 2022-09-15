@@ -28,7 +28,7 @@ public class LottoServlet extends HttpServlet {
 		}
 		
 		// 2. JSP에서 사용하도록 request에 데이터 저장
-		req.setAttribute("numbers", numbers);
+		req.setAttribute("numbers", numbers); // int[] or String or int or ....
 		
 		// 3. JSP로 이동
 		RequestDispatcher dispatcher = req.getRequestDispatcher("lotto.jsp");

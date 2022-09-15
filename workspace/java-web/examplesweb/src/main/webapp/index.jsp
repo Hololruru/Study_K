@@ -48,10 +48,18 @@
 	
 	<h2>10. <a href="model2">요청 처리와 응답 컨텐츠 생산 분리 (Model 2)</a></h2>
 	
+	<h2>11. <a href="select-lotto-numbers">로또 당첨 예상 번호 뽑기</a></h2>
+	
 	</div>
 
 </body>
 </html>
+
+
+
+
+
+
 
 
 
