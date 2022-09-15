@@ -48,7 +48,12 @@
 	
 	<h2>10. <a href="model2">요청 처리와 응답 컨텐츠 생산 분리 (Model 2)</a></h2>
 	
-	<h2>11. <a href="select-lotto-numbers">로또 당첨 예상 번호 뽑기</a></h2>
+	<h2>11-1. <a href="select-lotto-numbers">로또 당첨 예상 번호 뽑기</a></h2>
+	<h2>11-2. 홀/짝 게임</h2>
+	<form action="even-or-odd-game" method="post">
+		홀(1)/짝(2) 선택 : <input type="text" name="even-or-odd"><br>
+		<input type="submit" value="전송">
+	</form>
 	
 	</div>
 

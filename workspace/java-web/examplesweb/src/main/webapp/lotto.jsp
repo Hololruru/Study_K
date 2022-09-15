@@ -12,8 +12,12 @@
 	<% int[] numbers = (int[])request.getAttribute("numbers"); %>
 	
 	<table border="1" style="width:500px;margin:0 auto">
-		<caption style="text-align:center;font-size:25pt">당첨 예상 번호</caption>
 		<tr>
+			<th colspan="6" style="height:50px;font-size:15pt">
+				<a href="select-lotto-numbers">당첨 예상 번호 뽑기</a>
+			</th>
+		</tr>
+		<tr style="height:75px">
 		<% for (int number : numbers) { %>
 			<th><%= number %></th>
 		<% } %>
