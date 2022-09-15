@@ -21,6 +21,21 @@ public class LoginServlet extends HttpServlet {
 		rd.forward(req, resp); // 지정된 경로로 forward 이동
 		
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		req.setCharacterEncoding("utf-8");
+		
+		//1-1. 요청 데이터 읽기
+		String memberId = req.getParameter("memberId");
+		String passwd = req.getParameter("passwd");
+
+		System.out.printf("[%s][%s]\n", memberId, passwd);
+		
+		// 한 작업 사이클이 종료되면 redirect로 이동
+		resp.sendRedirect("/demoweb/home.action");
+	}
 
 }
 

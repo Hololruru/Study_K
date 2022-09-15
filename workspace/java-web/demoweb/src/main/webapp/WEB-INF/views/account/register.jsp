@@ -21,7 +21,7 @@
 			<br /><br />
 		    <div id="inputmain">
 		        <div class="inputsubtitle">회원기본정보</div>
-
+		  <!--  <form id="registerform" action="/demoweb/account/register.action" method="post"> --> <!--절대경로표시 -->
 		        <form id="registerform" action="register.action" method="post"><!-- 상대경로표시 -->
 		        <table>
 		            <tr>

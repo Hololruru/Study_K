@@ -21,6 +21,22 @@ public class RegisterServlet extends HttpServlet {
 		rd.forward(req, resp); // 지정된 경로로 forward 이동
 		
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		//1-1. 요청 데이터 읽기
+		String memberId = req.getParameter("memberId");
+		String passwd = req.getParameter("passwd");
+		String confirm = req.getParameter("confirm");
+		String email = req.getParameter("email");
+		
+		System.out.printf("[%s][%s][%s][%s]\n", memberId, passwd, confirm, email);
+		
+		// 한 작업 사이클이 종료되면 redirect로 이동
+		resp.sendRedirect("/demoweb/account/login.action");
+		
+	}
 
 }
 

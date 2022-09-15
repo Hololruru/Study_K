@@ -15,7 +15,12 @@
 
 	<div id='pageContainer'>
 		
-		<jsp:include page="/WEB-INF/views/include/header.jsp" />
+		<%-- <jsp:include page="/WEB-INF/views/include/header.jsp" /> --%>
+		<%-- <% pageContext.include("/WEB-INF/views/include/header.jsp"); %> --%>
+		<%-- <%@ include file="/WEB-INF/views/include/header.jsp" %> --%>
+		<jsp:include page="/WEB-INF/views/include/header.jsp">
+			<jsp:param name="bgcolor" value="skyblue" />
+		</jsp:include>
 		
 		<div id='content'>
 			<br /><br /><br />

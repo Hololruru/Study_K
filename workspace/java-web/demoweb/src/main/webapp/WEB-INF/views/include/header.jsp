@@ -1,10 +1,15 @@
 <%@ page language="java" 
-		 contentType="text/html; charset=UTF-8"
-    	 pageEncoding="UTF-8"%>
+		 contentType="text/html; charset=utf-8" 
+		 pageEncoding="utf-8"%>
 
-    	 <div id="header">    	
+		<% String bgColor = request.getParameter("bgcolor"); %>
+		<% if (bgColor != null) { %>
+    	 <div id="header" style="background-color:<%= bgColor %>">
+    	<% } else { %>
+    	 <div id="header">
+    	<% } %>    	
             <div class="title">
-                <a href="/demoweb/home.action">DEMO WEBSITE</a>
+                <a href="/demoweb/home.action">GREEN WEBSITE</a>
             </div>
             <div class="links">
             	<a href="/demoweb/account/login.action">로그인</a>
