@@ -51,7 +51,7 @@
 	<h2>11-1. <a href="select-lotto-numbers">로또 당첨 예상 번호 뽑기</a></h2>
 	<h2>11-2. 홀/짝 게임</h2>
 	<form action="even-or-odd-game" method="post">
-		홀(1)/짝(2) 선택 : <input type="text" name="even-or-odd"><br>
+		홀(1)/짝(2) 선택 : <input type="text" name="even-or-odd">&nbsp;
 		<input type="submit" value="전송">
 	</form>
 	
