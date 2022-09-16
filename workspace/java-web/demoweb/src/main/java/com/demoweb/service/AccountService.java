@@ -1,5 +1,6 @@
 package com.demoweb.service;
 
+import com.demoweb.common.Util;
 import com.demoweb.dao.MemberDao;
 import com.demoweb.dto.MemberDto;
 
@@ -9,6 +10,8 @@ public class AccountService {
 	public void registerMember(MemberDto member) {
 		
 		MemberDao memberDao = new MemberDao();
+		String passwd = Util.getHashedString(member.getPasswd(), "SHA-256");
+		member.setPasswd(passwd); // 암호화된 패스워드를 멤버에 저장
 		memberDao.insertMember(member);
 		
 	}
@@ -17,6 +20,7 @@ public class AccountService {
 	public MemberDto findMemberByIdAndPasswd(String memberId, String passwd) {
 		
 		MemberDao memberDao = new MemberDao();
+		passwd = Util.getHashedString(passwd, "SHA-256");
 		MemberDto memberDto = memberDao.selectMemberByIdAndPasswd(memberId, passwd);
 		return memberDto;
 		

@@ -54,6 +54,7 @@
 		홀(1)/짝(2) 선택 : <input type="text" name="even-or-odd">&nbsp;
 		<input type="submit" value="전송">
 	</form>
+	<h2>11-3. <a href="lotto-admin">로또 번호 관리</a></h2>
 	
 	</div>
 
