@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.examplesweb.dto.LottoDto;
+import com.examplesweb.service.LottoService;
+
 @WebServlet(urlPatterns = { "/lotto-admin" })
 public class LottoAdminServlet extends HttpServlet {
 	
@@ -25,9 +28,16 @@ public class LottoAdminServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		for (int i = 1; i < 7; i++) {
-			System.out.println(req.getParameter("no" + i));
-		}
+		LottoDto lottoDto = new LottoDto();
+		lottoDto.setNo1( Integer.parseInt(req.getParameter("no1")) );
+		lottoDto.setNo2( Integer.parseInt(req.getParameter("no2")) );
+		lottoDto.setNo3( Integer.parseInt(req.getParameter("no3")) );
+		lottoDto.setNo4( Integer.parseInt(req.getParameter("no4")) );
+		lottoDto.setNo5( Integer.parseInt(req.getParameter("no5")) );
+		lottoDto.setNo6( Integer.parseInt(req.getParameter("no6")) );
+		
+		LottoService lottoService = new LottoService();
+		lottoService.registerLotto(lottoDto);
 		
 	}
 
