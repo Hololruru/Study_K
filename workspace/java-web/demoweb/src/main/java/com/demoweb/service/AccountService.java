@@ -12,5 +12,14 @@ public class AccountService {
 		memberDao.insertMember(member);
 		
 	}
+	
+	// 2. 로그인 : 아이디, 패스워드를 받아서 데이터베이스 조회 후 결과 반환
+	public MemberDto findMemberByIdAndPasswd(String memberId, String passwd) {
+		
+		MemberDao memberDao = new MemberDao();
+		MemberDto memberDto = memberDao.selectMemberByIdAndPasswd(memberId, passwd);
+		return memberDto;
+		
+	}
 
 }
