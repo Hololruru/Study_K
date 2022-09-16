@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.demoweb.dto.MemberDto;
 import com.examplesweb.dto.LottoDto;
 
 public class LottoDao {
@@ -91,8 +90,7 @@ public class LottoDao {
 				l.setNo6(rs.getInt(6));
 				
 				lottos.add(l);	// 목록에 DTO 객체 추가
-			}			
-			
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace(); // 개발 용도로 사용
 		} finally {
@@ -102,6 +100,6 @@ public class LottoDao {
 			try { conn.close(); } catch (Exception ex) {}
 		}
 		
-		return memberDto;
+		return lottos;
 	}
 }
