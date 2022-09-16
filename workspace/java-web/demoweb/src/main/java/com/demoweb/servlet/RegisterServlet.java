@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.demoweb.dto.MemberDto;
+import com.demoweb.service.AccountService;
+
 @WebServlet(urlPatterns = { "/account/register.action" })
 public class RegisterServlet extends HttpServlet {
 	
@@ -37,7 +40,13 @@ public class RegisterServlet extends HttpServlet {
 		
 		System.out.printf("[%s][%s][%s][%s]\n", memberId, passwd, confirm, email);
 		
-		// 데이터베이스에 데이터 저장 ( JDBC )
+		// 데이터베이스에 데이터 저장 ( JDBC -> Service에게 요청 )
+		MemberDto memberDto = new MemberDto();
+		memberDto.setMemberId(memberId);
+		memberDto.setPasswd(passwd);
+		memberDto.setEmail(email);
+		AccountService accountService = new AccountService();
+		accountService.registerMember(memberDto);
 		
 		
 		// 한 작업 사이클이 종료되면 redirect로 이동
