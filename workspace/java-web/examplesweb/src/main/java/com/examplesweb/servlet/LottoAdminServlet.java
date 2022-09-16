@@ -21,5 +21,26 @@ public class LottoAdminServlet extends HttpServlet {
 		rd.forward(req, resp); // 지정된 경로로 forward 이동
 		
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		for (int i = 1; i < 7; i++) {
+			System.out.println(req.getParameter("no" + i));
+		}
+		
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
