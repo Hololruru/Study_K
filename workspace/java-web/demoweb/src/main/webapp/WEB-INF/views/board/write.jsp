@@ -22,7 +22,7 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시글 정보</div>
-		        <form>
+		        <form action="write.action" method="post">
 		        <table>
 		            <tr>
 		                <th>제목</th>
@@ -35,23 +35,24 @@
 		                <td>
 		                	<% MemberDto member = (MemberDto)session.getAttribute("loginuser"); %>
 		                	<%= member.getMemberId() %>
+		                	<input type="hidden" name="writer" value="<%= member.getMemberId() %>">
 		                </td>
 		            </tr>
 		            <tr>
-		                <th>첨부자료</th>
+		                <th>첨부파일</th>
 		                <td>
 		                    <input type="file" name="attach" style="width:580px;height:20px" />
 		                </td>
 		            </tr>
 		            <tr>
-		                <th>자료설명</th>
+		                <th>글내용</th>
 		                <td>
 		                	<textarea name="content" style="width:580px" rows="15"></textarea>
 		                </td>
 		            </tr>
 		        </table>
 		        <div class="buttons">
-		        	<input type="submit" value="자료등록" style="height:25px" />
+		        	<input type="submit" value="글쓰기" style="height:25px" />
 		        	<input type="button" value="취소" style="height:25px"  />
 		        </div>
 		        </form>

@@ -27,13 +27,40 @@ public class BoardWriteServlet extends HttpServlet {
 			return;
 		}
 		
-		// 1. 요청 처리
-		
+		// 1. 요청 처리		
 		
 		// 2. JSP에서 읽을 수 있도록 데이터 전달 ( request 객체에 저장 )		
 		// 3. 응답 컨텐츠 생산 ( JSP로 forward 이동 )		
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/write.jsp");
 		rd.forward(req, resp); // 지정된 경로로 forward 이동
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setCharacterEncoding("utf-8");
+		
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		String writer = req.getParameter("writer");
+//		HttpSession session = req.getSession();
+//		MemberDto member = (MemberDto)session.getAttribute("loginuser");
+//		String writer = member.getMemberId();
+		System.out.println(title + " / " + writer + " / " + content);
+		
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
