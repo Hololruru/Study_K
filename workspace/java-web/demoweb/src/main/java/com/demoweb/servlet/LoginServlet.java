@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.demoweb.dto.MemberDto;
 import com.demoweb.service.AccountService;
@@ -45,13 +46,20 @@ public class LoginServlet extends HttpServlet {
 		MemberDto memberDto = accountService.findMemberByIdAndPasswd(memberId, passwd);
 		
 		if (memberDto != null) {
-			System.out.println("로그인 성공");
+			// System.out.println("로그인 성공");
+			// 로그인 처리 --> Session에 데이터 저장
+			HttpSession session = req.getSession(); // 세션 가져오기
+			session.setAttribute("loginuser", memberDto);
+			
+			// 한 작업 사이클이 종료되면 redirect로 이동
+			resp.sendRedirect("/demoweb/home.action");
 		} else {
 			System.out.println("로그인 실패");
+			// 한 작업 사이클이 종료되면 redirect로 이동
+			resp.sendRedirect("/demoweb/account/login.action");
 		}
 		
-		// 한 작업 사이클이 종료되면 redirect로 이동
-		resp.sendRedirect("/demoweb/home.action");
+		
 	}
 
 }

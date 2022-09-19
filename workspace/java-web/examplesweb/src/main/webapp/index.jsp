@@ -56,6 +56,8 @@
 	</form>
 	<h2>11-3. <a href="lotto-admin">로또 번호 관리</a></h2>
 	
+	<h2>12. <a href="06.statemanagement.jsp">상태 관리 연습</a></h2>
+	
 	</div>
 
 </body>
