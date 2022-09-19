@@ -1,7 +1,7 @@
 create database demoweb;
 
-create user knit@localhost identified by "mysql";
-create user knit@"%" identified by "mysql"
+create user testuser@localhost identified by "mysql";
+create user testuser@"%" identified by "mysql"
 
 grant all privileges on demoweb.* to testuser@localhost;
 grant all privileges on demoweb.* to testuser@"%";
@@ -16,7 +16,7 @@ CREATE TABLE member
     , passwd VARCHAR (100) NOT NULL
     , email VARCHAR (50) NOT NULL
     , usertype VARCHAR (50) DEFAULT ('user') CHECK ( usertype IN ('user', 'admin'))
-    , regdate DATE DEFAULT (NOW())
+    , regdate DATETIME DEFAULT (NOW())
     , active BOOLEAN DEFAULT (TRUE)
 );
 
