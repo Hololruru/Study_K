@@ -19,7 +19,7 @@
                 <a href="/demoweb/account/register.action">회원가입</a>
             <% } else { %>
             	<%= member.getMemberId() %>님 환영합니다.
-            	<a href="#">로그아웃</a>
+            	<a href="/demoweb/account/logout.action">로그아웃</a>
             <% } %>
             </div>
         </div>
