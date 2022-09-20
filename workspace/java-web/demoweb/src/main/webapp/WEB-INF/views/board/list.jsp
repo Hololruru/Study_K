@@ -38,7 +38,11 @@
 				<% for (BoardDto board : boards) { %>
 				<tr style="height:30px">
 					<td><%= board.getBoardNo() %></td>
-					<td><%= board.getTitle() %></td>
+					<td>
+						<a href="detail.action?boardNo=<%= board.getBoardNo() %>">
+						<%= board.getTitle() %>
+						</a>
+					</td>
 					<td><%= board.getWriter() %></td>
 					<td><%= board.getReadCount() %></td>
 					<td><%= board.getRegDate() %></td>
