@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.demoweb.dto.BoardDto;
 import com.demoweb.dto.MemberDto;
+import com.demoweb.service.BoardService;
 
 @WebServlet(urlPatterns = { "/board/write.action" })
 public class BoardWriteServlet extends HttpServlet {
@@ -47,6 +49,13 @@ public class BoardWriteServlet extends HttpServlet {
 //		MemberDto member = (MemberDto)session.getAttribute("loginuser");
 //		String writer = member.getMemberId();
 		System.out.println(title + " / " + writer + " / " + content);
+		
+		BoardDto board = new BoardDto();
+		board.setTitle(title);
+		board.setWriter(writer);
+		board.setContent(content);
+		BoardService boardService = new BoardService();
+		boardService.writeBoard(board);
 		
 	}
 
