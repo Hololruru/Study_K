@@ -1,3 +1,5 @@
+<%@page import="com.demoweb.dto.BoardDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>    
 
@@ -32,13 +34,16 @@
 					<th style="width:50px">조회수</th>
 					<th style="width:125px">작성일</th>					
 				</tr>
+				<% List<BoardDto> boards = (List<BoardDto>)request.getAttribute("boards"); %>
+				<% for (BoardDto board : boards) { %>
 				<tr style="height:30px">
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td><%= board.getBoardNo() %></td>
+					<td><%= board.getTitle() %></td>
+					<td><%= board.getWriter() %></td>
+					<td><%= board.getReadCount() %></td>
+					<td><%= board.getRegDate() %></td>
 				</tr>
+				<% } %>
 								
 			</table>
 			<br /><br /><br /><br />
