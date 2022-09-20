@@ -71,7 +71,8 @@ public class BoardDao {
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
 					"SELECT boardno, title, writer, readcount, regdate " +
-					"FROM board ";
+					"FROM board " +
+					"ORDER BY boardno DESC "; // 최신 글이 앞에 보이도록 조회
 			pstmt = conn.prepareStatement(sql);
 			
 			// 4. 명령 실행
