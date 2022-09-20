@@ -57,13 +57,36 @@
 		        <div class="buttons">
 		        	<input type="button" id="update_button" value="편집" style="height:25px" />
 		        	<input type="button" id="delete_button" value="삭제" style="height:25px" />
-		        	<input type="button" id="cancel_button" value="목록보기" style="height:25px" />
+		        	<input type="button" id="tolist_button" value="목록보기" style="height:25px" />
 		        </div>
 		    </div>
 		</div>   	
 	
 	</div>
 	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$('#tolist_button').on('click', function(event) {
+			location.href = 'list.action';
+		});
+		
+		$('#delete_button').on('click', function(event) {
+			location.href = 'delete.action?boardNo=<%= board.getBoardNo() %>';
+		});
+	});
+	</script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

@@ -2,6 +2,7 @@ package com.demoweb.servlet;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.demoweb.dto.BoardDto;
 import com.demoweb.service.BoardService;
@@ -24,8 +26,20 @@ public class BoardDetailServlet extends HttpServlet {
 		String sBoardNo = req.getParameter("boardNo"); // 요청 데이터 읽기 : 사용자가 선택한 글번호 읽기
 		int boardNo = Integer.parseInt(sBoardNo);
 		
+		// 사용자가 읽은 글 목록을 세션에서 가져오기
+		HttpSession session = req.getSession();
+		ArrayList<Integer> readList = (ArrayList<Integer>)session.getAttribute("read-list");
+		if (readList == null) { // 세션에 목록이 없으면 
+			readList = new ArrayList<>(); // 목록 새로 만들기
+			session.setAttribute("read-list", readList); // 세션에 목록 등록
+		}
+				
 		BoardService boardService = new BoardService();
-		boardService.increaseBoardReadCount(boardNo);
+		if (!readList.contains(boardNo)) { // 현재 글 번호가 읽은 글 목록에 포함되지 않은 경우
+			boardService.increaseBoardReadCount(boardNo); // 글 조회수 증가
+			readList.add(boardNo); // 읽은 글 목록에 현개 글 번호 추가			
+		}
+		
 		BoardDto board = boardService.findBoardByBoardNo(boardNo);
 		
 		// 2. JSP에서 읽을 수 있도록 데이터 전달 ( request 객체에 저장 )
