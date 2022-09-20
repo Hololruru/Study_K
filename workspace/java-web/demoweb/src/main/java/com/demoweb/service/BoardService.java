@@ -25,5 +25,23 @@ public class BoardService {
 		return boards;
 		
 	}
+	
+	// 글 번호를 받아서 게시글 조회 및 반환
+	public BoardDto findBoardByBoardNo(int boardNo) {
+		
+		BoardDto board = boardDao.selectBoardByBoardNo(boardNo);
+		return board;
+		
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
