@@ -48,7 +48,9 @@
 		            <tr>
 		                <th>글내용</th>
 						<td>
-							<%= board.getContent() %>
+							<%= board.getContent().replace("\r\n", "<br>")
+												  .replace("\r", "<br>")
+												  .replace("\n", "<br>") %>
 						</td>
 		            </tr>
 		        </table>

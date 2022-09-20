@@ -33,6 +33,13 @@ public class BoardService {
 		return board;
 		
 	}
+	
+	// 글 번호를 받아서 게시글 조회수 증가
+	public void increaseBoardReadCount(int boardNo) {
+		
+		boardDao.updateBoardReadCount(boardNo);
+		
+	}
 
 }
 

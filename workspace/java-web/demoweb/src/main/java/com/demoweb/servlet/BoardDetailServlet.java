@@ -25,6 +25,7 @@ public class BoardDetailServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(sBoardNo);
 		
 		BoardService boardService = new BoardService();
+		boardService.increaseBoardReadCount(boardNo);
 		BoardDto board = boardService.findBoardByBoardNo(boardNo);
 		
 		// 2. JSP에서 읽을 수 있도록 데이터 전달 ( request 객체에 저장 )
