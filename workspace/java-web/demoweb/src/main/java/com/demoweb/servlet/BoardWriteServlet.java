@@ -54,8 +54,11 @@ public class BoardWriteServlet extends HttpServlet {
 		board.setTitle(title);
 		board.setWriter(writer);
 		board.setContent(content);
-		BoardService boardService = new BoardService();
+		BoardService boardService 
+			= new BoardService();
 		boardService.writeBoard(board);
+		
+		resp.sendRedirect("list.action");
 		
 	}
 
