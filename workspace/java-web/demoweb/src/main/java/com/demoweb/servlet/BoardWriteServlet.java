@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.demoweb.common.Util;
 import com.demoweb.dto.BoardDto;
 import com.demoweb.dto.MemberDto;
 import com.demoweb.service.BoardService;
@@ -88,8 +89,10 @@ public class BoardWriteServlet extends HttpServlet {
 							//C:\AAA\BBB\CCC.png -> CCC.png 
 							fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
 						}
+						String uniqueFileName = Util.makeUniqueFileName(fileName);
 						try {
-							item.write(new File(path, fileName));//파일 저장
+							//item.write(new File(path, fileName));//파일 저장
+							item.write(new File(path, uniqueFileName));//파일 저장
 						} catch (Exception e) {
 							e.printStackTrace();
 						} 
