@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.io.File"%>
 <%@ page language="java" 
 		 contentType="text/html; charset=UTF-8"
@@ -30,7 +31,7 @@ File dir = new File(path);
 	File[] files = dir.listFiles();
 	%>	
 	<% for (File file : files) { // 디렉터리 하위의 파일을 순서대로 읽어서 %>
-		<a href="file-download?filename=<%= file.getName() %>" style="text-decoration: none">
+		<a href='file-download?filename=<%= URLEncoder.encode(file.getName(), "utf-8") %>' style="text-decoration: none">
 		<%= file.getName() %>
 		</a>
 		<br>
