@@ -70,7 +70,7 @@ public class BoardDao {
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
-					"SELECT boardno, title, writer, readcount, regdate " +
+					"SELECT boardno, title, writer, readcount, regdate, deleted " +
 					"FROM board " +
 					"ORDER BY boardno DESC "; // 최신 글이 앞에 보이도록 조회
 			pstmt = conn.prepareStatement(sql);
@@ -86,6 +86,7 @@ public class BoardDao {
 				board.setWriter(rs.getString(3));
 				board.setReadCount(rs.getInt(4));
 				board.setRegDate(rs.getDate(5));
+				board.setDeleted(rs.getBoolean(6));
 				
 				boards.add(board);
 			}			

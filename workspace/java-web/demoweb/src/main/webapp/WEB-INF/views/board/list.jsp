@@ -38,10 +38,14 @@
 				<% for (BoardDto board : boards) { %>
 				<tr style="height:30px">
 					<td><%= board.getBoardNo() %></td>
-					<td>
+					<td style="text-align:left; padding-left:5px;">
+						<% if (board.isDeleted()) { %>
+						<span style="color:lightgray"><%= board.getTitle() %> [삭제된 글]</span>
+						<% } else { %>
 						<a href="detail.action?boardNo=<%= board.getBoardNo() %>">
 						<%= board.getTitle() %>
 						</a>
+						<% } %>
 					</td>
 					<td><%= board.getWriter() %></td>
 					<td><%= board.getReadCount() %></td>
