@@ -40,9 +40,21 @@ public class BoardDeleteServlet extends HttpServlet {
 			return;
 		}
 		
+		boardService.deleteBoard(boardNo); // 삭제 처리 -> BoardService에 요청
+		
 		// 2. JSP에서 읽을 수 있도록 데이터 전달 ( request 객체에 저장 )
 		
 		// 3. 응답 컨텐츠 생산 ( JSP로 forward 이동 )		
+		resp.sendRedirect("list.action");
 	}
 
 }
+
+
+
+
+
+
+
+
+

@@ -40,6 +40,13 @@ public class BoardService {
 		boardDao.updateBoardReadCount(boardNo);
 		
 	}
+	
+	// 글 번호를 받아서 게시글 삭제
+	public void deleteBoard(int boardNo) {
+		
+		boardDao.deleteBoard(boardNo);
+		
+	}
 
 }
 
