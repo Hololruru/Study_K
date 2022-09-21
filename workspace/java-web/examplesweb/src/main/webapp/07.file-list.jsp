@@ -20,12 +20,21 @@
 String path = application.getRealPath("/upload-files");
 // 디렉터리 관리 객체 만들기
 File dir = new File(path);
-// 디렉터리 하위의 모든 파일과 디렉터리 정보 가져오기
-File[] files = dir.listFiles();
-%>
 
-<% for (File file : files) { // 디렉터리 하위의 파일을 순서대로 읽어서 %>
-	<%= file.getName() %><br>
+%>
+<% if (!dir.exists()) { %>
+	<h3 style="color:red">업로드 디렉터리가 없습니다.</h3>
+<% } else { %>
+	<% 
+	// 디렉터리 하위의 모든 파일과 디렉터리 정보 가져오기
+	File[] files = dir.listFiles();
+	%>	
+	<% for (File file : files) { // 디렉터리 하위의 파일을 순서대로 읽어서 %>
+		<a href="file-download?filename=<%= file.getName() %>" style="text-decoration: none">
+		<%= file.getName() %>
+		</a>
+		<br>
+	<% } %>
 <% } %>
 
 </body>
