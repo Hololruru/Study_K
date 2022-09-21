@@ -1,3 +1,4 @@
+<%@page import="com.demoweb.dto.MemberDto"%>
 <%@page import="com.demoweb.dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -55,8 +56,12 @@
 		            </tr>
 		        </table>
 		        <div class="buttons">
+		        	<%-- 로그인한 사용자와 작성자가 같은 경우에 편집, 삭제 버튼 표시 --%>
+		        	<% MemberDto member = (MemberDto)session.getAttribute("loginuser"); %>
+		        	<% if (member != null && member.getMemberId().equals(board.getWriter())) { %>
 		        	<input type="button" id="update_button" value="편집" style="height:25px" />
 		        	<input type="button" id="delete_button" value="삭제" style="height:25px" />
+		        	<% } %>
 		        	<input type="button" id="tolist_button" value="목록보기" style="height:25px" />
 		        </div>
 		    </div>
