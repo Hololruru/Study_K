@@ -78,6 +78,9 @@
 		});
 		
 		$('#delete_button').on('click', function(event) {
+			const ok = confirm("<%= board.getBoardNo() %>번 글을 삭제할까요?");
+			if (!ok) return;
+			
 			location.href = 'delete.action?boardNo=<%= board.getBoardNo() %>';
 		});
 	});
