@@ -82,7 +82,7 @@ public class FileUploadServlet extends HttpServlet {
 			}
 		}
 
-		//resp.sendRedirect("07.file-list.jsp");
+		resp.sendRedirect("07.file-list.jsp");
 	}
 	
 }
