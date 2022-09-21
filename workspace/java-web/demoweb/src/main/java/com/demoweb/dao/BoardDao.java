@@ -126,7 +126,7 @@ public class BoardDao {
 			String sql = 
 					"SELECT boardno, title, writer, content, readcount, regdate " +
 					"FROM board " +
-					"WHERE boardno = ? ";
+					"WHERE boardno = ? AND deleted = FALSE ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
 			
@@ -175,7 +175,7 @@ public class BoardDao {
 			String sql = 
 					"UPDATE board  " +
 					"SET readcount = readcount + 1 " +
-					"WHERE boardno = ?"; // ? : 나중에 채워질 영역 표시
+					"WHERE boardno = ? AND deleted = FALSE "; // ? : 나중에 채워질 영역 표시
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
 			

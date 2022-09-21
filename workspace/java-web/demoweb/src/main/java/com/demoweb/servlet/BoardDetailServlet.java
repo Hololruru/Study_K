@@ -42,6 +42,11 @@ public class BoardDetailServlet extends HttpServlet {
 		
 		BoardDto board = boardService.findBoardByBoardNo(boardNo);
 		
+		if (board == null) { // 조회되지 않은 경우 (글 번호가 잘못되었거나 또는 삭제된 글인 경우)
+			resp.sendRedirect("list.action");
+			return;
+		}
+		
 		// 2. JSP에서 읽을 수 있도록 데이터 전달 ( request 객체에 저장 )
 		req.setAttribute("board", board);
 		
