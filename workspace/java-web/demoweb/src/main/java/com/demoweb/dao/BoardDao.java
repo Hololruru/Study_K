@@ -191,7 +191,7 @@ public class BoardDao {
 					"testuser", "mysql"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
-			String sql = "SELECT COUNT() FROM board ";
+			String sql = "SELECT COUNT(*) FROM board ";
 			pstmt = conn.prepareStatement(sql);
 			
 			// 4. 명령 실행

@@ -54,6 +54,11 @@
 				<% } %>
 								
 			</table>
+			
+			<br><br>
+			
+			<%= request.getAttribute("pager").toString() %>
+			
 			<br /><br /><br /><br />
 		
 		</div>
