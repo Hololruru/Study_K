@@ -18,7 +18,8 @@ import com.demoweb.service.BoardService;
 @WebServlet(urlPatterns = { "/board/list.action" })
 public class BoardListServlet extends HttpServlet {
 	
-	private final int PAGE_SIZE = 3; // 한 페이지에 표시되는 데이터 개수
+	private final int PAGE_SIZE = 3; 	// 한 페이지에 표시되는 데이터 개수
+	private final int PAGER_SIZE = 3;	// 한 번에 표시할 페이지 번호 개수
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,7 +34,8 @@ public class BoardListServlet extends HttpServlet {
 		} catch(Exception ex) {
 			pageNo = 1;
 		}		
-		List<BoardDto> boards = boardService.findBoardByPage(pageNo, PAGE_SIZE); // 페이지번호, 개수		
+		List<BoardDto> boards = boardService.findBoardByPage(pageNo, PAGE_SIZE); // 페이지번호, 개수	
+		int boardCount = boardService.findBoardCount();
 		
 		// 2. JSP에서 읽을 수 있도록 데이터 전달 ( request 객체에 저장 )
 		req.setAttribute("boards", boards);

@@ -77,6 +77,13 @@ public class BoardService {
 		
 	}
 
+	public int findBoardCount() {
+		
+		int boardCount = boardDao.selectBoardCount();
+		return boardCount;
+		
+	}
+
 
 }
 
