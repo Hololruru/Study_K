@@ -123,6 +123,7 @@ public class BoardWriteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
+		
 		BoardService boardService = new BoardService();
 		boardService.writeBoard(board);
 		

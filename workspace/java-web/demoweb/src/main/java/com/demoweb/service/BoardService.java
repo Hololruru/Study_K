@@ -38,6 +38,9 @@ public class BoardService {
 	public BoardDto findBoardByBoardNo(int boardNo) {
 		
 		BoardDto board = boardDao.selectBoardByBoardNo(boardNo);
+		List<BoardAttachDto> attachments = boardDao.selectBoardAttachByBoardNo(boardNo);
+		board.setAttachments(attachments);
+		
 		return board;
 		
 	}
@@ -53,6 +56,14 @@ public class BoardService {
 	public void deleteBoard(int boardNo) {
 		
 		boardDao.deleteBoard(boardNo);
+		
+	}
+	
+	// 첨부파일 번호를 받아서 첨부파일 데이터 조회 및 반환
+	public BoardAttachDto findBoardAttachByAttachNo(int attachNo) {
+		
+		BoardAttachDto attachment = boardDao.selectBoardAttachByAttachNo(attachNo);
+		return attachment;
 		
 	}
 

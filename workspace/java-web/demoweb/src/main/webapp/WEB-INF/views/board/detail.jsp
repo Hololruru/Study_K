@@ -1,3 +1,4 @@
+<%@page import="com.demoweb.dto.BoardAttachDto"%>
 <%@page import="com.demoweb.dto.MemberDto"%>
 <%@page import="com.demoweb.dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -44,6 +45,13 @@
 		            <tr>
 		                <th>첨부파일</th>
 		                <td>
+		                <% for (BoardAttachDto attachment : board.getAttachments()) { %>
+			                <a href="download.action?attachNo=<%= attachment.getAttachNo() %>" style="text-decoration: none">
+			                   <%= attachment.getUserFileName() %>
+			                </a>
+			                [<%= attachment.getDownloadCount() %>]
+			                <br>
+		                <% } %>
 		                </td>
 		            </tr>
 		            <tr>
