@@ -34,6 +34,16 @@ public class BoardService {
 		
 	}
 	
+	public List<BoardDto> findBoardByPage(int pageNo, int pageSize) {
+		
+		int from = (pageNo - 1) * pageSize;
+		int count = pageSize;
+		
+		List<BoardDto> boards = boardDao.selectBoardByPage(from, count);
+		return boards;
+		
+	}
+	
 	// 글 번호를 받아서 게시글 조회 및 반환
 	public BoardDto findBoardByBoardNo(int boardNo) {
 		
@@ -66,6 +76,7 @@ public class BoardService {
 		return attachment;
 		
 	}
+
 
 }
 
