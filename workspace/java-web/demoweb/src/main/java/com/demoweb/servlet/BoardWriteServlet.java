@@ -3,6 +3,7 @@ package com.demoweb.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.demoweb.common.Util;
+import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardDto;
 import com.demoweb.dto.MemberDto;
 import com.demoweb.service.BoardService;
@@ -74,7 +76,9 @@ public class BoardWriteServlet extends HttpServlet {
 		ServletFileUpload uploader = new ServletFileUpload(factory);
 		uploader.setFileSizeMax(1024 * 1024 * 10);//최대 파일 크기
 
-		BoardDto board = new BoardDto();
+		BoardDto board = new BoardDto();	// 게시글 정보를 저장하는 DTO 객체
+		ArrayList<BoardAttachDto> attachments = new ArrayList<>(); // 첨부파일 정보를 저장하는 DTO 객체
+		board.setAttachments(attachments);
 		
 		//요청 정보를 파싱하고 개별 객체의 목록을 반환
 		try {
@@ -105,6 +109,12 @@ public class BoardWriteServlet extends HttpServlet {
 							e.printStackTrace();
 						} 
 						item.delete(); //임시 파일 삭제
+						
+						// 첨부파일 정보를 객체에 저장
+						BoardAttachDto attachment = new BoardAttachDto();
+						attachment.setUserFileName(fileName);
+						attachment.setSavedFileName(uniqueFileName);
+						attachments.add(attachment);
 					}
 				}
 			}
