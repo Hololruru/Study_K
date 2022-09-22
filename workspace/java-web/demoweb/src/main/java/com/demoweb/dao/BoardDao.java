@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardDto;
 import com.demoweb.dto.MemberDto;
 
@@ -15,7 +16,9 @@ public class BoardDao {
 	// 사용자가 작성한 게시글 정보를 받아서 데이터베이스에 저장
 	public void insertBoard(BoardDto board) {
 		Connection conn = null;			// 연결과 관련된 JDBC 호출 규격 ( 인터페이스 )
-		PreparedStatement pstmt = null;	// 명령 실행과 관련된 JDBC 호출 규격 ( 인터페이스 )		
+		PreparedStatement pstmt = null;	// 명령 실행과 관련된 JDBC 호출 규격 ( 인터페이스 )
+		PreparedStatement pstmt2 = null;// 명령 실행과 관련된 JDBC 호출 규격 ( 인터페이스 )
+		ResultSet rs = null;
 		
 		try {
 			// 1. Driver 등록
@@ -27,7 +30,7 @@ public class BoardDao {
 					"jdbc:mysql://localhost:3306/demoweb", 		// 데이터베이스 연결 정보
 					"testuser", "mysql"); 						// 데이터베이스 계정 정보
 			
-			// 3. SQL 작성 + 명령 객체 가져오기
+			// 3-1. SQL 작성 + 명령 객체 가져오기
 			String sql = 
 					"INSERT INTO board (title, writer, content) " +
 					"VALUES (?, ?, ?)"; // ? : 나중에 채워질 영역 표시
@@ -36,16 +39,28 @@ public class BoardDao {
 			pstmt.setString(2, board.getWriter());		// SQL의 2번째 ?를 대체할 데이터
 			pstmt.setString(3, board.getContent());		// SQL의 3번째 ?를 대체할 데이터
 			
-			// 4. 명령 실행
+			// 4-1. 명령 실행
 			pstmt.executeUpdate(); // executeUpdate : select 이외의 SQL에 사용하는 메서드
 			
-			// 5. 결과 처리 (결과가 있다면 - SELECT 명령을 실행한 경우)				
+			// 3-2. 
+			String sql2 = "SELECT LAST_INSERT_ID()"; // LAST_INSERT_ID() : 현재 연결에서 마지막으로 생성된 자동증가번호
+			pstmt2 = conn.prepareStatement(sql2);
+			
+			// 4-1. 
+			rs = pstmt2.executeQuery();
+			
+			// 5. 결과 처리 (결과가 있다면 - SELECT 명령을 실행한 경우)
+			rs.next();
+			int newBoardNo = rs.getInt(1); 	// 자동 증가 값 (새 글번호) 조회 결과 읽기
+			board.setBoardNo(newBoardNo);	// 객체에 자동 증가 값 (새 글번호) 저장
 			
 		} catch (Exception ex) {
 			ex.printStackTrace(); // 개발 용도로 사용
 		} finally {
-			// 6. 연결 닫기			
+			// 6. 연결 닫기
+			try { rs.close(); } catch (Exception ex) {}
 			try { pstmt.close(); } catch (Exception ex) {}
+			try { pstmt2.close(); } catch (Exception ex) {}
 			try { conn.close(); } catch (Exception ex) {}
 		}
 	}
@@ -215,6 +230,43 @@ public class BoardDao {
 					"WHERE boardno = ?"; // ? : 나중에 채워질 영역 표시
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
+			
+			// 4. 명령 실행
+			pstmt.executeUpdate(); // executeUpdate : select 이외의 SQL에 사용하는 메서드
+			
+			// 5. 결과 처리 (결과가 있다면 - SELECT 명령을 실행한 경우)				
+			
+		} catch (Exception ex) {
+			ex.printStackTrace(); // 개발 용도로 사용
+		} finally {
+			// 6. 연결 닫기			
+			try { pstmt.close(); } catch (Exception ex) {}
+			try { conn.close(); } catch (Exception ex) {}
+		}
+	}
+
+	public void insertBoardAttach(BoardAttachDto attachment) {
+		Connection conn = null;			// 연결과 관련된 JDBC 호출 규격 ( 인터페이스 )
+		PreparedStatement pstmt = null;	// 명령 실행과 관련된 JDBC 호출 규격 ( 인터페이스 )		
+		
+		try {
+			// 1. Driver 등록
+			// DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			// 2. 연결 및 연결 객체 가져오기
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/demoweb", 		// 데이터베이스 연결 정보
+					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+			
+			// 3. SQL 작성 + 명령 객체 가져오기
+			String sql = 
+					"INSERT INTO boardattach (boardno, userfilename, savedfilename) " +
+					"VALUES (?, ?, ?)"; // ? : 나중에 채워질 영역 표시
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, attachment.getBoardNo());
+			pstmt.setString(2, attachment.getUserFileName());
+			pstmt.setString(3, attachment.getSavedFileName());
 			
 			// 4. 명령 실행
 			pstmt.executeUpdate(); // executeUpdate : select 이외의 SQL에 사용하는 메서드
