@@ -37,6 +37,12 @@ public class ThePager {
 			linkString.append(String.format(
 				"[<a href='%s?pageNo=%d'>이전</a>]", linkUrl, pageNo - 1));
 			linkString.append("&nbsp;");
+		} else {
+			linkString.append("[<span style='color:lightgray'>처음</span>]");
+			linkString.append("&nbsp;");
+			linkString.append("&nbsp;");
+			linkString.append("[<span style='color:lightgray'>이전</span>]");
+			linkString.append("&nbsp;");
 		}
 		
 		//2. 페이지 번호 Link 만들기
@@ -64,6 +70,12 @@ public class ThePager {
 			linkString.append("&nbsp;");
 			linkString.append(String.format(
 				"[<a href='%s?pageNo=%d'>마지막</a>]", linkUrl, pageCount));
+		} else {
+			linkString.append("[<span style='color:lightgray'>다음</span>]");
+			linkString.append("&nbsp;");
+			linkString.append("&nbsp;");
+			linkString.append("[<span style='color:lightgray'>마지막</span>]");
+			linkString.append("&nbsp;");
 		}
 		
 		return linkString.toString();
