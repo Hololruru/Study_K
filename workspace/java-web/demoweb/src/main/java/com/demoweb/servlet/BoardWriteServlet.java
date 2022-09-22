@@ -74,6 +74,8 @@ public class BoardWriteServlet extends HttpServlet {
 		ServletFileUpload uploader = new ServletFileUpload(factory);
 		uploader.setFileSizeMax(1024 * 1024 * 10);//최대 파일 크기
 
+		BoardDto board = new BoardDto();
+		
 		//요청 정보를 파싱하고 개별 객체의 목록을 반환
 		try {
 			List<FileItem> items = uploader.parseRequest(req);
@@ -81,7 +83,13 @@ public class BoardWriteServlet extends HttpServlet {
 			//목록에 담긴 데이터 사용
 			for (FileItem item : items) {			
 				if (item.isFormField()) { //form-data인 경우 (File이 아닌 일반 데이터인 경우)
-					
+					if (item.getFieldName().equals("title")) {
+						board.setTitle(item.getString("utf-8"));
+					} else if (item.getFieldName().equals("writer")) {
+						board.setWriter(item.getString("utf-8"));
+					} else if (item.getFieldName().equals("content")) {
+						board.setContent(item.getString("utf-8"));
+					}					
 				} else { //file인 경우
 					String fileName = item.getName(); //파일 이름 가져오기
 					if (fileName != null && fileName.length() > 0) { //내용이 있는 경우
@@ -105,27 +113,10 @@ public class BoardWriteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		////////////////////////////////////////////////////////////////////////////////
-
-//		req.setCharacterEncoding("utf-8");
-//		
-//		String title = req.getParameter("title");
-//		String content = req.getParameter("content");
-//		String writer = req.getParameter("writer");
-////		HttpSession session = req.getSession();
-////		MemberDto member = (MemberDto)session.getAttribute("loginuser");
-////		String writer = member.getMemberId();
-//		System.out.println(title + " / " + writer + " / " + content);
-//		
-//		BoardDto board = new BoardDto();
-//		board.setTitle(title);
-//		board.setWriter(writer);
-//		board.setContent(content);
-//		BoardService boardService 
-//			= new BoardService();
-//		boardService.writeBoard(board);
-//		
-//		resp.sendRedirect("list.action");
+		BoardService boardService = new BoardService();
+		boardService.writeBoard(board);
+		
+		resp.sendRedirect("list.action");
 		
 	}
 
