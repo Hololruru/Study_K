@@ -60,5 +60,11 @@ public class BoardDto {
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+	public List<BoardAttachDto> getAttachments() {
+		return attachments;
+	}
+	public void setAttachments(List<BoardAttachDto> attachments) {
+		this.attachments = attachments;
+	}
 
 }
