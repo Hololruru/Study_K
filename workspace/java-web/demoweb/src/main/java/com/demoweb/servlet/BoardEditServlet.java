@@ -42,5 +42,40 @@ public class BoardEditServlet extends HttpServlet {
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/edit.jsp");
 		rd.forward(req, resp); // 지정된 경로로 forward 이동
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		// 요청 데이터 읽기
+		String sBoardNo = req.getParameter("boardNo");
+		int boardNo = Integer.parseInt(sBoardNo);
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		
+		BoardDto board = new BoardDto();
+		board.setBoardNo(boardNo);
+		board.setTitle(title);
+		board.setContent(content);
+		
+		
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
