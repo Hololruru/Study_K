@@ -45,6 +45,7 @@ public class BoardListServlet extends HttpServlet {
 		// 2. JSP에서 읽을 수 있도록 데이터 전달 ( request 객체에 저장 )
 		req.setAttribute("boards", boards);
 		req.setAttribute("pager", pager);
+		req.setAttribute("pageNo", pageNo);
 		
 		// 3. 응답 컨텐츠 생산 ( JSP로 forward 이동 )		
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/list.jsp");

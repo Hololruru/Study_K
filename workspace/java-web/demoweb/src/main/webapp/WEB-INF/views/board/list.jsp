@@ -42,7 +42,7 @@
 						<% if (board.isDeleted()) { %>
 						<span style="color:lightgray"><%= board.getTitle() %> [삭제된 글]</span>
 						<% } else { %>
-						<a href="detail.action?boardNo=<%= board.getBoardNo() %>">
+						<a href='detail.action?boardNo=<%= board.getBoardNo() %>&pageNo=<%= request.getAttribute("pageNo") %>'>
 						<%= board.getTitle() %>
 						</a>
 						<% } %>

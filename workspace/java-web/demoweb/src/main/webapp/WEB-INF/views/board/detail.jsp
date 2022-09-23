@@ -82,7 +82,7 @@
 	<script type="text/javascript">
 	$(function() {
 		$('#tolist_button').on('click', function(event) {
-			location.href = 'list.action';
+			location.href = 'list.action?pageNo=<%= request.getAttribute("pageNo") %>';
 		});
 		
 		$('#delete_button').on('click', function(event) {

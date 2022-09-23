@@ -45,8 +45,10 @@ public class BoardEditServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+		
 		// 요청 데이터 읽기
+		req.setCharacterEncoding("utf-8");
+		
 		String sBoardNo = req.getParameter("boardNo");
 		int boardNo = Integer.parseInt(sBoardNo);
 		String title = req.getParameter("title");
