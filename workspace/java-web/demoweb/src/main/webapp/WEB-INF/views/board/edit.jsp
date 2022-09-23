@@ -25,6 +25,7 @@
 		        <form action="edit.action"
 		        	  method="post">
 		        	<input type="hidden" name="boardNo" value="<%= board.getBoardNo() %>">
+		        	<input type="hidden" name="pageNo" value="<%= request.getAttribute("pageNo") %>">
 		        <table>
 		            <tr>
 		                <th>제목</th>
@@ -55,7 +56,7 @@
 		        </table>
 		        <div class="buttons">
 		        	<input type="submit" value="글수정" style="height:25px" />
-		        	<input type="button" value="취소" style="height:25px"  />
+		        	<input id="btn-cancel" type="button" value="취소" style="height:25px"  />
 		        </div>
 		        </form>
 		    </div>
@@ -63,6 +64,21 @@
 	
 	</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$('#btn-cancel').on('click', function(event) {
+			location.href = 'detail.action?boardNo=<%= board.getBoardNo() %>' +
+							'&pageNo=<%= request.getAttribute("pageNo") %>';
+		});
+	});
+	</script>
 
 </body>
 </html>
+
+
+
+
+
+

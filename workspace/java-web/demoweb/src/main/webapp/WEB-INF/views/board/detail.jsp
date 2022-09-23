@@ -89,11 +89,11 @@
 			const ok = confirm("<%= board.getBoardNo() %>번 글을 삭제할까요?");
 			if (!ok) return;
 			
-			location.href = 'delete.action?boardNo=<%= board.getBoardNo() %>';
+			location.href = 'delete.action?boardNo=<%= board.getBoardNo() %>&pageNo=<%= request.getAttribute("pageNo") %>';
 		});
 		
 		$('#update_button').on('click', function(event) {
-			location.href = 'edit.action?boardNo=<%= board.getBoardNo() %>';
+			location.href = 'edit.action?boardNo=<%= board.getBoardNo() %>&pageNo=<%= request.getAttribute("pageNo") %>';
 		});
 	});
 	</script>

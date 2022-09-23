@@ -36,6 +36,9 @@ public class BoardDeleteServlet extends HttpServlet {
 		// 1. 요청 처리		
 		String sBoardNo = req.getParameter("boardNo");
 		int boardNo = Integer.parseInt(sBoardNo);
+		String sPageNo = req.getParameter("pageNo");
+		int pageNo = Integer.parseInt(sPageNo);
+		
 		BoardService boardService = new BoardService();		
 		BoardDto board = boardService.findBoardByBoardNo(boardNo);
 		
@@ -49,7 +52,7 @@ public class BoardDeleteServlet extends HttpServlet {
 		// 2. JSP에서 읽을 수 있도록 데이터 전달 ( request 객체에 저장 )
 		
 		// 3. 응답 컨텐츠 생산 ( JSP로 forward 이동 )		
-		resp.sendRedirect("list.action");
+		resp.sendRedirect("list.action?pageNo=" + pageNo);
 	}
 
 }

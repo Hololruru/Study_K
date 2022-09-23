@@ -25,6 +25,8 @@ public class BoardEditServlet extends HttpServlet {
 		// 1. 요청 처리
 		String sBoardNo = req.getParameter("boardNo"); // 요청 데이터 읽기 : 사용자가 선택한 글번호 읽기
 		int boardNo = Integer.parseInt(sBoardNo);
+		String sPageNo = req.getParameter("pageNo");
+		int pageNo = Integer.parseInt(sPageNo);
 	
 		BoardService boardService = new BoardService();
 		
@@ -37,6 +39,7 @@ public class BoardEditServlet extends HttpServlet {
 		
 		// 2. JSP에서 읽을 수 있도록 데이터 전달 ( request 객체에 저장 )
 		req.setAttribute("board", board);
+		req.setAttribute("pageNo", pageNo);
 		
 		// 3. 응답 컨텐츠 생산 ( JSP로 forward 이동 )		
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/edit.jsp");
@@ -51,6 +54,8 @@ public class BoardEditServlet extends HttpServlet {
 		
 		String sBoardNo = req.getParameter("boardNo");
 		int boardNo = Integer.parseInt(sBoardNo);
+		String sPageNo = req.getParameter("pageNo");
+		int pageNo = Integer.parseInt(sPageNo);
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		
@@ -63,7 +68,7 @@ public class BoardEditServlet extends HttpServlet {
 		BoardService boardService = new BoardService();
 		boardService.modifyBoard(board);
 		
-		resp.sendRedirect("detail.action?boardNo=" + boardNo);
+		resp.sendRedirect("detail.action?boardNo=" + boardNo + "&pageNo=" + pageNo);
 	}
 
 }
