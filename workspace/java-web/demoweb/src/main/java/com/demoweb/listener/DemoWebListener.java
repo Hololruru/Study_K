@@ -7,12 +7,14 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-@WebListener
+// @WebListener
 public class DemoWebListener implements ServletContextListener, HttpSessionListener {
     
-    public void contextInitialized(ServletContextEvent sce)  { 
+    public void contextInitialized(ServletContextEvent sce)  {    	
     	System.out.println("웹 애플리케이션 시작");
     	ServletContext application = sce.getServletContext();
+    	String param = application.getInitParameter("config-file"); // web.xml 파일에 등록된 param 정보 조회
+    	System.out.println("Param info : " + param);
     	application.setAttribute("current-count", 0);
     	application.setAttribute("total-count", 0);
     }

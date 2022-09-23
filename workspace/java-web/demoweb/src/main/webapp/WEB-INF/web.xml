@@ -6,10 +6,13 @@
 	id="WebApp_ID" 
 	version="4.0">
 
-  <!--   
+  <!-- listener에게 데이터 전달 -->
+  <context-param>
+  	<param-name>config-file</param-name>
+  	<param-value>/WEB-INF/config.xml</param-value>
+  </context-param>  
   <listener>
   	<listener-class>com.demoweb.listener.DemoWebListener</listener-class>
   </listener>
-  -->
   
 </web-app>
