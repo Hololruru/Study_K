@@ -24,7 +24,8 @@
 		        <% BoardDto board = (BoardDto)request.getAttribute("board"); %>
 		        <form action=""
 		        	  method=""
-		        	  enctype="">		        
+		        	  enctype="">
+		        	<input type="hidden" name="boardNo" value="<%= board.getBoardNo() %>">
 		        <table>
 		            <tr>
 		                <th>제목</th>
@@ -36,8 +37,7 @@
 		            <tr>
 		                <th>작성자</th>
 		                <td>
-		                	<%= board.getWriter() %>
-		                	<input type="hidden" name="writer" value="<%= board.getWriter() %>">
+		                	<%= board.getWriter() %>		                	
 		                </td>
 		            </tr>
 		            <tr>
@@ -55,7 +55,7 @@
 		            </tr>
 		        </table>
 		        <div class="buttons">
-		        	<input type="submit" value="자료등록" style="height:25px" />
+		        	<input type="submit" value="글수정" style="height:25px" />
 		        	<input type="button" value="취소" style="height:25px"  />
 		        </div>
 		        </form>
