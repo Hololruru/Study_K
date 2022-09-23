@@ -58,6 +58,10 @@
 	
 	<h2>12. <a href="06.statemanagement.jsp">상태 관리 연습</a></h2>
 	
+	<h2>13. <a href="07.file-list.jsp">파일 업로드/다운로드 연습</a></h2>
+	
+	<h2>14. <a href="08.property.jsp">프로퍼티 연습</a></h2>
+	
 	</div>
 
 </body>
