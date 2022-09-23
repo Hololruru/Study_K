@@ -34,3 +34,20 @@
                 </ul>
             </div>
 		</div>
+		<div style="text-align:right;padding:5px;border:solid 1px;">
+		[현재접속자수 : <%= application.getAttribute("current-count") %>]
+		[누적접속자수 : <%= application.getAttribute("total-count") %>]
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

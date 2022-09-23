@@ -13,8 +13,8 @@ public class DemoWebListener implements ServletContextListener, HttpSessionListe
     public void contextInitialized(ServletContextEvent sce)  { 
     	System.out.println("웹 애플리케이션 시작");
     	ServletContext application = sce.getServletContext();
-    	application.setAttribute("current-user", 0);
-    	application.setAttribute("total-user", 0);
+    	application.setAttribute("current-count", 0);
+    	application.setAttribute("total-count", 0);
     }
     public void sessionCreated(HttpSessionEvent se)  { 
     	System.out.println("세션 시작");
