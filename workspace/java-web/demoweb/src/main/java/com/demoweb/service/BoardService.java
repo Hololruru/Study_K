@@ -83,6 +83,12 @@ public class BoardService {
 		return boardCount;
 		
 	}
+	
+	public void modifyBoard(BoardDto board) {
+		
+		boardDao.updateBoard(board);
+		
+	}
 
 
 }

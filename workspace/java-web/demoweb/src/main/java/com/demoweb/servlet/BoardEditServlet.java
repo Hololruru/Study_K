@@ -57,7 +57,11 @@ public class BoardEditServlet extends HttpServlet {
 		board.setTitle(title);
 		board.setContent(content);
 		
+		// 데이터 처리
+		BoardService boardService = new BoardService();
+		boardService.modifyBoard(board);
 		
+		resp.sendRedirect("detail.action?boardNo=" + boardNo);
 	}
 
 }
