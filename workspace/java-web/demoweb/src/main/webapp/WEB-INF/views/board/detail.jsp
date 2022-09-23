@@ -91,6 +91,10 @@
 			
 			location.href = 'delete.action?boardNo=<%= board.getBoardNo() %>';
 		});
+		
+		$('#update_button').on('click', function(event) {
+			location.href = 'edit.action?boardNo=<%= board.getBoardNo() %>';
+		});
 	});
 	</script>
 
