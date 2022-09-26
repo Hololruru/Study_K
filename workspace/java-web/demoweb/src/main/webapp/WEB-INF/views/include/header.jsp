@@ -1,26 +1,33 @@
 <%@page import="com.demoweb.dto.MemberDto"%>
-<%@ page language="java" 
-		 contentType="text/html; charset=utf-8" 
-		 pageEncoding="utf-8"%>
+<%@page language="java" 
+		contentType="text/html; charset=utf-8" 
+		pageEncoding="utf-8"%>
+		
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-		<% String bgColor = request.getParameter("bgcolor"); %>
-		<% if (bgColor != null) { %>
-    	 <div id="header" style="background-color:<%= bgColor %>">
-    	<% } else { %>
-    	 <div id="header">
-    	<% } %>    	
+		<c:choose>
+		<c:when test="${ not empty param.bgcolor }">
+		<div id="header" style="background-color:${ param.bgcolor }">
+		</c:when>
+		<c:otherwise>
+		<div id="header">
+		</c:otherwise>
+		</c:choose>
             <div class="title">
                 <a href="/demoweb/home.action">GREEN WEBSITE</a>
             </div>
             <div class="links">
-            <% MemberDto member = (MemberDto)session.getAttribute("loginuser"); %>            
-            <% if (member == null) { %>
+                      
+            <c:choose>
+            <c:when test="${ empty loginuser }">
             	<a href="/demoweb/account/login.action">로그인</a>
                 <a href="/demoweb/account/register.action">회원가입</a>
-            <% } else { %>
-            	<%= member.getMemberId() %>님 환영합니다.
+            </c:when>
+            <c:otherwise>
+            	${ loginuser.memberId }님 환영합니다.
             	<a href="/demoweb/account/logout.action">로그아웃</a>
-            <% } %>
+            </c:otherwise>
+            </c:choose>
             </div>
         </div>
                 
@@ -35,8 +42,9 @@
             </div>
 		</div>
 		<div style="text-align:right;padding:5px;border:solid 1px;">
-		[현재접속자수 : <%= application.getAttribute("current-count") %>]
-		[누적접속자수 : <%= application.getAttribute("total-count") %>]
+		[현재접속자수 : ${ current_count }]
+		[누적접속자수 : ${ total_count }]
+		
 		</div>
 		
 		
