@@ -21,23 +21,23 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시글 정보</div>
-		        
+		        <% BoardDto board = (BoardDto)request.getAttribute("board"); %>
 		        <form action="edit.action"
 		        	  method="post">
-		        	<input type="hidden" name="boardNo" value="${ board.boardNo }">
-		        	<input type="hidden" name="pageNo" value="${ pageNo }">
+		        	<input type="hidden" name="boardNo" value="<%= board.getBoardNo() %>">
+		        	<input type="hidden" name="pageNo" value="<%= request.getAttribute("pageNo") %>">
 		        <table>
 		            <tr>
 		                <th>제목</th>
 		                <td>
 		                    <input type="text" name="title" style="width:580px"
-		                    	   value="${ board.title }" />
+		                    	   value="<%= board.getTitle() %>" />
 		                </td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
 		                <td>
-		                	${ board.writer }		                	
+		                	<%= board.getWriter() %>		                	
 		                </td>
 		            </tr>
 		            <tr>
@@ -50,7 +50,7 @@
 		                <th>글내용</th>
 		                <td>
 		                	<textarea name="content" 
-		                		style="width:580px" rows="15">${ board.content }</textarea>
+		                		style="width:580px" rows="15"><%= board.getContent() %></textarea>
 		                </td>
 		            </tr>
 		        </table>
@@ -68,7 +68,8 @@
 	<script type="text/javascript">
 	$(function() {
 		$('#btn-cancel').on('click', function(event) {
-			location.href = 'detail.action?boardNo=${ board.boardNo }&pageNo=${ pageNo }';
+			location.href = 'detail.action?boardNo=<%= board.getBoardNo() %>' +
+							'&pageNo=<%= request.getAttribute("pageNo") %>';
 		});
 	});
 	</script>

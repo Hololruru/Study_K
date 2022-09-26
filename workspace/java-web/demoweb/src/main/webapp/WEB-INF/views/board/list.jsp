@@ -63,7 +63,7 @@
 			
 			<br><br>
 			
-			<%= request.getAttribute("pager").toString() %>
+			${ pager }
 			
 			<br /><br /><br /><br />
 		
