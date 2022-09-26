@@ -1,10 +1,7 @@
 <%@page import="com.demoweb.dto.BoardDto"%>
 <%@page import="java.util.List"%>
-<%@page language="java" 
-		contentType="text/html; charset=utf-8"
-    	pageEncoding="utf-8"%>
-    
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>    
 
 <!DOCTYPE html>
 
@@ -37,27 +34,24 @@
 					<th style="width:50px">조회수</th>
 					<th style="width:125px">작성일</th>					
 				</tr>
-				<c:forEach var="board" items="${ boards }" >				
+				<% List<BoardDto> boards = (List<BoardDto>)request.getAttribute("boards"); %>
+				<% for (BoardDto board : boards) { %>
 				<tr style="height:30px">
-					<td>${ board.boardNo }</td>
-					<td style="text-align:left; padding-left:5px;">						
-						<c:choose>
-						<c:when test="${ board.deleted }">
-						<span style="color:lightgray">${ board.title } [삭제된 글]</span>
-						</c:when>						
-						<c:otherwise>
-						<a href='detail.action?boardNo=${ board.boardNo }&pageNo=${ pageNo }'>
-						${ board.title }
+					<td><%= board.getBoardNo() %></td>
+					<td style="text-align:left; padding-left:5px;">
+						<% if (board.isDeleted()) { %>
+						<span style="color:lightgray"><%= board.getTitle() %> [삭제된 글]</span>
+						<% } else { %>
+						<a href='detail.action?boardNo=<%= board.getBoardNo() %>&pageNo=<%= request.getAttribute("pageNo") %>'>
+						<%= board.getTitle() %>
 						</a>
-						</c:otherwise>
-						</c:choose>
-						
+						<% } %>
 					</td>
-					<td>${ board.writer }</td>
-					<td>${ board.readCount }</td>
-					<td>${ board.regDate }</td>
+					<td><%= board.getWriter() %></td>
+					<td><%= board.getReadCount() %></td>
+					<td><%= board.getRegDate() %></td>
 				</tr>
-				</c:forEach>
+				<% } %>
 								
 			</table>
 			
