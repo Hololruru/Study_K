@@ -8,6 +8,9 @@
 	<div style="padding-left:20px">
 		<h2>This is Result Page !!!!!</h2>
 		
+		<h3><%= request.getAttribute("person2") %></h3>
+		<h3>${ person2 }</h3>
+		
 		
 	</div>
 </body>
