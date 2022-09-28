@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.springexample.mvc.dto.Person;
 
@@ -84,6 +86,30 @@ public class DemoController {
 		model.addAttribute("person2", person); 
 		
 		return "result";
+	}
+	
+//	@GetMapping(path = { "/redirect" })
+//	public String redirect() {
+//		
+//		// return "redirect_result";  // /WEB-INF/views/ + redirect_result + .jsp
+//		return "redirect:redirect_result"; // --> response.sendRedirect("redirect_result")
+//	}
+	@GetMapping(path = { "/redirect" })
+	public View redirect() {
+		
+		// return "redirect_result";  // /WEB-INF/views/ + redirect_result + .jsp
+		return new RedirectView("redirect_result");
+	}
+	@GetMapping(path = { "/redirect_result" })
+	public String redirect_result() {
+		
+		return "redirect_result";  // /WEB-INF/views/ + redirect_result + .jsp
+	}
+	
+	@GetMapping(path = { "/forward" })
+	public String forward() {
+		
+		return "forward:/resources/forward_result.html";
 	}
 
 }
