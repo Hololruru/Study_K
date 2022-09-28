@@ -75,7 +75,8 @@ public class DemoController {
 	
 	// 컨트롤러에서 View로 데이터 전달 : Model 타입 전달인자 사용
 	@PostMapping(path = { "/param" })
-	public String processParam2(Person person, Model model) { // Model 전달인자는 View로 데이터를 보내기 위한 도구
+	public String processParam2(Person person, // DTO 전달이자는 자동으로 View로 전달 
+								Model model) { // Model 전달인자는 View로 데이터를 보내기 위한 도구
 		
 		System.out.println(person);
 		

@@ -10,6 +10,7 @@
 		
 		<h3><%= request.getAttribute("person2") %></h3>
 		<h3>${ person2 }</h3>
+		<h3>${ person }</h3>
 		
 		
 	</div>
