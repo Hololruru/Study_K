@@ -30,12 +30,12 @@ public class BoardListServlet extends HttpServlet {
 		// List<BoardDto> boards = boardService.findAllBoard(); // 전체 데이터 조회
 		
 		String sPageNo = req.getParameter("pageNo");
-		int pageNo;
+		int pageNo;    
 		try {
 			pageNo = Integer.parseInt(sPageNo);
 		} catch(Exception ex) {
 			pageNo = 1;
-		}		
+		}
 		List<BoardDto> boards = boardService.findBoardByPage(pageNo, PAGE_SIZE); // 페이지번호, 개수	
 		int boardCount = boardService.findBoardCount(); // 전체 게시물 개수
 		
