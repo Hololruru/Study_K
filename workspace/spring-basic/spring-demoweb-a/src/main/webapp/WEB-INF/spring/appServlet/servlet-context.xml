@@ -22,11 +22,11 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!--  
 	<beans:bean id="accountService" class="com.demoweb.service.AccountServiceImpl">
 		<beans:property name="memberDao" ref="memberDao" />
 	</beans:bean>
 	
-	<!-- MemberDaoImpl memberDao = new MemberDaoImpl() -->
 	<beans:bean id="memberDao" class="com.demoweb.dao.MemberDaoImpl"></beans:bean>
 	
 	<beans:bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
@@ -34,6 +34,7 @@
 	</beans:bean>
 	
 	<beans:bean id="boardDao" class="com.demoweb.dao.BoardDaoImpl"></beans:bean>
+	-->
 	
 	<context:component-scan base-package="com.demoweb.controller" />
 	
