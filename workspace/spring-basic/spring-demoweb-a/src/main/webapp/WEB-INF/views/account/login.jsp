@@ -1,6 +1,7 @@
-﻿<%@ page language="java" 
-		 contentType="text/html; charset=utf-8" 
-		 pageEncoding="utf-8"%>
+﻿<%@page language="java" 
+		contentType="text/html; charset=utf-8" 
+		pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -48,8 +49,29 @@
 		    </div>
 		</div>  	
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		<c:if test="${ not empty loginfail }">
+		alert('로그인 실패 : 아이디와 패스워드를 확인하세요');
+		</c:if>
+	});
+	</script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

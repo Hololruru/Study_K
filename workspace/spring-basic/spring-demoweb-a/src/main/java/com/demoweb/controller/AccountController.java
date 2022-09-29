@@ -1,6 +1,10 @@
 package com.demoweb.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,17 +47,24 @@ public class AccountController {
 	}
 	
 	@PostMapping(path = { "/login.action" })
-	public View login(String memberId, String passwd) {
+	public String login(String memberId, String passwd, HttpSession session, Model model) {
 		// 1. 요청 데이터 읽기 ( 전달인자 사용해서 대체 )
 		
 		// 2. 요청 처리
 		AccountService accountService = new AccountService();
 		MemberDto member = accountService.findMemberByIdAndPasswd(memberId, passwd);
 		
+		if (member != null) {
+			session.setAttribute("loginuser", member);
+		} else {
+			model.addAttribute("loginfail", memberId);
+			return "account/login"; // /WEB-INF/views/ + account/login + .jsp
+		}
+		
 		// 3. View에서 사용하도록 데이터 전달
 		
 		// 4. View 또는 다른 Controller로 이동 
-		return new RedirectView("/home.action"); // return "redirect:/home.action";
+		return "redirect:/home.action"; // return "redirect:/home.action";
 	}
 
 }
