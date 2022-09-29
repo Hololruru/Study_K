@@ -29,9 +29,8 @@ public class BoardController {
 	
 	@GetMapping(path = { "/list.action" })
 	public String showBoardList(@RequestParam(defaultValue = "1") int pageNo, Model model) {
-		// 1. 요청 데이터 읽기
-		// 2. 데이터 처리 ( 데이터 조회 )
-		
+		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )
+		// 2. 데이터 처리 ( 데이터 조회 )		
 		List<BoardDto> boards = boardService.findBoardByPage(pageNo, PAGE_SIZE);
 		int boardCount = boardService.findBoardCount();
 		
