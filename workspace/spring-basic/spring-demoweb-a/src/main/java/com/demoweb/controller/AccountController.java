@@ -66,6 +66,16 @@ public class AccountController {
 		// 4. View 또는 다른 Controller로 이동 
 		return "redirect:/home.action"; // return "redirect:/home.action";
 	}
+	
+	@GetMapping(path = { "/logout.action" })
+	public View logout(HttpSession session) {
+		
+		session.removeAttribute("loginuser");
+		
+		return new RedirectView("login.action");
+	}
+	
+	
 
 }
 
