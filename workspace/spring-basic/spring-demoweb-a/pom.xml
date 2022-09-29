@@ -44,6 +44,15 @@
 		
 		<!-- end of servlet and jsp -->
 
+		<!-- database library -->
+		
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.30</version>
+		</dependency>
+		
+		<!-- end of database libraray -->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
