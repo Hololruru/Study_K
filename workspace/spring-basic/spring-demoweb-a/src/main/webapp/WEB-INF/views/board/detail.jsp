@@ -1,6 +1,3 @@
-<%@page import="com.demoweb.dto.BoardAttachDto"%>
-<%@page import="com.demoweb.dto.MemberDto"%>
-<%@page import="com.demoweb.dto.BoardDto"%>
 <%@page language="java" 
 		contentType="text/html; charset=utf-8"
     	pageEncoding="utf-8"%>
@@ -15,8 +12,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>글상세보기</title>
-	<link rel="Stylesheet" href="/demoweb/styles/default.css" />
-	<link rel="Stylesheet" href="/demoweb/styles/input.css" />
+	<link rel="Stylesheet" href="/spring-demoweb-a/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/spring-demoweb-a/resources/styles/input.css" />
 </head>
 <body>
 

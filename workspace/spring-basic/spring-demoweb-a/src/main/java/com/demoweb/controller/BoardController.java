@@ -1,6 +1,9 @@
 package com.demoweb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,5 +47,62 @@ public class BoardController {
 		// 4. View or Controller로 이동
 		return "board/list"; 	// /WEB-INF/views/ + board/list + .jsp
 	}
+	
+	@GetMapping(path = { "/detail.action" })
+	public String showBoardDetail(@RequestParam(defaultValue = "-1") int boardNo, 
+								  @RequestParam(defaultValue = "-1") int pageNo,
+								  HttpSession session, 
+								  Model model) {		
+		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )	
+		if (boardNo == -1 || pageNo == -1) { // 요청 데이터가 잘못된 경우
+			return "redirect:list.action";
+		}
+		
+		// 2. 데이터 처리
+		ArrayList<Integer> readList = (ArrayList<Integer>)session.getAttribute("read-list");
+		if (readList == null) { // 세션에 목록이 없으면 
+			readList = new ArrayList<>(); // 목록 새로 만들기
+			session.setAttribute("read-list", readList); // 세션에 목록 등록
+		}
+		
+		if (!readList.contains(boardNo)) { // 현재 글 번호가 읽은 글 목록에 포함되지 않은 경우
+			boardService.increaseBoardReadCount(boardNo); // 글 조회수 증가
+			readList.add(boardNo); // 읽은 글 목록에 현개 글 번호 추가			
+		}
+		
+		BoardDto board = boardService.findBoardByBoardNo(boardNo);
+		
+		if (board == null) { // 조회되지 않은 경우 (글 번호가 잘못되었거나 또는 삭제된 글인 경우)
+			return "redirect:list.action";
+		}
+		
+		// 3. View에서 읽을 수 있도록 데이터 전달
+		model.addAttribute("board", board);
+		model.addAttribute("pageNo", pageNo);		
+		
+		// 4. View 또는 Controller로 이동
+		return "board/detail";
+	}
+	
+	@GetMapping(path = { "/write.action" })
+	public String showWriteForm() {
+		
+		return "board/write";
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

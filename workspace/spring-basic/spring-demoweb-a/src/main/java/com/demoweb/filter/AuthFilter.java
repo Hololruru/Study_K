@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import com.demoweb.dto.MemberDto;
 
-// interceptor
 @WebFilter("*.action")
 public class AuthFilter extends HttpFilter implements Filter {
 
