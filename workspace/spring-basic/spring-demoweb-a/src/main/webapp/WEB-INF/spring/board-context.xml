@@ -5,10 +5,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
+		<property name="boardDao" ref="boardDao" />
+	</bean>
 	
-	<import resource="member-context.xml" />
-	<import resource="board-context.xml" />
+	<bean id="boardDao" class="com.demoweb.dao.BoardDaoImpl"></bean>
 
 
 </beans>
