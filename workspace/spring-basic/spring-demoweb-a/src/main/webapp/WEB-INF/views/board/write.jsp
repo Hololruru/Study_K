@@ -22,7 +22,7 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시글 정보</div>
-		        <form action="write.action" method="post">
+		        <form action="write.action" method="post" enctype="multipart/form-data">
 		        <table>
 		            <tr>
 		                <th>제목</th>
