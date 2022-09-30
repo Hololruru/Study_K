@@ -206,9 +206,28 @@ public class BoardController {
 		BoardDto board = boardService.findBoardByBoardNo(boardNo);
 		
 		model.addAttribute("board", board);
+		model.addAttribute("boardNo", boardNo);
+		model.addAttribute("pageNo", pageNo);
 		
 		return "board/edit"; //   /WEB-INF/views/ + board/edit + .jsp
 				
+	}
+	
+	@PostMapping(path = { "/edit.action" })
+	public String modifyBoard(@RequestParam(defaultValue = "-1") int pageNo,
+							  BoardDto board,
+							  Model model) {
+		
+		if (board.getBoardNo() == 0 || pageNo == -1) {
+			model.addAttribute("error_type", "edit");
+			model.addAttribute("message", "글 번호 또는 페이지 번호가 없습니다.");
+			return "board/error";
+		}
+		
+		boardService.modifyBoard(board);
+		
+		return "redirect:detail.action?boardNo=" + board.getBoardNo() + "&pageNo=" + pageNo;
+		
 	}
 
 }
