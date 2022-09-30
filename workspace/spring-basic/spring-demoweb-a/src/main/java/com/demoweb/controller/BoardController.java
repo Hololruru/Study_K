@@ -100,6 +100,19 @@ public class BoardController {
 		// 4. View 또는 Controller로 이동
 		return "redirect:list.action";
 	}
+	
+	@GetMapping(path = { "/delete.action" })
+	public String deleteBoard(@RequestParam(defaultValue = "-1")int boardNo, 
+							  @RequestParam(defaultValue = "-1")int pageNo) {
+		
+		if (boardNo == -1 || pageNo == -1) {
+			return "redirect:list.action";
+		}
+		
+		boardService.deleteBoard(boardNo);
+		
+		return "redirect:list.action?pageNo=" + pageNo;
+	}
 
 }
 
