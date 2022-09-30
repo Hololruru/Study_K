@@ -1,8 +1,10 @@
 package com.demoweb.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.demoweb.common.Util;
+import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardDto;
 import com.demoweb.service.BoardService;
 import com.demoweb.service.BoardServiceImpl;
@@ -91,11 +97,40 @@ public class BoardController {
 		
 		return "board/write";
 	}
+
+//	@PostMapping(path = { "/write.action" })
+//	public String writeBoard(BoardDto board, 
+//							 //@RequestParam("attach") MultipartFile[] attaches) {
+//							 @RequestParam("attach") MultipartFile attach) {
 	
 	@PostMapping(path = { "/write.action" })
-	public String writeBoard(BoardDto board) {
+	public String writeBoard(BoardDto board, MultipartHttpServletRequest req) {
 		// 1. 요청 데이터 읽기 (전달인자로 대체)
-		// 2. 데이터 처리
+		MultipartFile attach = req.getFile("attach");
+
+		if (attach != null) { //내용이 있는 경우
+			// 2. 데이터 처리
+			ServletContext application = req.getServletContext();
+			String path = application.getRealPath("/board-attachments");
+			String fileName = attach.getOriginalFilename(); //파일 이름 가져오기			
+			String uniqueFileName = Util.makeUniqueFileName(fileName);
+			
+			try {				
+				attach.transferTo(new File(path, uniqueFileName));//파일 저장
+				
+				// 첨부파일 정보를 객체에 저장
+				ArrayList<BoardAttachDto> attachments = new ArrayList<>(); // 첨부파일 정보를 저장하는 DTO 객체
+				BoardAttachDto attachment = new BoardAttachDto();
+				attachment.setUserFileName(fileName);
+				attachment.setSavedFileName(uniqueFileName);
+				attachments.add(attachment);
+				board.setAttachments(attachments);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		boardService.writeBoard(board);
 		// 3. View에서 읽을 수 있도록 데이터 저장
 		// 4. View 또는 Controller로 이동
