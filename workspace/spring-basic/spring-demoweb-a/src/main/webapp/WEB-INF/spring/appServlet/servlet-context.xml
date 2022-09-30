@@ -26,6 +26,11 @@
 	<view-controller path="/" view-name="home" />
 	<view-controller path="/home.action" view-name="home" />
 	
+	<!-- apache commons fileupload component와 spring framework를 연결해 주는 클래스 -->
+	<beans:bean id="multipartResolver"
+				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</beans:bean>
+	
 	<interceptors>
 		<interceptor>
 			<mapping path="/board/**"/>
