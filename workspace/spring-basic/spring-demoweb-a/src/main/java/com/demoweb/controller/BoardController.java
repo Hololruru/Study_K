@@ -2,6 +2,7 @@ package com.demoweb.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.View;
 
 import com.demoweb.common.Util;
 import com.demoweb.dto.BoardAttachDto;
@@ -25,6 +27,7 @@ import com.demoweb.dto.BoardDto;
 import com.demoweb.service.BoardService;
 import com.demoweb.service.BoardServiceImpl;
 import com.demoweb.ui.ThePager;
+import com.demoweb.view.DownloadView;
 
 @Controller
 @RequestMapping(path = { "/board" })
@@ -112,22 +115,24 @@ public class BoardController {
 			// 2. 데이터 처리
 			ServletContext application = req.getServletContext();
 			String path = application.getRealPath("/board-attachments");
-			String fileName = attach.getOriginalFilename(); //파일 이름 가져오기			
-			String uniqueFileName = Util.makeUniqueFileName(fileName);
-			
-			try {				
-				attach.transferTo(new File(path, uniqueFileName));//파일 저장
+			String fileName = attach.getOriginalFilename(); //파일 이름 가져오기
+			if (fileName != null && fileName.length() > 0) {
+				String uniqueFileName = Util.makeUniqueFileName(fileName);
 				
-				// 첨부파일 정보를 객체에 저장
-				ArrayList<BoardAttachDto> attachments = new ArrayList<>(); // 첨부파일 정보를 저장하는 DTO 객체
-				BoardAttachDto attachment = new BoardAttachDto();
-				attachment.setUserFileName(fileName);
-				attachment.setSavedFileName(uniqueFileName);
-				attachments.add(attachment);
-				board.setAttachments(attachments);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
+				try {				
+					attach.transferTo(new File(path, uniqueFileName));//파일 저장
+					
+					// 첨부파일 정보를 객체에 저장
+					ArrayList<BoardAttachDto> attachments = new ArrayList<>(); // 첨부파일 정보를 저장하는 DTO 객체
+					BoardAttachDto attachment = new BoardAttachDto();
+					attachment.setUserFileName(fileName);
+					attachment.setSavedFileName(uniqueFileName);
+					attachments.add(attachment);
+					board.setAttachments(attachments);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -167,6 +172,24 @@ public class BoardController {
 		boardService.deleteBoard(boardNo);
 		
 		return "redirect:/board/list.action?pageNo=" + pageNo;
+	}
+	
+	@GetMapping(path = { "/download.action" })
+	public View download(@RequestParam(defaultValue = "-1") int attachNo, Model model) {
+		
+		if (attachNo == -1) {
+			model.addAttribute("error_type", "download");
+			model.addAttribute("message", "첨부파일 번호가 없습니다.");
+		}
+		
+		BoardAttachDto attachment = boardService.findBoardAttachByAttachNo(attachNo);
+		
+		// View에게 전달할 데이터 저장
+		model.addAttribute("now", new Date());
+		
+		DownloadView view = new DownloadView();
+		
+		return view;
 	}
 
 }
