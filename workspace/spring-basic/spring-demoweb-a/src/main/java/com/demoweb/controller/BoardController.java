@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -101,17 +102,36 @@ public class BoardController {
 		return "redirect:list.action";
 	}
 	
-	@GetMapping(path = { "/delete.action" })
-	public String deleteBoard(@RequestParam(defaultValue = "-1")int boardNo, 
-							  @RequestParam(defaultValue = "-1")int pageNo) {
+//	@GetMapping(path = { "/delete.action" })
+//	public String deleteBoard(@RequestParam(defaultValue = "-1")int boardNo, 
+//							  @RequestParam(defaultValue = "-1")int pageNo,
+//							  Model model) {
+//		if (boardNo == -1 || pageNo == -1) {
+//			//return "redirect:list.action";
+//			model.addAttribute("error_type", "delete");
+//			model.addAttribute("message", "잘못된 요청 : 글 번호 또는 페이지 번호가 없습니다.");
+//			return "board/error"; //	/WEB-INF/views/ + board/error + .jsp
+//		}
+//		
+//		boardService.deleteBoard(boardNo);
+//		
+//		return "redirect:list.action?pageNo=" + pageNo;
+//	}
+	@GetMapping(path = { "/{boardNo}/delete.action" })
+	public String deleteBoard(@PathVariable("boardNo") int boardNo, 
+							  @RequestParam(defaultValue = "-1")int pageNo,
+							  Model model) {	
 		
-		if (boardNo == -1 || pageNo == -1) {
-			return "redirect:list.action";
+		if (pageNo == -1) {
+			//return "redirect:list.action";
+			model.addAttribute("error_type", "delete");
+			model.addAttribute("message", "잘못된 요청 : 글 번호 또는 페이지 번호가 없습니다.");
+			return "board/error"; //	/WEB-INF/views/ + board/error + .jsp
 		}
 		
 		boardService.deleteBoard(boardNo);
 		
-		return "redirect:list.action?pageNo=" + pageNo;
+		return "redirect:/board/list.action?pageNo=" + pageNo;
 	}
 
 }

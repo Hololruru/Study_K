@@ -89,7 +89,8 @@
 			const ok = confirm("${ board.boardNo }번 글을 삭제할까요?");
 			if (!ok) return;
 			
-			location.href = 'delete.action?boardNo=${board.boardNo}&pageNo=${pageNo}';
+			//location.href = 'delete.action?boardNo=${board.boardNo}&pageNo=${pageNo}';
+			location.href = '${board.boardNo}/delete.action?pageNo=${pageNo}';
 		});
 		
 		$('#update_button').on('click', function(event) {
