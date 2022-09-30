@@ -185,11 +185,30 @@ public class BoardController {
 		BoardAttachDto attachment = boardService.findBoardAttachByAttachNo(attachNo);
 		
 		// View에게 전달할 데이터 저장
-		model.addAttribute("now", new Date());
+		model.addAttribute("attachment", attachment);
 		
 		DownloadView view = new DownloadView();
 		
 		return view;
+	}
+	
+	@GetMapping(path = { "/edit.action" })
+	public String showBoardEditForm(@RequestParam(defaultValue = "-1") int boardNo, 
+									@RequestParam(defaultValue = "-1") int pageNo,
+									Model model) {
+		
+		if (boardNo == -1 || pageNo == -1) {
+			model.addAttribute("error_type", "edit");
+			model.addAttribute("message", "글 번호 또는 페이지 번호가 없습니다.");
+			return "board/error";
+		}
+		
+		BoardDto board = boardService.findBoardByBoardNo(boardNo);
+		
+		model.addAttribute("board", board);
+		
+		return "board/edit"; //   /WEB-INF/views/ + board/edit + .jsp
+				
 	}
 
 }
