@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -85,9 +86,19 @@ public class BoardController {
 	}
 	
 	@GetMapping(path = { "/write.action" })
-	public String showWriteForm() {
+	public String showWriteBoardForm() {
 		
 		return "board/write";
+	}
+	
+	@PostMapping(path = { "/write.action" })
+	public String writeBoard(BoardDto board) {
+		// 1. 요청 데이터 읽기 (전달인자로 대체)
+		// 2. 데이터 처리
+		boardService.writeBoard(board);
+		// 3. View에서 읽을 수 있도록 데이터 저장
+		// 4. View 또는 Controller로 이동
+		return "redirect:list.action";
 	}
 
 }
