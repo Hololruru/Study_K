@@ -17,5 +17,28 @@
 	SELECT COUNT(*) FROM board
 	</select>
 	
+	<select id="selectBoardByBoardNo" parameterType="int" resultType="com.demoweb.dto.BoardDto">
+	SELECT boardno, title, writer, content, readcount, regdate
+	FROM board
+	WHERE boardno = #{boardNo} AND deleted = FALSE
+	</select>
+	
+	<select id="selectBoardAttachByBoardNo" parameterType="int" resultType="com.demoweb.dto.BoardAttachDto">
+	SELECT attachno, boardno, userfilename, savedfilename, downloadcount
+	FROM boardattach
+	WHERE boardno = #{ boardNo }
+	</select>
+	
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
