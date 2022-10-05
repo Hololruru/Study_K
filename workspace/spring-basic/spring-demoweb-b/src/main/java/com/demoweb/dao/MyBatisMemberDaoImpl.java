@@ -24,6 +24,7 @@ public class MyBatisMemberDaoImpl implements MemberDao {
 	@Override
 	public void insertMember(MemberDto member) {
 		
+		// insert method : mapper.xml 파일의 <insert 항목 호출
 		sqlSession.insert("com.demoweb.mapper.MemberMapper.insertMember", member);
 			
 	}

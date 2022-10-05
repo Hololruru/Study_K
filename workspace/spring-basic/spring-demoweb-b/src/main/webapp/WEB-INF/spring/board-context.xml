@@ -9,8 +9,12 @@
 		<property name="boardDao" ref="boardDao" />
 	</bean>
 	
+	<!-- 
 	<bean id="boardDao" class="com.demoweb.dao.BoardDaoImpl"></bean>
-
+ 	-->
+ 	<bean id="boardDao" class="com.demoweb.dao.MyBatisBoardDaoImpl">
+ 		<property name="sqlSession" ref="sqlSession" />
+ 	</bean>
 
 </beans>
 

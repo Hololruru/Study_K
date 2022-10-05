@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- namespace : 패키지이름.클래스이름 ( 저장된 위치와 일치하도록 작성 ) -->
+<mapper namespace="com.demoweb.mapper.BoardMapper">
+
+	<select id="selectBoardByPage" parameterType="hashmap" resultType="com.demoweb.dto.BoardDto">
+		SELECT boardno, title, writer, readcount, regdate, deleted
+		FROM board
+		ORDER BY boardno DESC
+		LIMIT #{from},#{count}
+	</select>
+	
+
+</mapper>
