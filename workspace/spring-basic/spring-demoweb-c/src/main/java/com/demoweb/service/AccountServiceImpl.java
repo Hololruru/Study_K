@@ -4,13 +4,15 @@ import com.demoweb.common.Util;
 import com.demoweb.dao.MemberDao;
 import com.demoweb.dao.MemberDaoImpl;
 import com.demoweb.dto.MemberDto;
+import com.demoweb.mapper.MemberMapper;
 
 import lombok.Setter;
 
 public class AccountServiceImpl implements AccountService {
 	
-	@Setter // void setMemberDao(MemberDao memberDao) { ... }
-	private MemberDao memberDao; // = new MemberDaoImpl();
+	@Setter 
+	//private MemberDao memberDao; // = new MemberDaoImpl();
+	private MemberMapper memberMapper; // mybatis-spring이 제공하는 mybatis 사용 객체
 	
 	// 1. 회원 가입 : 회원 데이터를 받아서 필요한 처리 ( 데이터베이스 저장은 Dao에 전달 )
 	@Override
@@ -18,7 +20,8 @@ public class AccountServiceImpl implements AccountService {
 		
 		String passwd = Util.getHashedString(member.getPasswd(), "SHA-256");
 		member.setPasswd(passwd); // 암호화된 패스워드를 멤버에 저장
-		memberDao.insertMember(member);
+		//memberDao.insertMember(member);
+		memberMapper.insertMember(member); // MemberMapper.xml의 <insert id="insertMember" 사용
 		
 	}
 	
@@ -27,7 +30,8 @@ public class AccountServiceImpl implements AccountService {
 	public MemberDto findMemberByIdAndPasswd(String memberId, String passwd) {
 		
 		passwd = Util.getHashedString(passwd, "SHA-256");
-		MemberDto memberDto = memberDao.selectMemberByIdAndPasswd(memberId, passwd);
+		// MemberDto memberDto = memberDao.selectMemberByIdAndPasswd(memberId, passwd);
+		MemberDto memberDto = memberMapper.selectMemberByIdAndPasswd(memberId, passwd);
 		return memberDto;
 		
 	}
