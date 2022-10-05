@@ -18,6 +18,8 @@ import lombok.Setter;
 
 public class MyBatisBoardDaoImpl implements BoardDao {
 	
+	private final String namespace = "com.demoweb.mapper.BoardMapper.";
+	
 	@Setter
 	private SqlSessionTemplate sqlSession;
 	
@@ -136,7 +138,7 @@ public class MyBatisBoardDaoImpl implements BoardDao {
 		params.put("count", count);
 		
 		List<BoardDto> boards = 
-				sqlSession.selectList("com.demoweb.mapper.BoardMapper.selectBoardByPage", params);
+				sqlSession.selectList(namespace + "selectBoardByPage", params);
 		
 		return boards;
 	}
