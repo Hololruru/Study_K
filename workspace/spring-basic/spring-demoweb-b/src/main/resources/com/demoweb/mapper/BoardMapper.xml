@@ -74,7 +74,8 @@
 	</select>
 	-->
 	
-	<!-- 상세보기 관련 매핑 3 : 두 개 이상의 조회를 결합해서 실행  -->
+	<!-- 상세보기 관련 매핑 3 : 두 개 이상의 조회를 결합해서 실행 ( ResultMap 호출 )  -->
+	<!-- 
 	<resultMap id="boardResultMap" type="com.demoweb.dto.BoardDto">
 		<id column="boardno" property="boardNo" />
 		<result column="title" property="title" />
@@ -100,6 +101,28 @@
 		<result column="downloadcount" property="downloadCount" />
 	</resultMap>
 	<select id="selectBoardAttachByBoardNo" parameterType="int" resultMap="boardAttachResultMap">
+	SELECT attachno, boardno, userfilename, savedfilename, downloadcount
+	FROM boardattach
+	WHERE boardno = #{ boardNo }
+	</select>
+	-->
+	
+	<!-- 상세보기 관련 매핑 4 : 두 개 이상의 조회를 결합해서 실행 ( 마이바티스 메서드 호출 )  -->
+	<resultMap id="boardResultMap" type="com.demoweb.dto.BoardDto">
+		<id column="boardno" property="boardNo" />
+		<result column="title" property="title" />
+		<result column="writer" property="writer" />
+		<result column="content" property="content" />
+		<result column="readcount" property="readCount" />
+		<result column="regdate" property="regDate" />
+		<collection property="attachments" select="selectBoardAttachByBoardNo" column="boardno" />
+	</resultMap>
+	<select id="selectBoardByBoardNo" parameterType="int" resultMap="boardResultMap">
+	SELECT boardno, title, writer, content, readcount, regdate
+	FROM board b	
+	WHERE boardno = #{boardNo} AND deleted = FALSE
+	</select>	
+	<select id="selectBoardAttachByBoardNo" parameterType="int" resultType="com.demoweb.dto.BoardAttachDto">
 	SELECT attachno, boardno, userfilename, savedfilename, downloadcount
 	FROM boardattach
 	WHERE boardno = #{ boardNo }
