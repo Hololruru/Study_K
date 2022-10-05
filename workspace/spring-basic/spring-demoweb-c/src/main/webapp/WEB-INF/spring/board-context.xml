@@ -19,10 +19,13 @@
  	
  	<!-- BoardMapper 인터페이스를 구현하는 클래스 자동 생성 + IoC 컨테이너에 등록 -->
 	<!-- 이 객체는 Dao의 역할을 수행합니다. -->
+	<!-- 아래 bean 설정은 Mapper interface의 @Mapper annotation으로 대체 가능 -->
+	<!--  
 	<bean id="boardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 		<property name="mapperInterface" value="com.demoweb.mapper.BoardMapper" />
 	</bean>
+	-->
 
 </beans>
 
