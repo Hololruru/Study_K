@@ -3,6 +3,7 @@
     	pageEncoding="utf-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -33,7 +34,7 @@
 					<th style="width:300px">제목</th>
 					<th style="width:125px">작성자</th>
 					<th style="width:50px">조회수</th>
-					<th style="width:125px">작성일</th>					
+					<th style="width:200px">작성일</th>					
 				</tr>
 				<c:forEach var="board" items="${ boards }" >				
 				<tr style="height:30px">
@@ -53,7 +54,7 @@
 					</td>
 					<td>${ board.writer }</td>
 					<td>${ board.readCount }</td>
-					<td>${ board.regDate }</td>
+					<td><fmt:formatDate value="${ board.regDate }" pattern="yyyy-MM-dd a hh:mm" /></td>
 				</tr>
 				</c:forEach>
 								

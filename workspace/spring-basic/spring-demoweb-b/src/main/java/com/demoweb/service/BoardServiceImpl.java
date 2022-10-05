@@ -57,10 +57,11 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDto findBoardByBoardNo(int boardNo) {
 		
 		BoardDto board = boardDao.selectBoardByBoardNo(boardNo);
-		if (board != null) {
-			List<BoardAttachDto> attachments = boardDao.selectBoardAttachByBoardNo(boardNo);
-			board.setAttachments(attachments);
-		}
+		// MyBatis에서 관계매핑을 사용해서 Board와 BoardAttach를 한 번에 조회하는 경우 아래 구현은 불필요
+//		if (board != null) {
+//			List<BoardAttachDto> attachments = boardDao.selectBoardAttachByBoardNo(boardNo);
+//			board.setAttachments(attachments);
+//		}
 		
 		return board;
 		

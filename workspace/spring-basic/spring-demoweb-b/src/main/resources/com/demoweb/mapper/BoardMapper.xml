@@ -6,24 +6,100 @@
 <!-- namespace : 패키지이름.클래스이름 ( 저장된 위치와 일치하도록 작성 ) -->
 <mapper namespace="com.demoweb.mapper.BoardMapper">
 
+	<insert id="insertBoard" parameterType="com.demoweb.dto.BoardDto"
+			useGeneratedKeys="true" keyColumn="boardno" keyProperty="boardNo">
+	INSERT INTO board (title, writer, content)
+	VALUES (#{ title }, #{ writer }, #{ content })
+	</insert>
+	
+	<insert id="insertBoard2" parameterType="com.demoweb.dto.BoardDto">
+	<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
+	SELECT LAST_INSERT_ID()
+	</selectKey>
+	INSERT INTO board (title, writer, content)
+	VALUES (#{ title }, #{ writer }, #{ content })
+	</insert>
+
 	<select id="selectBoardByPage" parameterType="hashmap" resultType="com.demoweb.dto.BoardDto">
 	SELECT boardno, title, writer, readcount, regdate, deleted
 	FROM board
 	ORDER BY boardno DESC
-	LIMIT #{from},#{count}
+	LIMIT #{ from },#{ count }
 	</select>
 	
 	<select id="selectBoardCount" resultType="int">
 	SELECT COUNT(*) FROM board
 	</select>
 	
+	<!-- 상세보기 관련 매핑 1 : SQL과 객체 직접 매핑 ( 이름, 자료형 등이 반드시 일치 ) -->
+	<!-- 
 	<select id="selectBoardByBoardNo" parameterType="int" resultType="com.demoweb.dto.BoardDto">
 	SELECT boardno, title, writer, content, readcount, regdate
 	FROM board
 	WHERE boardno = #{boardNo} AND deleted = FALSE
-	</select>
-	
+	</select>	
 	<select id="selectBoardAttachByBoardNo" parameterType="int" resultType="com.demoweb.dto.BoardAttachDto">
+	SELECT attachno, boardno, userfilename, savedfilename, downloadcount
+	FROM boardattach
+	WHERE boardno = #{ boardNo }
+	</select>
+	-->
+	
+	<!-- 상세보기 관련 매핑 2 : SQL과 객체 ResultMap을 통해 매핑 ( 이름, 자료형 등이 다른 경우 변환 설정 ) -->
+	<!-- 
+	<resultMap id="boardResultMap" type="com.demoweb.dto.BoardDto">
+		<id column="boardno" property="boardNo" />
+		<result column="title" property="title" />
+		<result column="writer" property="writer" />
+		<result column="content" property="content" />
+		<result column="readcount" property="readCount" />
+		<result column="regdate" property="regDate" />
+	</resultMap>
+	<select id="selectBoardByBoardNo" parameterType="int" resultMap="boardResultMap">
+	SELECT boardno, title, writer, content, readcount, regdate
+	FROM board
+	WHERE boardno = #{boardNo} AND deleted = FALSE
+	</select>
+	<resultMap id="boardAttachResultMap" type="com.demoweb.dto.BoardAttachDto">
+		<id column="attachno" property="attachNo" />
+		<result column="boardno" property="boardNo" />
+		<result column="userfilename" property="userFileName" />
+		<result column="savedfilename" property="savedFileName" />
+		<result column="downloadcount" property="downloadCount" />
+	</resultMap>
+	<select id="selectBoardAttachByBoardNo" parameterType="int" resultMap="boardAttachResultMap">
+	SELECT attachno, boardno, userfilename, savedfilename, downloadcount
+	FROM boardattach
+	WHERE boardno = #{ boardNo }
+	</select>
+	-->
+	
+	<!-- 상세보기 관련 매핑 3 : 두 개 이상의 조회를 결합해서 실행  -->
+	<resultMap id="boardResultMap" type="com.demoweb.dto.BoardDto">
+		<id column="boardno" property="boardNo" />
+		<result column="title" property="title" />
+		<result column="writer" property="writer" />
+		<result column="content" property="content" />
+		<result column="readcount" property="readCount" />
+		<result column="regdate" property="regDate" />
+		<collection property="attachments" resultMap="boardAttachResultMap" column="attachno" />
+	</resultMap>
+	<select id="selectBoardByBoardNo" parameterType="int" resultMap="boardResultMap">
+	SELECT b.boardno, b.title, b.writer, b.content, b.readcount, b.regdate,
+		   ba.attachno, ba.userfilename, ba.savedfilename, ba.downloadcount
+	FROM board b
+	LEFT OUTER JOIN boardattach ba
+	ON b.boardno = ba.boardno
+	WHERE b.boardno = #{boardNo} AND b.deleted = FALSE
+	</select>
+	<resultMap id="boardAttachResultMap" type="com.demoweb.dto.BoardAttachDto">
+		<id column="attachno" property="attachNo" />
+		<result column="boardno" property="boardNo" />
+		<result column="userfilename" property="userFileName" />
+		<result column="savedfilename" property="savedFileName" />
+		<result column="downloadcount" property="downloadCount" />
+	</resultMap>
+	<select id="selectBoardAttachByBoardNo" parameterType="int" resultMap="boardAttachResultMap">
 	SELECT attachno, boardno, userfilename, savedfilename, downloadcount
 	FROM boardattach
 	WHERE boardno = #{ boardNo }
