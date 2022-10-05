@@ -7,10 +7,14 @@
 <mapper namespace="com.demoweb.mapper.BoardMapper">
 
 	<select id="selectBoardByPage" parameterType="hashmap" resultType="com.demoweb.dto.BoardDto">
-		SELECT boardno, title, writer, readcount, regdate, deleted
-		FROM board
-		ORDER BY boardno DESC
-		LIMIT #{from},#{count}
+	SELECT boardno, title, writer, readcount, regdate, deleted
+	FROM board
+	ORDER BY boardno DESC
+	LIMIT #{from},#{count}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+	SELECT COUNT(*) FROM board
 	</select>
 	
 
