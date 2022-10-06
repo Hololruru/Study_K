@@ -6,6 +6,7 @@ import com.demoweb.dao.BoardDao;
 import com.demoweb.dao.BoardDaoImpl;
 import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardDto;
+import com.demoweb.mapper.BoardMapper;
 
 import lombok.Setter;
 
@@ -13,6 +14,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Setter
 	private BoardDao boardDao;
+	
+	@Setter
+	private BoardMapper boardMapper;
 	
 	// 사용자가 입력한 게시글 데이터를 받아서 글쓰기 처리
 	@Override
@@ -47,7 +51,7 @@ public class BoardServiceImpl implements BoardService {
 		int from = (pageNo - 1) * pageSize;
 		int count = pageSize;
 		
-		List<BoardDto> boards = boardDao.selectBoardByPage(from, count);
+		List<BoardDto> boards = boardMapper.selectBoardByPage(from, count);
 		return boards;
 		
 	}
