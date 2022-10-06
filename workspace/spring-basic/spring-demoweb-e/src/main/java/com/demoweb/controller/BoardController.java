@@ -23,6 +23,7 @@ import org.springframework.web.servlet.View;
 
 import com.demoweb.common.Util;
 import com.demoweb.dto.BoardAttachDto;
+import com.demoweb.dto.BoardCommentDto;
 import com.demoweb.dto.BoardDto;
 import com.demoweb.service.BoardService;
 import com.demoweb.service.BoardServiceImpl;
@@ -228,6 +229,20 @@ public class BoardController {
 		
 		return "redirect:detail.action?boardNo=" + board.getBoardNo() + "&pageNo=" + pageNo;
 		
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////
+	
+	@PostMapping(path = { "/write-comment.action" })
+	public String writeComment(BoardCommentDto commentDto, int pageNo) {
+		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )		
+		
+		// 2. 요청 처리
+		
+		// 3. View에서 읽을 수 있도록 데이터 저장
+		
+		// 4. View 또는 다른 컨터롤러로 이동
+		return String.format("redirect:detail.action?boardNo=%d&pageNo=%d", commentDto.getBoardNo(), pageNo);
 	}
 
 }

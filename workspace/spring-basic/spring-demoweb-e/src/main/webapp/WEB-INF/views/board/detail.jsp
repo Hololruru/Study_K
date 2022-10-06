@@ -73,8 +73,30 @@
 		        	<input type="button" id="tolist_button" value="목록보기" style="height:25px" />
 		        </div>
 		    </div>
-		</div>   	
-	
+		</div>
+		
+		<br><br>
+		
+		<!-- write comment area -->
+		<form id="commentform" action="write-comment.action" method="post">
+			<input type="hidden" name="boardNo" value="${ board.boardNo }" />
+			<input type="hidden" name="pageNo" value="${ pageNo }" />
+			<input type="hidden" name="writer" value="${ loginuser.memberId }" />
+			<table style="width:550px;border:solid 1px;margin:0 auto">
+	            <tr>
+	                <td style="width:500px">	                	
+	                    <textarea id="comment_content" name="content" style="width:500px" rows="3"></textarea>	                    
+	                </td>
+	                <td style="width:50px;vertical-align:middle">
+	                	<a id="writecomment" href="javascript:" style="text-decoration:none">
+	                		댓글<br />등록
+	                	</a>
+	                </td>
+	            </tr>                    
+	        </table>
+        </form>
+		<!-- write comment area -->
+		
 	</div>
 	</div>
 	
@@ -96,6 +118,14 @@
 		$('#update_button').on('click', function(event) {
 			location.href = 'edit.action?boardNo=${board.boardNo}&pageNo=${pageNo}';
 		});
+		
+		///////////////////////////////////////
+		
+		$('#writecomment').on('click', function(event) {
+			// alert('서버로 댓글 쓰기 요청');
+			$('#commentform').submit(); // form 객체의 submit 메서드는 form을 서버로 전송하는 명령
+		});
+		
 	});
 	</script>
 

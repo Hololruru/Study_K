@@ -21,5 +21,8 @@ public class BoardDto {
 	// Board 테이블과 BoartAttach 테이블 사이의 1:1 관계를 구현한 필드 (변수)
 	// private BoardAttachDto attachment;
 	
+	// Board 테이블과 BoartComment 테이블 사이의 1:Many 관계를 구현한 필드 (변수)
+	private List<BoardCommentDto> comments;
+	
 	
 }
