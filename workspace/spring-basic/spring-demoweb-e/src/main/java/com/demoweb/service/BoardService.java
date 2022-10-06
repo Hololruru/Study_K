@@ -26,6 +26,10 @@ public interface BoardService {
 
 	void modifyBoard(BoardDto board);
 	
+	////////////////////////////////////////////
+	
 	void writeComment(BoardCommentDto comment);
+	
+	void updateGroupNo(int commentNo, int groupNo);
 
 }

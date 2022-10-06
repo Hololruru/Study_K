@@ -124,6 +124,13 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public void updateGroupNo(int commentNo, int groupNo) {
+		
+		commentMapper.updateGroupNo(commentNo, groupNo);
+		
+	}
+
 
 }
 

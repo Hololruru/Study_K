@@ -238,6 +238,9 @@ public class BoardController {
 		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )		
 		
 		// 2. 요청 처리
+		boardService.writeComment(commentDto); // commentDto에 자동 증가된 commentNo가 저장됩니다.
+		// 최상위 댓글의 글번호를 그룹번호로 저장
+		boardService.updateGroupNo(commentDto.getCommentNo(), commentDto.getCommentNo());
 		
 		// 3. View에서 읽을 수 있도록 데이터 저장
 		

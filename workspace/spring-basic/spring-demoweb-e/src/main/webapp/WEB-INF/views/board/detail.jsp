@@ -95,7 +95,50 @@
 	            </tr>                    
 	        </table>
         </form>
-		<!-- write comment area -->
+		<!-- end of write comment area -->
+		
+		<!-- comment list area -->
+		<br>
+	    <hr style="width:550px;margin:0 auto">
+	    <br>
+	    <table id="comment-list" style="width:550px;border:solid 1px;margin:0 auto">
+				
+			<tr>
+				<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
+					<div>
+						작성자 &nbsp;&nbsp; 작성일자
+					    <br /><br />
+					    <span>댓글내용</span>
+						<br /><br />
+						<div style=''>
+					    	<a class="editcomment" href="javascript:">편집</a>
+							&nbsp;
+							<a class="deletecomment" href="javascript:">삭제</a>
+						</div>
+						<a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a>
+					</div>	                
+					<div style="display: none">
+						작성자 &nbsp;&nbsp; [작성일자]
+						<br /><br />
+						<form>
+						<input type="hidden" name="commentNo" value="" />
+						<textarea name="content" style="width: 550px" rows="3" 
+							maxlength="200">댓글내용</textarea>
+						</form>
+						<br />
+						<div>
+							<a class="updatecomment" href="javascript:">수정</a> 
+							&nbsp; 
+							<a class="cancel" href="javascript:">취소</a>
+						</div>
+					</div>
+			
+				</td>
+			</tr>        	
+		</table>
+		<!-- end of comment list area -->
+		
+		<br><br><br><br><br>
 		
 	</div>
 	</div>
