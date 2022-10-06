@@ -42,12 +42,9 @@ public interface BoardMapper {
 			"WHERE boardno = #{ boardNo } ")
 	List<BoardAttachDto> selectBoardAttachByBoardNo(int boardNo);
 	
-	@Select("SELECT b.boardno, b.title, b.writer, b.content, b.readcount, b.regdate, " +
-			"		ba.attachno, ba.userfilename, ba.savedfilename, ba.downloadcount " +
-			"FROM board b " +
-			"INNER JOIN boardattach ba " +
-			"ON b.boardno = ba.boardno " +
-			"WHERE b.boardno = #{ boardNo } AND deleted = FALSE")
+	@Select("SELECT boardno, title, writer, content, readcount, regdate " +
+			"FROM board " +
+			"WHERE boardno = #{ boardNo } AND deleted = FALSE")
 	@Results(id = "boardResultMap",
 			 value = {
 					 @Result(column = "boardno", property = "boardNo", id = true),
@@ -56,25 +53,10 @@ public interface BoardMapper {
 					 @Result(column = "content", property = "content"),
 					 @Result(column = "readcount", property = "readCount"),
 					 @Result(column = "regdate", property = "regDate"),
-//					 @Result(column = "boardno", property = "attachments", 
-//					 		 many = @Many(select = "selectBoardAttachByBoardNo"))
 					 @Result(column = "boardno", property = "attachments", 
-			 		 		 many = @Many(resultMap = "boardAttachResultMap"))
+					 		 many = @Many(select = "selectBoardAttachByBoardNo"))
 			 })
 	BoardDto selectBoardByBoardNo2(int boardNo);
-	
-	@Select("SELECT attachno, boardno, userfilename, savedfilename, downloadcount " +
-			"FROM boardattach " +
-			"WHERE boardno = #{ boardNo } ")
-	@Results(id = "boardAttachResultMap",
-			 value = {
-					 @Result(column = "attachno", property = "attachNo", id = true),
-					 @Result(column = "boardno", property = "boardNo"),
-					 @Result(column = "userfilename", property = "userFileName"),
-					 @Result(column = "savedfilename", property = "savedFileName"),
-					 @Result(column = "downloadcount", property = "downloadCount")
-			 })
-	List<BoardAttachDto> selectBoardAttachByBoardNo2(int boardNo);
 
 }
 
