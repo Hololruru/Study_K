@@ -3,6 +3,7 @@ package com.demoweb.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
@@ -51,7 +52,9 @@ public interface BoardMapper {
 					 @Result(column = "writer", property = "writer"),
 					 @Result(column = "content", property = "content"),
 					 @Result(column = "readcount", property = "readCount"),
-					 @Result(column = "regdate", property = "regDate")
+					 @Result(column = "regdate", property = "regDate"),
+					 @Result(column = "boardno", property = "attachments", 
+					 		 many = @Many(select = "selectBoardAttachByBoardNo"))
 			 })
 	BoardDto selectBoardByBoardNo2(int boardNo);
 
