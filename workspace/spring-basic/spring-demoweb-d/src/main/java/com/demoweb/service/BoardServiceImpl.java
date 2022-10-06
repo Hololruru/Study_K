@@ -22,10 +22,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void writeBoard(BoardDto board) {
 		
-		// BoardDao boardDao = new BoardDao();
-		// board.getBoardNo() --> 0
-		boardDao.insertBoard(board); // insert 하면서 boardNo 자동 생성 ( 글 번호 가져오기 필요 )
-		// board.getBoardNo() --> 새로 만들어진 글번호
+		boardMapper.insertBoard(board); // insert 하면서 boardNo 자동 생성 ( 글 번호 가져오기 필요 )
+
 		if (board.getAttachments() != null) {
 			for (BoardAttachDto attachment : board.getAttachments()) {
 				attachment.setBoardNo(board.getBoardNo()); // 새로 만들어진 글번호를 Attach 객체에 저장
@@ -60,7 +58,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardDto findBoardByBoardNo(int boardNo) {
 		
-		BoardDto board = boardMapper.selectBoardByBoardNo(boardNo);
+		// BoardDto board = boardMapper.selectBoardByBoardNo(boardNo);
+		BoardDto board = boardMapper.selectBoardByBoardNo2(boardNo);
 		if (board != null) {
 			List<BoardAttachDto> attachments = boardMapper.selectBoardAttachByBoardNo(boardNo);
 			board.setAttachments(attachments);
