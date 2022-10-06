@@ -45,7 +45,7 @@ public interface BoardMapper {
 	@Select("SELECT b.boardno, b.title, b.writer, b.content, b.readcount, b.regdate, " +
 			"		ba.attachno, ba.userfilename, ba.savedfilename, ba.downloadcount " +
 			"FROM board b " +
-			"INNER JOIN boardattach ba " +
+			"LEFT OUTER JOIN boardattach ba " +
 			"ON b.boardno = ba.boardno " +
 			"WHERE b.boardno = #{ boardNo } AND deleted = FALSE")
 	@Results(id = "boardResultMap",

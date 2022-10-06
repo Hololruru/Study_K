@@ -5,7 +5,9 @@ import java.util.List;
 import com.demoweb.dao.BoardDao;
 import com.demoweb.dao.BoardDaoImpl;
 import com.demoweb.dto.BoardAttachDto;
+import com.demoweb.dto.BoardCommentDto;
 import com.demoweb.dto.BoardDto;
+import com.demoweb.mapper.BoardCommentMapper;
 import com.demoweb.mapper.BoardMapper;
 
 import lombok.Setter;
@@ -17,6 +19,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Setter
 	private BoardMapper boardMapper;
+	
+	@Setter
+	private BoardCommentMapper commentMapper;
 	
 	// 사용자가 입력한 게시글 데이터를 받아서 글쓰기 처리
 	@Override
@@ -109,6 +114,13 @@ public class BoardServiceImpl implements BoardService {
 	public void modifyBoard(BoardDto board) {
 		
 		boardDao.updateBoard(board);
+		
+	}
+
+	@Override
+	public void writeComment(BoardCommentDto comment) {
+		
+		commentMapper.insertComment(comment);
 		
 	}
 

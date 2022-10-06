@@ -24,5 +24,6 @@ public interface BoardService {
 	int findBoardCount();
 
 	void modifyBoard(BoardDto board);
+	
 
 }
