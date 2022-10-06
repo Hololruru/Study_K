@@ -60,9 +60,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardDto findBoardByBoardNo(int boardNo) {
 		
-		BoardDto board = boardDao.selectBoardByBoardNo(boardNo);
+		BoardDto board = boardMapper.selectBoardByBoardNo(boardNo);
 		if (board != null) {
-			List<BoardAttachDto> attachments = boardDao.selectBoardAttachByBoardNo(boardNo);
+			List<BoardAttachDto> attachments = boardMapper.selectBoardAttachByBoardNo(boardNo);
 			board.setAttachments(attachments);
 		}
 		
