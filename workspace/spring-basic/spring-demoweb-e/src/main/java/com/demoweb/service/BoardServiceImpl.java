@@ -140,6 +140,14 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public List<BoardCommentDto> findBoardCommentByBoardNo(int boardNo) {
+		
+		List<BoardCommentDto> comments = commentMapper.selectCommentByBoardNo(boardNo);
+		return comments;
+		
+	}
+
 
 }
 

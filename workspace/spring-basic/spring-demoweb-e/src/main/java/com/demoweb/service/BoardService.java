@@ -34,4 +34,6 @@ public interface BoardService {
 
 	void deleteComment(int commentNo);
 
+	List<BoardCommentDto> findBoardCommentByBoardNo(int boardNo);
+
 }

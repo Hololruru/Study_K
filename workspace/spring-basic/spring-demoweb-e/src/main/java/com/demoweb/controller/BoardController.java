@@ -234,6 +234,17 @@ public class BoardController {
 	
 	/////////////////////////////////////////////////////////////////////////////
 	
+	@GetMapping(path = { "/comment-list.action" })
+	public String showCommentList(int boardNo, Model model) {
+		
+		List<BoardCommentDto> comments = boardService.findBoardCommentByBoardNo(boardNo);
+		
+		// View에서 읽을 수 있도록 데이터 저장
+		model.addAttribute("comments", comments);
+		
+		return "board/comment-list"; //  /WEB-INF/views/ + board/comment-list + .jsp
+	}
+	
 	@PostMapping(path = { "/write-comment.action" })
 	public String writeComment(BoardCommentDto commentDto, int pageNo) {
 		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )		

@@ -196,7 +196,8 @@
 			$('#comment-edit-area-' + commentNo).hide();
 		});
 		
-		$('#comment-list .delete-comment').on('click', function(event) {
+		// $('#comment-list .delete-comment').on('click', function(event) {
+		$('#comment-list').on('click', '.delete-comment', function(event) {
 			event.preventDefault();
 			
 			var commentNo = $(this).data('comment-no'); // .data('comment-no') --> data-comment-no="value"를 조회
@@ -215,12 +216,16 @@
 				"data" : 'commentNo=' + commentNo,
 				"success": function(data, status, xhr) {
 					if (data == "success") {
+						// 1. 해당 댓글만 수정
+						/*
 						const html = `<br><br>
-						<span style='color:gray'>삭제된 글입니다.</span>
-						<br><br>`
-						
-						$('#comment-view-area-' + commentNo).html(html);
-						// alert('삭제했습니다.');
+							<span style='color:gray'>삭제된 글입니다.</span>
+							<br><br>`						
+						$('#comment-view-area-' + commentNo).html(html); 
+						*/
+						// 2. 댓글 목록 전체 갱신
+						//    jQuery의 load 함수 : 지정된 html 요소의 내용을 응답받은 부분 HTML로 (비동기) 갱신
+						$('#comment-list').load("comment-list.action?boardNo=${ board.boardNo }");
 					} else {
 						alert('삭제 실패 2');
 					}
