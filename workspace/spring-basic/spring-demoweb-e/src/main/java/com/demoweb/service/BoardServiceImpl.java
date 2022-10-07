@@ -73,6 +73,8 @@ public class BoardServiceImpl implements BoardService {
 		// Board와 BoardAttach를 한 번에 조회
 		BoardDto board = boardMapper.selectBoardByBoardNo2(boardNo);
 		
+		// Comment 조회
+		
 		return board;
 		
 	}

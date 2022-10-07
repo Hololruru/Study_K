@@ -84,6 +84,8 @@ public class BoardController {
 		
 		BoardDto board = boardService.findBoardByBoardNo(boardNo);
 		
+		System.out.println(board.getComments().size());
+		
 		if (board == null) { // 조회되지 않은 경우 (글 번호가 잘못되었거나 또는 삭제된 글인 경우)
 			return "redirect:list.action";
 		}

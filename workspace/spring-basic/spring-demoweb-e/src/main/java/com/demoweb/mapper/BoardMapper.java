@@ -54,7 +54,9 @@ public interface BoardMapper {
 					 @Result(column = "readcount", property = "readCount"),
 					 @Result(column = "regdate", property = "regDate"),
 					 @Result(column = "boardno", property = "attachments", 
-					 		 many = @Many(select = "selectBoardAttachByBoardNo"))
+					 		 many = @Many(select = "selectBoardAttachByBoardNo")),
+					 @Result(column = "boardno", property = "comments", 
+					 		 many = @Many(select = "com.demoweb.mapper.BoardCommentMapper.selectCommentByBoardNo"))
 			 })
 	BoardDto selectBoardByBoardNo2(int boardNo);
 
