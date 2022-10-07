@@ -84,8 +84,6 @@ public class BoardController {
 		
 		BoardDto board = boardService.findBoardByBoardNo(boardNo);
 		
-		System.out.println(board.getComments().size());
-		
 		if (board == null) { // 조회되지 않은 경우 (글 번호가 잘못되었거나 또는 삭제된 글인 경우)
 			return "redirect:list.action";
 		}
@@ -248,6 +246,23 @@ public class BoardController {
 		
 		// 4. View 또는 다른 컨터롤러로 이동
 		return String.format("redirect:detail.action?boardNo=%d&pageNo=%d", commentDto.getBoardNo(), pageNo);
+	}
+	
+	@GetMapping(path = { "/delete-comment.action" })
+	public String deleteComment(@RequestParam(defaultValue = "-1") int commentNo, 
+								@RequestParam(defaultValue = "-1") int boardNo, 
+								@RequestParam(defaultValue = "-1") int pageNo) {
+		
+		//1. 요청 데이터 읽기 (전달인자로 대체)
+		if (commentNo == -1 || boardNo == -1 || pageNo == -1) {
+			return "redirect:list.action";
+		}
+		
+		// 2. 데이터 처리
+		boardService.deleteComment(commentNo);		
+		
+		
+		return String.format("redirect:detail.action?boardNo=%d&pageNo=%d", boardNo, pageNo);
 	}
 
 }

@@ -102,39 +102,40 @@
 	    <hr style="width:550px;margin:0 auto">
 	    <br>
 	    <table id="comment-list" style="width:550px;border:solid 1px;margin:0 auto">
-				
+		<c:forEach var="comment" items="${ board.comments }">				
 			<tr>
 				<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
-					<div>
-						작성자 &nbsp;&nbsp; 작성일자
+					<div id="comment-view-area-${ comment.commentNo }">
+						${ comment.writer } &nbsp;&nbsp; [${ comment.regDate }]
 					    <br /><br />
-					    <span>댓글내용</span>
+					    <span>${ fn:replace(comment.content, enter, "<br>") }</span>
 						<br /><br />
-						<div style=''>
-					    	<a class="editcomment" href="javascript:">편집</a>
+						<div style='display:${ (not empty loginuser and loginuser.memberId == comment.writer) ? "block" : "none" }'>
+					    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">편집</a>
 							&nbsp;
-							<a class="deletecomment" href="javascript:">삭제</a>
+							<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
 						</div>
 						<a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a>
 					</div>	                
-					<div style="display: none">
-						작성자 &nbsp;&nbsp; [작성일자]
+					<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
+						${ comment.writer } &nbsp;&nbsp; [${ comment.regDate }]
 						<br /><br />
 						<form>
-						<input type="hidden" name="commentNo" value="" />
+						<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
 						<textarea name="content" style="width: 550px" rows="3" 
-							maxlength="200">댓글내용</textarea>
+							maxlength="200">${ comment.content }</textarea>
 						</form>
 						<br />
 						<div>
-							<a class="updatecomment" href="javascript:">수정</a> 
+							<a class="update-comment" href="javascript:">수정</a> 
 							&nbsp; 
-							<a class="cancel" href="javascript:">취소</a>
+							<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
 						</div>
 					</div>
 			
 				</td>
-			</tr>        	
+			</tr>
+		</c:forEach>        	
 		</table>
 		<!-- end of comment list area -->
 		
@@ -167,6 +168,36 @@
 		$('#writecomment').on('click', function(event) {
 			// alert('서버로 댓글 쓰기 요청');
 			$('#commentform').submit(); // form 객체의 submit 메서드는 form을 서버로 전송하는 명령
+		});
+		
+		$('#comment-list .edit-comment').on('click', function(event) {
+			event.preventDefault();
+			
+			var commentNo = $(this).data('comment-no'); // $(this) : 이벤트 발생 객체 (여기서는 <a class="edit-comment" ...>)
+			
+			$('#comment-view-area-' + commentNo).hide();
+			$('#comment-edit-area-' + commentNo).show();
+		});
+		$('#comment-list .cancel-edit-comment').on('click', function(event) {
+			event.preventDefault();
+			
+			var commentNo = $(this).data("comment-no"); // $(this) : 이벤트 발생 객체 (여기서는 <a class="cancel-edit-comment" ...>)
+			
+			$('#comment-view-area-' + commentNo).show();
+			$('#comment-edit-area-' + commentNo).hide();
+		});
+		
+		$('#comment-list .delete-comment').on('click', function(event) {
+			event.preventDefault();
+			
+			var commentNo = $(this).data('comment-no'); // .data('comment-no') --> data-comment-no="value"를 조회
+			
+			const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
+			if (!yn) return;
+			
+			location.href = 
+				'delete-comment.action?commentNo=' + commentNo + '&boardNo=${board.boardNo}&pageNo=${pageNo}';
+			
 		});
 		
 	});

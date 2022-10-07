@@ -29,4 +29,26 @@ public interface BoardCommentMapper {
 			"WHERE boardno = #{ boardNo }")
 	List<BoardCommentDto> selectCommentByBoardNo(int boardNo);
 
+	@Update("UPDATE boardcomment " +
+			"SET deleted = TRUE " +
+			"WHERE commentno = #{ commentNo }")
+	void deleteComment(int commentNo);
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

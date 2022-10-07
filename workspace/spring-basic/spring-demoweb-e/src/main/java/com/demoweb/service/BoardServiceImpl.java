@@ -133,6 +133,13 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public void deleteComment(int commentNo) {
+		
+		commentMapper.deleteComment(commentNo);
+		
+	}
+
 
 }
 

@@ -32,4 +32,6 @@ public interface BoardService {
 	
 	void updateGroupNo(int commentNo, int groupNo);
 
+	void deleteComment(int commentNo);
+
 }
