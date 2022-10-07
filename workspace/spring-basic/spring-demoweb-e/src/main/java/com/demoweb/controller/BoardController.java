@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.View;
@@ -248,21 +249,32 @@ public class BoardController {
 		return String.format("redirect:detail.action?boardNo=%d&pageNo=%d", commentDto.getBoardNo(), pageNo);
 	}
 	
+//	@GetMapping(path = { "/delete-comment.action" })
+//	public String deleteComment(@RequestParam(defaultValue = "-1") int commentNo, 
+//								@RequestParam(defaultValue = "-1") int boardNo, 
+//								@RequestParam(defaultValue = "-1") int pageNo) {
+//		//1. 요청 데이터 읽기 (전달인자로 대체)
+//		if (commentNo == -1 || boardNo == -1 || pageNo == -1) {
+//			return "redirect:list.action";
+//		}
+//		// 2. 데이터 처리
+//		boardService.deleteComment(commentNo);
+//		return String.format("redirect:detail.action?boardNo=%d&pageNo=%d", boardNo, pageNo);
+//	}
 	@GetMapping(path = { "/delete-comment.action" })
-	public String deleteComment(@RequestParam(defaultValue = "-1") int commentNo, 
-								@RequestParam(defaultValue = "-1") int boardNo, 
-								@RequestParam(defaultValue = "-1") int pageNo) {
+	@ResponseBody // 반환 값은 view 이름이 아니고 응답 컨텐츠 입니다.
+	public String deleteComment(@RequestParam(defaultValue = "-1") int commentNo) {
 		
 		//1. 요청 데이터 읽기 (전달인자로 대체)
-		if (commentNo == -1 || boardNo == -1 || pageNo == -1) {
-			return "redirect:list.action";
+		if (commentNo == -1) {
+			return "fail";	// "fail" 문자열을 응답 (@ResponseBody 때문에)
 		}
 		
 		// 2. 데이터 처리
 		boardService.deleteComment(commentNo);		
 		
 		
-		return String.format("redirect:detail.action?boardNo=%d&pageNo=%d", boardNo, pageNo);
+		return "success"; // "success" 문자열을 응답 (@ResponseBody 때문에)
 	}
 
 }

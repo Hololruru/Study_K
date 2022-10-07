@@ -204,32 +204,8 @@
 			const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
 			if (!yn) return;
 			
-			// 동기 방식 All Refresh 요청
-			//location.href = 
-			//	'delete-comment.action?commentNo=' + commentNo + '&boardNo=${board.boardNo}&pageNo=${pageNo}';
-			
-			// jQuery 기반의 비동기(ajax) 요청
-			$.ajax({
-				"url": "delete-comment.action",
-				"method": "get",
-				"data" : 'commentNo=' + commentNo,
-				"success": function(data, status, xhr) {
-					if (data == "success") {
-						const html = `<br><br>
-						<span style='color:gray'>삭제된 글입니다.</span>
-						<br><br>`
-						
-						$('#comment-view-area-' + commentNo).html(html);
-						// alert('삭제했습니다.');
-					} else {
-						alert('삭제 실패 2');
-					}
-					
-				},
-				"error": function(xhr, status, err) {
-					alert('삭제 실패 1');
-				}
-			});
+			location.href = 
+				'delete-comment.action?commentNo=' + commentNo + '&boardNo=${board.boardNo}&pageNo=${pageNo}';
 			
 		});
 		
