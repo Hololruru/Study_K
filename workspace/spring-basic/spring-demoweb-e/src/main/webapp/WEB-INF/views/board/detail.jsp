@@ -106,6 +106,13 @@
 			<tr>
 				<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
 					<div id="comment-view-area-${ comment.commentNo }">
+					<c:choose>
+					<c:when test="${ comment.deleted }">
+						<br><br>
+						<span style='color:gray'>삭제된 글입니다.</span>
+						<br><br>
+					</c:when>
+					<c:otherwise>
 						${ comment.writer } &nbsp;&nbsp; [${ comment.regDate }]
 					    <br /><br />
 					    <span>${ fn:replace(comment.content, enter, "<br>") }</span>
@@ -116,6 +123,8 @@
 							<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
 						</div>
 						<a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a>
+					</c:otherwise>
+					</c:choose>
 					</div>	                
 					<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
 						${ comment.writer } &nbsp;&nbsp; [${ comment.regDate }]
