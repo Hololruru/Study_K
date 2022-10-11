@@ -11,9 +11,13 @@
 <html>
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
 	<title>글상세보기</title>
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/default.css" />
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/input.css" />
+	
+	<link rel="Stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/default.css">
+	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/input.css">
 </head>
 <body>
 
@@ -122,7 +126,7 @@
 							&nbsp;
 							<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
 						</div>
-						<a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a>
+						<a href="#" data-comment-no="${ comment.commentNo }" class="recomment-link btn btn-sm btn-success">댓글 쓰기</a>
 					</c:otherwise>
 					</c:choose>
 					</div>	                
@@ -153,7 +157,37 @@
 	</div>
 	</div>
 	
+	<!-- Modal -->
+	<div class="modal fade" id="recomment-modal" 
+		 data-bs-backdrop="static" data-bs-keyboard="false" 
+		 tabindex="-1" aria-labelledby="recomment-modal-label" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="recomment-modal-label">댓글 쓰기</h1>
+	      </div>
+	      <div class="modal-body">
+	      <!-- write comment area -->
+			<form id="recommentform" action="write-recomment.action" method="post">
+				<input type="hidden" name="commentNo" value="" />
+				<input type="hidden" name="writer" value="${ loginuser.memberId }" />
+				   
+				<textarea class="form-control" name="content" rows="3"></textarea>             	
+	        </form>
+		  <!-- end of write comment area -->
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary cancel-button" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-primary write-button">쓰기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+	
 	<script type="text/javascript">
 	$(function() {
 		$('#tolist_button').on('click', function(event) {
@@ -204,21 +238,34 @@
 			});
 		});
 		
-		$('#comment-list .edit-comment').on('click', function(event) {
+		var currentEditCommentNo = null;
+		
+		$('#comment-list').on('click', '.edit-comment', function(event) {
 			event.preventDefault();
+			
+			if (currentEditCommentNo != null) {
+				$('#comment-view-area-' + currentEditCommentNo).show();
+				$('#comment-edit-area-' + currentEditCommentNo).hide();
+			}
 			
 			var commentNo = $(this).data('comment-no'); // $(this) : 이벤트 발생 객체 (여기서는 <a class="edit-comment" ...>)
 			
 			$('#comment-view-area-' + commentNo).hide();
 			$('#comment-edit-area-' + commentNo).show();
+			
+			currentEditCommentNo = commentNo
 		});
-		$('#comment-list .cancel-edit-comment').on('click', function(event) {
+		$('#comment-list').on('click', '.cancel-edit-comment', function(event) {
 			event.preventDefault();
 			
 			var commentNo = $(this).data("comment-no"); // $(this) : 이벤트 발생 객체 (여기서는 <a class="cancel-edit-comment" ...>)
+			const editForm = $('#comment-edit-area-' + commentNo + ' form');
+			editForm[0].reset(); // editForm : jQuery 객체 , editForm[0] : javascript 객체
 			
 			$('#comment-view-area-' + commentNo).show();
 			$('#comment-edit-area-' + commentNo).hide();
+			
+			currentEditCommentNo = null;
 		});
 		
 		// $('#comment-list .delete-comment').on('click', function(event) {
@@ -272,16 +319,57 @@
 			
 			$.ajax({
 				"url": "update-comment.action",
-				"method": "get",
+				"method": "post",
 				"data": editForm.serialize(),
 				"success": function(data) {
-					
+					if (data == "success") {
+						$('#comment-list').load("comment-list.action?boardNo=${ board.boardNo }");
+					}
 				},
 				"error": function(xhr, status, err) {
 					alert('fail : ' + status);
 				}
 			});
-		})
+		});
+		
+		$('#comment-list').on('click', ".recomment-link", function(event) {
+			event.preventDefault();
+			
+			var commentNo = $(this).data("comment-no");
+			$('#recommentform')[0].reset();
+			$('#recommentform input[name=commentNo]').val(commentNo);
+			
+			// javascript code로 modal 표시
+			$('#recomment-modal').modal('show');
+			
+		});
+		
+		$('#recomment-modal .write-button').on('click', function(event) {
+			
+			if ( $('#recomment-form textarea').val().length == 0 ) {
+				alert('댓글을 작성하세요')
+				return;
+			}
+			
+			var formData = $('#recomment-form').serialize();
+			
+			$.ajax({
+				"url": "write-recomment.action",
+				"method": "post",
+				"data": formData,
+				"success": function(data) {
+					if (data == "success") {
+						$('#comment-list').load("comment-list.action?boardNo=${ board.boardNo }");
+						$('#recomment-modal').modal('hide');
+					}
+				},
+				"error": function() {
+					
+				}
+			});
+			
+		}
+		});
 		
 	});
 	</script>

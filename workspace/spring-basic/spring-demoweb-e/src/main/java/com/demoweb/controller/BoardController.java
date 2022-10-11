@@ -285,6 +285,15 @@ public class BoardController {
 		
 		return "success"; // "success" 문자열을 응답 (@ResponseBody 때문에)
 	}
+	
+	@PostMapping(path = { "/update-comment.action" })
+	@ResponseBody
+	public String updateComment(BoardCommentDto comment) {
+		
+		boardService.updateComment(comment);
+		
+		return "success";
+	}
 
 }
 

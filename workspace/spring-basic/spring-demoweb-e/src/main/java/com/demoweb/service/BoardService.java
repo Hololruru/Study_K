@@ -36,4 +36,6 @@ public interface BoardService {
 
 	List<BoardCommentDto> findBoardCommentByBoardNo(int boardNo);
 
+	void updateComment(BoardCommentDto comment);
+
 }

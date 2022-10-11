@@ -35,6 +35,11 @@ public interface BoardCommentMapper {
 			"WHERE commentno = #{ commentNo }")
 	void deleteComment(int commentNo);
 
+	@Update("UPDATE boardcomment " +
+			"SET content = #{ content } " +
+			"WHERE commentno = #{ commentNo }")
+	void updateComment(BoardCommentDto comment);
+
 }
 
 

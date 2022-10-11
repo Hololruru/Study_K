@@ -41,7 +41,7 @@
 						</form>
 						<br />
 						<div>
-							<a class="update-comment" href="javascript:">수정</a> 
+							<a class="update-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a> 
 							&nbsp; 
 							<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
 						</div>
