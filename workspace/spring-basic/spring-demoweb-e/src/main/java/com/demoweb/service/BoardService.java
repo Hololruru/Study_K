@@ -38,4 +38,6 @@ public interface BoardService {
 
 	void updateComment(BoardCommentDto comment);
 
+	void writeReComment(BoardCommentDto commentDto);
+
 }

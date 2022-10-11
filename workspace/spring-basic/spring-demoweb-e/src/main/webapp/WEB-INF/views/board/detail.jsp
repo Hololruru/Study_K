@@ -346,12 +346,12 @@
 		
 		$('#recomment-modal .write-button').on('click', function(event) {
 			
-			if ( $('#recomment-form textarea').val().length == 0 ) {
+			if ( $('#recommentform textarea').val().length == 0 ) {
 				alert('댓글을 작성하세요')
 				return;
 			}
 			
-			var formData = $('#recomment-form').serialize();
+			var formData = $('#recommentform').serialize();
 			
 			$.ajax({
 				"url": "write-recomment.action",
@@ -366,9 +366,8 @@
 				"error": function() {
 					
 				}
-			});
-			
-		}
+			});			
+		
 		});
 		
 	});

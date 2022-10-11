@@ -40,6 +40,20 @@ public interface BoardCommentMapper {
 			"WHERE commentno = #{ commentNo }")
 	void updateComment(BoardCommentDto comment);
 
+	@Select("SELECT commentno, boardno, writer, content, regdate, groupno, step, depth " + 
+			"FROM boardcomment " +
+			"WHERE commentno = #{ commentNo }")
+	BoardCommentDto selectCommentByCommentNo(int commentNo);
+
+	@Update("UPDATE boardcomment " +
+			"SET step = step + 1 " +
+			"WHERE groupno = #{ groupNo } and step > #{ step }")
+	void updateStepNo(@Param("groupNo") int groupNo, @Param("step") int step);
+
+	@Insert("INSERT INTO boardcomment (boardno, writer, content, groupno, step, depth) " +
+			"VALUES (#{ boardNo }, #{ writer }, #{ content }, #{ groupNo }, #{ step }, #{ depth })")
+	void insertReComment(BoardCommentDto commentDto);
+
 }
 
 

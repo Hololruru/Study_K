@@ -155,6 +155,23 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public void writeReComment(BoardCommentDto commentDto) {
+
+		// 1. 부모글 조회 -> 그룹번호(groupno), 그룹내 순서번호(step), 들여쓰기 (depth) 적용
+		BoardCommentDto parent = commentMapper.selectCommentByCommentNo(commentDto.getCommentNo());
+		commentDto.setBoardNo(parent.getBoardNo());
+		commentDto.setGroupNo(parent.getGroupNo());
+		commentDto.setStep(parent.getStep() + 1);
+		commentDto.setDepth(parent.getDepth() + 1);
+		
+		// 2. 이미 등록된 글 중에서 삽입될 위치 뒤에 있는 글의 step 조정 (1 증가)
+		commentMapper.updateStepNo(parent.getGroupNo(), parent.getStep());
+		
+		// 3. 글쓰기
+		commentMapper.insertReComment(commentDto);
+	}
+
 
 }
 
