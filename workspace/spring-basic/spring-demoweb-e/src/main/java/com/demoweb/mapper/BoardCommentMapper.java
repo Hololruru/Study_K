@@ -26,7 +26,8 @@ public interface BoardCommentMapper {
 	
 	@Select("SELECT commentno, writer, content, regdate, deleted, groupno, step, depth " +
 			"FROM boardcomment " +
-			"WHERE boardno = #{ boardNo }")
+			"WHERE boardno = #{ boardNo } " +
+			"ORDER BY groupno DESC, step ASC")
 	List<BoardCommentDto> selectCommentByBoardNo(int boardNo);
 
 	@Update("UPDATE boardcomment " +

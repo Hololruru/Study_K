@@ -248,7 +248,7 @@ public class BoardController {
 	@PostMapping(path = { "/write-comment.action" })
 	public String writeComment(BoardCommentDto commentDto, int pageNo) {
 		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )		
-		
+		System.out.println(commentDto);
 		// 2. 요청 처리
 		boardService.writeComment(commentDto); // commentDto에 자동 증가된 commentNo가 저장됩니다.
 		// 최상위 댓글의 글번호를 그룹번호로 저장
@@ -283,7 +283,6 @@ public class BoardController {
 		
 		// 2. 데이터 처리
 		boardService.deleteComment(commentNo);		
-		
 		
 		return "success"; // "success" 문자열을 응답 (@ResponseBody 때문에)
 	}

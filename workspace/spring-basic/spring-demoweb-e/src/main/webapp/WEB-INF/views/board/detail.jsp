@@ -176,7 +176,28 @@
 		
 		$('#writecomment').on('click', function(event) {
 			// alert('서버로 댓글 쓰기 요청');
-			$('#commentform').submit(); // form 객체의 submit 메서드는 form을 서버로 전송하는 명령
+			// $('#commentform').submit(); // form 객체의 submit 메서드는 form을 서버로 전송하는 명령 (동기 방식)
+			
+			/*
+ 			const boardNo = $('#commentform input[name=boardNo]').val();
+			const writer = $('#commentform input[name=writer]').val();
+			const content = $('#commentform textarea[name=content]').val();			
+			*/
+			
+			const formData = $('#commentform').serialize(); //form 내부의 모든 입력 요소의 값을 전송가능한 문자열 형식으로 반환
+			// const formData = $('#commentform').serializeArray(); //form 내부의 모든 입력 요소의 값을 전송가능한 객체 배열 형식으로 반환
+						
+			$.ajax({
+				"url": "write-comment.action",
+				"method": "post",
+				"data": formData,
+				"success": function(data, status, xhr) {
+					
+				},
+				"error": function(xhr, status, err) {
+					
+				}
+			});
 		});
 		
 		$('#comment-list .edit-comment').on('click', function(event) {
