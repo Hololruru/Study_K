@@ -4,7 +4,9 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    	
+   
+<c:set var="enter" value="
+" />
 		<c:forEach var="comment" items="${ comments }">				
 			<tr>
 				<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					

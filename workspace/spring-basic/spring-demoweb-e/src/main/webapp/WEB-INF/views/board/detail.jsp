@@ -192,7 +192,11 @@
 				"method": "post",
 				"data": formData,
 				"success": function(data, status, xhr) {
-					
+					if (data == "success") {
+						// alert('댓글을 등록했습니다.');
+						$('#comment-list').load("comment-list.action?boardNo=${ board.boardNo }");
+						$('#commentform textarea').val("");
+					}
 				},
 				"error": function(xhr, status, err) {
 					
