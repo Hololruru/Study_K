@@ -136,7 +136,7 @@
 						</form>
 						<br />
 						<div>
-							<a class="update-comment" href="javascript:">수정</a> 
+							<a class="update-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a> 
 							&nbsp; 
 							<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
 						</div>
@@ -262,6 +262,26 @@
 			});
 			
 		});
+		
+		// $('#comment-list .update-comment').on('click', function(event) {
+		$('#comment-list').on('click', '.update-comment', function(event) {
+			const commentNo = $(this).data('comment-no'); // $(this) : 이벤트 발생한 객체, .data('abc') : data-abc 값 읽기
+			
+			const editForm = $('#comment-edit-area-' + commentNo + ' form');
+			// alert(editForm.serialize());
+			
+			$.ajax({
+				"url": "update-comment.action",
+				"method": "get",
+				"data": editForm.serialize(),
+				"success": function(data) {
+					
+				},
+				"error": function(xhr, status, err) {
+					alert('fail : ' + status);
+				}
+			});
+		})
 		
 	});
 	</script>
