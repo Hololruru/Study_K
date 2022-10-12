@@ -90,6 +90,14 @@
 		    <version>2.11.0</version>
 		</dependency>
 		<!-- end of file upload library -->
+		
+		<!-- validation library -->
+		<dependency>
+		    <groupId>org.hibernate.validator</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>6.2.5.Final</version>
+		</dependency>
+		<!-- end of validation library -->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

@@ -2,11 +2,13 @@ package com.demoweb.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,13 +32,20 @@ public class AccountController {
 	private AccountService accountService;
 	
 	@GetMapping(path = { "/register.action" })
-	public String showRegisterForm() {
+	public String showRegisterForm(MemberDto member) {
 		
 		return "account/register";	//	/WEB-INF/views/ + account/register + .jsp
 	}
 	
 	@PostMapping(path = { "/register.action" })
-	public String register(MemberDto member) {
+	public String register(@Valid MemberDto member, 
+						   BindingResult br) { // @Valid에 의해 검출된 오류 정보가 저장된 객체
+		
+		if (br.hasErrors()) {
+			System.out.println("유효성 검사 오류 발생");
+			return "account/register";
+		}
+		
 		// 1. 요청 데이터 읽기 -> DTO에 저장 : 전달인자 사용으로 대체
 		System.out.println(member);
 		
