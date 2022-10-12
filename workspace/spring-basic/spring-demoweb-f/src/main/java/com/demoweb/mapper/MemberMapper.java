@@ -11,7 +11,7 @@ import com.demoweb.dto.MemberDto;
 public interface MemberMapper {
 	
 	@Insert("INSERT INTO member (memberid, passwd, email) " +
-			"VALUES (#{ memberId }, #{ passwd }, #{ email }")
+			"VALUES (#{ memberId }, #{ passwd }, #{ email })")
 	void insertMember(MemberDto member);
 	
 	@Select("SELECT memberid, email, usertype, regdate, active " +

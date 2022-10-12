@@ -31,7 +31,7 @@
 		    <div id="inputmain">
 		        <div class="inputsubtitle">회원기본정보</div>		  
 		        <form:form id="registerform" action="register.action" method="post"
-		        		   modelAttribute="member">
+		        		   modelAttribute="memberDto">
 		        <table>
 		            <tr>
 		                <th>아이디(ID)</th>
