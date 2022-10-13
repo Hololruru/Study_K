@@ -20,6 +20,20 @@
 			<version>5.3.23</version>
 		</dependency>
 		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aop</artifactId>
+		    <version>5.3.23</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aspects</artifactId>
+		    <version>5.3.23</version>
+		</dependency>
+
+
+		
 		<!-- beginning of servlet and jsp -->
 		
 		<dependency>
