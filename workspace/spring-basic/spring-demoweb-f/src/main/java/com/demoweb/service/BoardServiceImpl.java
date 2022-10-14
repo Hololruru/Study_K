@@ -2,6 +2,9 @@ package com.demoweb.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.demoweb.dao.BoardDao;
 import com.demoweb.dao.BoardDaoImpl;
 import com.demoweb.dto.BoardAttachDto;
@@ -24,10 +27,13 @@ public class BoardServiceImpl implements BoardService {
 	private BoardCommentMapper commentMapper;
 	
 	// 사용자가 입력한 게시글 데이터를 받아서 글쓰기 처리
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
 	public void writeBoard(BoardDto board) {
 		
 		boardMapper.insertBoard(board); // insert 하면서 boardNo 자동 생성 ( 글 번호 가져오기 필요 )
+		
+		int x = 10 / 0; // 강제 예외 발생
 
 		if (board.getAttachments() != null) {
 			for (BoardAttachDto attachment : board.getAttachments()) {

@@ -33,6 +33,7 @@ public class App {
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/demoweb", 		// 데이터베이스 연결 정보
 					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+			conn.setAutoCommit(false); // executeUpdate 실행할 때 최종 확정하지 마세요
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -45,17 +46,23 @@ public class App {
 			pstmt.setString(2, "철수");
 			pstmt.executeUpdate();
 			
+			//int x = 10 / 0;
+			
 			pstmt.setInt(1, 500);
 			pstmt.setString(2, "영희");
 			pstmt.executeUpdate();
 			
 			System.out.println("계좌 이체 완료");
+			conn.commit(); // 마지막 commit() 또는 rollback() 실행 후 수행된 모든 SQL 작업을 확정하세요 
 			
 		} catch (Exception ex) {
 			System.out.println("계좌 이체 실패");
+			// 마지막 commit() 또는 rollback() 실행 후 수행된 모든 SQL 작업을 취소하세요
+			try {conn.rollback();} catch (Exception ex2) {} 
 		} finally {
-			// 6. 연결 닫기			
+			// 6. 연결 닫기
 			try { pstmt.close(); } catch (Exception ex) {}
+			try { conn.setAutoCommit(true); } catch (Exception ex) {}
 			try { conn.close(); } catch (Exception ex) {}
 		}
 
