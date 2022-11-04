@@ -22,7 +22,7 @@
 </form>
     
 	
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
@@ -50,8 +50,11 @@ $(function() {
 		url : "/spring-mvc-1/upload-image-file",
 		contentType : false,
 		processData : false,
-		success : function(data) {
-			$(editor).summernote('insertImage', data);
+		success : function(data, status, xhr) {
+			$(editor).summernote('insertImage', data); // data : 서버에 저장된 파일의 웹경로
+		},
+		error: function (xhr, status, err) {
+			alert(err);
 		}
 	});
   }
