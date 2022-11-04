@@ -42,18 +42,18 @@ $(function() {
   });
   
   function upload_image_file(file, editor) {
-	  formData = new FormData();
-		formData.append("file", file);
-		$.ajax({
-			data : formData,
-			type : "POST",
-			url : "/demo-one/demo/upload-image-file",
-			contentType : false,
-			processData : false,
-			success : function(data) {
-				$(editor).summernote('insertImage', data);
-			}
-		});
+	formData = new FormData();
+	formData.append("file", file);
+	$.ajax({
+		data : formData,
+		type : "POST",
+		url : "/spring-mvc-1/upload-image-file",
+		contentType : false,
+		processData : false,
+		success : function(data) {
+			$(editor).summernote('insertImage', data);
+		}
+	});
   }
 });
 </script>

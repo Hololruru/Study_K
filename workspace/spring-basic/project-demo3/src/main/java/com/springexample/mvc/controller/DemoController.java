@@ -22,5 +22,26 @@ public class DemoController {
 		
 		return "summer-note";
 	}
+	
+	@PostMapping("/upload-image-file")
+	public String uploadImage() {
+		
+		return "";
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
