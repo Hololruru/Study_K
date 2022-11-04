@@ -1,6 +1,7 @@
 package com.springexample.mvc.controller;
 
 import java.io.File;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,16 +38,19 @@ public class DemoController {
 	// public String uploadImage(MultipartFile file) {
 	public String uploadImage(MultipartHttpServletRequest req) {
 		
-		MultipartFile file = req.getFile("file");		
+		MultipartFile file = req.getFile("file");
+		String fileName = file.getOriginalFilename();
+		String unique_file_name = UUID.randomUUID().toString();
+		unique_file_name += fileName.substring(fileName.lastIndexOf("."));
 		String path = 
-				req.getServletContext().getRealPath("/resources/image-files/" + file.getOriginalFilename());
+				req.getServletContext().getRealPath("/resources/image-files/" + unique_file_name);
 		try {
 			file.transferTo(new File(path)); // 저장
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}		 
 		
-		return "/spring-mvc-1/resources/image-files/" + file.getOriginalFilename(); // 서버에 저장된 파일 경로
+		return "/spring-mvc-1/resources/image-files/" + unique_file_name; // 서버에 저장된 파일 경로
 	}
 
 }
