@@ -52,6 +52,12 @@ public class DemoController {
 		
 		return "/spring-mvc-1/resources/image-files/" + unique_file_name; // 서버에 저장된 파일 경로
 	}
+	
+	@GetMapping(path = { "/chartjs-demo" })
+	public String showChartjsDemo() {
+		
+		return "chartjs";
+	}
 
 }
 
