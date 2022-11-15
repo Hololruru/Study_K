@@ -1,7 +1,13 @@
 package com.springexample.mvc.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.springexample.mvc.dto.IrisDto;
 
 @Controller
 public class DemoController {
@@ -57,6 +65,47 @@ public class DemoController {
 	public String showChartjsDemo() {
 		
 		return "chartjs";
+	}
+	
+	@GetMapping(path = { "/load-iris-dataset" })
+	@ResponseBody
+	public ArrayList<IrisDto> loadIrisDataset(HttpServletRequest req) {
+		
+		FileInputStream fis = null;
+		InputStreamReader isr = null;
+		BufferedReader br = null;
+		ArrayList<IrisDto> irisList = new ArrayList<>();
+		
+		try {
+			String irisPath = req.getServletContext().getRealPath("/data-files/iris.csv");
+			fis = new FileInputStream(irisPath);
+			isr = new InputStreamReader(fis);
+			br = new BufferedReader(isr);
+			br.readLine();
+			while (true) {
+				String line = br.readLine();
+				if (line == null) break;
+				
+				String[] data = line.split(",");
+				IrisDto iris = new IrisDto();
+				iris.setSepalLength(Double.parseDouble(data[0]));
+				iris.setSepalWidth(Double.parseDouble(data[1]));
+				iris.setPetalLength(Double.parseDouble(data[2]));
+				iris.setPetalWidth(Double.parseDouble(data[3]));
+				iris.setSpecies(data[4]);
+				
+				irisList.add(iris);
+			}
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try { br.close(); } catch (Exception ex) {}
+			try { isr.close(); } catch (Exception ex) {}
+			try { fis.close(); } catch (Exception ex) {}
+		}
+		
+		return irisList;
 	}
 
 }

@@ -32,3 +32,28 @@
 			try { isr.close(); } catch (Exception ex) {}
 			try { fis.close(); } catch (Exception ex) {}
 		}
+
+
+/////////////////////////////////
+
+if (dataset == null || dataset.length == 0) {
+			alert('데이터셋이 준비되지 않았습니다.');
+			return;
+		}
+		const labels = Object.keys(dataset[0]);
+		labels.pop();
+		
+		const data = [];
+		$.each(labels, function(idx, label) {
+			data.push(0);	
+		});
+		
+		var count = 0;
+		$.each(dataset, function(idx, row) {
+			count++;
+			$.each(labels, function(idx2, label) {
+				data[idx2] += row[label];
+			});
+		});
+		
+		const meanData = data.map(x => x / count);
