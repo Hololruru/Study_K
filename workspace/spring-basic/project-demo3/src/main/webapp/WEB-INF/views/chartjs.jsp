@@ -17,6 +17,7 @@
 
 <div class="container">
 	<button type="button" id="load-iris" class="btn btn-primary mt-3">load iris dataset</button>
+	<button type="button" id="chart-demo-1" class="btn btn-primary mt-3">show chart</button>
 	<hr>
 	<canvas id="the-chart"></canvas>
 </div>
@@ -45,17 +46,48 @@ $(function() {
 	
 	$('#chart-demo-1').on('click', function(event) {
 		
+		if (dataset == null || dataset.length == 0) {
+			alert('데이터셋이 준비되지 않았습니다.');
+			return;
+		}
+		const labels = Object.keys(dataset[0]);
+		labels.pop();
+		
+		const data = [];
+		$.each(labels, function(idx, label) {
+			data.push(0);	
+		});
+		
+		var count = 0;
+		$.each(dataset, function(idx, row) {
+			count++;
+			$.each(labels, function(idx2, label) {
+				data[idx2] += row[label];
+			});
+		});
+		
+		const meanData = data.map(x => x / count);
+		
 	  const ctx = document.getElementById('the-chart');
 
 	  new Chart(ctx, {
-	    type: 'bar',
+	    type: 'line',
 	    data: {
-	      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'], // x축 tick
+	      labels: labels, // x축 tick
 	      datasets: [{
-	        label: '# of Votes',			// data series name
-	        data: [12, 19, 3, 5, 2, 3], 	// y축 data
+	        label: 'iris data means',			// data series name
+	        data: meanData, 				// y축 data
+	        backgroundColor: 'rgb(255,0,0)',
+	        borderColor: 'rgb(0,0,255)',
 	        borderWidth: 1
-	      }]
+	      },
+	      {
+		        label: 'iris data means 2',			// data series name
+		        data: [5.7, 3.4, 3.1, 2], 				// y축 data
+		        backgroundColor: 'rgb(0,255,0)',
+		        borderColor: 'rgb(0,0,255)',
+		        borderWidth: 1
+		      }]
 	    },
 	    options: {
 	      scales: {
