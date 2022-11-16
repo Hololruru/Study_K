@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,6 +107,26 @@ public class DemoController {
 		}
 		
 		return irisList;
+	}
+	
+	@GetMapping(path = { "/login" })
+	public String showLoginView() {
+		
+		return "login";
+	}
+	
+	@GetMapping(path = { "/naver-login-callback" })
+	public String showNaverLoginCallbackView() {
+		
+		return "naver-login-callback";
+	}
+	
+	@GetMapping(path = { "/naver-login-success" })
+	public String naverLoginSuccess(String id, String email, HttpSession session) {
+		
+		session.setAttribute("loginuser", email);
+		
+		return "redirect:/home";
 	}
 
 }

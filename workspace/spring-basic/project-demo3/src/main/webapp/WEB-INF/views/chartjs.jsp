@@ -76,7 +76,7 @@ $(function() {
 	      labels: labels, // x축 tick
 	      datasets: [{
 	        label: 'iris data means',			// data series name
-	        data: meanData, 				// y축 data
+	        data: meanData, 					// y축 data
 	        backgroundColor: 'rgb(255,0,0)',
 	        borderColor: 'rgb(0,0,255)',
 	        borderWidth: 1
