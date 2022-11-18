@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +14,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springexample.mvc.dto.IrisDto;
 
@@ -127,6 +130,27 @@ public class DemoController {
 		session.setAttribute("loginuser", email);
 		
 		return "redirect:/home";
+	}
+	
+	@GetMapping(path = { "/redirect-attributes" })
+	public String redirectAttributes(RedirectAttributes redirectAttributes) {
+		// RedirectAttributes 전달인자는 Redirect 할 때 redirect target controller로
+		// 데이터를 전달하는 도구
+
+		redirectAttributes.addFlashAttribute("b", new Date()); // 주소에 표시 X ( 모든 객체 )
+		redirectAttributes.addAttribute("a", Math.random()); // 주소에 표시 ( 제한된 객체 )
+		
+		return "redirect:redirect-target";
+	}	
+	@GetMapping(path = { "/redirect-target" })
+	public String redirectTarget(
+			@ModelAttribute("b") Date b, @ModelAttribute("a") Double a,
+			Model model) {
+		
+		model.addAttribute("a2", a);
+		model.addAttribute("b2", b);
+		
+		return "redirect-target";
 	}
 
 }

@@ -15,6 +15,7 @@
 	<h3><a href="summer-note-demo">Summer Note Demo</a></h3>
 	<h3><a href="chartjs-demo">Chart.js Demo</a></h3>
 	<h3><a href="login">Naver Login Demo</a></h3>
+	<h3><a href="redirect-attributes">Data transfer with redirect</a></h3>
 
 </body>
 </html>
