@@ -144,10 +144,11 @@ public class DemoController {
 	}	
 	@GetMapping(path = { "/redirect-target" })
 	public String redirectTarget(
-			@ModelAttribute("b") Date b, @ModelAttribute("a") Double a,
+			@ModelAttribute("b") Date b,
+			// @ModelAttribute("a") double a,
 			Model model) {
 		
-		model.addAttribute("a2", a);
+		//model.addAttribute("a2", a);
 		model.addAttribute("b2", b);
 		
 		return "redirect-target";
