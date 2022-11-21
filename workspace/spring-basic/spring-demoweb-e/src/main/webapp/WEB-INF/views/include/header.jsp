@@ -33,7 +33,7 @@
         <div id="menu">
             <div>
                 <ul>
-                    <li><a href="#">사용자관리</a></li>
+                    <li><a href="/spring-demoweb-e/admin/user-management">사용자관리</a></li>
 					<li><a href="#">메일보내기</a></li>
 					<li><a href="#">자료실</a></li>
 					<li><a href="/spring-demoweb-e/board/list.action">게시판</a></li>

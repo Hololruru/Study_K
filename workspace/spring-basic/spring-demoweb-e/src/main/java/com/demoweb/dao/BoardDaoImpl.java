@@ -28,8 +28,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb", 		// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb", 		// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3-1. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -82,8 +82,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb",	 	// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb",	 	// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -135,8 +135,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb",	 	// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb",	 	// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -191,8 +191,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb",	 	// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb",	 	// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = "SELECT COUNT(*) FROM board ";
@@ -233,8 +233,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb",	 	// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb",	 	// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -283,8 +283,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb", 		// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb", 		// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -321,8 +321,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb", 		// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb", 		// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -358,8 +358,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb", 		// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb", 		// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -400,8 +400,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb",	 	// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb",	 	// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -454,8 +454,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb",	 	// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb",	 	// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
@@ -503,8 +503,8 @@ public class BoardDaoImpl implements BoardDao {
 			
 			// 2. 연결 및 연결 객체 가져오기
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb", 		// 데이터베이스 연결 정보
-					"testuser", "mysql"); 						// 데이터베이스 계정 정보
+					"jdbc:mysql://43.201.107.251:3306/demoweb", 		// 데이터베이스 연결 정보
+					"developer", "developer"); 						// 데이터베이스 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 

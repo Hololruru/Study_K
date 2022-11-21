@@ -24,7 +24,8 @@
 		        <div class="inputsubtitle">로그인정보</div>
 		        
 		        <form action="login.action" method="post">
-		       
+		        <input type="hidden" name="returnurl" value="${ returnurl }">
+		        <%-- <input type="hidden" name="returnurl" value="${ param.returnurl }"> --%>
 		        <table>
 		            <tr>
 		                <th>아이디(ID)</th>

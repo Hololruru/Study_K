@@ -50,13 +50,15 @@ public class AccountController {
 	}
 	
 	@GetMapping(path = { "/login.action" })
-	public String showLoginForm() {
+	public String showLoginForm(@RequestParam(defaultValue = "") String returnurl, Model model) {
+		
+		model.addAttribute("returnurl", returnurl);
 		
 		return "account/login";		//  /WEB-INF/views/ + account/login + .jsp
 	}
 	
 	@PostMapping(path = { "/login.action" })
-	public String login(String memberId, String passwd, HttpSession session, Model model) {
+	public String login(String memberId, String passwd, String returnurl, HttpSession session, Model model) {
 		// 1. 요청 데이터 읽기 ( 전달인자 사용해서 대체 )
 		
 		// 2. 요청 처리
@@ -64,15 +66,21 @@ public class AccountController {
 		
 		if (member != null) {
 			session.setAttribute("loginuser", member);
+			if (returnurl != null && returnurl.length() > 0) {
+				return "redirect:" + returnurl.replace("/spring-demoweb-e", "");
+			} else {
+				return "redirect:/home.action";
+			}
 		} else {
 			model.addAttribute("loginfail", memberId);
+			model.addAttribute("returnurl", returnurl);
 			return "account/login"; // /WEB-INF/views/ + account/login + .jsp
 		}
 		
 		// 3. View에서 사용하도록 데이터 전달
 		
 		// 4. View 또는 다른 Controller로 이동 
-		return "redirect:/home.action"; // return "redirect:/home.action";
+		// return "redirect:/home.action"; // return "redirect:/home.action";
 	}
 	
 	@GetMapping(path = { "/logout.action" })
