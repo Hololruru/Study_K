@@ -8,9 +8,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -152,6 +157,42 @@ public class DemoController {
 		model.addAttribute("b2", b);
 		
 		return "redirect-target";
+	}
+	
+	@GetMapping(path = { "/send-mail" })
+	public String showSendMailForm() {
+		
+		return "send-mail";
+	}
+	
+	@Autowired
+	@Qualifier("mailSender")
+	private JavaMailSenderImpl mailSender;
+	
+	@PostMapping(path = { "/send-mail" })
+	public String sendMail(String title, String from, String to, String content) {
+		
+		//for test
+		String[] toList = { to, "shared.repo.z@gmail.com" };
+		
+		// 메일 전송 구현
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message);
+			
+			messageHelper.setFrom(from);
+			// messageHelper.setTo(to);
+			messageHelper.setTo(toList);
+			messageHelper.setSubject(title);
+			messageHelper.setText(content, true);
+			
+			mailSender.send(message);
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return "send-mail";
 	}
 
 }
