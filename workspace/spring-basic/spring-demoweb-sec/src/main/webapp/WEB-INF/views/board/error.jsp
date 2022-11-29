@@ -9,7 +9,7 @@
 <head>
 	<meta charset='utf-8'>
 	<title>Error</title>
-	<link rel='Stylesheet' href='/spring-demoweb-e/resources/styles/default.css'>
+	<link rel='Stylesheet' href='/spring-demoweb-sec/resources/styles/default.css'>
 </head>
 <body>
 
@@ -28,7 +28,7 @@
 	<script type="text/javascript">
 	$(function() {
 		alert("[${ error_type }] : ${ message }");
-		location.href = "/spring-demoweb-e/board/list.action";
+		location.href = "/spring-demoweb-sec/board/list.action";
 	});
 	</script>
 

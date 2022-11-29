@@ -9,8 +9,8 @@
 <head>
 	<meta charset='utf-8' />
 	<title>Login</title>
-	<link rel='Stylesheet' href='/spring-demoweb-e/resources/styles/default.css' />
-	<link rel='Stylesheet' href='/spring-demoweb-e/resources/styles/input.css' />
+	<link rel='Stylesheet' href='/spring-demoweb-sec/resources/styles/default.css' />
+	<link rel='Stylesheet' href='/spring-demoweb-sec/resources/styles/input.css' />
 </head>
 <body>
 
@@ -23,9 +23,8 @@
 		    <div id="inputmain">
 		        <div class="inputsubtitle">로그인정보</div>
 		        
-		        <form action="login.action" method="post">
-		        <input type="hidden" name="returnurl" value="${ returnurl }">
-		        <%-- <input type="hidden" name="returnurl" value="${ param.returnurl }"> --%>
+		        <form action="/spring-demoweb-sec/login" method="post">
+		        <%-- <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }"> --%>
 		        <table>
 		            <tr>
 		                <th>아이디(ID)</th>

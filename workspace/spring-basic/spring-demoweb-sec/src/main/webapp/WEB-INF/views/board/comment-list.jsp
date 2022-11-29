@@ -17,7 +17,7 @@
 								&nbsp;&nbsp;
 								</c:forEach>
 								<c:if test="${ comment.depth > 0 }">
-								<img src="/spring-demoweb-e/resources/image/re.gif">
+								<img src="/spring-demoweb-sec/resources/image/re.gif">
 								&nbsp;
 								</c:if>
 							</td>

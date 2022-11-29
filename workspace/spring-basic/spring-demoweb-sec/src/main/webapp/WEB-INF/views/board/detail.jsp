@@ -16,8 +16,8 @@
 	<title>글상세보기</title>
 	
 	<link rel="Stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/default.css">
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/input.css">
+	<link rel="Stylesheet" href="/spring-demoweb-sec/resources/styles/default.css">
+	<link rel="Stylesheet" href="/spring-demoweb-sec/resources/styles/input.css">
 </head>
 <body>
 

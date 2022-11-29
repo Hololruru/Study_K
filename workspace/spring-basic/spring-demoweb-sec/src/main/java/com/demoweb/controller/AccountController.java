@@ -1,6 +1,5 @@
 package com.demoweb.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.demoweb.dto.MemberDto;
 import com.demoweb.service.AccountService;
-import com.demoweb.service.AccountServiceImpl;
-
-import lombok.Setter;
 
 @Controller
 @RequestMapping(path = { "/account" })
@@ -57,38 +53,46 @@ public class AccountController {
 		return "account/login";		//  /WEB-INF/views/ + account/login + .jsp
 	}
 	
-	@PostMapping(path = { "/login.action" })
-	public String login(String memberId, String passwd, String returnurl, HttpSession session, Model model) {
-		// 1. 요청 데이터 읽기 ( 전달인자 사용해서 대체 )
-		
-		// 2. 요청 처리
-		MemberDto member = accountService.findMemberByIdAndPasswd(memberId, passwd);
-		
-		if (member != null) {
-			session.setAttribute("loginuser", member);
-			if (returnurl != null && returnurl.length() > 0) {
-				return "redirect:" + returnurl.replace("/spring-demoweb-e", "");
-			} else {
-				return "redirect:/home.action";
-			}
-		} else {
-			model.addAttribute("loginfail", memberId);
-			model.addAttribute("returnurl", returnurl);
-			return "account/login"; // /WEB-INF/views/ + account/login + .jsp
-		}
-		
-		// 3. View에서 사용하도록 데이터 전달
-		
-		// 4. View 또는 다른 Controller로 이동 
-		// return "redirect:/home.action"; // return "redirect:/home.action";
-	}
+//	@PostMapping(path = { "/login.action" })
+//	public String login(String memberId, String passwd, String returnurl, HttpSession session, Model model) {
+//		// 1. 요청 데이터 읽기 ( 전달인자 사용해서 대체 )
+//		
+//		// 2. 요청 처리
+//		MemberDto member = accountService.findMemberByIdAndPasswd(memberId, passwd);
+//		
+//		if (member != null) {
+//			session.setAttribute("loginuser", member);
+//			if (returnurl != null && returnurl.length() > 0) {
+//				return "redirect:" + returnurl.replace("/spring-demoweb-sec", "");
+//			} else {
+//				return "redirect:/home.action";
+//			}
+//		} else {
+//			model.addAttribute("loginfail", memberId);
+//			model.addAttribute("returnurl", returnurl);
+//			return "account/login"; // /WEB-INF/views/ + account/login + .jsp
+//		}
+//		
+//		// 3. View에서 사용하도록 데이터 전달
+//		
+//		// 4. View 또는 다른 Controller로 이동 
+//		// return "redirect:/home.action"; // return "redirect:/home.action";
+//	}
+//	
+//	@GetMapping(path = { "/logout.action" })
+//	public View logout(HttpSession session) {
+//		
+//		session.removeAttribute("loginuser");
+//		
+//		return new RedirectView("login.action");
+//	}
 	
-	@GetMapping(path = { "/logout.action" })
-	public View logout(HttpSession session) {
+	@GetMapping(path = { "/access-denied" })
+	public String accessDenied() {
 		
-		session.removeAttribute("loginuser");
+		System.out.println("access denied");
 		
-		return new RedirectView("login.action");
+		return "redirect:/account/login.action";
 	}
 	
 	

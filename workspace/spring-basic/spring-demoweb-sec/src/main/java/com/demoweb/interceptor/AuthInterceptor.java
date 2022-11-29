@@ -29,14 +29,14 @@ public class AuthInterceptor implements HandlerInterceptor {
 				uri.contains("/board/update")	||
 				uri.contains("/admin/")) { // 로그인한 사용자만 볼 수 있는 요청
 			
-				// resp.sendRedirect("/spring-demoweb-e/account/login.action");
-				resp.sendRedirect("/spring-demoweb-e/account/login.action?returnurl=" + uri);
+				// resp.sendRedirect("/spring-demoweb-sec/account/login.action");
+				resp.sendRedirect("/spring-demoweb-sec/account/login.action?returnurl=" + uri);
 				return false; // 예정된 컨트롤러 호출을 취소				
 			}
 		} else { // 로그인한 사용자
 			if (uri.contains("/admin/")) { 
 				if (!member.getUserType().equals("admin")) { // 관리자가 아니라면
-					resp.sendRedirect("/spring-demoweb-e/account/login.action?returnurl=" + uri);
+					resp.sendRedirect("/spring-demoweb-sec/account/login.action?returnurl=" + uri);
 					return false; // 예정된 컨트롤러 호출을 취소
 				}
 			}

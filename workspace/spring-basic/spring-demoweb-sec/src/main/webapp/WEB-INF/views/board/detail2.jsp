@@ -12,8 +12,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>글상세보기</title>
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/default.css" />
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/input.css" />
+	<link rel="Stylesheet" href="/spring-demoweb-sec/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/spring-demoweb-sec/resources/styles/input.css" />
 </head>
 <body>
 

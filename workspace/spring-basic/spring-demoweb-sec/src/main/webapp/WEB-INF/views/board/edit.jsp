@@ -8,8 +8,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>글수정</title>
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/default.css" />
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/input2.css" />
+	<link rel="Stylesheet" href="/spring-demoweb-sec/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/spring-demoweb-sec/resources/styles/input2.css" />
 </head>
 <body>
 

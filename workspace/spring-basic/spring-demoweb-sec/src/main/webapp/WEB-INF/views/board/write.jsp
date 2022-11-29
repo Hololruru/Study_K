@@ -9,8 +9,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>게시판글쓰기</title>
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/default.css" />
-	<link rel="Stylesheet" href="/spring-demoweb-e/resources/styles/input2.css" />
+	<link rel="Stylesheet" href="/spring-demoweb-sec/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/spring-demoweb-sec/resources/styles/input2.css" />
 </head>
 <body>
 
