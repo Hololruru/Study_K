@@ -23,8 +23,9 @@ public class LottoController {
 		
 		HashMap<String, Object> parsingResult = new HashMap<>();
 
-		Element option = doc.selectFirst("#dwrNoList option:selected");
-		int round = Integer.parseInt(option.attr("value"));
+		// Element option = doc.selectFirst("#dwrNoList option:selected");
+		String sRound = doc.selectFirst(".win_result h4 strong").text();
+		int round = Integer.parseInt(sRound.substring(0, sRound.length() - 1));
 		parsingResult.put("round", round);
 		
 		ArrayList<Integer> numbers = new ArrayList<>();
