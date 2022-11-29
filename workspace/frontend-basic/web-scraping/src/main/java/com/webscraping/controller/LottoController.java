@@ -10,6 +10,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,7 +57,7 @@ public class LottoController {
 		return "lotto/winning-numbers-by-round";
 	}
 	
-	@GetMapping(path = { "/winning-numbers-by-round" })
+	@PostMapping(path = { "/winning-numbers-by-round" })
 	@ResponseBody
 	public HashMap<String, Object> searchWinningNumbersByRound(
 			@RequestParam(defaultValue = "0") int round, Model model) {

@@ -14,15 +14,15 @@
 		<tr>
 			<td colspan="7" style="height:70px">
 				<select id="round">
-					<c:forEach var="idx" begin="1" end="${ round }">
-						<option>${ round - idx + 1 }</option>
+					<c:forEach var="idx" begin="1" end="${ parsedData.round }">
+						<option>${ parsedData.round - idx + 1 }</option>
 					</c:forEach>
 				</select>
 				<button id="search-btn">조회</button>
 			</td>
 		</tr>
 		<tr>
-		<c:forEach var="number" items="${ numbers }">
+		<c:forEach var="number" items="${ parsedData.numbers }">
 			<td style="width:70px;height:70px;text-align:center">${ number }</td>
 		</c:forEach>			
 		</tr>
@@ -37,11 +37,15 @@
 				"method": "post",
 				"data" : "round=" + round,
 				"dataType": "json",
-				"success": function(data, status, xhr) {
-					
+				"success": function(responseData, status, xhr) {
+					if (responseData.result == 'success') {
+						alert(responseData.round);
+					} else {
+						alert('실패 1');
+					}
 				},
 				"error": function(xhr, status, err) {
-					
+					alert('실패 2');
 				}
 			});
 		});
