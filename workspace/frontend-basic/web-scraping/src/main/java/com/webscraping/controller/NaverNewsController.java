@@ -1,7 +1,11 @@
 package com.webscraping.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +28,26 @@ public class NaverNewsController {
 			String url = String.format(urlFormat, sid1, sid2, date, page);
 			Document doc = Jsoup.connect(url).get();
 			
-			Elements dls = doc.select(".type06_headline li dl");
+			Elements dls = doc.select(".newsflash_body ul li dl");
 			
-			System.out.println(dls.size());
+			// System.out.println(dls.size());
+			
+			ArrayList<HashMap<String, Object>> newsList = new ArrayList<>();
+			for (Element dl : dls) {
+				HashMap<String, Object> news = new HashMap<>();
+				Elements dts = dl.select("dt");
+				if (dts.size() == 1) {					
+					news.put("link", dts.get(0).select("a").attr("href"));
+					news.put("title", dts.get(0).select("a").text());
+				} else {
+					news.put("link", dts.get(1).select("a").attr("href"));
+					news.put("title", dts.get(1).select("a").text());
+					news.put("image", dts.get(0).select("img").attr("src"));
+				}
+				news.put("desc", dl.select("dd").text());
+				
+				newsList.add(news);
+			}
 			
 		} catch (Exception ex) {
 			
