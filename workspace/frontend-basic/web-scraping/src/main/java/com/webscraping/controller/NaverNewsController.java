@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NaverNewsController {
 	
 	@GetMapping(path = { "/it-news" })
-	public String showItNewsForm() {
+	public String showItNewsForm(Model model) {
 		
 		int sid1 = 105;
 		int sid2 = 230;
@@ -48,6 +49,8 @@ public class NaverNewsController {
 				
 				newsList.add(news);
 			}
+			
+			model.addAttribute("newsList", newsList);
 			
 		} catch (Exception ex) {
 			
