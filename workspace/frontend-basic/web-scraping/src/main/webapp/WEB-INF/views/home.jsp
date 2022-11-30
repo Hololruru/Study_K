@@ -11,6 +11,7 @@
 	<hr>
 	<h3>1. <a href="lotto/winning-numbers-by-round">로또 회차별 당첨번호 조회</a></h3>
 	<h3>2. <a href="naver/it-news">네이버 뉴스 조회</a></h3>
+	<h3>3. <a href="naver/movie">네이버 영화 조회</a></h3>
 
 </body>
 </html>

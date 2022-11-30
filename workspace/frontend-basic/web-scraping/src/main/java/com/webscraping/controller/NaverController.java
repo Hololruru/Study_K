@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(path = { "/naver" })
-public class NaverNewsController {
+public class NaverController {
 	
 	@GetMapping(path = { "/it-news" })
 	public String showItNewsForm(Model model) {
@@ -59,6 +59,44 @@ public class NaverNewsController {
 		}
 		
 		return "naver/it-news";
+	}
+	
+	@GetMapping(path = { "/movie" })
+	public String showMovieForm(Model model) {
+		
+		
+		
+		try {
+			String url = "https://movie.naver.com/movie/running/current.naver";
+			Document doc = Jsoup.connect(url).get();
+			
+			Elements lis = doc.select("ul.lst_detail_t1 li");
+			
+			// System.out.println(dls.size());
+			
+			ArrayList<HashMap<String, Object>> movies = new ArrayList<>();
+			for (Element li : lis) {
+				HashMap<String, Object> movie = new HashMap<>();
+				
+				movie.put("image", li.select("div.thumb img").attr("src"));
+				movie.put("title", li.select("dl.lst_dsc dt.tit a").text());
+				movie.put("link", "https://movie.naver.com" + 
+								  li.select("dl.lst_dsc dt.tit a").attr("href"));
+				movie.put("rating", li.select("dd.star dd span.num").text());
+				movie.put("count", li.select("dd.star dd span.num2").text());
+				
+				movies.add(movie);
+			}
+			
+			model.addAttribute("movies", movies);
+			
+		} catch (Exception ex) {
+			
+		} finally {
+			
+		}
+		
+		return "naver/movies";
 	}
 	
 
