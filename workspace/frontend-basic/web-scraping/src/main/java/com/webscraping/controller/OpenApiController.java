@@ -6,12 +6,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.w3c.dom.Document;
@@ -23,7 +26,7 @@ import org.w3c.dom.NodeList;
 public class OpenApiController {
 	
 	@GetMapping(path = { "/covid19" })
-	public String showCovid19Form() {
+	public String showCovid19Form(Model model) {
 		
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -66,18 +69,28 @@ public class OpenApiController {
 	        
 	        NodeList items = doc.getElementsByTagName("item");
 	        
+	        ArrayList<HashMap<String, Object>> data = new ArrayList<>();
+	        
 	        for (int i = 0; i < items.getLength(); i++) {
 	        	Node node = items.item(i); // Node : tag, text, cdatasection, pi, declaration,
-	        	System.out.println("Node Type : " + node.getNodeType());
-	        	System.out.println("Node Name : " + node.getNodeName());
+	        	//System.out.println("Node Type : " + node.getNodeType());
+	        	//System.out.println("Node Name : " + node.getNodeName());
 	        	
+	        	HashMap<String, Object> tmp = new HashMap<>();
 	        	NodeList children = node.getChildNodes();
 	        	for (int j = 0; j < children.getLength(); j++) {
-	        		System.out.print(j + ". Node Type : " + node.getNodeType() + " / ");
-	        		System.out.print("Node Name : " + node.getNodeName() + " / ");
-	        		System.out.println("Node Value : " + node.getFirstChild().getTextContent());
+	        		Node child = children.item(j);
+	        		//System.out.print(j + ". Node Type : " + child.getNodeType() + " / ");
+	        		//System.out.print("Node Name : " + child.getNodeName() + " / ");
+	        		//System.out.println("Node Value : " + child.getTextContent());
+	        		if (child.getNodeType() == 1) {
+	        			tmp.put(child.getNodeName(), child.getTextContent());
+	        		}
 	        	}
+	        	data.add(tmp);
 	        }
+	        
+	        model.addAttribute("data", data);
 	        
 			
 		} catch (Exception ex) {
