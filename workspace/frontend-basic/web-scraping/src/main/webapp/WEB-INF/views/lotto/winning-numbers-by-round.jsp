@@ -39,7 +39,12 @@
 				"dataType": "json",
 				"success": function(responseData, status, xhr) {
 					if (responseData.result == 'success') {
-						alert(responseData.round);
+						// alert(responseData.round);
+						const tds = $('table tr:eq(1) td');
+						tds.each(function(idx, td) {
+							$(td).text(responseData.numbers[idx]);
+							//td.innerText = responseData.numbers[idx];
+						});
 					} else {
 						alert('실패 1');
 					}
