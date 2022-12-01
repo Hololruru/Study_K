@@ -231,6 +231,47 @@ public class OpenApiController {
             throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
         }
     }
+
+	//////////////////////////////////////////////////////////////////////////
+
+	@GetMapping(path = { "/kakao-image" })
+	public String showKakaoImageSearchForm() {
+		
+		return "openapi/kakao-image";
+	}
+	
+	@GetMapping(path = { "/search-image" })
+	@ResponseBody
+	public String searchKakaoImage(String name) {
+		
+		try {
+	        String encodedName = URLEncoder.encode(name, "UTF-8");
+	        System.out.println(encodedName);
+	        URL url = new URL("https://dapi.kakao.com/v2/search/image?query=" + encodedName);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("GET");
+	        conn.setRequestProperty("Authorization", "KakaoAK b303e8704e4b4e4625ac87042258882c");
+	        
+//	        InputStream is = conn.getInputStream();
+//	        InputStreamReader isr = new InputStreamReader(is);
+//	        BufferedReader br = new BufferedReader(isr);
+//	        
+//	        while (true) {
+//	        	String line = br.readLine();
+//	        	if (line == null) break;
+//	        	System.out.println(line);
+//	        }
+//	        br.close();
+//	        isr.close();
+//	        is.close();
+	        
+		} catch (Exception ex) {
+			
+		}
+		
+		return "";
+	}
+
 }
 
 
