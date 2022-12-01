@@ -36,19 +36,16 @@
 				"dataType": "json",
 				"success": function(response, status, xhr) {
 					if (response.result == "success") {
-						const tbody = $('#movie-list tbody');
+						const tbody = $('#image-list tbody');
 						tbody.empty(); // 기존의 하위 요소(tr) 모두 제거
-						const movies = response.movies;
-						$.each(movies, function(idx, movie) {
-							const tr = $("<tr></tr>");
-							tbody.append(tr);
-							tr.append('<td><img src="' + movie.image + '"></td>');
-							
-							const td = $('<td></td>');
-							td.append('<p>제목 : <a href="' + movie.link + '">' + movie.title + '</a></p>');
-							td.append('<p>부제 : ' + movie.subtitle + '</p>');
-							td.append('<p>평점 : ' + movie.userRating + '</p>');							
-							tr.append(td);
+						const images = response.images;
+						let tr = null;
+						$.each(images, function(idx, image) {
+							if (idx % 4 == 0) {
+								tr = $("<tr></tr>");
+								tbody.append(tr);
+							}							
+							tr.append('<td><img src="' + image.thumbnail_url + '"></td>');							
 						});
 					} else {
 						alert(response.result);

@@ -27,6 +27,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+
 @Controller
 @RequestMapping(path = "/openapi")
 public class OpenApiController {
@@ -242,7 +248,9 @@ public class OpenApiController {
 	
 	@GetMapping(path = { "/search-image" })
 	@ResponseBody
-	public String searchKakaoImage(String name) {
+	public HashMap<String, Object> searchKakaoImage(String name) {
+		
+		HashMap<String, Object> response = new HashMap<>();
 		
 		try {
 	        String encodedName = URLEncoder.encode(name, "UTF-8");
@@ -265,11 +273,33 @@ public class OpenApiController {
 //	        isr.close();
 //	        is.close();
 	        
+	        InputStream is = conn.getInputStream();
+	        InputStreamReader isr = new InputStreamReader(is);
+	        // JsonReader jr = new JsonReader(isr);
+	        
+	        JsonElement root = JsonParser.parseReader(isr);
+	        // JsonParser.parseReader(jr);
+	        
+	        JsonObject obj =root.getAsJsonObject();
+	        JsonArray images = obj.get("documents").getAsJsonArray();
+	        ArrayList<HashMap<String, Object>> results = new ArrayList<>();
+	        for (JsonElement element : images) {
+	        	JsonObject image = element.getAsJsonObject();
+	        	HashMap<String, Object> result = new HashMap<>();
+	        	for (String key : image.keySet()) {
+	        		// System.out.printf("[%s:%s]", key, image.get(key).toString());
+	        		result.put(key, image.get(key).getAsString());
+	        	}
+	        	results.add(result);
+	        }
+	        response.put("result", "success");
+        	response.put("images", results);
+	        
 		} catch (Exception ex) {
-			
+			response.put("result", "fail");
 		}
 		
-		return "";
+		return response;
 	}
 
 }
