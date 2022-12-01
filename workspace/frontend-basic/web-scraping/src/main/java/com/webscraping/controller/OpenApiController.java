@@ -130,7 +130,7 @@ public class OpenApiController {
         String apiURL = "https://openapi.naver.com/v1/search/movie.xml?query=" + text;    // XML 결과
         //String apiURL = "https://openapi.naver.com/v1/search/movie.json?query="+ text; // JSON 결과
 
-        apiURL += "display=100";
+        apiURL += "&display=100";
 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);
@@ -152,10 +152,20 @@ public class OpenApiController {
                 
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder parser = factory.newDocumentBuilder(); // xml parser
-                Document doc = parser.parse(is);
+                Document doc = parser.parse(is); // xml string -> object tree
                 
+                NodeList items = doc.getElementsByTagName("item"); // <item>...</item>을 모두 찾아서 반환
+                for (int i = 0; i < items.getLength(); i++) {
+                	Node item = items.item(i);
+                	NodeList children = item.getChildNodes();
+                	for (int j = 0; j < children.getLength(); j++) {
+                		Node child = children.item(j);
+                		System.out.printf("[%s : %s]", child.getNodeName(), child.getTextContent());
+                	}
+                	System.out.println();
+                }
             } else { // 오류 발생
-
+            	System.out.println("오류 발생");
             }
         } catch (Exception ex) {
         	ex.printStackTrace();
