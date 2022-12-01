@@ -115,7 +115,7 @@ public class OpenApiController {
 	
 	@GetMapping(path = { "/search-movie" })
 	@ResponseBody
-	public String searchNaverMovie(String title, Model model) {
+	public HashMap<String, Object> searchNaverMovie(String title) {
 		
 		String clientId = "SpfHcpgJIZfwSahhohl4"; //애플리케이션 클라이언트 아이디
         String clientSecret = "hcwdgwgQkw"; //애플리케이션 클라이언트 시크릿
@@ -139,6 +139,7 @@ public class OpenApiController {
         // String responseBody = get(apiURL, requestHeaders);
         // System.out.println(responseBody);
         
+        HashMap<String, Object> response = new HashMap<>();
         try {
         	HttpURLConnection con = connect(apiURL);
         	con.setRequestMethod("GET");
@@ -168,15 +169,18 @@ public class OpenApiController {
                 	// System.out.println();
                 	movies.add(movie);
                 }
-                model.addAttribute("movies", movies); // JSP에서 읽을 수 있도록 저장
+                
+                response.put("result", "success");
+                response.put("movies", movies);
+                
             } else { // 오류 발생
-            	System.out.println("오류 발생");
+            	response.put("result", "fail1");
             }
         } catch (Exception ex) {
-        	ex.printStackTrace();
+        	response.put("result", "fail2");
         }
 		
-		return "success";
+		return response;
 	}
 	
 	private static String get(String apiUrl, Map<String, String> requestHeaders){
