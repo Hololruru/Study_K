@@ -1,14 +1,19 @@
 package com.webscraping.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -106,4 +112,117 @@ public class OpenApiController {
 		
 		return "openapi/naver-movie";
 	}
+	
+	@GetMapping(path = { "/search-movie" })
+	@ResponseBody
+	public String searchNaverMovie(String title) {
+		
+		String clientId = "SpfHcpgJIZfwSahhohl4"; //애플리케이션 클라이언트 아이디
+        String clientSecret = "hcwdgwgQkw"; //애플리케이션 클라이언트 시크릿
+
+        String text = null;
+        try {
+            text = URLEncoder.encode(title, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String apiURL = "https://openapi.naver.com/v1/search/movie.xml?query=" + text;    // XML 결과
+        //String apiURL = "https://openapi.naver.com/v1/search/movie.json?query="+ text; // JSON 결과
+
+        apiURL += "display=100";
+
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("X-Naver-Client-Id", clientId);
+        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+        
+        // String responseBody = get(apiURL, requestHeaders);
+        // System.out.println(responseBody);
+        
+        try {
+        	HttpURLConnection con = connect(apiURL);
+        	con.setRequestMethod("GET");
+            for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
+                con.setRequestProperty(header.getKey(), header.getValue());
+            }
+
+            int responseCode = con.getResponseCode(); // 요청 전송 + 응답 수신
+            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
+                InputStream is = con.getInputStream();
+                
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder parser = factory.newDocumentBuilder(); // xml parser
+                Document doc = parser.parse(is);
+                
+            } else { // 오류 발생
+
+            }
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
+		
+		return "success";
+	}
+	
+	private static String get(String apiUrl, Map<String, String> requestHeaders){
+        HttpURLConnection con = connect(apiUrl);
+        try {
+            con.setRequestMethod("GET");
+            for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
+                con.setRequestProperty(header.getKey(), header.getValue());
+            }
+
+            int responseCode = con.getResponseCode(); // 요청 전송 + 응답 수신
+            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
+                return readBody(con.getInputStream());
+            } else { // 오류 발생
+                return readBody(con.getErrorStream());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("API 요청과 응답 실패", e);
+        } finally {
+            con.disconnect();
+        }
+    }
+	
+	private static HttpURLConnection connect(String apiUrl){
+        try {
+            URL url = new URL(apiUrl); // URL : 네트워크 요청 처리 클래스
+            return (HttpURLConnection)url.openConnection();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
+        } catch (IOException e) {
+            throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
+        }
+    }
+	
+	private static String readBody(InputStream body){
+        InputStreamReader streamReader = new InputStreamReader(body);
+
+        try (BufferedReader lineReader = new BufferedReader(streamReader)) {
+            StringBuilder responseBody = new StringBuilder();
+
+            String line;
+            while ((line = lineReader.readLine()) != null) {
+                responseBody.append(line);
+            }
+
+            return responseBody.toString();
+        } catch (IOException e) {
+            throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
