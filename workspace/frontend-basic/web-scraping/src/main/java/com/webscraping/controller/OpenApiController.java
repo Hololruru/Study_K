@@ -115,7 +115,7 @@ public class OpenApiController {
 	
 	@GetMapping(path = { "/search-movie" })
 	@ResponseBody
-	public String searchNaverMovie(String title) {
+	public String searchNaverMovie(String title, Model model) {
 		
 		String clientId = "SpfHcpgJIZfwSahhohl4"; //애플리케이션 클라이언트 아이디
         String clientSecret = "hcwdgwgQkw"; //애플리케이션 클라이언트 시크릿
@@ -155,15 +155,20 @@ public class OpenApiController {
                 Document doc = parser.parse(is); // xml string -> object tree
                 
                 NodeList items = doc.getElementsByTagName("item"); // <item>...</item>을 모두 찾아서 반환
+                ArrayList<HashMap<String, Object>> movies = new ArrayList<>(); // 영화 목록 저장 변수
                 for (int i = 0; i < items.getLength(); i++) {
                 	Node item = items.item(i);
                 	NodeList children = item.getChildNodes();
+                	HashMap<String, Object> movie = new HashMap<>(); // 한 편의 영화 저장 변수
                 	for (int j = 0; j < children.getLength(); j++) {
                 		Node child = children.item(j);
-                		System.out.printf("[%s : %s]", child.getNodeName(), child.getTextContent());
+                		// System.out.printf("[%s : %s]", child.getNodeName(), child.getTextContent());
+                		movie.put(child.getNodeName(), child.getTextContent());
                 	}
-                	System.out.println();
+                	// System.out.println();
+                	movies.add(movie);
                 }
+                model.addAttribute("movies", movies); // JSP에서 읽을 수 있도록 저장
             } else { // 오류 발생
             	System.out.println("오류 발생");
             }
