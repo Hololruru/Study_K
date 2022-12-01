@@ -30,8 +30,8 @@ public class OpenApiController {
 		
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String today = sdf.format(new Date());
-			// String today = "20201130";
+			//String today = sdf.format(new Date());
+			String today = "20201130";
 			
 			StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1352000/ODMS_COVID_02/callCovid02Api"); /*URL*/
 	        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=R%2BBEwJ49XVmTutdoCAdNq4m7wjOsdFNhVtlzkxWVeZJPhwQqWbGcD7CNeQPipFzIWAanQVw%2FrPLsGkfcYvD4AQ%3D%3D"); /*Service Key*/
@@ -101,4 +101,9 @@ public class OpenApiController {
 		return "openapi/covid19";
 	}
 
+	@GetMapping(path = { "/naver-movie" })
+	public String showNaverMovieSearchForm() {
+		
+		return "openapi/naver-movie";
+	}
 }

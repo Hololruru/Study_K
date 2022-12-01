@@ -14,6 +14,7 @@
 	<h3>3. <a href="naver/movie">네이버 영화 조회</a></h3>
 	
 	<h3>4. <a href="openapi/covid19">코로나 발생 현황 조회</a></h3>
+	<h3>5. <a href="openapi/naver-movie">네이버 영화 검색 (Open API)</a></h3>
 
 </body>
 </html>
