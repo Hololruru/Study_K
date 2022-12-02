@@ -1,5 +1,7 @@
 package com.webscraping.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -335,7 +337,7 @@ public class OpenApiController {
 	        TypeToken<ArrayList<KakaoBook>> collectionType = new TypeToken<ArrayList<KakaoBook>>(){};
 	        ArrayList<KakaoBook> results = gson.fromJson(obj.get("documents"), collectionType);
 	        response.put("result", "success");
-        	response.put("images", results);
+        	response.put("books", results);
         	System.out.println(results);
 	        
 		} catch (Exception ex) {

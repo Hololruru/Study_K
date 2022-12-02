@@ -36,16 +36,19 @@
 				"dataType": "json",
 				"success": function(response, status, xhr) {
 					if (response.result == "success") {
-						const tbody = $('#image-list tbody');
+						const tbody = $('#book-list tbody');
 						tbody.empty(); // 기존의 하위 요소(tr) 모두 제거
-						const images = response.images;
+						const books = response.books;
 						let tr = null;
-						$.each(images, function(idx, image) {
+						$.each(books, function(idx, book) {
 							if (idx % 4 == 0) {
 								tr = $("<tr></tr>");
 								tbody.append(tr);
 							}							
-							tr.append('<td><img src="' + image.thumbnail_url + '"></td>');							
+							const td = $('<td></td>');
+							td.append('<img src="' + book.thumbnail + '">')
+							  .append(`<h4>\${book.title}</h4>`);
+							tr.append(td);
 						});
 					} else {
 						alert(response.result);
