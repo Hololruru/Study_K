@@ -27,11 +27,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.webscraping.dto.KakaoBook;
 
 @Controller
 @RequestMapping(path = "/openapi")
@@ -325,21 +328,15 @@ public class OpenApiController {
 	        InputStreamReader isr = new InputStreamReader(is);
 	        
 	        JsonElement root = JsonParser.parseReader(isr);
-	        
 	        JsonObject obj =root.getAsJsonObject();
-	        JsonArray images = obj.get("documents").getAsJsonArray();
-	        ArrayList<HashMap<String, Object>> results = new ArrayList<>();
-	        for (JsonElement element : images) {
-	        	JsonObject image = element.getAsJsonObject();
-//	        	HashMap<String, Object> result = new HashMap<>();
-//	        	for (String key : image.keySet()) {
-//	        		// System.out.printf("[%s:%s]", key, image.get(key).toString());
-//	        		result.put(key, image.get(key).getAsString());
-//	        	}
-//	        	results.add(result);
-	        }
+	        
+	        Gson gson = new Gson();
+//	        
+	        TypeToken<ArrayList<KakaoBook>> collectionType = new TypeToken<ArrayList<KakaoBook>>(){};
+	        ArrayList<KakaoBook> results = gson.fromJson(obj.get("documents"), collectionType);
 	        response.put("result", "success");
         	response.put("images", results);
+        	System.out.println(results);
 	        
 		} catch (Exception ex) {
 			ex.printStackTrace();

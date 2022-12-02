@@ -14,7 +14,7 @@ public class KakaoBook {
 	private Date datetime;
 	private String[] authors;
 	private String publisher;
-	private String translators;
+	private String[] translators;
 	private int price;
 	private int sale_price;
 	private String thumbnail;
