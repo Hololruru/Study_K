@@ -338,7 +338,8 @@ public class OpenApiController {
 	        ArrayList<KakaoBook> results = gson.fromJson(obj.get("documents"), collectionType);
 	        response.put("result", "success");
         	response.put("books", results);
-        	System.out.println(results);
+        	// System.out.println(results);
+        	
 	        
 		} catch (Exception ex) {
 			ex.printStackTrace();
