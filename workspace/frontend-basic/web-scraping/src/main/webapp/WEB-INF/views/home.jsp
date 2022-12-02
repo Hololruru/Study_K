@@ -17,6 +17,7 @@
 	<h3>5. <a href="openapi/naver-movie">네이버 영화 검색 (Open API)</a></h3>
 	<h3>6. <a href="openapi/naver-book">네이버 도서 검색 (Open API)</a></h3>
 	<h3>7. <a href="openapi/kakao-image">카카오 이미지 검색 (Open API)</a></h3>
+	<h3>8. <a href="openapi/kakao-book">카카오 도서 검색 (Open API)</a></h3>
 
 </body>
 </html>
