@@ -301,6 +301,68 @@ public class OpenApiController {
 		
 		return response;
 	}
+	
+	@GetMapping(path = { "/kakao-book" })
+	public String showKakaoBookSearchForm() {
+		
+		return "openapi/kakao-book";
+	}
+	
+	@GetMapping(path = { "/search-book" })
+	@ResponseBody
+	public HashMap<String, Object> searchKakaoBook(String name) {
+		
+		HashMap<String, Object> response = new HashMap<>();
+		
+		try {
+	        String encodedName = URLEncoder.encode(name, "UTF-8");
+	        System.out.println(encodedName);
+	        URL url = new URL("https://dapi.kakao.com/v2/search/image?query=" + encodedName);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("GET");
+	        conn.setRequestProperty("Authorization", "KakaoAK b303e8704e4b4e4625ac87042258882c");
+	        
+//	        InputStream is = conn.getInputStream();
+//	        InputStreamReader isr = new InputStreamReader(is);
+//	        BufferedReader br = new BufferedReader(isr);
+//	        
+//	        while (true) {
+//	        	String line = br.readLine();
+//	        	if (line == null) break;
+//	        	System.out.println(line);
+//	        }
+//	        br.close();
+//	        isr.close();
+//	        is.close();
+	        
+	        InputStream is = conn.getInputStream();
+	        InputStreamReader isr = new InputStreamReader(is);
+	        // JsonReader jr = new JsonReader(isr);
+	        
+	        JsonElement root = JsonParser.parseReader(isr);
+	        // JsonParser.parseReader(jr);
+	        
+	        JsonObject obj =root.getAsJsonObject();
+	        JsonArray images = obj.get("documents").getAsJsonArray();
+	        ArrayList<HashMap<String, Object>> results = new ArrayList<>();
+	        for (JsonElement element : images) {
+	        	JsonObject image = element.getAsJsonObject();
+	        	HashMap<String, Object> result = new HashMap<>();
+	        	for (String key : image.keySet()) {
+	        		// System.out.printf("[%s:%s]", key, image.get(key).toString());
+	        		result.put(key, image.get(key).getAsString());
+	        	}
+	        	results.add(result);
+	        }
+	        response.put("result", "success");
+        	response.put("images", results);
+	        
+		} catch (Exception ex) {
+			response.put("result", "fail");
+		}
+		
+		return response;
+	}
 
 }
 
