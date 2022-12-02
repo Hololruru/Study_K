@@ -3,16 +3,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>카카오 이미지 검색</title>
+<title>카카오 도서 검색</title>
 </head>
 <body>
 
-	<h2>카카오 이미지 검색</h2>
-	<input type="text" id="image-name">
+	<h2>카카오 도서 검색</h2>
+	<input type="text" id="book-title">
 	<button id="search-btn">검색</button>
 	<hr>
 	
-	<table id="image-list" border="1" style="width:700px;margin:0 auto">
+	<table id="book-list" border="1" style="width:700px;margin:0 auto">
 	<thead>
 	</thead>
 	<tbody>	
@@ -23,15 +23,15 @@
 	<script type="text/javascript">
 	$(function() {
 		$('#search-btn').on('click', function(event) {
-			const name = $('#image-name').val();
-			if (name.length == 0) {
+			const title = $('#book-title').val();
+			if (title.length == 0) {
 				alert('검색어를 입력하세요');
 				return;
 			}
 			
 			$.ajax({
-				"url": "search-image",
-				"data": "name=" + name,
+				"url": "search-book",
+				"data": "title=" + title,
 				"method": "get",
 				"dataType": "json",
 				"success": function(response, status, xhr) {
