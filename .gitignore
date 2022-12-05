@@ -150,3 +150,5 @@ $RECYCLE.BIN/
 tools/
 Servers/
 .Rproj.user
+
+node_modules/
