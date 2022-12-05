@@ -19,4 +19,10 @@ const FunctionComponent = ({ name, email, age }) => {
     );
 }
 
+FunctionComponent.defaultProps = {
+    name : "Anonymous2",
+    email: "anonymous2@example.com",
+    age: 0
+};
+
 export default FunctionComponent;

@@ -1,6 +1,19 @@
-import { Component } from 'react'
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ClassComponent extends Component {
+
+    static defaultProps = {
+        name : "Anonymous",
+        email: "anonymous@example.com",
+        age: 0
+    }
+
+    static propTypes = {
+        name: PropTypes.string,
+        email: PropTypes.string,
+        age: PropTypes.number
+    }
 
     render() {
         const { name, email, age } = this.props;

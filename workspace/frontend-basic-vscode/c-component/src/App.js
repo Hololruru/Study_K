@@ -11,11 +11,11 @@ function App() {
       <br /><br />
       <h2>React Component Demo</h2>
       <hr />
-      <ClassComponent name="John Doe"
+      <ClassComponent 
                       email="johndoe@example.com"
-                      age="29" />
+                      age="스물아홉" />
       <ClassComponent2 />
-      <FunctionComponent name="Jane Doe"
+      <FunctionComponent 
                          email="janedoe@example.com"
                          age="26" />
       <FunctionComponent2 />
