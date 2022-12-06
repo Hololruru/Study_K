@@ -28,8 +28,14 @@ function App() {
     setTodos(
       // todos.map( (todo) => todo.id === id ? { id: todo.id, title: todo.title, checked: !todo.checked } : todo );
       todos.map( (todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo )
-    )
+    );
 
+  }
+
+  const deleteTodo = (id) => {
+    setTodos(
+      todos.filter( (todo) => todo.id !== id )
+    );
   }
 
   return (
@@ -38,6 +44,7 @@ function App() {
         <TodoInsert onInsert={ insertTodo } />
         <TodoList todos={ todos }
                   onToggle={ toggleTodoChecked }
+                  onDelete={ deleteTodo }
         ></TodoList>
       </TodoTemplate>
     </div>
