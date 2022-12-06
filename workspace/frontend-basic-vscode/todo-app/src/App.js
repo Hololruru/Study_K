@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import TodoTemplate from './components/TodoTemplate';
 import TodoList from './components/TodoList';
+import TodoInsert from './components/TodoInsert';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
   return (
     <div>
       <TodoTemplate>
+        <TodoInsert />
         <TodoList todos={ todos }></TodoList>
       </TodoTemplate>
     </div>
