@@ -1,13 +1,19 @@
 import { MdCheckBoxOutlineBlank, MdCheckBox, MdRemoveCircleOutline } from 'react-icons/md';
-const TodoListItem = (props) => {
+import './TodoListItem.scss';
+
+const TodoListItem = ({ todo }) => {
+
+    const { title, checked } = todo;
 
     return (
-        <div>
-            <div>
-                <MdCheckBoxOutlineBlank />
-                <div>content</div>
+        <div className="TodoListItem">
+            <div className="checkbox">
+                {
+                    checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />
+                }
+                <div className="text">{ title }</div>
             </div>
-            <div>
+            <div className="remove">
                 <MdRemoveCircleOutline />
             </div>
         </div>

@@ -1,10 +1,17 @@
-import './TodoList.css';
+import './TodoList.scss';
+import TodoListItem from './TodoListItem';
 
-const TodoList = (props) => {
+// const TodoList = (props) => {
+//     const { todos } = props;
+const TodoList = ({ todos }) => {
 
     return (
         <div className="TodoList">
-            <h3>할 일 목록입니다.</h3>
+            {
+                todos.map( (todo) => {
+                    return <TodoListItem key={todo.id} todo={ todo } />
+                })                
+            }
         </div>
     );
 

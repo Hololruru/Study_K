@@ -1,5 +1,5 @@
 
-import './TodoTemplate.css'
+import './TodoTemplate.scss'
 
 // const TodoTemplate = (props) => {
 //     const { children } = props;
