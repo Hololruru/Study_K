@@ -2,9 +2,16 @@ import { useState } from 'react';
 
 
 const Actors2 = (props) => {
+
+    const removeActor = (id) => {
+        const newActors = actors.filter( (actor) => actor.id !== id );
+        setActors(newActors);
+    }
     
     const [actors, setActors] = useState([]);    
-    const actorsLi = actors.map( (actor) => <li key={actor.id}>{actor.name}</li> );
+    const actorsLi = actors.map( (actor) => <li key={ actor.id }
+                                                onDoubleClick={ (e) => removeActor(actor.id) }
+                                            >{ actor.name }</li> );
 
     const [name, setName] = useState("");
     const [nextId, setNextId] = useState(1);
