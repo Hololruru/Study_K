@@ -23,11 +23,22 @@ function App() {
     setNextId(nextId  + 1); 
   };
 
+  const toggleTodoChecked = (id) => {
+
+    setTodos(
+      // todos.map( (todo) => todo.id === id ? { id: todo.id, title: todo.title, checked: !todo.checked } : todo );
+      todos.map( (todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo )
+    )
+
+  }
+
   return (
     <div>
       <TodoTemplate>
         <TodoInsert onInsert={ insertTodo } />
-        <TodoList todos={ todos }></TodoList>
+        <TodoList todos={ todos }
+                  onToggle={ toggleTodoChecked }
+        ></TodoList>
       </TodoTemplate>
     </div>
   );
