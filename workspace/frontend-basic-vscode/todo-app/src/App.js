@@ -1,10 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
+import TodoTemplate from './components/TodoTemplate';
+import TodoList from './components/TodoList';
 
 function App() {
   return (
     <div>
-      <h3>할 일 관리 앱</h3>
+      <TodoTemplate>
+        <TodoList></TodoList>
+      </TodoTemplate>
     </div>
   );
 }
