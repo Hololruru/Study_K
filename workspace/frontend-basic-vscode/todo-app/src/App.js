@@ -11,13 +11,13 @@ function App() {
   // 성능 개선 hook 사용 테스트
   function createTestTodos() {
     const todos = [];
-    for (var i = 1; i <= 30; i++) {
+    for (var i = 1; i <= 3000; i++) {
       todos.push({ id: i, title: `할 일 ${i}`, checked: false });
     }
     return todos;
   }
   const [ todos, setTodos ] = useState(createTestTodos);
-  const [ nextId, setNextId ] = useState(31);
+  const [ nextId, setNextId ] = useState(3001);
   // end of 성능 개성 hook 사용 테스트 
 
   // const [ todos, setTodos ] = useState([
@@ -40,14 +40,14 @@ function App() {
 
     setTodos(
       // todos.map( (todo) => todo.id === id ? { id: todo.id, title: todo.title, checked: !todo.checked } : todo );
-      totos => todos.map( (todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo )
+      (todos) => todos.map( (todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo )
     );
 
-  }, [] );
+  }, []);
 
   const deleteTodo = useCallback( (id) => {
     setTodos(
-      todos.filter( (todo) => todo.id !== id )
+      (todos) => todos.filter( (todo) => todo.id !== id )
     );
   }, []);
 
