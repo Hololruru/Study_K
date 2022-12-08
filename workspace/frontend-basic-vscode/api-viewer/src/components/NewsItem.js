@@ -47,7 +47,7 @@ const NewsItem = (props) => {
             </div>
             <div className="contents">
                 <h2>
-                    { title }
+                    <a href={ url }>{ title }</a>
                 </h2>
                 <p>{ description }</p>
             </div>

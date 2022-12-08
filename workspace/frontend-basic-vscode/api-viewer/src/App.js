@@ -2,13 +2,15 @@ import './App.css';
 import HttpRequestDemo from './components/HttpRequestDemo';
 import NewsApiDemo from './components/NewsApiDemo';
 import NewsCategories from './components/NewsCategories';
+import NewsList from './components/NewsList';
 
 function App() {
   return (
-    <div style={{ padding: 20}}>
+    <div>
       {/* <HttpRequestDemo /> */}
       {/* <NewsApiDemo /> */}
-      <NewsCategories />
+      {/* <NewsCategories /> */}
+      <NewsList category={ "sports" } />
     </div>
   );
 }
