@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import styled from 'styled-components';
 
 const categories = [
     {
@@ -32,48 +32,60 @@ const categories = [
     },    
 ];
 
-const NewsCategories = (props) => {
+const CategoriesBlock = styled.div`
+    display: flex;
+    padding: 1rem;
+    width: 768px;
+    margin: 0 auto;
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        overflow-x: auto;
+    }
+`;
 
-    const [news, setNews] = useState(null);
-    const loadNews = (category) => {
-        const country = "kr";
-        const apiKey = "db4defe7779a4b8c9d3d65b8ce37798e";
-        const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}`;
-        axios.get(url)
-             .then((response) => { setNews(response.data) });
-    } 
+const Category = styled.div`
+    font-size: 1.125rem;
+    cursor: pointer;
+    white-space: pre;
+    text-decoration: none;
+    color: inherit;
+    padding-bottom: 0.25rem;
+
+    &:hover {
+        color: #495057;
+    }
+
+    &.active {
+        font-weight: 600;
+        border-bottom: 2px solid #22b8cf;
+        color: #22b8cf;
+        &:hover {
+            color: #3bc9db;
+        }
+    }
+
+    & + & {
+        margin-left: 1rem;
+    }
+`;
+
+// const NewsCategories = (props) => {
+//     const { category, onSelectCategory } = props;    
+const NewsCategories = ({ category, onSelectCategory }) => {
 
     return (
-        <div>
-            <div>
+        <CategoriesBlock>            
             {
                 categories.map( (category) => {
                     return (
-                        <button onClick={ (e) => loadNews(category.name) }>{category.text}</button>
+                        <Category key={ category.name }
+                                  onClick={ () => onSelectCategory(category.name) }>
+                            { category.text }
+                        </Category>
                     );
                 })
-            }
-            </div>
-            <hr />
-            <div>
-                <ul>
-                {
-                    news ? 
-                        news.articles.map( (article, idx) => {
-                            return (
-                                <li key={idx}>
-                                    <h3>{ article.title }</h3>
-                                    <p>{ article.description }</p>
-                                    <hr />
-                                </li>
-                            )
-                        })
-                        :                    
-                        "카테고리 버튼을 클릭하세요"
-                }
-                </ul>
-            </div>
-        </div>
+            }           
+        </CategoriesBlock>
     );
 };
 

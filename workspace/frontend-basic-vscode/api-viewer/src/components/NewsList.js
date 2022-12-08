@@ -24,9 +24,10 @@ const NewsList = (props) => {
     // useEffect : mount(초기화), update(상태변화) 이벤트 처리기 등록
     useEffect( () => {
             const loadNews = async (e) => {
-                const country = "kr";
-                const apiKey = "db4defe7779a4b8c9d3d65b8ce37798e";
-                const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}`;
+                const countryQs = "country=kr";
+                const apiKeyQs = "&apiKey=db4defe7779a4b8c9d3d65b8ce37798e";
+                const categoryQs = category === 'all' ? '' : `&category=${category}`;
+                const url = `https://newsapi.org/v2/top-headlines?${countryQs}${categoryQs}${apiKeyQs}`;
                 const response = await axios.get(url)
                 setArticles(response.data.articles);
             }
