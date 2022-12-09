@@ -37,7 +37,8 @@ function App() {
     setNextId(nextId  + 1); 
 
     // 서버에 데이터 전송 
-    axios.post("http://127.0.0.1:8080/react-web/demo/add-todo", 
+    //axios.post("http://127.0.0.1:8080/react-web/demo/add-todo", 
+    axios.post("/react-web/demo/add-todo", 
                todo, 
                { headers: { "Content-Type": "application/x-www-form-urlencoded" } })
          .then( response => {

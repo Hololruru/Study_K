@@ -23,7 +23,7 @@ public class DemoController {
 		return "demo/todo-app";
 	}
 	
-	@CrossOrigin
+//	@CrossOrigin
 	@PostMapping(path = { "/add-todo" })
 	@ResponseBody
 //	public String addTodo(@RequestBody Todo todo) {

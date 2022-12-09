@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="logo192.png" />
 <link rel="manifest" href="/react-web/react/todo-app/manifest.json" />
 <title>React App</title>
-<script defer="defer" src="/react-web/react/todo-app/static/js/main.c3b8bffe.js"></script>
+<script defer="defer" src="/react-web/react/todo-app/static/js/main.9277827b.js"></script>
 <link href="/react-web/react/todo-app/static/css/main.a587c590.css" rel="stylesheet">
 </head>
 <body>
