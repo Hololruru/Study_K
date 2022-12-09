@@ -34,13 +34,40 @@ public class DemoController {
 		
 		ServletContext application = req.getServletContext();
 		List<Todo> todos = (List<Todo>)application.getAttribute("todos");
-		int nextId = (int)application.getAttribute("nextId");
+		Integer nextId = (Integer)application.getAttribute("nextId");
 		if (todos == null) {
-			todos = new ArrayList<>();			
+			todos = new ArrayList<>();
 			nextId = 1;
-		} 
+		}
+		
+		todo.setId(nextId);
+		nextId++;
+		todos.add(todo);
+		
+		application.setAttribute("todos", todos);
+		application.setAttribute("nextId", nextId);
 		
 		return todos;
+	}
+	
+	@CrossOrigin
+	@GetMapping(path = { "/load-todos" })
+	@ResponseBody
+	public List<Todo> loadTodos(HttpServletRequest req) {
+		
+		ServletContext application = req.getServletContext();
+		List<Todo> todos = (List<Todo>)application.getAttribute("todos");
+		Integer nextId = (Integer)application.getAttribute("nextId");
+		if (todos == null) {
+			todos = new ArrayList<>();
+			nextId = 1;
+		}
+		
+		application.setAttribute("todos", todos);
+		application.setAttribute("nextId", nextId);
+		
+		return todos;
+		
 	}
 
 

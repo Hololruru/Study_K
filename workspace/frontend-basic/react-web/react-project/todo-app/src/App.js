@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import axios from "axios";
 
 import './App.css';
@@ -29,18 +29,27 @@ function App() {
   
   const [ todos, setTodos ] = useState([]);
 
+  useEffect( 
+    () => {
+      const loadTodos = async (e) => {
+        //const response = await axios.get("http://localhost:8080/react-web/demo/load-todos");
+        const response = await axios.get("/react-web/demo/load-todos");
+        setTodos(response.data);
+      };
+      loadTodos();
+    }, []
+  );
+
   const insertTodo = (title) => {
     // 서버에 데이터 전송 
-    axios.post("http://127.0.0.1:8080/react-web/demo/add-todo", 
-    // axios.post("/react-web/demo/add-todo", 
+    // axios.post("http://127.0.0.1:8080/react-web/demo/add-todo", 
+    axios.post("/react-web/demo/add-todo", 
                { title: title }, 
                { headers: { "Content-Type": "application/x-www-form-urlencoded" } })
          .then( response => {
             setTodos(response.data);
-            console.log();
          })
          .catch( e => {
-
          });
 
   };
