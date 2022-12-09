@@ -1,10 +1,11 @@
 import { useState, useCallback } from 'react';
+import axios from "axios";
 
-import logo from './logo.svg';
 import './App.css';
 import TodoTemplate from './components/TodoTemplate';
 import TodoList from './components/TodoList';
 import TodoInsert from './components/TodoInsert';
+
 
 function App() {
 
@@ -34,6 +35,16 @@ function App() {
     const newTodos = todos.concat(todo);
     setTodos(newTodos);
     setNextId(nextId  + 1); 
+
+    // 서버에 데이터 전송
+    axios.post("http://127.0.0.1:8080/react-web/demo/add-todo", todo)
+         .then( response => {
+
+         })
+         .catch( e => {
+
+         });
+
   };
 
   const toggleTodoChecked = useCallback( (id) => {
