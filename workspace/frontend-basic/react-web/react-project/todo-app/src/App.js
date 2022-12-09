@@ -28,21 +28,16 @@ function App() {
   // ]);  
   
   const [ todos, setTodos ] = useState([]);
-  const [ nextId, setNextId ] = useState(1);
 
   const insertTodo = (title) => {
-    const todo = { id: nextId, title: title, checked: false }
-    const newTodos = todos.concat(todo);
-    setTodos(newTodos);
-    setNextId(nextId  + 1); 
-
     // 서버에 데이터 전송 
-    //axios.post("http://127.0.0.1:8080/react-web/demo/add-todo", 
-    axios.post("/react-web/demo/add-todo", 
-               todo, 
+    axios.post("http://127.0.0.1:8080/react-web/demo/add-todo", 
+    // axios.post("/react-web/demo/add-todo", 
+               { title: title }, 
                { headers: { "Content-Type": "application/x-www-form-urlencoded" } })
          .then( response => {
-            console.log(response.data);
+            setTodos(response.data);
+            console.log();
          })
          .catch( e => {
 
