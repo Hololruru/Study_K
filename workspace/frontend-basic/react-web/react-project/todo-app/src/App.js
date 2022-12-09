@@ -36,7 +36,7 @@ function App() {
     setTodos(newTodos);
     setNextId(nextId  + 1); 
 
-    // 서버에 데이터 전송
+    // 서버에 데이터 전송 
     axios.post("http://127.0.0.1:8080/react-web/demo/add-todo", todo)
          .then( response => {
 
