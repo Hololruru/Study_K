@@ -26,7 +26,7 @@ const mapDispatch = (dispatch) => ({
 });
 
 // export default CounterContainer;
-export default connect({
-    mapState, // 상태 정보
-    mapDispatch // 상태 변경 액션
-})(CounterContainer)
+export default connect(
+    mapState, //  (mapStateToProps) : State -- Props
+    mapDispatch // (mapDispatchToProps) : Dispatch : Props
+)(CounterContainer)
