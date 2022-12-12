@@ -58,17 +58,17 @@
             const { number } = store.getState();
             document.querySelector('#message').innerText = number;
 
-            // 액션에 의해 state가 변경되면 호출할 함수 등록
+            // 액션에 의해 state가 변경되면 호출할 함수 등록 ( 필수 )
             store.subscribe( () => {
                 const { number } = store.getState();
                 document.querySelector('#message').innerText = number;
             });
 
             document.querySelector('#increase').addEventListener('click', function(event) {
-                store.dispatch(increment(1));
+                store.dispatch(increment(1)); // 상태 변경 통지
             });
             document.querySelector('#decrease').addEventListener('click', function(event) {
-                store.dispatch(decrement(1));
+                store.dispatch(decrement(1)); // 상태 변경 통지
             });
         });
 
