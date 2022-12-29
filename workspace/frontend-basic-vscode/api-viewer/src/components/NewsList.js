@@ -29,6 +29,7 @@ const NewsList = (props) => {
                 const categoryQs = category === 'all' ? '' : `&category=${category}`;
                 const url = `https://newsapi.org/v2/top-headlines?${countryQs}${categoryQs}${apiKeyQs}`;
                 const response = await axios.get(url)
+                
                 setArticles(response.data.articles);
             }
             loadNews();
