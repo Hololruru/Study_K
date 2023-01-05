@@ -31,9 +31,24 @@
 
     <h3>4. 가위 바위 보 게임</h3>
     <!-- 가위 바위 보 선택 후 요청 -->
+    <form action="game1" method="POST">
+        가위,바위,보 선택
+        <select name="selection">
+            <option value="1">가위</option>
+            <option value="2">바위</option>
+            <option value="3">보</option>
+        </select>
+        <br>
+        <input type="submit" value="겨루기">
+    </form>
 
     <h3>5. 로또 당첨 예상 번호 뽑기</h3>
     <!-- 게임 수 입력 후 요청-->
+    <form action="lotto" method="POST">
+        게임 수 : <input type="text" name="cnt">
+        <br>
+        <input type="submit" value="뽑기">
+    </form>
     
 </body>
 </html>
