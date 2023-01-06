@@ -79,4 +79,22 @@ def upload_picture():
     picture.save(picture.filename)
 
     return "<h1>Succeeded Upload Picture</h1>"
+
+
+import pymysql
+
+connection_info = { "host": "127.0.0.1", "user" : "pythonuser", "password" : "pythonuser", "database" : "pythondemo", "charset": "utf8" }
+
+@app.post("/save-data")
+def save_data():
+    email = request.form.get("email", "")
+    phone = request.form.get("phone", "")
+
+    # db = pymysql.connect(host=connection_info['host'], 
+    #                      database=connection_info['database'],
+    #                      user=connection_info['user'], password=connection_info['password'], 
+    #                      charset=connection_info['charset'])
+    db = pymysql.connect(**connection_info) # (host="127.0.0.1", user="pythonuser", ....)
+
+    pass
     
