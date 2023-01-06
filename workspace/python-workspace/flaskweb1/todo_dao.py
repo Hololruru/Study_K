@@ -32,5 +32,20 @@ class TodoDao:
 
         cursor.close()
         conn.close()
-        
+
         return todos
+
+    def selectTodoByIdx(self, idx):
+        conn = pymysql.connect(**TodoDao.connection_info)
+        cursor = conn.cursor()
+
+        sql = """SELECT idx, title, content, regdate
+                 FROM todo
+                 WHERE idx = %s"""
+        cursor.execute(sql, (idx, ))
+        todo = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+        
+        return todo

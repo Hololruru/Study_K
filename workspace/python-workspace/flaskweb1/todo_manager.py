@@ -39,3 +39,14 @@ def todo_write():
 
     # return redirect("/todo/list")
     return redirect(url_for("todo_list"))
+
+@app.get("/todo/detail")
+def todo_detail():
+    idx = int(request.args.get("idx", -1))
+    if idx == -1:
+        return redirect(url_for('todo_list'))
+    
+    todoDao = TodoDao()
+    todo = todoDao.selectTodoByIdx(idx)
+
+    return render_template("todo/todo-detail.html", todo=todo)
