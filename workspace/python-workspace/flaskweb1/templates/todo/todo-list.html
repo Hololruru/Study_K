@@ -1,36 +1,14 @@
-<!DOCTYPE html>
+{% extends 'todo_base.html' %}
 
-<html>
-<head>
-	<meta charset='utf-8' />
+{% block title %}
 	<title>Home</title>
-	<link rel='Stylesheet' href='/static/styles/default.css' />
-</head>
-<body>
+{% endblock %}
 
-	<div id='pageContainer'>
-		
-		<div id="header">    	
-            <div class="title">
-                <a href="/home">DEMO WEBSITE</a>
-            </div>
-            <div class="links">
-            	<a href="#">로그인</a>
-                <a href="#">회원가입</a>
-            </div>
-        </div>
-                
-        <div id="menu">
-            <div>
-                <ul>
-                    <li><a href="#">사용자관리</a></li>
-					<li><a href="#">메일보내기</a></li>
-					<li><a href="#">자료실</a></li>
-					<li><a href="#">게시판</a></li>
-					<li><a href="/todo/list">할일</a></li>
-                </ul>
-            </div>
-		</div>
+{% block custom_css %}
+	<link rel='Stylesheet' href='/static/styles/default.css' />
+{% endblock %}
+
+{% block main_content %}
 		
 		<div style="padding-top:25px;text-align:center">
 		
@@ -55,9 +33,5 @@
 			</table>
 			
 		</div>
-	</div>
 
-</body>
-</html>
-
-
+{% endblock %}
