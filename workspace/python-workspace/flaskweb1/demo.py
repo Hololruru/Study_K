@@ -72,4 +72,11 @@ def select_golden_numbers():
         numbers_list.append(numbers)
 
     return render_template('lotto-result.html', numbers_list=numbers_list)
+
+@app.post("/upload-picture")
+def upload_picture():
+    picture = request.files['picture']
+    picture.save(picture.filename)
+
+    return "<h1>Succeeded Upload Picture</h1>"
     
