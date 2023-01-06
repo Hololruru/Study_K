@@ -21,4 +21,16 @@ class TodoDao:
         conn.close()
 
     def selectAllTodos(self):
-        pass
+        conn = pymysql.connect(**TodoDao.connection_info)
+        cursor = conn.cursor()
+
+        sql = """SELECT idx, title, regdate
+                 FROM todo
+                 ORDER BY idx DESC"""
+        cursor.execute(sql)
+        todos = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+        
+        return todos

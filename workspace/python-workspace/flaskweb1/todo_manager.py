@@ -16,8 +16,12 @@ def home():
 def todo_list():
 
     # 데이터베이스 데이터 조회
+    todoDao = TodoDao()
+    todos = todoDao.selectAllTodos()
 
-    return render_template("todo/todo-list.html")
+    print(todos)
+
+    return render_template("todo/todo-list.html", todos=todos)
 
 @app.get("/todo/write")
 def show_todo_write_form():
