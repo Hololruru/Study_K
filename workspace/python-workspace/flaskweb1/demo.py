@@ -90,11 +90,34 @@ def save_data():
     email = request.form.get("email", "")
     phone = request.form.get("phone", "")
 
-    # db = pymysql.connect(host=connection_info['host'], 
-    #                      database=connection_info['database'],
-    #                      user=connection_info['user'], password=connection_info['password'], 
-    #                      charset=connection_info['charset'])
-    db = pymysql.connect(**connection_info) # (host="127.0.0.1", user="pythonuser", ....)
+    # conn = pymysql.connect(host=connection_info['host'], 
+    #                        database=connection_info['database'],
+    #                        user=connection_info['user'], password=connection_info['password'], 
+    #                        charset=connection_info['charset'])
+    conn = pymysql.connect(**connection_info) # (host="127.0.0.1", user="pythonuser", ....)
 
-    pass
-    
+    cursor = conn.cursor() # cursor : 명령 실행 객체
+
+    sql = """INSERT INTO person (email, phone) 
+             VALUES (%s, %s)"""
+    cursor.execute(sql, (email, phone))
+
+    conn.commit() # 이전에 실행한 명령을 적용
+    cursor.close()
+    conn.close()
+
+    return "succeeded save data"
+
+@app.get("/load-data")
+def load_data():
+    conn = pymysql.connect(**connection_info)
+    cursor = conn.cursor()
+
+    sql = """SELECT idx, email, phone
+            FROM person"""
+    cursor.execute(sql)
+    rows = cursor.fetchall() # select 명령인 경우 사용 : 데이터 꺼내기
+
+    return render_template('person-list.html', persons=rows)
+
+
