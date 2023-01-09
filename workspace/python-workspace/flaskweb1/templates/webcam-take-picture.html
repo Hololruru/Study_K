@@ -23,13 +23,12 @@
                                 <tr>
                                     <td style="width:50%">
                                         <video id="video" style="width:500px;height:500px" autoplay>
-                                        </video>
-                                        
+                                        </video>                                        
                                     </td>
                                     <td>
                                         <canvas id="picture-display" width="500" height="350"></canvas>
                                         <form action="upload-picture" method="post" enctype="multipart/form-data">
-                                            <input type="file" name="picture">
+                                            <input type="file" id="picture" name="picture" style="display:none">
                                         </form>
                                     </td>
                                 </tr>
@@ -101,6 +100,13 @@
                 const context = canvas.getContext('2d');
 
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                canvas.toBlob( (blob) => {
+                    const file = new File([blob], "number.png"); 
+                    const dt = new DataTransfer();
+                    dt.items.add(file)
+                    $('#picture')[0].files = dt.files;
+                });
             }
 
         });
