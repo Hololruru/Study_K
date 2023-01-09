@@ -8,6 +8,8 @@ import numpy as np
 import cv2
 from tensorflow import keras
 
+import pytesseract
+
 app = Flask(__name__)
 
 # @app.route("/", methods=['GET'])
@@ -185,6 +187,10 @@ def upoload_picture2():
     # picture.save(picture.filename)
 
     mnist_data = np.frombuffer(picture.read(), np.uint8)  # 파일 데이터 -> numpy array
+    imgt = cv2.imdecode( mnist_data, cv2.IMREAD_COLOR)   # numpy array -> image formatted numpy array
+    # imgt = cv2.cvtColor(imgt, cv2.COLOR_BGR2RGB)
+    cv2.imwrite("color-data.png", imgt)
+
     img = cv2.imdecode( mnist_data, cv2.IMREAD_GRAYSCALE)   # numpy array -> image formatted numpy array
     _, bin_img = cv2.threshold(img, 127, 256, cv2.THRESH_BINARY_INV)
 
@@ -220,5 +226,23 @@ def upoload_picture2():
             return "no number detected 2"
 
 
+@app.get("/take-picture2")
+def show_take_picture_form2():
 
+    return render_template("webcam-take-picture2.html")
+
+@app.post('/upload-picture3')
+def upload_picture3():
+
+    picture = request.files['picture']
+    picture_data = np.frombuffer(picture.read(), np.uint8)  # 파일 데이터 -> numpy array
+    img = cv2.imdecode( picture_data, cv2.IMREAD_COLOR)
+
+    # print(img.shape)
+    # cv2.imwrite("picture.png", img)
+
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    data = pytesseract.image_to_string(image=img, lang="eng+kor")
+
+    return data
     
