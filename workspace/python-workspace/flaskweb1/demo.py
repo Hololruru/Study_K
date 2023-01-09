@@ -154,10 +154,11 @@ def predict_species():
 def predict_number():
     import io
 
-    mnist_img = request.files['mnist']
-    mnist_data = np.frombuffer(mnist_img.read(), np.uint8)
+    mnist_img = request.files['mnist']  # 파일 읽기
+    mnist_data = np.frombuffer(mnist_img.read(), np.uint8)  # 파일 데이터 -> numpy array
+    img = cv2.imdecode( mnist_data, cv2.IMREAD_GRAYSCALE)   # numpy array -> image formatted numpy array
 
-    img = cv2.imdecode( mnist_data, cv2.IMREAD_GRAYSCALE)
+    # process img fit to train model
     reshaped_img = img.reshape(-1, 28, 28, 1)
     reshaped_scaled_img = reshaped_img / reshaped_img.max()
     
