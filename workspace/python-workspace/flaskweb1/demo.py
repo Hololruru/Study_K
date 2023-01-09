@@ -171,6 +171,11 @@ def predict_number():
     # print("=========================> {0}".format(selected_number))
 
     return "NUMBER IN IMAGE IS {0}".format(selected_number)
+
+@app.get("/take-picture")
+def show_take_picture_form():
+
+    return render_template("webcam-take-picture.html")
     
 
 
