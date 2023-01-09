@@ -5,6 +5,8 @@ from flask import render_template, request
 import pickle
 
 import numpy as np
+import cv2
+from tensorflow import keras
 
 app = Flask(__name__)
 
@@ -150,12 +152,24 @@ def predict_species():
 
 @app.post("/predict-number")
 def predict_number():
+    import io
+
     mnist_img = request.files['mnist']
-    # mnist_img(FileStorage) -> ndarray (28, 28, 1)
+    mnist_data = np.frombuffer(mnist_img.read(), np.uint8)
 
+    img = cv2.imdecode( mnist_data, cv2.IMREAD_GRAYSCALE)
+    reshaped_img = img.reshape(-1, 28, 28, 1)
+    reshaped_scaled_img = reshaped_img / reshaped_img.max()
     
+    # print("------------------> {0} / {1}".format(reshaped_scaled_img.shape, reshaped_scaled_img.max()))
 
-    return "success"
+    mnist_model = keras.models.load_model(filepath="model/mnist_model.h5")
+    predicted_value = mnist_model.predict(reshaped_scaled_img)
+    selected_number = np.argmax(predicted_value)
+
+    # print("=========================> {0}".format(selected_number))
+
+    return "NUMBER IN IMAGE IS {0}".format(selected_number)
     
 
 
