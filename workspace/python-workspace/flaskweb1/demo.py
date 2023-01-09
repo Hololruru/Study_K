@@ -121,3 +121,9 @@ def load_data():
     return render_template('person-list.html', persons=rows)
 
 
+@app.post('/predict-species')
+def predict_species():
+    sl = request.form.get("sl")
+    sw = request.form.get("sw")
+    pl = request.form.get("pl")
+    pw = request.form.get("pw")
