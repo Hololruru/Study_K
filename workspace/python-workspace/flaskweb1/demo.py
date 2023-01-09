@@ -182,9 +182,25 @@ def show_take_picture_form():
 def upoload_picture2():
 
     picture = request.files['picture']
-    picture.save(picture.filename)
+    # picture.save(picture.filename)
 
-    return "success"
+    mnist_data = np.frombuffer(picture.read(), np.uint8)  # 파일 데이터 -> numpy array
+    img = cv2.imdecode( mnist_data, cv2.IMREAD_GRAYSCALE)   # numpy array -> image formatted numpy array
+    _, img = cv2.threshold(img, 127, 256, cv2.THRESH_BINARY)
+
+    resized_img = cv2.resize(img, (28, 28), interpolation=cv2.INTER_AREA)
+
+    # process img fit to train model
+    reshaped_img = resized_img.reshape(-1, 28, 28, 1)
+    reshaped_scaled_img = reshaped_img / reshaped_img.max()    
+    
+    mnist_model = keras.models.load_model(filepath="model/mnist_model.h5")
+    predicted_value = mnist_model.predict(reshaped_scaled_img)
+    selected_number = np.argmax(predicted_value)
+
+    # print("=========================> {0}".format(selected_number))
+
+    return "NUMBER IN IMAGE IS {0}".format(selected_number)    
 
 
 
