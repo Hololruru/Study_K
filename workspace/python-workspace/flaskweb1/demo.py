@@ -2,6 +2,8 @@ from flask import Flask
 
 from flask import render_template, request
 
+import pickle
+
 app = Flask(__name__)
 
 # @app.route("/", methods=['GET'])
@@ -123,7 +125,23 @@ def load_data():
 
 @app.post('/predict-species')
 def predict_species():
-    sl = request.form.get("sl")
-    sw = request.form.get("sw")
-    pl = request.form.get("pl")
-    pw = request.form.get("pw")
+    
+    sl = float(request.form.get("sl"))
+    sw = float(request.form.get("sw"))
+    pl = float(request.form.get("pl"))
+    pw = float(request.form.get("pw"))
+
+    with open("model/iris_estimator.pkl", "rb") as f:
+        iris_model = pickle.load(f)
+
+    predicted_value = iris_model.predict([[sl, sw, pl, pw]])
+    if predicted_value[0] == 0:
+        species = 'setosa'
+    elif predicted_value[0] == 1:
+        species = 'versicolor'
+    else:
+        species = 'virginica'
+
+    # species = 'setosa' if species == 0 else 'versicolor' if species == 1 else 'virginica'
+
+    return species
