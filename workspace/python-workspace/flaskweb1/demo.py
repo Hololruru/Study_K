@@ -4,6 +4,8 @@ from flask import render_template, request
 
 import pickle
 
+import numpy as np
+
 app = Flask(__name__)
 
 # @app.route("/", methods=['GET'])
@@ -145,3 +147,17 @@ def predict_species():
     # species = 'setosa' if species == 0 else 'versicolor' if species == 1 else 'virginica'
 
     return species
+
+@app.post("/predict-number")
+def predict_number():
+    mnist_img = request.files['mnist']
+    # mnist_img(FileStorage) -> ndarray (28, 28, 1)
+
+    
+
+    return "success"
+    
+
+
+
+    
