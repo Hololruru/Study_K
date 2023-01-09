@@ -176,7 +176,15 @@ def predict_number():
 def show_take_picture_form():
 
     return render_template("webcam-take-picture.html")
-    
+
+
+@app.post("/upload-picture2")
+def upoload_picture2():
+
+    picture = request.files['picture']
+    picture.save(picture.filename)
+
+    return "success"
 
 
 

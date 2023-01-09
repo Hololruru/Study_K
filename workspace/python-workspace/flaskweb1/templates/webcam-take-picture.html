@@ -27,7 +27,7 @@
                                     </td>
                                     <td>
                                         <canvas id="picture-display" width="500" height="350"></canvas>
-                                        <form action="upload-picture" method="post" enctype="multipart/form-data">
+                                        <form id="picture-form" action="upload-picture2" method="post" enctype="multipart/form-data">
                                             <input type="file" id="picture" name="picture" style="display:none">
                                         </form>
                                     </td>
@@ -44,6 +44,9 @@
                             </a>
                             <a id="lnkTakePicture" href="#!" class="btn btn-success">
                                 Take Picture
+                            </a>
+                            <a id="lnkUploadPicture" href="#!" class="btn btn-success">
+                                Upload Picture
                             </a>
                         </div>
                     </div>
@@ -109,6 +112,12 @@
                 });
             }
 
+        });
+
+        $('#lnkUploadPicture').on('click', function(event) {
+            if ($('#picture')[0].files.length > 0) {
+                $('#picture-form').submit();
+            }
         });
         
         // start();
