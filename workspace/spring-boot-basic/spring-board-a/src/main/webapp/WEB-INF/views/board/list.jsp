@@ -10,7 +10,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>게시글 목록</title>
-	<link rel="Stylesheet" href="/spring-demoweb-f/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/resources/styles/default.css" />
 	<style>
 	a { text-decoration: none }
 	</style>
@@ -24,7 +24,7 @@
 		
 		<div style="padding-top:25px;text-align:center">
 		
-			[ <a href="write.action">게시글 쓰기</a> ]
+			[ <a href="write">게시글 쓰기</a> ]
 			<br /><br />
 			
 			<table border="1" style="width:600px;margin:0 auto">
@@ -44,7 +44,7 @@
 						<span style="color:lightgray">${ board.title } [삭제된 글]</span>
 						</c:when>						
 						<c:otherwise>
-						<a href='detail.action?boardNo=${ board.boardNo }&pageNo=${ pageNo }'>
+						<a href='detail?boardNo=${ board.boardNo }&pageNo=${ pageNo }'>
 						${ board.title }
 						</a>
 						</c:otherwise>

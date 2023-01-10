@@ -16,8 +16,8 @@
 	<title>글상세보기</title>
 	
 	<link rel="Stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-	<link rel="Stylesheet" href="/spring-demoweb-f/resources/styles/default.css">
-	<link rel="Stylesheet" href="/spring-demoweb-f/resources/styles/input.css">
+	<link rel="Stylesheet" href="/resources/styles/default.css">
+	<link rel="Stylesheet" href="/resources/styles/input.css">
 </head>
 <body>
 
@@ -51,7 +51,7 @@
 		                <th>첨부파일</th>
 		                <td>
 		                <c:forEach var="attachment" items="${ board.attachments }">
-			                <a href="download.action?attachNo=${ attachment.attachNo }" style="text-decoration: none">
+			                <a href="download?attachNo=${ attachment.attachNo }" style="text-decoration: none">
 			                   ${ attachment.userFileName }
 			                </a>
 			                [${ attachment.downloadCount }]
@@ -82,7 +82,7 @@
 		<br><br>
 		
 		<!-- write comment area -->
-		<form id="commentform" action="write-comment.action" method="post">
+		<form id="commentform" action="write-comment" method="post">
 			<input type="hidden" name="boardNo" value="${ board.boardNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
 			<input type="hidden" name="writer" value="${ loginuser.memberId }" />
@@ -126,7 +126,7 @@
 	      </div>
 	      <div class="modal-body">
 	      <!-- write comment area -->
-			<form id="recommentform" action="write-recomment.action" method="post">
+			<form id="recommentform" action="write-recomment" method="post">
 				<input type="hidden" name="commentNo" value="" />
 				<input type="hidden" name="writer" value="${ loginuser.memberId }" />
 				   
@@ -149,24 +149,24 @@
 	<script type="text/javascript">
 	$(function() {
 		$('#tolist_button').on('click', function(event) {
-			location.href = 'list.action?pageNo=${ requestScope.pageNo }';
+			location.href = 'list?pageNo=${ requestScope.pageNo }';
 		});
 		
 		$('#delete_button').on('click', function(event) {
 			const ok = confirm("${ board.boardNo }번 글을 삭제할까요?");
 			if (!ok) return;
 			
-			//location.href = 'delete.action?boardNo=${board.boardNo}&pageNo=${pageNo}';
-			location.href = '${board.boardNo}/delete.action?pageNo=${pageNo}';
+			//location.href = 'delete?boardNo=${board.boardNo}&pageNo=${pageNo}';
+			location.href = '${board.boardNo}/delete?pageNo=${pageNo}';
 		});
 		
 		$('#update_button').on('click', function(event) {
-			location.href = 'edit.action?boardNo=${board.boardNo}&pageNo=${pageNo}';
+			location.href = 'edit?boardNo=${board.boardNo}&pageNo=${pageNo}';
 		});
 		
 		///////////////////////////////////////
 		
-		$('#comment-list').load("comment-list.action?boardNo=${ board.boardNo }");
+		$('#comment-list').load("comment-list?boardNo=${ board.boardNo }");
 		
 		$('#writecomment').on('click', function(event) {
 			// alert('서버로 댓글 쓰기 요청');
@@ -182,13 +182,13 @@
 			// const formData = $('#commentform').serializeArray(); //form 내부의 모든 입력 요소의 값을 전송가능한 객체 배열 형식으로 반환
 						
 			$.ajax({
-				"url": "write-comment.action",
+				"url": "write-comment",
 				"method": "post",
 				"data": formData,
 				"success": function(data, status, xhr) {
 					if (data == "success") {
 						// alert('댓글을 등록했습니다.');
-						$('#comment-list').load("comment-list.action?boardNo=${ board.boardNo }");
+						$('#comment-list').load("comment-list?boardNo=${ board.boardNo }");
 						$('#commentform textarea').val("");
 					}
 				},
@@ -239,11 +239,11 @@
 			
 			// 동기 방식 All Refresh 요청
 			//location.href = 
-			//	'delete-comment.action?commentNo=' + commentNo + '&boardNo=${board.boardNo}&pageNo=${pageNo}';
+			//	'delete-comment?commentNo=' + commentNo + '&boardNo=${board.boardNo}&pageNo=${pageNo}';
 			
 			// jQuery 기반의 비동기(ajax) 요청
 			$.ajax({
-				"url": "delete-comment.action",
+				"url": "delete-comment",
 				"method": "get",
 				"data" : 'commentNo=' + commentNo,
 				"success": function(data, status, xhr) {
@@ -257,7 +257,7 @@
 						*/
 						// 2. 댓글 목록 전체 갱신
 						//    jQuery의 load 함수 : 지정된 html 요소의 내용을 응답받은 부분 HTML로 (비동기) 갱신
-						$('#comment-list').load("comment-list.action?boardNo=${ board.boardNo }");
+						$('#comment-list').load("comment-list?boardNo=${ board.boardNo }");
 					} else {
 						alert('삭제 실패 2');
 					}
@@ -278,12 +278,12 @@
 			// alert(editForm.serialize());
 			
 			$.ajax({
-				"url": "update-comment.action",
+				"url": "update-comment",
 				"method": "post",
 				"data": editForm.serialize(),
 				"success": function(data) {
 					if (data == "success") {
-						$('#comment-list').load("comment-list.action?boardNo=${ board.boardNo }");
+						$('#comment-list').load("comment-list?boardNo=${ board.boardNo }");
 					}
 				},
 				"error": function(xhr, status, err) {
@@ -314,12 +314,12 @@
 			var formData = $('#recommentform').serialize();
 			
 			$.ajax({
-				"url": "write-recomment.action",
+				"url": "write-recomment",
 				"method": "post",
 				"data": formData,
 				"success": function(data) {
 					if (data == "success") {
-						$('#comment-list').load("comment-list.action?boardNo=${ board.boardNo }");
+						$('#comment-list').load("comment-list?boardNo=${ board.boardNo }");
 						$('#recomment-modal').modal('hide');
 					}
 				},

@@ -33,7 +33,7 @@ public class BoardServiceImpl implements BoardService {
 	private BoardCommentMapper commentMapper;
 	
 	// 사용자가 입력한 게시글 데이터를 받아서 글쓰기 처리
-	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+	// @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
 	public void writeBoard(BoardDto board) {
 		

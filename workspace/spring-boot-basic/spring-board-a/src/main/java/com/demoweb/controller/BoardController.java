@@ -37,13 +37,13 @@ public class BoardController {
 	
 	private final int PAGE_SIZE = 3; 	// 한 페이지에 표시되는 데이터 개수
 	private final int PAGER_SIZE = 3;	// 한 번에 표시할 페이지 번호 개수
-	private final String LINK_URL = "list.action"; // 페이지 번호를 클릭했을 때 이동할 페이지 경로
+	private final String LINK_URL = "list"; // 페이지 번호를 클릭했을 때 이동할 페이지 경로
 	
 	@Autowired
 	@Qualifier("boardService")
 	private BoardService boardService;
 	
-	@GetMapping(path = { "/list.action" })
+	@GetMapping(path = { "/list" })
 	public String showBoardList(@RequestParam(defaultValue = "1") int pageNo, Model model) {
 		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )
 		// 2. 데이터 처리 ( 데이터 조회 )		
@@ -61,14 +61,14 @@ public class BoardController {
 		return "board/list"; 	// /WEB-INF/views/ + board/list + .jsp
 	}
 	
-	@GetMapping(path = { "/detail.action" })
+	@GetMapping(path = { "/detail" })
 	public String showBoardDetail(@RequestParam(defaultValue = "-1") int boardNo, 
 								  @RequestParam(defaultValue = "-1") int pageNo,
 								  HttpSession session, 
 								  Model model) {		
 		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )	
 		if (boardNo == -1 || pageNo == -1) { // 요청 데이터가 잘못된 경우
-			return "redirect:list.action";
+			return "redirect:list";
 		}
 		
 		// 2. 데이터 처리
@@ -86,7 +86,7 @@ public class BoardController {
 		BoardDto board = boardService.findBoardByBoardNo(boardNo);
 		
 		if (board == null) { // 조회되지 않은 경우 (글 번호가 잘못되었거나 또는 삭제된 글인 경우)
-			return "redirect:list.action";
+			return "redirect:list";
 		}
 		
 		// 3. View에서 읽을 수 있도록 데이터 전달
@@ -97,18 +97,18 @@ public class BoardController {
 		return "board/detail";
 	}
 	
-	@GetMapping(path = { "/write.action" })
+	@GetMapping(path = { "/write" })
 	public String showWriteBoardForm() {
 		
 		return "board/write";
 	}
 
-//	@PostMapping(path = { "/write.action" })
+//	@PostMapping(path = { "/write" })
 //	public String writeBoard(BoardDto board, 
 //							 //@RequestParam("attach") MultipartFile[] attaches) {
 //							 @RequestParam("attach") MultipartFile attach) {
 	
-	@PostMapping(path = { "/write.action" })
+	@PostMapping(path = { "/write" })
 	public String writeBoard(BoardDto board, MultipartHttpServletRequest req) {
 		// 1. 요청 데이터 읽기 (전달인자로 대체)
 		MultipartFile attach = req.getFile("attach");
@@ -141,15 +141,15 @@ public class BoardController {
 		boardService.writeBoard(board);
 		// 3. View에서 읽을 수 있도록 데이터 저장
 		// 4. View 또는 Controller로 이동
-		return "redirect:list.action";
+		return "redirect:list";
 	}
 	
-//	@GetMapping(path = { "/delete.action" })
+//	@GetMapping(path = { "/delete" })
 //	public String deleteBoard(@RequestParam(defaultValue = "-1")int boardNo, 
 //							  @RequestParam(defaultValue = "-1")int pageNo,
 //							  Model model) {
 //		if (boardNo == -1 || pageNo == -1) {
-//			//return "redirect:list.action";
+//			//return "redirect:list";
 //			model.addAttribute("error_type", "delete");
 //			model.addAttribute("message", "잘못된 요청 : 글 번호 또는 페이지 번호가 없습니다.");
 //			return "board/error"; //	/WEB-INF/views/ + board/error + .jsp
@@ -157,15 +157,15 @@ public class BoardController {
 //		
 //		boardService.deleteBoard(boardNo);
 //		
-//		return "redirect:list.action?pageNo=" + pageNo;
+//		return "redirect:list?pageNo=" + pageNo;
 //	}
-	@GetMapping(path = { "/{boardNo}/delete.action" })
+	@GetMapping(path = { "/{boardNo}/delete" })
 	public String deleteBoard(@PathVariable("boardNo") int boardNo, 
 							  @RequestParam(defaultValue = "-1")int pageNo,
 							  Model model) {	
 		
 		if (pageNo == -1) {
-			//return "redirect:list.action";
+			//return "redirect:list";
 			model.addAttribute("error_type", "delete");
 			model.addAttribute("message", "잘못된 요청 : 글 번호 또는 페이지 번호가 없습니다.");
 			return "board/error"; //	/WEB-INF/views/ + board/error + .jsp
@@ -173,10 +173,10 @@ public class BoardController {
 		
 		boardService.deleteBoard(boardNo);
 		
-		return "redirect:/board/list.action?pageNo=" + pageNo;
+		return "redirect:/board/list?pageNo=" + pageNo;
 	}
 	
-	@GetMapping(path = { "/download.action" })
+	@GetMapping(path = { "/download" })
 	public View download(@RequestParam(defaultValue = "-1") int attachNo, Model model) {
 		
 		if (attachNo == -1) {
@@ -194,7 +194,7 @@ public class BoardController {
 		return view;
 	}
 	
-	@GetMapping(path = { "/edit.action" })
+	@GetMapping(path = { "/edit" })
 	public String showBoardEditForm(@RequestParam(defaultValue = "-1") int boardNo, 
 									@RequestParam(defaultValue = "-1") int pageNo,
 									Model model) {
@@ -215,7 +215,7 @@ public class BoardController {
 				
 	}
 	
-	@PostMapping(path = { "/edit.action" })
+	@PostMapping(path = { "/edit" })
 	public String modifyBoard(@RequestParam(defaultValue = "-1") int pageNo,
 							  BoardDto board,
 							  Model model) {
@@ -228,13 +228,13 @@ public class BoardController {
 		
 		boardService.modifyBoard(board);
 		
-		return "redirect:detail.action?boardNo=" + board.getBoardNo() + "&pageNo=" + pageNo;
+		return "redirect:detail?boardNo=" + board.getBoardNo() + "&pageNo=" + pageNo;
 		
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////
 	
-	@GetMapping(path = { "/comment-list.action" })
+	@GetMapping(path = { "/comment-list" })
 	public String showCommentList(int boardNo, Model model) {
 		
 		List<BoardCommentDto> comments = boardService.findBoardCommentByBoardNo(boardNo);
@@ -245,7 +245,7 @@ public class BoardController {
 		return "board/comment-list"; //  /WEB-INF/views/ + board/comment-list + .jsp
 	}
 	
-	@PostMapping(path = { "/write-comment.action" })
+	@PostMapping(path = { "/write-comment" })
 	@ResponseBody
 	public String writeComment(BoardCommentDto commentDto, int pageNo) {
 		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )
@@ -255,23 +255,23 @@ public class BoardController {
 		boardService.updateGroupNo(commentDto.getCommentNo(), commentDto.getCommentNo());		
 		// 3. View에서 읽을 수 있도록 데이터 저장		
 		// 4. View 또는 다른 컨터롤러로 이동
-		// return String.format("redirect:detail.action?boardNo=%d&pageNo=%d", commentDto.getBoardNo(), pageNo);
+		// return String.format("redirect:detail?boardNo=%d&pageNo=%d", commentDto.getBoardNo(), pageNo);
 		return "success";
 	}
 	
-//	@GetMapping(path = { "/delete-comment.action" })
+//	@GetMapping(path = { "/delete-comment" })
 //	public String deleteComment(@RequestParam(defaultValue = "-1") int commentNo, 
 //								@RequestParam(defaultValue = "-1") int boardNo, 
 //								@RequestParam(defaultValue = "-1") int pageNo) {
 //		//1. 요청 데이터 읽기 (전달인자로 대체)
 //		if (commentNo == -1 || boardNo == -1 || pageNo == -1) {
-//			return "redirect:list.action";
+//			return "redirect:list";
 //		}
 //		// 2. 데이터 처리
 //		boardService.deleteComment(commentNo);
-//		return String.format("redirect:detail.action?boardNo=%d&pageNo=%d", boardNo, pageNo);
+//		return String.format("redirect:detail?boardNo=%d&pageNo=%d", boardNo, pageNo);
 //	}
-	@GetMapping(path = { "/delete-comment.action" })
+	@GetMapping(path = { "/delete-comment" })
 	@ResponseBody // 반환 값은 view 이름이 아니고 응답 컨텐츠 입니다.
 	public String deleteComment(@RequestParam(defaultValue = "-1") int commentNo) {
 		
@@ -286,7 +286,7 @@ public class BoardController {
 		return "success"; // "success" 문자열을 응답 (@ResponseBody 때문에)
 	}
 	
-	@PostMapping(path = { "/update-comment.action" })
+	@PostMapping(path = { "/update-comment" })
 	@ResponseBody
 	public String updateComment(BoardCommentDto comment) {
 		
@@ -295,7 +295,7 @@ public class BoardController {
 		return "success";
 	}
 	
-	@PostMapping(path = { "/write-recomment.action" })
+	@PostMapping(path = { "/write-recomment" })
 	@ResponseBody
 	public String writeReComment(BoardCommentDto commentDto) {
 		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )
@@ -304,7 +304,7 @@ public class BoardController {
 
 		// 3. View에서 읽을 수 있도록 데이터 저장		
 		// 4. View 또는 다른 컨터롤러로 이동
-		// return String.format("redirect:detail.action?boardNo=%d&pageNo=%d", commentDto.getBoardNo(), pageNo);
+		// return String.format("redirect:detail?boardNo=%d&pageNo=%d", commentDto.getBoardNo(), pageNo);
 		return "success";
 	}
 

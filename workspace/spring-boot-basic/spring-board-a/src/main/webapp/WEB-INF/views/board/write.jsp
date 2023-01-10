@@ -9,8 +9,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>게시판글쓰기</title>
-	<link rel="Stylesheet" href="/spring-demoweb-f/resources/styles/default.css" />
-	<link rel="Stylesheet" href="/spring-demoweb-f/resources/styles/input2.css" />
+	<link rel="Stylesheet" href="/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/resources/styles/input2.css" />
 </head>
 <body>
 
@@ -22,7 +22,7 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시글 정보</div>
-		        <form action="write.action" method="post" enctype="multipart/form-data">
+		        <form action="write" method="post" enctype="multipart/form-data">
 		        <table>
 		            <tr>
 		                <th>제목</th>
