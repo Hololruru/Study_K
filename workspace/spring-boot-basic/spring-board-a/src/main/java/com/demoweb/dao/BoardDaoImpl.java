@@ -7,13 +7,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardDto;
 import com.demoweb.dto.MemberDto;
 
+//@Component
+@Repository("boardDao")
 public class BoardDaoImpl implements BoardDao {
 	
 	// 사용자가 작성한 게시글 정보를 받아서 데이터베이스에 저장

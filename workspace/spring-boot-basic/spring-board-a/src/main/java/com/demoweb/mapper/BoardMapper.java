@@ -17,7 +17,8 @@ import com.demoweb.dto.BoardDto;
 
 @Mapper
 public interface BoardMapper {
-		
+	
+	
 	@Insert("INSERT INTO board (title, writer, content) " +
 			"VALUES (#{ title }, #{ writer }, #{ content })")
 	@Options(useGeneratedKeys = true, keyColumn = "boardno", keyProperty = "boardNo")
