@@ -2,6 +2,8 @@ package com.demoweb.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,12 +14,16 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.demoweb.dto.MemberDto;
+import com.demoweb.service.AccountService;
 
 
 @Controller
 @RequestMapping(path = { "/account" })
 public class AccountController {
 	
+	@Autowired
+	@Qualifier("accountService")
+	private AccountService accountService;
 	
 	@GetMapping(path = { "/register" })
 	public String showRegisterForm(MemberDto member) {
@@ -38,7 +44,7 @@ public class AccountController {
 		System.out.println(member);
 		
 		// 2. 요청 처리
-		// accountService.registerMember(member);
+		accountService.registerMember(member);
 		
 		// 3. View에서 사용할 수 있도록 데이터 전달
 		
@@ -57,7 +63,7 @@ public class AccountController {
 		// 1. 요청 데이터 읽기 ( 전달인자 사용해서 대체 )
 		
 		// 2. 요청 처리
-		MemberDto member = new MemberDto(); //accountService.findMemberByIdAndPasswd(memberId, passwd);
+		MemberDto member = accountService.findMemberByIdAndPasswd(memberId, passwd);
 		
 		if (member != null) {
 			session.setAttribute("loginuser", member);
