@@ -1,6 +1,9 @@
 package com.demoweb.service;
 
+import java.util.HashMap;
 import java.util.List;
+
+import org.springframework.data.domain.Page;
 
 import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardCommentDto;
@@ -13,6 +16,7 @@ public interface BoardService {
 	List<BoardDto> findAllBoard();
 
 	List<BoardDto> findBoardByPage(int pageNo, int pageSize);
+	HashMap<String, Object> findBoardByPage2(int pageNo, int pageSize);
 
 	BoardDto findBoardByBoardNo(int boardNo);
 

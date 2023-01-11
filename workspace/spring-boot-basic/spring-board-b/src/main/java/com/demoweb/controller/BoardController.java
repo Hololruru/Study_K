@@ -51,7 +51,17 @@ public class BoardController {
 //		model.addAttribute("boards", boards);
 //		model.addAttribute("pageNo", pageNo);
 		
-		// 2. with paging
+		// 2. with paging 1
+//		List<BoardDto> boards = boardService.findBoardByPage(pageNo, PAGE_SIZE);
+//		long boardCount = boardService.findBoardCount();
+//		
+//		ThePager pager = new ThePager((int)boardCount, pageNo, PAGE_SIZE, PAGER_SIZE, LINK_URL);
+//		
+//		model.addAttribute("boards", boards);
+//		model.addAttribute("pager", pager);
+//		model.addAttribute("pageNo", pageNo);
+		
+		// 3. with paging 2
 		List<BoardDto> boards = boardService.findBoardByPage(pageNo, PAGE_SIZE);
 		long boardCount = boardService.findBoardCount();
 		

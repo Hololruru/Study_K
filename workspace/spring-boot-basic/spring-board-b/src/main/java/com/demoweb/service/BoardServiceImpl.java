@@ -1,10 +1,14 @@
 package com.demoweb.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,7 +87,11 @@ public class BoardServiceImpl implements BoardService {
 		int from = (pageNo - 1) * pageSize;
 		int count = pageSize;
 		
+		PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+		Page<BoardEntity> page = boardRepository.findAll(pageRequest);
+		
 		List<BoardEntity> boardList = boardRepository.findAllWithPage(from, count);
+		
 		ArrayList<BoardDto> boards = new ArrayList<>();
 		for (BoardEntity boardEntity : boardList) {
 			boards.add(boardEntity.exportBoardDto());
@@ -91,6 +99,27 @@ public class BoardServiceImpl implements BoardService {
 		
 		return boards;
 		
+	}
+	
+	@Override
+	public HashMap<String, Object> findBoardByPage2(int pageNo, int pageSize) {
+		
+		PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+		Page<BoardEntity> page = boardRepository.findAll(pageRequest);
+		
+		HashMap<String, Object> pagingData = new HashMap<>();
+		pagingData.put("dataCount", (int)page.getTotalElements());
+		pagingData.put("pageCount", page.getTotalPages());
+		List<BoardEntity> boardList = page.getContent();
+		
+		ArrayList<BoardDto> boards = new ArrayList<>();
+		for (BoardEntity boardEntity : boardList) {
+			boards.add(boardEntity.exportBoardDto());
+		}
+		
+		pagingData.put("boards", boards);
+		
+		return pagingData;
 	}
 	
 	// 글 번호를 받아서 게시글 조회 및 반환
