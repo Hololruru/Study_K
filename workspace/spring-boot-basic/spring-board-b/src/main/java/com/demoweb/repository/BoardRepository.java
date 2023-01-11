@@ -6,4 +6,6 @@ import com.demoweb.entity.BoardEntity;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
 
+	BoardEntity findAllByOrderByBoardNoDesc();
+	
 }

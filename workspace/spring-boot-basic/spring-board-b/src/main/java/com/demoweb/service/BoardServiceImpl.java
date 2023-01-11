@@ -1,5 +1,6 @@
 package com.demoweb.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +66,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDto> findAllBoard() {
 		
-		// BoardDao boardDao = new BoardDao();
-		List<BoardDto> boards = boardDao.selectAllBoard();
+		List<BoardEntity> boardList = boardRepository.findAll();
+		ArrayList<BoardDto> boards = new ArrayList<>();
+		for (BoardEntity boardEntity : boardList) {
+			boards.add(boardEntity.exportBoardDto());
+		}
+		
 		return boards;
 		
 	}

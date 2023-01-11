@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.demoweb.dto.BoardDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +23,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tbl_board")
 public class BoardEntity {
+	
+	public BoardDto exportBoardDto() {
+		BoardDto boardDto = new BoardDto();
+		boardDto.setBoardNo(boardNo);
+		boardDto.setTitle(title);
+		boardDto.setContent(content);
+		boardDto.setReadCount(readCount);
+		boardDto.setRegDate(regDate);
+		boardDto.setDeleted(deleted);
+		
+		return boardDto;
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
