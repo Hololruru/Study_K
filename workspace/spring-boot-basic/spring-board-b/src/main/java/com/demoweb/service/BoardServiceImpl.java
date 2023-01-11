@@ -12,8 +12,10 @@ import com.demoweb.dao.BoardDao;
 import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardCommentDto;
 import com.demoweb.dto.BoardDto;
+import com.demoweb.entity.BoardEntity;
 import com.demoweb.mapper.BoardCommentMapper;
 import com.demoweb.mapper.BoardMapper;
+import com.demoweb.repository.BoardRepository;
 
 import lombok.Setter;
 
@@ -32,19 +34,30 @@ public class BoardServiceImpl implements BoardService {
 	@Qualifier("boardCommentMapper")
 	private BoardCommentMapper commentMapper;
 	
+	@Autowired
+	private BoardRepository boardRepository;
+	
 	// 사용자가 입력한 게시글 데이터를 받아서 글쓰기 처리
 	// @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
 	public void writeBoard(BoardDto board) {
 		
-		boardMapper.insertBoard(board); // insert 하면서 boardNo 자동 생성 ( 글 번호 가져오기 필요 )
+//		boardMapper.insertBoard(board); // insert 하면서 boardNo 자동 생성 ( 글 번호 가져오기 필요 )
+//		
+//		if (board.getAttachments() != null) {
+//			for (BoardAttachDto attachment : board.getAttachments()) {
+//				attachment.setBoardNo(board.getBoardNo()); // 새로 만들어진 글번호를 Attach 객체에 저장
+//				boardDao.insertBoardAttach(attachment);
+//			}
+//		}
 		
-		if (board.getAttachments() != null) {
-			for (BoardAttachDto attachment : board.getAttachments()) {
-				attachment.setBoardNo(board.getBoardNo()); // 새로 만들어진 글번호를 Attach 객체에 저장
-				boardDao.insertBoardAttach(attachment);
-			}
-		}
+		// 게시글 등록 작업만 처리 ( 첨부파일 처리는 나중에 )
+ 		BoardEntity boardEntity = BoardEntity.builder()
+ 											 .title(board.getTitle())
+ 											 .writer(board.getWriter())
+ 											 .content(board.getContent())
+ 											 .build();
+ 		boardRepository.save(boardEntity);
 		
 	}
 	
