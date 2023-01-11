@@ -33,9 +33,9 @@ public class AccountServiceImpl implements AccountService {
 												.memberId(member.getMemberId())
 												.passwd(member.getPasswd())
 												.email(member.getEmail())
-												.userType("user")
-												.regDate(new Date())
-												.active(true)
+//												.userType("user")
+//												.regDate(new Date())
+//												.active(true)
 												.build();
 		
 		memberRepository.save(memberEntity); // 데이터베이스에 데이터 저장		
