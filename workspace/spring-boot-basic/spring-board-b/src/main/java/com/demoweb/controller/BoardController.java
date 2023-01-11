@@ -3,6 +3,7 @@ package com.demoweb.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -62,12 +63,11 @@ public class BoardController {
 //		model.addAttribute("pageNo", pageNo);
 		
 		// 3. with paging 2
-		List<BoardDto> boards = boardService.findBoardByPage(pageNo, PAGE_SIZE);
-		long boardCount = boardService.findBoardCount();
+		HashMap<String, Object> pagingData = boardService.findBoardByPage2(pageNo - 1, PAGE_SIZE);
+	
+		ThePager pager = new ThePager((int)pagingData.get("dataCount"), pageNo, PAGE_SIZE, PAGER_SIZE, LINK_URL);
 		
-		ThePager pager = new ThePager((int)boardCount, pageNo, PAGE_SIZE, PAGER_SIZE, LINK_URL);
-		
-		model.addAttribute("boards", boards);
+		model.addAttribute("boards", pagingData.get("boards"));
 		model.addAttribute("pager", pager);
 		model.addAttribute("pageNo", pageNo);
 		
