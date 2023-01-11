@@ -6,4 +6,6 @@ import com.demoweb.entity.MemberEntity;
 
 public interface MemberRepository extends JpaRepository<MemberEntity, String> {
 
+	MemberEntity findByMemberIdAndPasswd(String memberid, String passwd);
+	
 }

@@ -1,5 +1,7 @@
 package com.demoweb.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -27,11 +29,16 @@ public class AccountServiceImpl implements AccountService {
 		String passwd = Util.getHashedString(member.getPasswd(), "SHA-256");
 		member.setPasswd(passwd); // 암호화된 패스워드를 멤버에 저장
 		
-		MemberEntity memberEntity = new MemberEntity();
-		memberEntity.setMemberId(member.getMemberId());
+		MemberEntity memberEntity = MemberEntity.builder()
+												.memberId(member.getMemberId())
+												.passwd(member.getPasswd())
+												.email(member.getEmail())
+												.userType("user")
+												.regDate(new Date())
+												.active(true)
+												.build();
 		
-		memberRepository.save(memberEntity); // 데이터베이스에 데이터 저장
-		
+		memberRepository.save(memberEntity); // 데이터베이스에 데이터 저장		
 	}
 	
 	// 2. 로그인 : 아이디, 패스워드를 받아서 데이터베이스 조회 후 결과 반환
@@ -39,9 +46,9 @@ public class AccountServiceImpl implements AccountService {
 	public MemberDto findMemberByIdAndPasswd(String memberId, String passwd) {
 		
 		passwd = Util.getHashedString(passwd, "SHA-256");
-//		MemberDto memberDto = memberMapper.selectMemberByIdAndPasswd(memberId, passwd);
-//		return memberDto;
-		return null;
+		MemberEntity memberEntity = memberRepository.findByMemberIdAndPasswd(memberId, passwd);
+		
+		return memberEntity != null ? memberEntity.exportMemberDto() : null;
 		
 	}
 
