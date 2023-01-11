@@ -66,7 +66,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDto> findAllBoard() {
 		
-		List<BoardEntity> boardList = boardRepository.findAll();
+		// List<BoardEntity> boardList = boardRepository.findAll();
+		List<BoardEntity> boardList = boardRepository.findAllByOrderByBoardNoDesc();
 		ArrayList<BoardDto> boards = new ArrayList<>();
 		for (BoardEntity boardEntity : boardList) {
 			boards.add(boardEntity.exportBoardDto());
@@ -82,7 +83,12 @@ public class BoardServiceImpl implements BoardService {
 		int from = (pageNo - 1) * pageSize;
 		int count = pageSize;
 		
-		List<BoardDto> boards = boardMapper.selectBoardByPage(from, count);
+		List<BoardEntity> boardList = boardRepository.findAllWithPage(from, count);
+		ArrayList<BoardDto> boards = new ArrayList<>();
+		for (BoardEntity boardEntity : boardList) {
+			boards.add(boardEntity.exportBoardDto());
+		}
+		
 		return boards;
 		
 	}
@@ -133,9 +139,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int findBoardCount() {
+	public long findBoardCount() {
 		
-		int boardCount = boardDao.selectBoardCount();
+		long boardCount = boardRepository.countBy();
 		return boardCount;
 		
 	}

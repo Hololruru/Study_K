@@ -22,7 +22,7 @@ public interface BoardService {
 
 	BoardAttachDto findBoardAttachByAttachNo(int attachNo);
 
-	int findBoardCount();
+	long findBoardCount();
 
 	void modifyBoard(BoardDto board);
 	

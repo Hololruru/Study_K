@@ -45,23 +45,22 @@ public class BoardController {
 	
 	@GetMapping(path = { "/list" })
 	public String showBoardList(@RequestParam(defaultValue = "1") int pageNo, Model model) {
-//		// 1. 요청 데이터 읽기 ( 전달인자로 대체 )
-//		// 2. 데이터 처리 ( 데이터 조회 )		
-//		List<BoardDto> boards = boardService.findBoardByPage(pageNo, PAGE_SIZE);
-//		int boardCount = boardService.findBoardCount();
-//		
-//		ThePager pager = new ThePager(boardCount, pageNo, PAGE_SIZE, PAGER_SIZE, LINK_URL);
-//		
-//		// 3. View에서 읽을 수 있도록 데이터 저장
+		
+		// 1. without paging
+//		List<BoardDto> boards = boardService.findAllBoard();
 //		model.addAttribute("boards", boards);
-//		model.addAttribute("pager", pager);
 //		model.addAttribute("pageNo", pageNo);
 		
-		List<BoardDto> boards = boardService.findAllBoard();
+		// 2. with paging
+		List<BoardDto> boards = boardService.findBoardByPage(pageNo, PAGE_SIZE);
+		long boardCount = boardService.findBoardCount();
+		
+		ThePager pager = new ThePager((int)boardCount, pageNo, PAGE_SIZE, PAGER_SIZE, LINK_URL);
+		
 		model.addAttribute("boards", boards);
+		model.addAttribute("pager", pager);
 		model.addAttribute("pageNo", pageNo);
 		
-		// 4. View or Controller로 이동
 		return "board/list"; 	// /WEB-INF/views/ + board/list + .jsp
 	}
 	
