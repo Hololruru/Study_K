@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardCommentDto;
 import com.demoweb.dto.BoardDto;
+import com.demoweb.entity.BoardAttachEntity;
 import com.demoweb.entity.BoardEntity;
 
 public interface BoardService {
@@ -24,6 +25,7 @@ public interface BoardService {
 		
 		return boardDto;		
 	}
+	
 	public default BoardEntity boardDtoToEntity(BoardDto boardDto) {
 		BoardEntity boardEntity = BoardEntity.builder()
 											 .boardNo(boardDto.getBoardNo())
@@ -35,6 +37,14 @@ public interface BoardService {
 											 .deleted(boardDto.isDeleted())
 											 .build();		
 		return boardEntity;
+	}
+	
+	public default BoardAttachEntity boardAttachDtoToEntity(BoardAttachDto boardAttachDto) {
+		BoardAttachEntity boardAttachEntity = BoardAttachEntity.builder()
+															   .userFileName(boardAttachDto.getUserFileName())
+															   .savedFileName(boardAttachDto.getSavedFileName())
+															   .build();
+		return boardAttachEntity;
 	}
 
 	void writeBoard(BoardDto board);

@@ -2,6 +2,7 @@ package com.demoweb.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.demoweb.dao.BoardDao;
 import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardCommentDto;
 import com.demoweb.dto.BoardDto;
+import com.demoweb.entity.BoardAttachEntity;
 import com.demoweb.entity.BoardEntity;
 import com.demoweb.mapper.BoardCommentMapper;
 import com.demoweb.mapper.BoardMapper;
@@ -88,6 +90,13 @@ public class BoardServiceImpl implements BoardService {
  											 .writer(board.getWriter())
  											 .content(board.getContent())
  											 .build();
+ 		
+ 		HashSet<BoardAttachEntity> attachments = new HashSet<>();
+ 		for (BoardAttachDto boardAttachDto : board.getAttachments()) {
+ 			attachments.add(boardAttachDtoToEntity(boardAttachDto));
+ 		}
+ 		boardEntity.setAttachments(attachments);
+ 		
  		boardRepository.save(boardEntity);
 		
 	}
@@ -149,7 +158,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardDto findBoardByBoardNo(int boardNo) {
 		
-		// BoardDto board = boardMapper.selectBoardByBoardNo2(boardNo);
 		BoardEntity boardEntity = boardRepository.findByBoardNo(boardNo);
 		BoardDto board = boardEntityToDto(boardEntity);
 		

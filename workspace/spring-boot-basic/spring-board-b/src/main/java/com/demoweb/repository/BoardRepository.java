@@ -25,7 +25,7 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
 	@Transactional
 	@Modifying
 	@Query(value = "UPDATE BoardEntity b SET b.readCount = b.readCount + 1 WHERE b.boardNo = :boardNo")
-	// @Query(value = "UPDATE tbl_board b SET b.read_count = b.read_count + 1 WHERE b.board_no = :boardNo")
+	// @Query(value = "UPDATE tbl_board b SET b.read_count = b.read_count + 1 WHERE b.board_no = :boardNo", navtiveQuery = true)
 	void increaseBoardReadCount(@Param("boardNo") int boardNo);
 	
 }
