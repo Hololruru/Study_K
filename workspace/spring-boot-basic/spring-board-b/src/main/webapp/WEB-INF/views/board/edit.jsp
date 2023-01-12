@@ -22,7 +22,7 @@
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시글 정보</div>
 		        
-		        <form action="edit.action"
+		        <form action="edit"
 		        	  method="post">
 		        	<input type="hidden" name="boardNo" value="${ board.boardNo }">
 		        	<input type="hidden" name="pageNo" value="${ pageNo }">

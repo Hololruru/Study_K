@@ -172,7 +172,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void deleteBoard(int boardNo) {
 		
-		boardDao.deleteBoard(boardNo);
+		BoardEntity boardEntity = boardRepository.findByBoardNo(boardNo);
+		boardRepository.delete(boardEntity);
 		
 	}
 	
@@ -196,7 +197,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void modifyBoard(BoardDto board) {
 		
-		boardDao.updateBoard(board);
+		BoardEntity boardEntity = boardRepository.findByBoardNo(board.getBoardNo());
+		boardEntity.setTitle(board.getTitle());
+		boardEntity.setContent(board.getContent());
+		boardRepository.save(boardEntity);
 		
 	}
 

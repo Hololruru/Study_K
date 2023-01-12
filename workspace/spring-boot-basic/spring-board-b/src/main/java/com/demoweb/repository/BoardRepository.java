@@ -17,8 +17,6 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
 	List<BoardEntity> findAllWithPage(@Param("from") int from, @Param("count") int count);	
 	long countBy();
 	
-	BoardEntity findByBoardNo(int boardNo);
-	
-	
+	BoardEntity findByBoardNo(int boardNo);	
 	
 }
