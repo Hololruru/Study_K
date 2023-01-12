@@ -56,14 +56,6 @@ public class BoardServiceImpl implements BoardService {
 //	}
 	
 	@Autowired
-	@Qualifier("boardDao")
-	private BoardDao boardDao;
-	
-	@Autowired
-	@Qualifier("boardMapper")
-	private BoardMapper boardMapper;
-	
-	@Autowired
 	@Qualifier("boardCommentMapper")
 	private BoardCommentMapper commentMapper;
 	
@@ -203,8 +195,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardAttachDto findBoardAttachByAttachNo(int attachNo) {
 		
-		BoardAttachDto attachment = boardDao.selectBoardAttachByAttachNo(attachNo);
-		return attachment;
+		BoardAttachEntity boardAttachEntity = boardRepository.findBoardAttachByAttachNo(attachNo);
+		
+		return boardAttachEntityToDto(boardAttachEntity);
 		
 	}
 

@@ -1,8 +1,14 @@
 package com.demoweb.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BoardAttachDto {
 	
 	private int attachNo;			// 첨부파일 고유 번호 (자동증가)

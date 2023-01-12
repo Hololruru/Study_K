@@ -46,6 +46,16 @@ public interface BoardService {
 															   .build();
 		return boardAttachEntity;
 	}
+	
+	public default BoardAttachDto boardAttachEntityToDto(BoardAttachEntity boardAttachEntity) {
+		BoardAttachDto boardAttachDto = BoardAttachDto.builder()
+													  .attachNo(boardAttachEntity.getAttachNo())
+													  .userFileName(boardAttachEntity.getUserFileName())
+													  .savedFileName(boardAttachEntity.getSavedFileName())
+													  .downloadCount(boardAttachEntity.getDownloadCount())
+													  .build();
+		return boardAttachDto;
+	}
 
 	void writeBoard(BoardDto board);
 
