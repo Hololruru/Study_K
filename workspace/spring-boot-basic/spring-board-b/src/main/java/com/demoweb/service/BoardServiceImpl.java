@@ -28,6 +28,22 @@ import lombok.Setter;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 	
+	public BoardDto boardEntityToDto(BoardEntity boardEntity) {
+		BoardDto boardDto = new BoardDto();
+		boardDto.setBoardNo(boardEntity.getBoardNo());
+		boardDto.setWriter(boardEntity.getWriter());
+		boardDto.setTitle(boardEntity.getTitle());
+		boardDto.setContent(boardEntity.getContent());
+		boardDto.setReadCount(boardEntity.getReadCount());
+		boardDto.setRegDate(boardEntity.getRegDate());
+		boardDto.setDeleted(boardEntity.isDeleted());
+		
+		return boardDto;		
+	}
+	public BoardEntity boardDtoToEntity(BoardDto boardDto) {
+		
+	}
+	
 	@Autowired
 	@Qualifier("boardDao")
 	private BoardDao boardDao;
