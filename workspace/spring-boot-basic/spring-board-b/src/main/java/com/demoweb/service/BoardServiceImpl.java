@@ -161,10 +161,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void increaseBoardReadCount(int boardNo) {
 		
-		// boardDao.updateBoardReadCount(boardNo);
-		BoardEntity boardEntity = boardRepository.findByBoardNo(boardNo);
-		boardEntity.setReadCount(boardEntity.getReadCount() + 1);
-		boardRepository.save(boardEntity);
+//		BoardEntity boardEntity = boardRepository.findByBoardNo(boardNo);
+//		boardEntity.setReadCount(boardEntity.getReadCount() + 1);
+//		boardRepository.save(boardEntity);
+		
+		boardRepository.increaseBoardReadCount(boardNo);
 		
 	}
 	

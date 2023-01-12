@@ -2,7 +2,10 @@ package com.demoweb.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -17,6 +20,12 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
 	List<BoardEntity> findAllWithPage(@Param("from") int from, @Param("count") int count);	
 	long countBy();
 	
-	BoardEntity findByBoardNo(int boardNo);	
+	BoardEntity findByBoardNo(int boardNo);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE BoardEntity b SET b.readCount = b.readCount + 1 WHERE b.boardNo = :boardNo")
+	// @Query(value = "UPDATE tbl_board b SET b.read_count = b.read_count + 1 WHERE b.board_no = :boardNo")
+	void increaseBoardReadCount(@Param("boardNo") int boardNo);
 	
 }
