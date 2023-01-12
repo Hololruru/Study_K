@@ -28,21 +28,30 @@ import lombok.Setter;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 	
-	public BoardDto boardEntityToDto(BoardEntity boardEntity) {
-		BoardDto boardDto = new BoardDto();
-		boardDto.setBoardNo(boardEntity.getBoardNo());
-		boardDto.setWriter(boardEntity.getWriter());
-		boardDto.setTitle(boardEntity.getTitle());
-		boardDto.setContent(boardEntity.getContent());
-		boardDto.setReadCount(boardEntity.getReadCount());
-		boardDto.setRegDate(boardEntity.getRegDate());
-		boardDto.setDeleted(boardEntity.isDeleted());
-		
-		return boardDto;		
-	}
-	public BoardEntity boardDtoToEntity(BoardDto boardDto) {
-		
-	}
+//	public BoardDto boardEntityToDto(BoardEntity boardEntity) {
+//		BoardDto boardDto = new BoardDto();
+//		boardDto.setBoardNo(boardEntity.getBoardNo());
+//		boardDto.setWriter(boardEntity.getWriter());
+//		boardDto.setTitle(boardEntity.getTitle());
+//		boardDto.setContent(boardEntity.getContent());
+//		boardDto.setReadCount(boardEntity.getReadCount());
+//		boardDto.setRegDate(boardEntity.getRegDate());
+//		boardDto.setDeleted(boardEntity.isDeleted());
+//		
+//		return boardDto;		
+//	}
+//	public BoardEntity boardDtoToEntity(BoardDto boardDto) {
+//		BoardEntity boardEntity = BoardEntity.builder()
+//											 .boardNo(boardDto.getBoardNo())
+//											 .title(boardDto.getTitle())
+//											 .writer(boardDto.getWriter())
+//											 .content(boardDto.getContent())
+//											 .readCount(boardDto.getReadCount())
+//											 .regDate(boardDto.getRegDate())
+//											 .deleted(boardDto.isDeleted())
+//											 .build();		
+//		return boardEntity;
+//	}
 	
 	@Autowired
 	@Qualifier("boardDao")
@@ -91,7 +100,7 @@ public class BoardServiceImpl implements BoardService {
 		List<BoardEntity> boardList = boardRepository.findAllByOrderByBoardNoDesc();
 		ArrayList<BoardDto> boards = new ArrayList<>();
 		for (BoardEntity boardEntity : boardList) {
-			boards.add(boardEntity.exportBoardDto());
+			boards.add(boardEntityToDto(boardEntity));
 		}
 		
 		return boards;
@@ -108,7 +117,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		ArrayList<BoardDto> boards = new ArrayList<>();
 		for (BoardEntity boardEntity : boardList) {
-			boards.add(boardEntity.exportBoardDto());
+			boards.add(boardEntityToDto(boardEntity));
 		}
 		
 		return boards;
@@ -128,7 +137,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		ArrayList<BoardDto> boards = new ArrayList<>();
 		for (BoardEntity boardEntity : boardList) {
-			boards.add(boardEntity.exportBoardDto());
+			boards.add(boardEntityToDto(boardEntity));
 		}
 		
 		pagingData.put("boards", boards);
@@ -142,7 +151,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		// BoardDto board = boardMapper.selectBoardByBoardNo2(boardNo);
 		BoardEntity boardEntity = boardRepository.findByBoardNo(boardNo);
-		BoardDto board = boardEntity.exportBoardDto();
+		BoardDto board = boardEntityToDto(boardEntity);
 		
 		return board;
 		

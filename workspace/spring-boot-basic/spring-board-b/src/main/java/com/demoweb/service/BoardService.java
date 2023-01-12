@@ -8,8 +8,34 @@ import org.springframework.data.domain.Page;
 import com.demoweb.dto.BoardAttachDto;
 import com.demoweb.dto.BoardCommentDto;
 import com.demoweb.dto.BoardDto;
+import com.demoweb.entity.BoardEntity;
 
 public interface BoardService {
+	
+	public default BoardDto boardEntityToDto(BoardEntity boardEntity) {
+		BoardDto boardDto = new BoardDto();
+		boardDto.setBoardNo(boardEntity.getBoardNo());
+		boardDto.setWriter(boardEntity.getWriter());
+		boardDto.setTitle(boardEntity.getTitle());
+		boardDto.setContent(boardEntity.getContent());
+		boardDto.setReadCount(boardEntity.getReadCount());
+		boardDto.setRegDate(boardEntity.getRegDate());
+		boardDto.setDeleted(boardEntity.isDeleted());
+		
+		return boardDto;		
+	}
+	public default BoardEntity boardDtoToEntity(BoardDto boardDto) {
+		BoardEntity boardEntity = BoardEntity.builder()
+											 .boardNo(boardDto.getBoardNo())
+											 .title(boardDto.getTitle())
+											 .writer(boardDto.getWriter())
+											 .content(boardDto.getContent())
+											 .readCount(boardDto.getReadCount())
+											 .regDate(boardDto.getRegDate())
+											 .deleted(boardDto.isDeleted())
+											 .build();		
+		return boardEntity;
+	}
 
 	void writeBoard(BoardDto board);
 
