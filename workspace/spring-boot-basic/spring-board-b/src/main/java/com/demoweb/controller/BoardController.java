@@ -85,16 +85,17 @@ public class BoardController {
 		}
 		
 		// 2. 데이터 처리
-		ArrayList<Integer> readList = (ArrayList<Integer>)session.getAttribute("read-list");
-		if (readList == null) { // 세션에 목록이 없으면 
-			readList = new ArrayList<>(); // 목록 새로 만들기
-			session.setAttribute("read-list", readList); // 세션에 목록 등록
-		}
-		
-		if (!readList.contains(boardNo)) { // 현재 글 번호가 읽은 글 목록에 포함되지 않은 경우
-			boardService.increaseBoardReadCount(boardNo); // 글 조회수 증가
-			readList.add(boardNo); // 읽은 글 목록에 현개 글 번호 추가			
-		}
+//		ArrayList<Integer> readList = (ArrayList<Integer>)session.getAttribute("read-list");
+//		if (readList == null) { // 세션에 목록이 없으면 
+//			readList = new ArrayList<>(); // 목록 새로 만들기
+//			session.setAttribute("read-list", readList); // 세션에 목록 등록
+//		}
+//		
+//		if (!readList.contains(boardNo)) { // 현재 글 번호가 읽은 글 목록에 포함되지 않은 경우
+//			boardService.increaseBoardReadCount(boardNo); // 글 조회수 증가
+//			readList.add(boardNo); // 읽은 글 목록에 현개 글 번호 추가			
+//		}
+		boardService.increaseBoardReadCount(boardNo); // 글 조회수 증가
 		
 		BoardDto board = boardService.findBoardByBoardNo(boardNo);
 		

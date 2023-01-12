@@ -8,8 +8,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>글수정</title>
-	<link rel="Stylesheet" href="/spring-demoweb-f/resources/styles/default.css" />
-	<link rel="Stylesheet" href="/spring-demoweb-f/resources/styles/input2.css" />
+	<link rel="Stylesheet" href="/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/resources/styles/input2.css" />
 </head>
 <body>
 
@@ -68,7 +68,7 @@
 	<script type="text/javascript">
 	$(function() {
 		$('#btn-cancel').on('click', function(event) {
-			location.href = 'detail.action?boardNo=${ board.boardNo }&pageNo=${ pageNo }';
+			location.href = 'detail?boardNo=${ board.boardNo }&pageNo=${ pageNo }';
 		});
 	});
 	</script>
