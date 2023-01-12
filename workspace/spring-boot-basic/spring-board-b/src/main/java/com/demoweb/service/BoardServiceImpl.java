@@ -161,6 +161,19 @@ public class BoardServiceImpl implements BoardService {
 		BoardEntity boardEntity = boardRepository.findByBoardNo(boardNo);
 		BoardDto board = boardEntityToDto(boardEntity);
 		
+		ArrayList<BoardAttachDto> attachments = new ArrayList<>();
+		for (BoardAttachEntity boardAttachEntity : boardEntity.getAttachments()) {
+			BoardAttachDto boardAttachDto = new BoardAttachDto();
+			boardAttachDto.setBoardNo(boardEntity.getBoardNo());
+			boardAttachDto.setAttachNo(boardAttachEntity.getAttachNo());
+			boardAttachDto.setUserFileName(boardAttachEntity.getUserFileName());
+			boardAttachDto.setSavedFileName(boardAttachEntity.getSavedFileName());
+			boardAttachDto.setDownloadCount(boardAttachEntity.getDownloadCount());
+			
+			attachments.add(boardAttachDto);
+		}
+		board.setAttachments(attachments);
+		
 		return board;
 		
 	}
