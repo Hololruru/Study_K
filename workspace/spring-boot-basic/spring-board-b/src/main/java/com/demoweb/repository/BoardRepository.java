@@ -14,9 +14,10 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
 	
 	@Query(value = "SELECT * FROM tbl_board ORDER BY board_no DESC LIMIT :from, :count",
 		   nativeQuery = true)
-	List<BoardEntity> findAllWithPage(@Param("from") int from, @Param("count") int count);
-	
+	List<BoardEntity> findAllWithPage(@Param("from") int from, @Param("count") int count);	
 	long countBy();
+	
+	BoardEntity findByBoardNo(int boardNo);
 	
 	
 	

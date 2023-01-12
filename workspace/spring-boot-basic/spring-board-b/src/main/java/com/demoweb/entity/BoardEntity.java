@@ -27,6 +27,7 @@ public class BoardEntity {
 	public BoardDto exportBoardDto() {
 		BoardDto boardDto = new BoardDto();
 		boardDto.setBoardNo(boardNo);
+		boardDto.setWriter(writer);
 		boardDto.setTitle(title);
 		boardDto.setContent(content);
 		boardDto.setReadCount(readCount);

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,10 +87,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		int from = (pageNo - 1) * pageSize;
 		int count = pageSize;
-		
-		PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
-		Page<BoardEntity> page = boardRepository.findAll(pageRequest);
-		
+
 		List<BoardEntity> boardList = boardRepository.findAllWithPage(from, count);
 		
 		ArrayList<BoardDto> boards = new ArrayList<>();
@@ -104,7 +102,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public HashMap<String, Object> findBoardByPage2(int pageNo, int pageSize) {
 		
-		PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+		PageRequest pageRequest = PageRequest.of(pageNo, pageSize, Sort.by("boardNo").descending());
 		Page<BoardEntity> page = boardRepository.findAll(pageRequest);
 		
 		HashMap<String, Object> pagingData = new HashMap<>();
@@ -126,17 +124,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardDto findBoardByBoardNo(int boardNo) {
 		
-		// Board와 BoardAttach를 각각 조회
-//		BoardDto board = boardMapper.selectBoardByBoardNo(boardNo);		
-//		if (board != null) {
-//			List<BoardAttachDto> attachments = boardMapper.selectBoardAttachByBoardNo(boardNo);
-//			board.setAttachments(attachments);
-//		}
-		
-		// Board와 BoardAttach를 한 번에 조회
-		BoardDto board = boardMapper.selectBoardByBoardNo2(boardNo);
-		
-		// Comment 조회
+		// BoardDto board = boardMapper.selectBoardByBoardNo2(boardNo);
+		BoardEntity boardEntity = boardRepository.findByBoardNo(boardNo);
+		BoardDto board = boardEntity.exportBoardDto();
 		
 		return board;
 		
