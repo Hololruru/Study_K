@@ -37,7 +37,11 @@
 		            </tr>
 		            <tr>
 		            	<th>등록일자</th>
-		            	<td>[[${ board.regDate }]]</td>
+		            	<td>
+		            		[[${ board.regDate }]]
+		            		<br>
+		            		[[${ #dates.format(board.regDate, "yyyy년 MM월 dd일") }]]
+		            	</td>
 		            </tr>
 		            <tr>
 		                <th>첨부파일</th>
@@ -55,7 +59,7 @@
 		            <tr>
 		                <th>글내용</th>
 						<td>
-							[[${ board.content }]]
+							[(${ #strings.replace(board.content, enter, "&lt;br&gt;") })]
 						</td>
 		            </tr>
 		        </table>
@@ -75,25 +79,29 @@
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 	
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
+	/* <![CDATA[ */
 	$(function() {
 		$('#tolist_button').on('click', function(event) {
-			location.href = 'list?pageNo=${ requestScope.pageNo }';
+			// location.href = 'list?pageNo=' + [[${ pageNo }]];
+			// location.href = [[|list?pageNo=${ pageNo }|]];
+			location.href = /*[[|list?pageNo=${ pageNo }|]]*/ "";
 		});
 		
 		$('#delete_button').on('click', function(event) {
-			const ok = confirm("${ board.boardNo }번 글을 삭제할까요?");
+			// const ok = confirm(/*[[|${ board.boardNo }번 글을 삭제할까요?|]]*/);
+			const ok = confirm(/*[(|'${ board.boardNo }번 글을 삭제할까요?'|)]*/);
 			if (!ok) return;
 			
-			//location.href = 'delete?boardNo=${board.boardNo}&pageNo=${pageNo}';
-			location.href = '${board.boardNo}/delete?pageNo=${pageNo}';
+			location.href = /*[(|'${board.boardNo}/delete?pageNo=${pageNo}'|)]*/ "";
 		});
 		
 		$('#update_button').on('click', function(event) {
-			location.href = 'edit?boardNo=${board.boardNo}&pageNo=${pageNo}';
+			location.href = /*[(|'edit?boardNo=${board.boardNo}&pageNo=${pageNo}'|)]*/ "";
 		});		
 		
 	});
+	/* ]]> */
 	</script>
 
 </body>
