@@ -105,7 +105,8 @@ public class BoardController {
 		
 		// 3. View에서 읽을 수 있도록 데이터 전달
 		model.addAttribute("board", board);
-		model.addAttribute("pageNo", pageNo);		
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("enter", "\n");
 		
 		// 4. View 또는 Controller로 이동
 		return "board/detail";

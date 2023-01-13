@@ -187,7 +187,9 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteBoard(int boardNo) {
 		
 		BoardEntity boardEntity = boardRepository.findByBoardNo(boardNo);
-		boardRepository.delete(boardEntity);
+		// boardRepository.delete(boardEntity);
+		boardEntity.setDeleted(true);
+		boardRepository.save(boardEntity);
 		
 	}
 	
