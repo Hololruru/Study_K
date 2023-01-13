@@ -45,11 +45,15 @@ def get_winning_numbers():
 
 import pymysql
 
-@app.get('/find-member-to-login')
+@app.route('/find-member-to-login', methods=["GET", "POST"])
 def find_member_to_login():
 
-    id = request.args.get("id", "")
-    passwd = request.args.get('passwd', '')
+    if request.method == "POST" : 
+        id = request.form.get("id", "")
+        passwd = request.form.get('passwd', '')
+    else:
+        id = request.args.get("id", "")
+        passwd = request.args.get('passwd', '')
 
     conn = pymysql.connect(host="localhost", user="testuser", password="mysql", database="demoweb", charset="utf8")
     cursor = conn.cursor()
@@ -64,3 +68,5 @@ def find_member_to_login():
     json_response = json.dumps(member, ensure_ascii=False).encode("utf-8")
 
     return json_response
+
+
