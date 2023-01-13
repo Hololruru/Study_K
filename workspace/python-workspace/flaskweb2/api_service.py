@@ -43,3 +43,24 @@ def get_winning_numbers():
     return json_numbers
     # return Response(json_numbers, mimetype="application/json")
 
+import pymysql
+
+@app.get('/find-member-to-login')
+def find_member_to_login():
+
+    id = request.args.get("id", "")
+    passwd = request.args.get('passwd', '')
+
+    conn = pymysql.connect(host="localhost", user="testuser", password="mysql", database="demoweb", charset="utf8")
+    cursor = conn.cursor()
+    sql = "SELECT memberid, email, usertype, regdate, active FROM member WHERE memberid = %s AND passwd = %s"
+    cursor.execute(sql, (id, passwd))
+
+    member = cursor.fetchone()
+
+    member = list(member)
+    member[3] = str(member[3])
+
+    json_response = json.dumps(member, ensure_ascii=False).encode("utf-8")
+
+    return json_response

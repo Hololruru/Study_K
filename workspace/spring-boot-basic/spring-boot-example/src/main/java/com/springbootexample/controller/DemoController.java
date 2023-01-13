@@ -85,6 +85,39 @@ public class DemoController {
 			return "fail to receive data 2";
 		}
 	}
+	
+	@GetMapping(path = { "/login" })
+	@ResponseBody
+	public String login(String memberId, String passwd) {
+		
+		try {
+			String path = "http://localhost:5000/find-member-to-login?id=" + memberId + "&passwd=" + passwd;
+			URL url = new URL(path);
+			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			conn.setRequestMethod("GET");
+			
+			int respCode = conn.getResponseCode();
+			if (respCode == HttpURLConnection.HTTP_OK) {
+				InputStream is = conn.getInputStream();
+				InputStreamReader isr = new InputStreamReader(is, "utf-8");
+				BufferedReader br = new BufferedReader(isr);
+				String message = "";
+				while (true) {
+					String line = br.readLine();
+					if (line == null) {
+						break;
+					}
+					message += line;
+				}
+		
+				return message;
+			} else {
+				return "fail to receive data 1";
+			}
+		} catch (Exception ex) {
+			return "fail to receive data 2";
+		}
+	}
 }
 
 
