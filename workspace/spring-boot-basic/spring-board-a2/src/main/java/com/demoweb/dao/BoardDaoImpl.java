@@ -244,7 +244,7 @@ public class BoardDaoImpl implements BoardDao {
 			String sql = 
 					"SELECT boardno, title, writer, content, readcount, regdate " +
 					"FROM board " +
-					"WHERE boardno = ? AND deleted = FALSE ";
+					"WHERE boardno = ? AND deleted = '0' ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
 			
@@ -294,7 +294,7 @@ public class BoardDaoImpl implements BoardDao {
 			String sql = 
 					"UPDATE board  " +
 					"SET readcount = readcount + 1 " +
-					"WHERE boardno = ? AND deleted = FALSE "; // ? : 나중에 채워질 영역 표시
+					"WHERE boardno = ? AND deleted = '0' "; // ? : 나중에 채워질 영역 표시
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
 			
@@ -331,7 +331,7 @@ public class BoardDaoImpl implements BoardDao {
 			// 3. SQL 작성 + 명령 객체 가져오기
 			String sql = 
 					"UPDATE board " +
-					"SET deleted = TRUE " +
+					"SET deleted = '1' " +
 					"WHERE boardno = ?"; // ? : 나중에 채워질 영역 표시
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
