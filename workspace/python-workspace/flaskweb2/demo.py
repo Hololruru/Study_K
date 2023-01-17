@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, Response
 from flask import request
 import json
 import pymysql
@@ -38,3 +38,11 @@ def get_winning_numbers():
     json_numbers = json.dumps({"선택된 번호" : numbers}, ensure_ascii=False).encode("utf-8")
     return json_numbers
     # return Response(json_numbers, mimetype="application/json")
+
+@bp.post("upload-file")
+def upload_file():
+    file1 = request.files.get("file1", None)
+    print(file1.filename)
+    file1.save(file1.filename)
+
+    return Response("success", 200)
