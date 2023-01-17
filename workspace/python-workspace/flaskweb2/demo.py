@@ -42,11 +42,18 @@ def get_winning_numbers():
 @bp.post("/upload-file")
 def upload_file():
 
-    file1 = request.files.get("file1", None)    
+    file1 = request.files.get("file1", None)
     if file1:
         print(file1.filename)
         file1.save(file1.filename)
     else:
-        print("file not uploaded")
+        print("file not uploaded 1")
+
+    file2 = request.files.get("file2", None)    
+    if file2:
+        print(file2.filename)
+        file2.save(file2.filename)
+    else:
+        print("file not uploaded 2")
 
     return Response("success", 200)

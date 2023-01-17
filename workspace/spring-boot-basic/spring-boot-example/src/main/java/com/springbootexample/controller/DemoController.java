@@ -1,16 +1,20 @@
 package com.springbootexample.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
@@ -178,51 +182,27 @@ public class DemoController {
 		
 		try {
 			String boundary = UUID.randomUUID().toString();
+			HashMap<String, String> properties = new HashMap<>();
+			properties.put("User-Agent", 
+						   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.52");
 			
 			// 1. 연결 설정
-			URL url = new URL("http://localhost:5000/demo/upload-file");
-			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-			conn.setRequestMethod("POST");
-			conn.setDoOutput(true);		// POST
-			conn.setDoInput(true);
-			conn.setUseCaches(false);
-			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.52");
+			HttpURLConnection conn = makeFileUploadConnection("http://localhost:5000/demo/upload-file", boundary, properties);
 			
 			// 2. 전송 준비
 			OutputStream os = conn.getOutputStream();
 			PrintWriter writer = new PrintWriter(os, true, Charset.forName("utf-8"));
 			
-			//3-1. 전송1 (전송 데이터에 대한 정보)
-			writer.append("--").append(boundary).append("\r\n");
-			writer.append("Content-Disposition: form-data; name=\"file1\"; filename=\"" + file1.getOriginalFilename() + "\"").append("\r\n");
-			writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(file1.getOriginalFilename())).append("\r\n");
-			writer.append("Content-Transfer-Encoding: binary").append("\r\n");
-			writer.append("\r\n");
-			writer.flush();
-			
-			//3-2. 전송2 (데이터)
-			InputStream is = file1.getInputStream();
-			byte[] buffer = new byte[4096];
-			while (true) {
-				int count = is.read(buffer, 0, buffer.length);
-				if (count == -1) { // End of File
-					break;
-				}
-				os.write(buffer, 0, count); // 읽은 갯수만큼 쓰기
-			}
-			os.flush();
-			is.close();
-			writer.append("\r\n");
-			writer.flush();
-			
+			//3-1. 전송
+			// writeFormData("email", "johndoe@email.com", boundary, writer, "utf-8");
+			writeFileData(file1, boundary, os, writer);
+			writeFileData(file2, boundary, os, writer);
 			
 			// 4. 전송 종료
 			writer.append("--").append(boundary).append("--").append("\r\n"); // --boundary-- : 전송 끝
 			writer.close();
-			// os.close();
 			
-			// 5. 응답 수진
+			// 5. 응답 수신
 			if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				// do nothing				
 			} else {
@@ -237,6 +217,60 @@ public class DemoController {
 		
 		return "success";
 		
+	}
+
+	private void writeFileData(MultipartFile file, String boundary, OutputStream os, PrintWriter writer) throws IOException {
+		writer.append("--").append(boundary).append("\r\n");
+		writer.append("Content-Disposition: form-data; name=\"" + file.getName() + "\"; filename=\"" + file.getOriginalFilename() + "\"").append("\r\n");
+		writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(file.getOriginalFilename())).append("\r\n");
+		writer.append("Content-Transfer-Encoding: binary").append("\r\n");
+		writer.append("\r\n");
+		writer.flush();
+		
+		//3-2. 전송2 (데이터)
+		InputStream is = file.getInputStream();
+		byte[] buffer = new byte[4096];
+		while (true) {
+			int count = is.read(buffer, 0, buffer.length);
+			if (count == -1) { // End of File
+				break;
+			}
+			os.write(buffer, 0, count); // 읽은 갯수만큼 쓰기
+		}
+		os.flush();
+		is.close(); 
+		writer.append("\r\n");
+		writer.flush();
+	}
+	
+	private void writeFormData(String name, String value, String boundary, PrintWriter writer, String charSet) throws IOException {
+		writer.append("--").append(boundary).append("\r\n");
+		writer.append("Content-Disposition: form-data; name=\"" + name + "\"").append("\r\n");
+		writer.append("Content-Type: text/plain;charset=" + charSet).append("\r\n");
+		writer.append("\r\n");
+		writer.append(value).append("\r\n");
+		writer.flush();
+	}
+
+	private HttpURLConnection makeFileUploadConnection(String path, String boundary, HashMap<String, String> properties) {
+		
+		HttpURLConnection conn = null;
+		try {
+			URL url = new URL(path);
+			conn = (HttpURLConnection)url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);		// POST
+			conn.setDoInput(true);
+			conn.setUseCaches(false);
+			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+			for (String key : properties.keySet()) {
+				conn.setRequestProperty(key, properties.get(key));
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			conn = null;
+		}
+		return conn;
 	}
 }
 
