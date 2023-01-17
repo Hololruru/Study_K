@@ -39,10 +39,14 @@ def get_winning_numbers():
     return json_numbers
     # return Response(json_numbers, mimetype="application/json")
 
-@bp.post("upload-file")
+@bp.post("/upload-file")
 def upload_file():
-    file1 = request.files.get("file1", None)
-    print(file1.filename)
-    file1.save(file1.filename)
+
+    file1 = request.files.get("file1", None)    
+    if file1:
+        print(file1.filename)
+        file1.save(file1.filename)
+    else:
+        print("file not uploaded")
 
     return Response("success", 200)

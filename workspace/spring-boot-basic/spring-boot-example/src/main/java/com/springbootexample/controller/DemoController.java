@@ -195,7 +195,7 @@ public class DemoController {
 			
 			//3-1. 전송1 (전송 데이터에 대한 정보)
 			writer.append("--").append(boundary).append("\r\n");
-			writer.append("Content-Disposition: form-data;name=\"file1\";filename=\"" + file1.getOriginalFilename() + "\"").append("\r\n");
+			writer.append("Content-Disposition: form-data; name=\"file1\"; filename=\"" + file1.getOriginalFilename() + "\"").append("\r\n");
 			writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(file1.getOriginalFilename())).append("\r\n");
 			writer.append("Content-Transfer-Encoding: binary").append("\r\n");
 			writer.append("\r\n");
@@ -212,14 +212,17 @@ public class DemoController {
 				os.write(buffer, 0, count); // 읽은 갯수만큼 쓰기
 			}
 			os.flush();
+			is.close();
 			writer.append("\r\n");
 			writer.flush();
 			
-			writer.append("--").append(boundary).append("\r\n");
 			
+			// 4. 전송 종료
+			writer.append("--").append(boundary).append("--").append("\r\n"); // --boundary-- : 전송 끝
 			writer.close();
-			os.close();
+			// os.close();
 			
+			// 5. 응답 수진
 			if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				// do nothing				
 			} else {
