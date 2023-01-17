@@ -221,9 +221,9 @@ public class DemoController {
 			os.close();
 			
 			if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-				return "fail 1";
+				// do nothing				
 			} else {
-				// do nothing
+				return "fail 1";
 			}
 		
 		} catch (Exception ex) {
