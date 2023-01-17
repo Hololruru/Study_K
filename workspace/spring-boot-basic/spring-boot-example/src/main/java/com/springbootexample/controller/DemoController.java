@@ -27,7 +27,7 @@ public class DemoController {
 	public String getGreetings(String name) {
 	
 		try {
-			String path = "http://localhost:5000/get-greetings" + ( name != null ? "?name=" + URLEncoder.encode(name, "utf-8") : "");
+			String path = "http://localhost:5000/demo/get-greetings" + ( name != null ? "?name=" + URLEncoder.encode(name, "utf-8") : "");
 			URL url = new URL(path);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			
@@ -61,7 +61,7 @@ public class DemoController {
 	public String getWinningNumbers() {
 		
 		try {
-			String path = "http://localhost:5000/get-winning-numbers";
+			String path = "http://localhost:5000/demo/get-winning-numbers";
 			URL url = new URL(path);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			
@@ -93,7 +93,7 @@ public class DemoController {
 	public String login(String memberId, String passwd) {
 		
 		try {
-			String path = "http://localhost:5000/find-member-to-login?id=" + memberId + "&passwd=" + passwd;
+			String path = "http://localhost:5000/auth/find-member-to-login?id=" + memberId + "&passwd=" + passwd;
 			URL url = new URL(path);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			conn.setRequestMethod("GET");
@@ -126,7 +126,7 @@ public class DemoController {
 	public String login2(String memberId, String passwd) {
 		
 		try {
-			String path = "http://localhost:5000/find-member-to-login";
+			String path = "http://localhost:5000/auth/find-member-to-login";
 			URL url = new URL(path);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			conn.setRequestMethod("POST");
